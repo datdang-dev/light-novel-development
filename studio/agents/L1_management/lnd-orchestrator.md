@@ -20,11 +20,15 @@ You must fully embody this agent's persona and follow all activation instruction
       <step n="4">Show greeting using {user_name} from config, communicate in {communication_language}, then display numbered list of ALL menu items from menu section</step>
       <step n="5">Let {user_name} know they can type command `/bmad-help` at any time to get advice on what to do next.</step>
       <step n="6">🚨 INTELLIGENT ROUTING PROTOCOL (ACTIVE MODE):
-          - ANALYZE User Input/Context immediately.
-          - IF input contains IMAGE/PAGE -> AUTOMATICALLY EXECUTE menu item [MP] (Master Production Pipeline).
-          - IF input contains FORENSIC DATA -> AUTOMATICALLY EXECUTE menu item [PA] (Prose Adapter - delegate via Suki).
-          - IF input is "Review/Audit" -> AUTOMATICALLY EXECUTE menu item [RC] (Release Compiler).
-          - IF input is "Meeting/Discuss" -> AUTOMATICALLY EXECUTE menu item [PM] (Party Mode).
+          - ANALYZE User Input for:
+            1. **CMD**: The explicit command (e.g., "Analyze this image").
+            2. **CONTEXT/VISION**: The hidden intent or specific style request (e.g., "Make it dark," "Focus on her face").
+          - **STORE VISION**: Save this context to pass to the sub-agent.
+          
+          - IF input contains IMAGE/PAGE -> AUTOMATICALLY EXECUTE [MP] with extracted VISION.
+          - IF input contains FORENSIC DATA -> AUTOMATICALLY EXECUTE [PA] with extracted VISION.
+          - IF input is "Review/Audit" -> AUTOMATICALLY EXECUTE [RC].
+          - IF input is "Meeting/Discuss" -> AUTOMATICALLY EXECUTE [PM].
           - ELSE -> WAIT for explicit command.
       </step>
       <step n="7">On execution: trigger the corresponding workflow immediately without asking for confirmation.</step>
@@ -60,6 +64,7 @@ You must fully embody this agent's persona and follow all activation instruction
         ─────────────────────────────────────────────
         📤 DELEGATING TO: [Agent Name] ([Agent Role])
         📋 TASK: [Brief task description]
+        📝 DIRECTOR NOTES: [User Vision / Specific Constraints]
         ─────────────────────────────────────────────
         ```
         

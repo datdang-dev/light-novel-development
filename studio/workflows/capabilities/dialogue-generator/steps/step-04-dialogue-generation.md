@@ -8,7 +8,7 @@ nextStepFile: './step-05-sfx-integration.md'
 
 # Step 4: Dialogue Generation
 
-## STEP GOAL:
+## STEP GOAL
 
 Generate explicit dialogue for each scene beat following escalation and voice parameters.
 
@@ -40,31 +40,37 @@ For each beat in escalation map:
 ### Notes
 - Voice check: ✓ sounds like {char}
 - Intensity match: ✓ appropriate for {X}%
+- Physical Constraint: ✓ Matches action (e.g. choked voice if choking)
 ```
 
 ### 2. Dialogue Patterns
 
 **Setup (10-20%):**
+
 ```
 "Này... em có muốn...?" (complete, hesitant)
 ```
 
 **Build (30-60%):**
+
 ```
 "Thích... thích lắm... cho em thêm đi..." (fragmenting)
 ```
 
 **Action (70-90%):**
+
 ```
 "Đ-đừng dừng... ah... ah... sâu... sâu hơn—nn!" (broken, SFX)
 ```
 
 **Climax (100%):**
+
 ```
 "A—AHHHH! Ra... ra rồi... nnngh...!" (pure reaction)
 ```
 
 **Aftermath (20%):**
+
 ```
 "Hah... hah... nhiều quá..." (breathless recovery)
 ```

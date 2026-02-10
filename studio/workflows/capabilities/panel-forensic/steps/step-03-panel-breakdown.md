@@ -12,19 +12,20 @@ analysisElements: '{workflow_path}/data/analysis-elements.csv'
 
 # Step 3: Panel Breakdown
 
-## STEP GOAL:
+## STEP GOAL
 
 Perform comprehensive forensic analysis of EACH panel identified in step 2, documenting every visual element with Zero-Skip Protocol compliance.
 
-## MANDATORY EXECUTION RULES (READ FIRST):
+## MANDATORY EXECUTION RULES (READ FIRST)
 
-### Universal Rules:
+### Universal Rules
 
 - 🛑 NEVER skip any panel from the index
 - 📖 CRITICAL: Read the complete step file before taking any action
+- 📖 READ RESOURCE: `{project-root}/studio/config/knowledge/hentai_lexicon.md` NOW
 - ✅ YOU MUST speak in Vietnamese
 
-### ZERO-SKIP PROTOCOL (CRITICAL):
+### ZERO-SKIP PROTOCOL (CRITICAL)
 
 ```
 FOR EACH PANEL:
@@ -33,7 +34,7 @@ FOR EACH PANEL:
 - Residue check is MANDATORY (hair, fluids, condoms)
 ```
 
-### Step-Specific Rules:
+### Step-Specific Rules
 
 - 🎯 Analyze ONE panel at a time, in order
 - 🚫 FORBIDDEN to skip panels or summarize multiple together
@@ -89,12 +90,20 @@ Thought 8: FLUID TRACKING (ATOMIC)
 - Sweat: droplets location, sheen?
 - Sexual fluids: cum, arousal, where exactly?
 
-Thought 9: RESIDUE CHECK (ZERO-SKIP - CRITICAL)
-- Stray pubic hair (vương vãi lông mu - check thighs, sheets)
-- Used condoms, wrappers (check floor, bed, corners)
-- Cum trails, stains, leakage patterns
-- Marks: hickeys, handprints, bite marks, rope marks
-- Environmental residue: tissues, lube bottles, money
+Thought 9: RESIDUE & DEBRIS CHECKLIST (MANDATORY - REFER TO HENTAI LEXICON)
+- **Check Category 1 (Protection):** Any condoms (wrapper/used)? WHERE?
+- **Check Category 2 (Fluids):** Any white/clear/yellow patches on skin/floor/bed?
+- **Check Category 5 (Environment):** Tissues? Trash? Stains on sheets?
+- **Check Category 5 (Hair):** Any STRAY PUBIC HAIR (curly/black)? Check thighs/face.
+- **Hypothesis Test:** For each category, ask: "Is it *really* empty, or am I missing a small detail?"
+- **Conclusion:** List found items or state "None" explicitly.
+
+Thought 10: NARRATIVE SEED & PSYCHO-ANALYSIS (NEW CORE PROTOCOL)
+- **Initiative Check:** Who started this action? (Dominance/Submission/Training)
+- **Hesitation Check:** Any sweat drops/trembling indicating fear vs eagerness?
+- **Continuity Buffer:** How does this compare to the previous panel? (Corruption Arc?)
+- **Psychological Beat:** "She is [Action] because she feels [Emotion] and wants [Goal]."
+- **Drafting Seed:** Write a raw, vivid sentence capturing the *feeling* of this panel.
 ```
 
 ### 2. Document Each Panel
@@ -137,6 +146,12 @@ For EACH panel, create section in output file:
 - **Current Action:** {what is happening}
 - **Motion Indicators:** {speed lines, blur effects}
 - **Implied Next:** {what seems about to happen}
+
+#### 3F. Narrative Analysis (NARRATIVE SEED)
+- **Initiative:** {Who initiated? Active/Passive?}
+- **Psychological State:** {Internal monologue guess based on visuals}
+- **Corruption Arc:** {Progress from previous panel? E.g., Hesitation -> Acceptance}
+- **Narrative Seed:** "{A raw, evocative sentence describing the moment using sensory language}"
 ```
 
 ### 3. Zero-Skip Verification Checklist
@@ -158,6 +173,7 @@ Track progress: "**Panel {X}/{total} complete**"
 ### 5. Update Output File
 
 After ALL panels analyzed:
+
 - Append all panel breakdowns to `{outputFile}`
 - Update frontmatter: `stepsCompleted: [..., 'step-03-panel-breakdown']`
 
@@ -177,7 +193,7 @@ Display:
 **Chọn:** [C] Continue to Dialogue Extraction"
 ```
 
-#### Menu Handling Logic:
+#### Menu Handling Logic
 
 - IF C: Save/update output file, load `{nextStepFile}`
 - IF other: Help user respond, redisplay menu
@@ -192,7 +208,7 @@ ONLY WHEN ALL panels from the index have been analyzed with Zero-Skip compliance
 
 ## 🚨 SYSTEM SUCCESS/FAILURE METRICS
 
-### ✅ SUCCESS:
+### ✅ SUCCESS
 
 - Sequential thinking used per panel
 - All panels from index analyzed
@@ -201,7 +217,7 @@ ONLY WHEN ALL panels from the index have been analyzed with Zero-Skip compliance
 - All characters and positions documented
 - Output file contains all panel breakdowns
 
-### ❌ SYSTEM FAILURE:
+### ❌ SYSTEM FAILURE
 
 - Skipping panels
 - Summarizing multiple panels together

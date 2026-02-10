@@ -10,19 +10,19 @@ nextStepFile: './step-02-scene-planning.md'
 
 # Step 1: Context Loading
 
-## STEP GOAL:
+## STEP GOAL
 
 Load and internalize the forensic analysis and any available story bible context before beginning prose generation.
 
-## MANDATORY EXECUTION RULES (READ FIRST):
+## MANDATORY EXECUTION RULES (READ FIRST)
 
-### Universal Rules:
+### Universal Rules
 
 - 🛑 NEVER start writing prose before context is loaded
 - 📖 CRITICAL: Read the complete step file before taking any action
 - ✅ YOU MUST speak in Vietnamese
 
-### Step-Specific Rules:
+### Step-Specific Rules
 
 - 🎯 Focus only on loading and understanding context
 - 🚫 FORBIDDEN to begin prose generation here
@@ -41,7 +41,8 @@ If not provided:
 
 1. **Đường dẫn forensic report** (output từ panel-forensic)
 2. **Manga name** và **page number**
-3. **Story bible path** (nếu có, để maintain continuity)
+3. **Story bible path** (nếu có)
+4. **Director Notes / User Vision** (nếu có requirements đặc biệt)
 
 Vui lòng cung cấp thông tin!"
 ```
@@ -51,6 +52,7 @@ Vui lòng cung cấp thông tin!"
 **CRITICAL:** Use `view_file` tool to load the complete forensic report.
 
 Extract and note:
+
 - Panel count and layout
 - Character positions and actions
 - Dialogue and SFX
@@ -61,6 +63,7 @@ Extract and note:
 ### 3. Load Story Bible (if available)
 
 If bible path provided, load:
+
 - Character profiles
 - Relationship dynamics
 - Previously established details
@@ -89,6 +92,7 @@ source_forensics: "{forensics_path}"
 **Setting:** {from forensics}
 **Primary Action:** {from forensics}
 **Fetish Tags:** {from forensics}
+**Director Vision:** {User/Director Notes}
 
 ---
 ```
@@ -110,7 +114,7 @@ source_forensics: "{forensics_path}"
 **Chọn:** [C] Continue to Scene Planning"
 ```
 
-#### Menu Handling Logic:
+#### Menu Handling Logic
 
 - IF C: Save output file, load `{nextStepFile}`
 - IF other: Help user respond, redisplay menu
@@ -119,7 +123,7 @@ source_forensics: "{forensics_path}"
 
 ## 🚨 SYSTEM SUCCESS/FAILURE METRICS
 
-### ✅ SUCCESS:
+### ✅ SUCCESS
 
 - Forensic report fully loaded
 - Key elements extracted
@@ -127,7 +131,7 @@ source_forensics: "{forensics_path}"
 - Output file initialized
 - User confirms context understanding
 
-### ❌ SYSTEM FAILURE:
+### ❌ SYSTEM FAILURE
 
 - Not loading forensic report
 - Starting prose without context

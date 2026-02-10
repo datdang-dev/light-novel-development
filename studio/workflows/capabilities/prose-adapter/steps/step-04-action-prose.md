@@ -10,18 +10,19 @@ nextStepFile: './step-05-dialogue-integration.md'
 
 # Step 4: Action Prose
 
-## STEP GOAL:
+## STEP GOAL
 
 Write the core physical action prose covering BUILD, ACTION, and CLIMAX beats with maximum sensory density and explicit detail.
 
-## MANDATORY EXECUTION RULES (READ FIRST):
+## MANDATORY EXECUTION RULES (READ FIRST)
 
-### Universal Rules:
+### Universal Rules
 
 - 📖 CRITICAL: Read the complete step file before taking any action
+- 📖 READ RESOURCE: `{project-root}/studio/config/knowledge/hentai_lexicon.md` NOW
 - ✅ Write prose in {document_output_language} (Vietnamese)
 
-### OBSERVER-CAMERA Perspective:
+### OBSERVER-CAMERA Perspective
 
 ```
 Write as forensic observer:
@@ -31,7 +32,7 @@ Write as forensic observer:
 - Clinical yet arousing
 ```
 
-### Banned Words (AUTO-FAIL):
+### Banned Words (AUTO-FAIL)
 
 ```
 NEVER use:
@@ -39,7 +40,7 @@ NEVER use:
 - đê tiện, đáng khinh, ô uế
 ```
 
-### Step-Specific Rules:
+### Step-Specific Rules
 
 - 🎯 Focus on physical action from BUILD to CLIMAX beats
 - 🚫 FORBIDDEN to skip any action from forensic report
@@ -63,6 +64,7 @@ From forensic panel data (BUILD panels):
 ```
 
 **Required Elements:**
+
 - Physical movements described precisely
 - Skin contact moments noted
 - Breathing/body reactions
@@ -84,14 +86,17 @@ From forensic panel data (ACTION panels):
 ```
 
 **Sensory Requirements (ACTION):**
+
 - Smell: ≥2 (body scent, arousal, secretions)
 - Sound: ≥3 (SFX from forensics, moans, slapping)
 - Texture: ≥4 (skin, moisture, friction, internal)
 - Internal: ≥1 (vaginal walls, womb, cock sensation)
 
 **GOONER REQUIREMENTS (ACTION):**
+
 ```
 MANDATORY for action section:
+- LEXICON INJECTION: You MUST pick specific sensory words from `hentai_lexicon.md` (e.g., "viscous", "shuddering", "glistening")
 - X-RAY VIEW: Describe internal penetration sensation
   (vaginal walls gripping, womb being pushed, cock throbbing inside)
 - FLUID WORSHIP: Track all fluids with sensory detail
@@ -119,6 +124,7 @@ From forensic climax panel:
 ```
 
 **Climax Requirements (GOONER GRADE):**
+
 - Extended description (NEVER RUSH - minimum 300 words)
 - Multiple sensory elements (all 5 senses + internal)
 - Physical residue noted with trajectory (where fluids go)
@@ -138,6 +144,7 @@ From forensic report, ensure:
 ### 5. Update Output File
 
 Append action prose to output:
+
 - Update frontmatter: `stepsCompleted: [..., 'step-04-action-prose']`
 
 ### 6. Present MENU OPTIONS
@@ -156,7 +163,7 @@ Append action prose to output:
 **Chọn:** [R] Revise action [C] Continue to Dialogue"
 ```
 
-#### Menu Handling Logic:
+#### Menu Handling Logic
 
 - IF R: Ask what to revise, make changes, redisplay menu
 - IF C: Save/update output file, load `{nextStepFile}`
@@ -165,7 +172,7 @@ Append action prose to output:
 
 ## 🚨 SYSTEM SUCCESS/FAILURE METRICS
 
-### ✅ SUCCESS:
+### ✅ SUCCESS
 
 - All action beats covered
 - Maximum sensory density achieved
@@ -174,7 +181,7 @@ Append action prose to output:
 - OBSERVER-CAMERA maintained
 - No banned words used
 
-### ❌ SYSTEM FAILURE:
+### ❌ SYSTEM FAILURE
 
 - Skipping action moments
 - Truncating climax

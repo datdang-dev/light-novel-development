@@ -1,3 +1,11 @@
+---
+name: "gooner-audit-engine"
+description: "Core logic for the Gooner Audit Framework - Automated scoring and feedback"
+version: "1.0.0"
+type: "module"
+owner: "Riko (gooner-editor)"
+---
+
 # 🔥 Gooner Audit Engine Module
 
 > **Purpose**: Tự động hóa scoring và audit theo GOONER_AUDIT_FRAMEWORK.
@@ -134,6 +142,7 @@ Suggestions:
 ## Usage Examples
 
 ### Full Audit
+
 ```
 /audit [prose_file.md]
 → Returns: Complete 100-point scorecard
@@ -142,6 +151,7 @@ Suggestions:
 ```
 
 ### Quick Check
+
 ```
 /audit-quick [prose_file.md]
 → Returns: Pass/Fail per category
@@ -149,6 +159,7 @@ Suggestions:
 ```
 
 ### Category Focus
+
 ```
 /audit-sensory [prose_file.md]
 → Returns: Category A detailed breakdown
@@ -172,9 +183,11 @@ Suggestions:
 ## Technical Details
 
 ### Source Framework
+
 `{project-root}/studio/docs/GOONER_AUDIT_FRAMEWORK.md`
 
 ### Keyword Lists
+
 - Smell: `{project-root}/studio/docs/GOONER_AUDIT_FRAMEWORK.md#smell-words`
 - Banned: `{project-root}/studio/docs/GOONER_AUDIT_FRAMEWORK.md#banned-words`
 

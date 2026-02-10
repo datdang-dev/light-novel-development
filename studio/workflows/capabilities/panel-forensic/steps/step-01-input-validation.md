@@ -12,26 +12,26 @@ templateFile: '{workflow_path}/templates/forensic-report-template.md'
 
 # Step 1: Input Validation
 
-## STEP GOAL:
+## STEP GOAL
 
 Validate the input image, confirm it's readable, and establish page identification metadata for the forensic analysis session.
 
-## MANDATORY EXECUTION RULES (READ FIRST):
+## MANDATORY EXECUTION RULES (READ FIRST)
 
-### Universal Rules:
+### Universal Rules
 
 - 🛑 NEVER proceed without viewing the actual image
 - 📖 CRITICAL: Read the complete step file before taking any action
 - 🔄 CRITICAL: When loading next step with 'C', ensure entire file is read
 - ✅ YOU MUST speak in Vietnamese
 
-### Role Reinforcement:
+### Role Reinforcement
 
 - ✅ You are a forensic analyst preparing to examine visual evidence
 - ✅ Maintain clinical, precise approach
 - ✅ We engage in collaborative dialogue
 
-### Step-Specific Rules:
+### Step-Specific Rules
 
 - 🎯 Focus only on validation and identification
 - 🚫 FORBIDDEN to begin analysis before validation complete
@@ -50,7 +50,8 @@ If not already provided, ask user for:
 
 1. **Đường dẫn hình ảnh** hoặc page range (ví dụ: `page_001.jpg` hoặc `001-005`)
 2. **Tên manga** (để đặt tên file output)
-3. **Hướng đọc** nếu khác mặc định (mặc định: phải-sang-trái cho manga)
+3. **Hướng đọc** (mặc định: phải-sang-trái)
+4. **Director Notes** (nếu có yêu cầu soi chi tiết nào đặc biệt)
 
 Vui lòng cung cấp thông tin!"
 ```
@@ -60,6 +61,7 @@ Vui lòng cung cấp thông tin!"
 Once path provided:
 
 **CRITICAL - ZERO ASSUMPTION PROTOCOL:**
+
 ```
 1. Use `view_file` tool to ACTUALLY SEE the image
 2. NEVER assume content without viewing
@@ -67,6 +69,7 @@ Once path provided:
 ```
 
 Validate:
+
 - [ ] Image file exists and is readable
 - [ ] Format is supported (jpg, jpeg, png, webp)
 - [ ] Image loads correctly
@@ -88,6 +91,7 @@ After viewing image, document:
 - **Panel Count (initial):** {estimated count}
 - **Page Type:** {standard / splash / double-page}
 - **Content Rating:** {SFW / NSFW / R18}
+- **Director Notes:** {User vision/requests}
 ```
 
 ### 4. Create Output File
@@ -114,7 +118,7 @@ status: IN_PROGRESS
 
 ### 5. Present MENU OPTIONS
 
-Display: 
+Display:
 
 ```
 "✅ Image validated thành công!
@@ -129,7 +133,7 @@ Display:
 **Chọn:** [C] Continue to Layout Analysis"
 ```
 
-#### Menu Handling Logic:
+#### Menu Handling Logic
 
 - IF C: Update frontmatter với stepsCompleted, then load `{nextStepFile}`
 - IF other: Help user respond, redisplay menu
@@ -144,7 +148,7 @@ ONLY WHEN image is validated, output file is created with proper frontmatter, wi
 
 ## 🚨 SYSTEM SUCCESS/FAILURE METRICS
 
-### ✅ SUCCESS:
+### ✅ SUCCESS
 
 - Image actually viewed using view_file tool
 - All metadata collected (manga name, page, direction)
@@ -152,7 +156,7 @@ ONLY WHEN image is validated, output file is created with proper frontmatter, wi
 - Initial panel count estimated
 - User confirms validation
 
-### ❌ SYSTEM FAILURE:
+### ❌ SYSTEM FAILURE
 
 - Not viewing the actual image file
 - Assuming content without visual confirmation

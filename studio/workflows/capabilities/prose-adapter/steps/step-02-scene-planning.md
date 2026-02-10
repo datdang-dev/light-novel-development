@@ -10,18 +10,18 @@ nextStepFile: './step-03-environment-prose.md'
 
 # Step 2: Scene Planning
 
-## STEP GOAL:
+## STEP GOAL
 
 Create a structured scene plan with clear escalation loops and beat tracking before writing prose.
 
-## MANDATORY EXECUTION RULES (READ FIRST):
+## MANDATORY EXECUTION RULES (READ FIRST)
 
-### Universal Rules:
+### Universal Rules
 
 - 📖 CRITICAL: Read the complete step file before taking any action
 - ✅ YOU MUST speak in Vietnamese
 
-### Step-Specific Rules:
+### Step-Specific Rules
 
 - 🎯 Focus on PLANNING only, no prose writing
 - 🚫 FORBIDDEN to skip the escalation loop structure
@@ -29,7 +29,17 @@ Create a structured scene plan with clear escalation loops and beat tracking bef
 
 ## MANDATORY SEQUENCE
 
-### 1. Map Panels to Narrative Beats
+### 1. Map Panels to Narrative Beats (SKEPTIC PROTOCOL ACTIVE)
+
+**SKEPTIC CHECK:** Before mapping, ask: "Does the Forensic Data match the Corruption Arc?"
+
+- If Forensic says "Smiling" but context is "Pain", TRUST CONTEXT.
+- If Forensic says "No fluids" but action is "Ejaculation", INFER FLUIDS.
+
+**DIRECTOR ALIGNMENT:** Review "Director Vision" from Context Summary.
+
+- Does the mapping serve the Director's request? (e.g. "More aggressive" -> Ensure aggressive beats).
+- If Vision contradicts Forensic data, PRIORITIZE VISION for tone/style.
 
 Create a beat map from forensic panel data:
 
@@ -72,12 +82,21 @@ Identify escalation patterns:
 - Focus: {residue, consequence, continuation setup}
 ```
 
-### 3. Plan Sensory Distribution
+### 3. Plan Sensory Distribution AND Palette
+
+**Define the SENSORY PALETTE for this scene:**
+
+- **Smell:** {e.g., Sweat, Semen, Cheap Perfume}
+- **Sound:** {e.g., Wet slapping, Heavy breathing, Bed creaking}
+- **Taste:** {e.g., Salty skin, Metallic blood, Sweet saliva}
+- **Temperature:** {e.g., Stifling heat, Cold floor, Burning friction}
 
 Pre-plan where sensory elements will go:
 
 ```markdown
 ### Sensory Planning
+
+**Palette:** [Smell: {smell}] [Sound: {sound}] [Touch: {touch}]
 
 | Sense | Target Count | Planned Locations |
 |-------|--------------|-------------------|
@@ -107,6 +126,7 @@ From bible or forensics, establish:
 ### 5. Update Output File
 
 Append scene structure to output file:
+
 - Update frontmatter: `stepsCompleted: [..., 'step-02-scene-planning']`
 
 ### 6. Present MENU OPTIONS
@@ -123,7 +143,7 @@ Append scene structure to output file:
 **Chọn:** [C] Continue to Environment Prose"
 ```
 
-#### Menu Handling Logic:
+#### Menu Handling Logic
 
 - IF C: Save/update output file, load `{nextStepFile}`
 - IF other: Help user respond, redisplay menu
@@ -132,7 +152,7 @@ Append scene structure to output file:
 
 ## 🚨 SYSTEM SUCCESS/FAILURE METRICS
 
-### ✅ SUCCESS:
+### ✅ SUCCESS
 
 - All panels mapped to beats
 - Escalation loops defined
@@ -140,7 +160,7 @@ Append scene structure to output file:
 - Character voices noted
 - Structure documented
 
-### ❌ SYSTEM FAILURE:
+### ❌ SYSTEM FAILURE
 
 - Skipping panel mapping
 - No escalation planning

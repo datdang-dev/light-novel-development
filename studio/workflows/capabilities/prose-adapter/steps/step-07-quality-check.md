@@ -5,23 +5,24 @@ description: 'Pre-audit quality verification before sending to gooner-audit'
 # Path Definitions
 workflow_path: '{project-root}/studio/workflows/capabilities/prose-adapter'
 thisStepFile: './step-07-quality-check.md'
+nextStepFile: './step-08-wiki-update.md'
 outputFile: '{output_folder}/_prose/{manga_name}/chapter_{ch}/page_{page_num}_prose.md'
 ---
 
 # Step 7: Quality Self-Check
 
-## STEP GOAL:
+## STEP GOAL
 
-Perform self-audit against gooner-audit criteria before formal audit, ensuring prose meets quality standards.
+Perform self-audit against gooner-audit criteria and PREPARE FOR RECURSIVE UPDATE.
 
-## MANDATORY EXECUTION RULES (READ FIRST):
+## MANDATORY EXECUTION RULES (READ FIRST)
 
-### Universal Rules:
+### Universal Rules
 
-- 📖 CRITICAL: This is the final step before audit
+- 📖 CRITICAL: This is the pre-final step
 - ✅ Be honest in self-assessment
 
-### Step-Specific Rules:
+### Step-Specific Rules
 
 - 🎯 Score against gooner-audit rubric
 - 🚫 FORBIDDEN to submit prose that self-scores <70
@@ -129,6 +130,7 @@ Perform self-audit against gooner-audit criteria before formal audit, ensuring p
 ### 7. Fix Issues if Below 85
 
 If score <85:
+
 - Identify weakest categories
 - Make targeted improvements
 - Re-score after fixes
@@ -145,33 +147,37 @@ self_audit_score: {score}
 ---
 ```
 
-### 9. Workflow Completion
+### 9. Continue to Recursive Update
 
 ```
-"✅ PROSE ADAPTATION HOÀN THÀNH!
+"✅ PROSE ADAPTATION AUDIT COMPLETE!
 
 **Self-Audit Score:** {score}/100 ({status})
-
 **Output:** {outputFile}
 
-**Ready for:** gooner-audit workflow
+**Tiếp theo:** Recursive Universe Update (Extract Facts)
 
-**WORKFLOW COMPLETE**"
+**Chọn:** [C] Continue to Wiki Update"
 ```
+
+#### Menu Handling Logic
+
+- IF C: Save output, load `{nextStepFile}`
+- IF other: Redisplay menu
 
 ---
 
 ## 🚨 SYSTEM SUCCESS/FAILURE METRICS
 
-### ✅ SUCCESS:
+### ✅ SUCCESS
 
 - Self-audit completed honestly
 - Score ≥70 achieved
 - Issues fixed before completion
 - Output file properly formatted
-- Ready for formal audit
+- Ready for recursive update
 
-### ❌ SYSTEM FAILURE:
+### ❌ SYSTEM FAILURE
 
 - Submitting prose <70 score
 - Dishonest self-assessment
@@ -179,11 +185,3 @@ self_audit_score: {score}
 - Missing frontmatter updates
 
 **Master Rule:** Honest self-check. Fix before submit. Quality first.
-
----
-
-## WORKFLOW END
-
-This concludes the Prose Adapter workflow. Output is ready for:
-- `gooner-audit` workflow
-- `bible-sync SAVE` (if state changes)
