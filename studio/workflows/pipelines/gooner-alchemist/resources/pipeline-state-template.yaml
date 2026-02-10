@@ -1,0 +1,32 @@
+# Pipeline State Template
+# Created by gooner-alchemist/step-01-initialize
+# This file tracks per-page progress through the pipeline
+
+project: ""
+chapter: 1
+source_folder: ""
+started: ""
+status: "IN_PROGRESS"
+
+# Page tracking
+current_page: null
+pages_total: 0
+pages_pending: []
+pages_processed: []
+
+# Step completion per page
+forensics_completed: []
+context_loaded: []
+prose_completed: []
+audits_passed: []
+bible_synced: []
+
+# Quality stats
+audit_scores: {}  # page: score
+
+# Revision tracking
+revision_counts: {}  # page: count
+max_revisions: 3
+
+# First chapter flag
+first_chapter: false

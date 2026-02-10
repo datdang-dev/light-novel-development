@@ -1,0 +1,16 @@
+{
+  "workflow_version": "1.2.0",
+  "timestamps": {
+    "started": "2026-02-06T00:02:42+07:00",
+    "last_updated": "2026-02-06T00:02:42+07:00"
+  },
+  "mode": "initial_scan",
+  "scan_level": "exhaustive",
+  "project_root": "/home/datdang/working/light_novel_development_framework",
+  "output_folder": "/home/datdang/working/light_novel_development_framework/studio/docs",
+  "completed_steps": [],
+  "current_step": "step_1",
+  "findings": {},
+  "outputs_generated": ["project-scan-report.json"],
+  "resume_instructions": "Starting from step 1"
+}

@@ -1,0 +1,179 @@
+# Vietnamese SFX Quick Reference
+# Từ tượng thanh tiếng Việt cho Light Novel
+# Use this for Vietnamese reader output
+
+## ===================================
+## LICKING / ORAL (Liếm)
+## ===================================
+
+licking:
+  - vn: "Liếm~"
+    jp: "べろ (bero)"
+    usage: "Lưỡi liếm bề mặt"
+    
+  - vn: "Mút~"
+    jp: "ちゅぱ (chupa)"
+    usage: "Mút hút"
+    
+  - vn: "Nhấm nháp~"
+    jp: "れろ (rero)"
+    usage: "Liếm nhẹ nhàng"
+
+## ===================================
+## WET SOUNDS (Âm ướt)
+## ===================================
+
+wet_sounds:
+  - vn: "Nhẹp... nhẹp..."
+    jp: "ぬちゃ (nucha)"
+    usage: "Ướt nhẹp, sticky"
+    
+  - vn: "Nhếp nháp..."
+    jp: "ねちゃ (necha)"
+    usage: "Ướt dính"
+    
+  - vn: "Bì bạch..."
+    jp: "ぐちゅ (guchu)"
+    usage: "Ướt sũng, squelch"
+    
+  - vn: "Toẹt toẹt..."
+    jp: "ずぽずぽ (zupozupo)"
+    usage: "Thúc lặp lại"
+
+## ===================================
+## INSERTION / THRUST (Đâm/Thúc)
+## ===================================
+
+insertion:
+  - vn: "Đâm~"
+    jp: "ずぽ (zupo)"
+    usage: "Đâm sâu"
+    
+  - vn: "Thọc~"
+    jp: "ずぷ (zupu)"
+    usage: "Thọc vào"
+    
+  - vn: "Bì bạch!"
+    jp: "ぱんぱん (panpan)"
+    usage: "Tiếng da thịt đập"
+
+## ===================================
+## GAGGING / CHOKING (Nấc/Nghẹn)
+## ===================================
+
+gagging:
+  - vn: "Ức... ức..."
+    jp: "ぐぽ (gupo)"
+    usage: "Nghẹn cổ họng"
+    
+  - vn: "Ọe~"
+    jp: "おえ (oe)"
+    usage: "Nôn khan"
+    
+  - vn: "Ựa~"
+    jp: "うぐ (ugu)"
+    usage: "Nấc nghẹn"
+    
+  - vn: "Phù~"
+    jp: "ぷはぁ (puhaa)"
+    usage: "Thở ra nhẹ nhõm sau khi rút"
+
+## ===================================
+## SWALLOWING (Nuốt)
+## ===================================
+
+swallowing:
+  - vn: "Ực... ực..."
+    jp: "ごくっ (goku)"
+    usage: "Nuốt chửng"
+    
+  - vn: "Ừng... ừng..."
+    jp: "んく (nku)"
+    usage: "Nuốt nhỏ"
+
+## ===================================
+## EJACULATION (Xuất tinh)
+## ===================================
+
+ejaculation:
+  - vn: "Xịt~"
+    jp: "びゅるる (byururu)"
+    usage: "Phun ra mạnh"
+    
+  - vn: "Phụt~"
+    jp: "どぴゅ (dopyu)"
+    usage: "Bắn từng đợt"
+    
+  - vn: "Tràn..."
+    jp: "どくどく (dokudoku)"
+    usage: "Chảy ra liên tục"
+
+## ===================================
+## MOANING (Rên)
+## ===================================
+
+moaning:
+  light:
+    - vn: "Ah~"
+      usage: "Rên nhẹ"
+    - vn: "Mm~"
+      usage: "Nín nhịn"
+      
+  medium:
+    - vn: "Aahn~♥"
+      usage: "Rên sướng"
+    - vn: "Hyaa~♥"
+      usage: "Bất ngờ sướng"
+      
+  intense:
+    - vn: "Hiii~♥♥"
+      usage: "Cao trào gần"
+    - vn: "Nhooo~♥♥♥"
+      usage: "Đã vỡ"
+
+## ===================================
+## HEARTBEAT / PULSE
+## ===================================
+
+heartbeat:
+  - vn: "Thình thịch..."
+    jp: "どきどき (dokidoki)"
+    usage: "Tim đập nhanh"
+    
+  - vn: "Rần rật..."
+    jp: "むらむら (muramura)"
+    usage: "Kích thích dâng lên"
+
+## ===================================
+## BODY SOUNDS
+## ===================================
+
+body:
+  trembling:
+    - vn: "Run rẩy..."
+      jp: "ぶるぶる (buruburu)"
+      
+  twitching:
+    - vn: "Giật giật~"
+      jp: "びくびく (bikubiku)"
+      
+  jiggling:
+    - vn: "Lắc lư~"
+      jp: "ぷるん (purun)"
+
+## ===================================
+## CONVERSION RULES
+## ===================================
+
+# Khi viết prose cho đọc giả Việt:
+# 1. KHÔNG dùng tiếng Nhật (hiragana/katakana)
+# 2. KHÔNG dùng Romaji thuần
+# 3. Dùng từ tượng thanh tiếng Việt
+# 4. Có thể dùng từ mượn phổ biến (onahole, ahegao)
+# 5. Format: *SFX* hoặc *SFX... SFX... SFX...*
+
+# Example:
+# ❌ *ぐちゅ... ぐちゅ...*
+# ❌ *Guchu... guchu...*
+# ✅ *Nhẹp... nhẹp...*
+# ✅ *Bì bạch... bì bạch...*

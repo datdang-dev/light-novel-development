@@ -1,0 +1,72 @@
+{
+    "spec": "chara_card_v3",
+    "spec_version": "3.0",
+    "name": "TEMPLATE_NAME",
+    "description": "Describe your character here. This is the MAIN prompt block sent to the AI.\n\n[Physical Appearance]\nHeight, body type, hair, eyes, distinctive features, clothing.\n\n[Personality & Traits]\nList key personality traits, mannerisms, fears, desires, kinks (if R18).\n\n[Background]\nBrief backstory relevant to the interaction.\n\n[Powers/Abilities]\n(Optional) If applicable.",
+    "personality": "Brief personality summary (optional redundant field usually concatenated to description or inserted separately depending on settings). Good for concise keywords: Tsundere, Shy, Dominant, etc.",
+    "scenario": "Describe the current situation/context. Where are they? Why are they talking to {{user}}? What is the relationship?",
+    "first_mes": "The opening message of the chat. This sets the tone and formatting style.\n\n*Write narration in asterisks like this.*\n\n\"Speak dialogue in quotes like this.\"\n\nOr use Japanese bracket style if preferred:\n\n*Action description...*\n\n「Dialogue text...」",
+    "mes_example": "<START>\n{{user}}: \"Hello.\"\n{{char}}: *She looks up, startled.* \"Oh! I didn't see you there.\"\n\n<START>\n{{user}}: \"Who are you?\"\n{{char}}: *She crosses her arms.* \"None of your business!\"\n\n(Use <START> tag to separate unique dialogue examples. This helps the AI learn the character's voice/speech patterns.)",
+    "creator_notes": "Notes for the user (not sent to AI). Credits, version info, usage tips.",
+    "tags": [
+        "Tag1",
+        "Tag2",
+        "Tag3"
+    ],
+    "talkativeness": "0.5",
+    "fav": false,
+    "avatar": "none",
+    "alternate_greetings": [
+        "Alternative opening message 1",
+        "Alternative opening message 2"
+    ],
+    "group_only_greetings": [
+        "Greeting used only in group chats"
+    ],
+    "creator": "YOUR_NAME",
+    "character_version": "1.0.0",
+    "extensions": {
+        "talkativeness": "0.5",
+        "fav": false,
+        "world": "Name of linked World Info file (optional)",
+        "depth_prompt": {
+            "prompt": "Text to be injected at specific depth (e.g. '[System Note: {{char}} is getting angry]')",
+            "depth": 4,
+            "role": "system"
+        }
+    },
+    "character_book": {
+        "name": "Embedded Lorebook",
+        "description": "Lorebook entries embedded within the card",
+        "scan_depth": 3000,
+        "token_budget": 500,
+        "recursive_scanning": true,
+        "extensions": {},
+        "entries": [
+            {
+                "id": 1,
+                "keys": ["keyword1", "keyword2"],
+                "secondary_keys": ["context_key"],
+                "content": "This content is injected when keywords are found in chat.",
+                "comment": "Description of this entry",
+                "enabled": true,
+                "position": "after_char",
+                "use_regex": false,
+                "constant": false,
+                "selective": true,
+                "insertion_order": 10,
+                "extensions": {
+                    "position": 1,
+                    "exclude_recursion": false,
+                    "display_index": 1,
+                    "probability": 100,
+                    "useProbability": true,
+                    "depth": 4,
+                    "group": "",
+                    "group_override": false,
+                    "priority": 10
+                }
+            }
+        ]
+    }
+}

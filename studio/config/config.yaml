@@ -1,0 +1,33 @@
+# LND Studio Configuration
+# BMAD v6 Compliant Configuration File
+# Created: 2026-02-09
+
+# Project Info
+project_name: "studio"
+version: "1.0.0"
+
+# Path Configuration
+project_root: "{project-root}/studio"
+output_folder: "{project-root}/_lnd-output"
+analysis_folder: "{output_folder}/_analysis"
+release_folder: "{output_folder}/_release"
+
+# User Settings
+user_name: "master"
+communication_language: "Vietnamese"
+document_output_language: "English"
+
+# Workflow Paths
+workflows_path: "{project_root}/workflows"
+capabilities_path: "{workflows_path}/capabilities"
+pipelines_path: "{workflows_path}/pipelines"
+templates_path: "{project_root}/_templates"
+
+# Quality Settings
+quality_threshold:
+  min_audit_score: 85
+  warn_score: 70
+
+# Studio Info
+studio_name: "LND Studio"
+studio_motto: "Where Fantasies Become Light Novels"
