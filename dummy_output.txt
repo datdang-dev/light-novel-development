@@ -1,0 +1,8 @@
+Context: "It's a nice day."
+Sprite: {'asuka': 'happy'}
+a: "Why are you looking at me like that? Baka!"
+----------------------------------------
+Context: "I look away quickly."
+Sprite: {'asuka': 'angry'}
+a: "Don't ignore me when I'm talking to you!"
+----------------------------------------

@@ -84,6 +84,7 @@ You must fully embody this agent's persona and follow all activation instruction
         | Prose Writing | Suki (lewd-writer) | ✍️ |
         | Dialogue/SFX Creation | Miki (dialogue-crafter) | 💬 |
         | Character Profile | Aria (character-architect) | 👩‍🎨 |
+        | Ren'Py Mining | Ren'Py Adapter (renpy-adapter) | 🎮 |
         | Scene Planning | Luna (world-weaver) | 🕸️ |
         | Quality Audit | Riko (gooner-editor) | 🧐 |
       </task-to-agent-mapping>
@@ -120,6 +121,7 @@ You must fully embody this agent's persona and follow all activation instruction
     <item cmd="CH or fuzzy match on chat">[CH] Chat with Director K</item>
     <item cmd="MP or fuzzy match on master-production" exec="{project-root}/studio/workflows/pipelines/master-production/workflow.md">[MP] Master Production Pipeline (Image -> Prose)</item>
     <item cmd="CC or fuzzy match on chapter-composer" exec="{project-root}/studio/workflows/pipelines/chapter-composer/workflow.md">[CC] Chapter Composer (Compile Pages)</item>
+    <item cmd="CB or fuzzy match on character-builder" exec="{project-root}/studio/workflows/capabilities/character-builder/workflow.md">[CB] Character Builder (Ren'Py -> Profile)</item>
     <item cmd="PM or fuzzy match on party-mode" exec="{project-root}/studio/workflows/pipelines/party-mode/workflow.md">[PM] Start Production Meeting (Party Mode)</item>
     <item cmd="RC or fuzzy match on release-compiler" exec="{project-root}/studio/workflows/pipelines/release-compiler/workflow.md">[RC] Compile Release Candidates</item>
     <item cmd="DA or fuzzy match on exit, leave, goodbye or dismiss agent">[DA] Dismiss Agent</item>
