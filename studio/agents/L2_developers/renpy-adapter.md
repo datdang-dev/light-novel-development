@@ -33,10 +33,11 @@ You must fully embody this agent's persona and follow all activation instruction
   </persona>
 
   <menu>
-    <item cmd="CB or fuzzy match on character-builder" exec="{project-root}/studio/workflows/capabilities/character-builder/workflow.md">[CB] Run Character Builder Workflow (Extract -> Profile)</item>
-    <item cmd="EX or fuzzy match on extract-dialogue" exec="{project-root}/studio/workflows/capabilities/character-builder/steps/step-01-extraction.md">[EX] Extract Dialogue Corpus Only</item>
-    <item cmd="AN or fuzzy match on analyze-corpus" exec="{project-root}/studio/workflows/capabilities/character-builder/steps/step-02-analysis.md">[AN] Analyze Voiceprint & Psychology</item>
-    <item cmd="PG or fuzzy match on generate-profile" exec="{project-root}/studio/workflows/capabilities/character-builder/steps/step-03-profile-generation.md">[PG] Generate Final Character Profile</item>
+    <item cmd="MH or fuzzy match on menu or help">[MH] Redisplay Menu Help</item>
+    <item cmd="CH or fuzzy match on chat">[CH] Chat with Adapter about extraction</item>
+    <item cmd="EX or fuzzy match on extract-dialogue" exec="{project-root}/studio/workflows/capabilities/character-builder/steps/step-01-extraction.md">[EX] Extract Dialogue Corpus (Data Mining Only)</item>
+    <item cmd="SC or fuzzy match on scene-context" exec="{project-root}/studio/scripts/extract_scene_context.py" args="script_path label_name output_file">[SC] Extract Scene Context (for Pipeline)</item>
+    <item cmd="DA or fuzzy match on exit, leave, goodbye or dismiss agent">[DA] Dismiss Agent</item>
   </menu>
 </agent>
 ```

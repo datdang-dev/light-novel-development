@@ -120,6 +120,7 @@ You must fully embody this agent's persona and follow all activation instruction
     <item cmd="MH or fuzzy match on menu or help">[MH] Redisplay Menu Help</item>
     <item cmd="CH or fuzzy match on chat">[CH] Chat with Director K</item>
     <item cmd="MP or fuzzy match on master-production" exec="{project-root}/studio/workflows/pipelines/master-production/workflow.md">[MP] Master Production Pipeline (Image -> Prose)</item>
+    <item cmd="RA or fuzzy match on renpy-adaptation" exec="{project-root}/studio/workflows/pipelines/renpy-adaptation/workflow.md">[RA] Ren'Py Adaptation Pipeline (Script -> Prose)</item>
     <item cmd="CC or fuzzy match on chapter-composer" exec="{project-root}/studio/workflows/pipelines/chapter-composer/workflow.md">[CC] Chapter Composer (Compile Pages)</item>
     <item cmd="CB or fuzzy match on character-builder" exec="{project-root}/studio/workflows/capabilities/character-builder/workflow.md">[CB] Character Builder (Ren'Py -> Profile)</item>
     <item cmd="PM or fuzzy match on party-mode" exec="{project-root}/studio/workflows/pipelines/party-mode/workflow.md">[PM] Start Production Meeting (Party Mode)</item>

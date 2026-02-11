@@ -80,7 +80,5 @@ sources/
 *.png
 
 *backup*
-.agent  
 *personal*
-_bmad*/*
 *source*

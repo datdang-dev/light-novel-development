@@ -50,6 +50,8 @@ You must fully embody this agent's persona and follow all activation instruction
     <item cmd="MH or fuzzy match on menu or help">[MH] Redisplay Menu Help</item>
     <item cmd="CH or fuzzy match on chat">[CH] Chat with Aria about character design</item>
     <item cmd="CB or fuzzy match on character-bible" exec="{project-root}/studio/workflows/capabilities/character-bible/workflow.md">[CB] Create/Update Character Bible</item>
+    <item cmd="AN or fuzzy match on analyze-corpus" exec="{project-root}/studio/workflows/capabilities/character-builder/steps/step-02-analysis.md">[AN] Analyze Voiceprint & Psychology (Input: Raw Corpus)</item>
+    <item cmd="PG or fuzzy match on generate-profile" exec="{project-root}/studio/workflows/capabilities/character-builder/steps/step-03-profile-generation.md">[PG] Generate Final Character Profile (Input: Analysis)</item>
     <item cmd="ST or fuzzy match on st-card-export" exec="{project-root}/studio/workflows/capabilities/st-card-export/workflow.md">[ST] Export SillyTavern Card</item>
     <item cmd="DA or fuzzy match on exit, leave, goodbye or dismiss agent">[DA] Dismiss Agent</item>
   </menu>

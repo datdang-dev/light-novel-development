@@ -1,0 +1,153 @@
+# Scene Context: d31_restroom_asuka_backstory -> d31_restroom_asuka_backstory_end
+# Source: /mnt/d/nsfw_stuff/WaifuAcademy-0.13.5-pc/game/script.rpy:66556
+----------------------------------------
+label d31_restroom_asuka_backstory:
+    menu:
+        "\"What the hell? Helen slapped a kid? Just for that?\"" :
+            #scene d31restroom_asuka11 with fade
+            a "One time, Mom got me a dress, just one for summer that was white with little pink and blue flowers on it. She told me I'd be in trouble if I got it dirty..."
+            p "Let me guess..."
+            a "Yeah, but not because I fell or something like that. I tried really hard to be careful."
+            a "A few of the girls who I thought were my friends asked if I could twirl in it, and when I turned around..."
+            scene d31restroom_asuka27 with fade
+            p "Man I can really relate to Asuka childhood..."
+            a "... one pushed me to the ground, and before I could get up, one started kicking me, while another... s-she had scissors, and... {i}*snf...*{/i}"
+            menu:
+                "\"She had scissors?\"":
+                    a "Yes... She sliced up my dress, yelling at me how it was my Mom's fault her parent's were getting divorced, and that I ruined everything."
+                    a "The one kicking me claimed that her dad was going to jail for having \"bad pictures of me,\" and that I must have... {i}*Hic!*{/i}"
+                    scene d31restroom_asuka11 with fade
+                    a "{i}*Snf!*{/i} U-Um, the last one, the girl who pushed me, said I needed to be punished for being a \"demon-spawn whore...\""
+                    a "...b-but the boy! He came to help me..."
+                    a "He tried to protect me, but once the \"freezing\" went away. I remember just trying to punch, and scream at him to make him go away..."
+                    a "He just kept trying to cover me from the assault of the girls... I remember my nail scratching his arm because I was scared..."
+                    a "{i}*U-Um...*{/i} Eventually, the girls left and I calmed down, I was just... numb. He was hugging me and saying..."
+                    a "\"You are safe now, don't listen to them. You are not a bad person...\""
+                    a "{i}*Heh...*{/i} I might have even fallen asleep from how tired, but safe, I felt... if Mom hadn't show up."
+                    p "Why? What happened?"
+                    scene d31restroom_asuka27 with fade
+                    a "She slapped him so hard his nose was bleeding, and said if he came anywhere near me again, that she send him to a \"place he'd never come back from.\""
+                    a "I don't remember much else of what happened after that, but when she picked me up and carried me away, she said... \"like father, like son. Pathetic...\""
+                    a "After that, every time I saw him, or thought of him, my heart would race and I would feel really warm inside."
+                    a "By the time I figured out what I was feeling, I started seeing him less and less, until one day, he was gone."
+                    scene d31restroom_asuka11 with fade
+                    a "I never got to thank him, apologize... or tell him how I felt. {i}*Snf...* *Heh...*{/i} It was just a silly childhood crush, anyway..."
+                    a "This is why I'm just terrified of having you drift away from me."
+                    a "Every time I feel like I'm losing you, I feel like my lungs fill with water, and my heart is going to stop."
+                    a "I stop thinking, and try desperately to cling to you... to pull you back to me the only way I know how before I drown."
+                    a "I'm sorry. I'm really, {i}really{/i} sorry... Just, please... Don't leave me... Please..."
+                    p "({i}*Hah...*{/i} As much as I want to be mad at her, I can't. To do so, I'd have to come to hate myself as well, and it's far too late for that. The sins of the mother, and all that... Fuck it.)"
+                    jump d31_restroom_asuka_backstory_end
+
+
+label d31_restroom_asuka_backstory_end:
+    call setup_replay from _call_setup_replay_74
+    scene d31restroom_asuka12 with fade
+    stop music fadeout 2.4
+    "You grip Asuka's hand firmly, guiding her towards the restroom with ample, yet gentle, force."
+    p "I've heard enough, Asuka. You're coming with me. I think you need a little reminder of how things are supposed to work between the two of us."
+    "Her fingers happily curl into your grasp, delighted to be held and possessed. A stray thought brings a smile to her face, as she follows your lead with a blissful lack of resistance."
+    a "(We're... we're holding hands... just like a couple. It feels nice, and warm. \u2661)"
+    scene d31restroom_asuka14 with hpunch
+    play music "sexy.mp3"
+    "The moment the stall door closes, she leaps lovingly into your arms. She presses her lips to yours with hunger, starved beyond words for your love and your touch. That which can fill her as nothing else does."
+    "Her hands caress your face, while yours clutch her ass, both of your greedily partaking of the other to your heart's content."
+    "For but a moment she pries herself away, simply to whisper what has long lingered in her heart."
+    a "{i}*Mwah~*{/i} I love you, [player_name]. Even though I may be nothing but a outlet to you, and even though you make me want to scream sometimes, I have never wanted to belong to anyone more. \u2665"
+    p "The feeling's mostly mutual, Asuka: even though you infuriate me, you're still mine at the end of that day, and I love that."
+    a "B-Baka... \u2661 {i}*Mhmn~*"
+    p "Everything you have, everything you are, is mine. From this lusciously soft lips..."
+    scene d31restroom_asuka15 with fade
+    p "... to this perfect little ass~."
+    a "{i}*Ahn~!*{/i} Pervert~."
+    a "As long as you let me \"borrow\" that manly cock of yours from time to time, I think I'm getting the better deal. {i}*Hmn~*{/i} Nothing about me is special, compared to the other girls..."
+    p "The thing is, Asuka..."
+    scene d31restroom_asuka17 with fade
+    "You effortlessly twirl Asuka around, pressing her into the wall just enough to make it clear who she belongs to."
+    p "... I won't allow {i}anyone{/i} to speak ill of my belongings, {i}including{/i} you. Your body is flawless; a masterpiece. From your golden hair, to your extra-sensitive nipples..."
+    scene d31restroom_asuka17 with vpunch
+    a "{i}*HAHN~!*{/i} D-Don't pinch them... \u2665"
+    p "As I said, I won't allow any slander towards what I own, and those who do so, will be punished accordingly."
+    p "If you badmouth any part of yourself, I will have to \"correct\" you until you admit you are wrong."
+    a "{i}*Ahn...* *Hah...*{/i} B-But my boobs are so small... I can barely-."
+    scene black
+    
+    play movie "d31restroom_asuka18.webm" loop
+    show movie with CropMove(0.2)
+    a "{i}MWAH~!* *HAHN~!*{/i}"
+    p "As always, you refuse to listen. They are perfect as they are, but if you want them bigger..."
+    a "{i}*Hmn~!* *O-Ooh~!*{/i} I-I do... {i}*AH~!*{/i} I wish they were larger..."
+    p "Oh, Asuka... In that case, I can think of a few ways. I can massage them, just like this. Or... well, we'll get to the other options later."
+    p "... that is, of course, if {i}I{/i} want them to change. {i}You{/i} don't get to decide what happens to your body anymore. {i}I{/i} do. Understand?"
+    hide movie with Fade(0.1, 0.0, 0.0)
+    stop movie
+    play movie "d31restroom_asuka19.webm" loop 
+    show movie with dissolve
+    a "{i}*Ah!* *Hahn~!*{/i} Y-Yes... {i}*Mhm~*{/i} W-Whatever you want... I'll do it~." 
+    p "Then you'll start by apologizing. Apologzing to this sexy-ass body that you spoke ill of."
+    a "{i}*Hngh~*{/i} I-I'm sorry... {i}Ooh~*{/i} I'm sorry I said my breasts were small...!"
+    a "If [player_name] likes them... {i}*HAHN~!*{/i} T-Then they're perfect! If they're not, he'll change them! {i}*Ah~!*{/i} S-So they will always be how they should be! \u2661"
+    p "That's my good girl, you're learning. I think you deserve a reward. Pull down your panties and beg for it."
+    hide movie with Fade(0.1, 0.0, 0.0)
+    stop movie
+
+    scene d31restroom_asuka21 with fade
+    a "{i}*Mwah~!*{/i} Y-Yes!"
+    "She does as she was told with frantic fervor, practically ripping them off of her legs to receive her \"reward\" even a milisecond faster."
+    a "{i}*Hahn~!*{/i} P-Please fuck me, [player_name]! Use me as much as you'd like!"
+    a "Fill me with your massive cock until you get addicted, and can't live without me! {i}*Mhmn~!*{/i} I want it~!"
+    scene d31restroom_asuka22 with hpunch
+    a "{i}*GHAN!!*{/i}"
+    p "Here I am, trying to reward you for being good, and you had to try and be uppity again. Looks like I will have to turn your prize into punishment, my naughty nemesis."
+    a "{i}*Hngh~!*{/i} T-That hurts...! It hurtss~! \u2665"
+    p "Oh my, it looks like you enjoy it rough even more than I thought. In fact, I think you get off on me \"correcting\" you, don't you?"
+    a "N-No~! {i}*Ahn~!*{/i} I-I'll get you stuck on me, I swear~! \u2665"
+    scene black
+
+    play movie "d31restroom_asuka23.webm" loop
+    show movie with CropMove(0.2)
+    a "{i}*MWAH~!* *HAHN~!* *OH~!*{/i}"
+    p "Naughty, naughty, naughty. How many times do I have to teach you this lesson, brat? You belong to {i}me!{/i}"
+    a "{i}*HNGH~!* I do~! I do~! {i}*AHN~!*{/i} B-But I'll get you next time I-I swearrr~! {i}*AHH~!*{/i}"
+    p "\"Next time,\" huh? Bring it on, Asuka. Even if I have to dick you down one hundred-thousand times, I {i}will{/i} get you to bend to me!"
+    a "{i}*GAHN~!* *MHM~!*{/i} T-Then I only need to last to one hundred-thousand and {i}one{/i} times to win! {i}*AHH~!* \u2661"
+    p "Oh, you're going to regret that, brat! (Did I just hear footsteps?)"
+    stop movie
+    hide movie with Fade(0.1, 0.0, 0.0)
+    play movie "d31restroom_asuka25.webm" loop
+    show movie with dissolve
+    a "{i}*HA-AAHHN~!* *OOOOH~!* *Hah...!*{/i} IT's GOOOD~! IT FEELS SHO FHUCKING GOOOD~!"
+    "Asuka is thrown over the edge of ecstasy, shaking in sublime adoration of the feeling of you inside her."
+    "You give her no rest, however, continuing to pound away mercilessly in persuit of your own climax."
+    a "S-Slow down...! {i}*HIIIE~!*{/i} I-I'm too sensitive! I-I'm going to... again~"
+    p "I don't give a fuck! Cum a million more times, until your brain turns to mush! You're body is mine, you stupid bitch, and I will break you if it means I get what I want!"
+    a "{i}*GHNNN~!*{/i} FUCK-FUCK-FUUCCCKK~! \u2661"
+    stop movie
+
+    scene d31restroom_asuka26 with ComposeTransition(hpunch, after=Fade(0.2,0.2,0.6, color="#ffffff"))
+    a "{i}*GBLEHHHN~!!!* *O-OOOOOHHH~!!*{/i} \u2665 \u2661 \u2665"
+    "Without a single shred of concern for the piece of meat in front of you, you empty the entirety of your balls into her spasming cunt."
+    "It drinks all you have willingly, doing all it can to coax your nutsack to turn inside-out to give this pussy even a single drop more."
+    p "Fucking Saints..."
+    "Asuka's greedy hole leaves you completely drained, and in doing so, proves your point: her body is the fucking best, and it is, and always will be, yours. Yours, and yours alone..."
+    scene d31restroom_asuka27a with fade
+    "As the primal drive to breed her subsides, you pull her into your arms. This woman belonged to you, even if she would never stop making a pathetic effort to deny it."
+    "Despite her bratty nature, you felt in your soul that she would always be by your side in the end. A fact that made this strange post-coitus cuddle feel all the better."
+    a "{i}*Hah...* *Hah...*{/i} That was... amazing."
+    p "Sure was. It would be nice to be able to do that, and this, in a more private setting for once, though."
+    a "{i}*Hah...* *Hee-hee.*{/i} Maybe if you agree to make us offical, you could come over to my house whenever you'd like. It might complicate things between you and my mom, but whatever."
+    a "Or I could go to yours. Either would be fine, as long as I get to be with you. \u2665"
+    p "You never learn, do you, brat-suka?"
+    a "Nope, never~. You're not wrong, though. Being on a bed would be nice. Let's think about it when we get back to class, okay?"
+    a "It wouldn't hurt you to take me on a proper date for once, either. Even more tennis would be good enough for me."
+    p "We'll see, Asuka. We'll see~."
+    $ renpy.end_replay() 
+    scene d31restroom_asuka24 with vpunch
+    stop music
+    play sound "drop03.mp3"
+    "The clatter of metal and glass on tile echos throughout the restroom."
+    qm "{size=-5}*Noooo, the sacred archives! Please don't be broken!*{/size}"
+    "Despite the intensity of your intercourse, the sound rings clear. The pair of you freeze, ready to engage in flight... or fight..."
+    jump kensoustalk01
+
+

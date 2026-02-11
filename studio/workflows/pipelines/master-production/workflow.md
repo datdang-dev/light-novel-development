@@ -1,45 +1,26 @@
 ---
 name: "master-production"
-description: "Master Pipeline: Full Automation from Evidence to Publishable Prose"
+description: "Pipeline: Master Production Orchestrator (V6)"
 owner: "Director K (lnd-orchestrator)"
-version: "2.0.0"
+version: "6.0.0"
+web_bundle: true
+validateWorkflow: './steps/step-01-forensic-dispatch.md'
 ---
 
-# Master Production Pipeline 🏭
+# Master Production Pipeline (V6)
 
-**Goal:** Automate the entire LND production cycle by orchestrating specialized agents (Atomic, Aria, Miki, Suki, Riko) in a seamless pipeline.
+**Goal:** Automate the entire LND production cycle by orchestrating specialized agents.
 
-**Process:**
-1.  **Analyze Evidence (Forensics):** Prof. Atomic scans the image.
-2.  **Prepare Context (Entity/Bible):** Extract entities and sync with Bible (Aria).
-3.  **Draft Dialogue (Scripting):** Miki generates lines & SFX.
-4.  **Adapt Prose (Writing):** Suki combines Forensics + Dialogue into Prose.
-5.  **Review Quality (Audit):** Riko validates the output.
+**Documentation:**
 
----
+- **Full Architecture & Principles:** [See workflow-OLD.md](./workflow-OLD.md)
 
-## WORKFLOW ARCHITECTURE
+**Architecture:**
 
-### Principles
-- **Strict Delegation**: Director K ONLY manages the queue. Agents do the work.
-- **Data Flow**: Output of Step N becomes Context for Step N+1.
-- **Fail Fast**: If any step fails quality checks, HALT pipeline.
+- **Step 1:** Forensic Analysis (Dispatch to Atomic)
+- **Step 2:** Context Preparation (Internal)
+- **Step 3:** Dialogue Scripting (Dispatch to Miki)
+- **Step 4:** Prose Adaptation (Dispatch to Suki)
+- **Step 5:** Quality Editing (Dispatch to Riko)
 
-### Steps
-| Phase | Step | Name | Agent | Output |
-|-------|------|------|-------|--------|
-| 1 | 01 | Forensic Analysis | Prof. Atomic | `forensic_report.md` |
-| 2 | 02 | Context Preparation | Director K (Internal) | `entities.yaml` / `active_bible` |
-| 3 | 03 | Dialogue Scripting | Miki | `dialogue_script.md` |
-| 4 | 04 | Prose Adaptation | Suki | `prose_scene.md` |
-| 5 | 05 | Quality Editing | Riko | `audit_report.md` |
-
----
-
-## EXECUTION SEQUENCE
-
-### 1. Initialize Pipeline
-Load config (`config.yaml`) and identify inputs (Image/Text).
-
-### 2. Begin Phase 1: Forensics
-Load and execute: `./steps/step-01-forensic-dispatch.md`
+IT IS CRITICAL THAT YOU FOLLOW THIS COMMAND: LOAD the FULL @{project-root}/studio/workflows/pipelines/master-production/steps/step-01-forensic-dispatch.md, READ its entire contents and follow its directions exactly!

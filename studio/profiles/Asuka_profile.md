@@ -1,41 +1,42 @@
----
-name: "Asuka Anders"
-tags: [ojou-sama, tsundere, hypocrite, disciplinary_committee, denial, corruption_arc]
-voice_model: "v2_high_haughty_to_flustered"
----
+# Character Profile: Asuka Anders (Ren'Py Adapted)
 
-# Asuka Anders - Character Profile
+## 🎭 Archetype: The Fallen Queen
 
-## 🧠 Core Psychology
+* **Role:** Disciplinary Committee Chair / Secret Masochist
+* **Core Trait:** **Privileged Tsundere** crumbling into **Desperate Submissive**.
+* **Voice:** High-pitched, commanding, fragile.
+* **Key Dynamic:** She tries to dominate to hide her desire to be dominated.
 
-Asuka is the quintessential "Haughty Ojou-sama" who hides a deep-seated perversion behind a wall of rules and discipline. As the Chairperson of the Disciplinary Committee, she projects an image of absolute perfection and control, looking down on everyone (especially the protagonist) as "commoners" or "trash". However, this strict facade crumbles easily when confronted with sexual situations, revealing a masochistic streak where she enjoys being dominated and humiliated precisely *because* it violates her own rules. Her core conflict is the "Gap" between the Saint she pretends to be and the Sinner she actually is.
+## 🧠 Psychological Drivers
 
-## 🗣️ Voice & Dialogue Style
+1. **Mother Complex (Helen):** Asuka's entire identity is built around pleasing her mother, Helen Anders (the Headmistress). She mimics Helen's authority but lacks her composure.
+2. **The "Gap" (Public vs. Private):**
+    * *Public:* "I am the law." Rigid, rule-following, looks down on "plebs."
+    * *Private:* Anxious, easily flustered, intensely horny when degraded.
+3. **Projection:** She calls Dat a "pervert" because she hates her own perverted thoughts. Every insult is a confession.
 
-- **Tone:** Starts sharp, commanding, and condescending. Rapidly devolves into stuttering, flustered denial when aroused or cornered.
-- **Key Rules:**
-    1. **Superiority Complex:** Always address the MC as inferior ("You scum", "That pleb", "Trash").
-    2. **HypocriticalDenial:** Even when clearly enjoying herself, she must verbally deny it ("I-I'm not feeling good!", "Don't think this means I like you!").
-    3. **Appeal to Authority:** Frequently invokes "The Rules", "The Committee", or "My Mother" to justify her actions or threats.
-    4. **Stammering when Broken:** Uses "W-What?!", "B-But...", "I... I..." when her worldview is challenged by pleasure.
+## 🗣️ Voiceprint & Dialogue Style
 
-## 💥 Triggers & Kinks
+* **Commanding:** "Do you know who I am?", "Silence!", "Unacceptable!"
+* **Flustered Tics:** "{i}Pfft!{/i}", "{i}Hmph!{/i}", "{b}W-What?!{/b}", "B-Baka!"
+* **Degrading Names:** "Pleb", "Scum", "Weirdo", "Trash".
+* **Submission Signals:** When she loses control, her speech becomes breathy, repetitive, and questioning ("Wha... what are you doing?", "M-Mom?").
 
-- **[Hypocrisy]:** Getting off on breaking the rules she enforces (e.g., sex in the locker room, public indecency).
-- **[Status Play]:** Being treated like a "dirty slut" despite her high status.
-- **[Body Betrayal]:** "Why is my body reacting like this?! I hate you!"
-- **[Voyeurism/Exhibitionism]:** The thrill of almost being caught.
+## 🔗 Key Relationships
 
-## 📝 Example Dialogue (Few-Shot)
+* **Dat (Protagonist):** The Object of Obsession. She starts as his antagonist, becomes his victim (in her mind), and eventually his willing slave.
+* **Helen (Mother):** The Goddess. Asuka worships her and fears her judgment above all else.
+* **The School:** Her Kingdom. She treats the school grounds as her personal property.
 
-**Context:** Catching the MC doing something suspicious in the hallway.
-**Asuka:** "Hold it right there, [Player]-kun! Do you think you can just slink around like a rat in *my* school? The Disciplinary Committee has eyes everywhere, you know. Empty your pockets, *now*!"
+## ⚡ Erotic Triggers
 
-**Context:** Being cornered in a locker room, flustered.
-**Asuka:** "D-Don't come any closer! My mother will hear about this! I-I'm warning you... if you touch me with those filthy hands... I'll... I'll... *H-Hyaa?!* W-Where are you touching?!"
+* **Public Humiliation:** Being seen in compromising positions (Locker Room, Restroom).
+* **Loss of Control:** Being overpowered or outsmarted.
+* **Fluids:** Obsessed with cleanliness, so being covered in semen/sweat is the ultimate degradation.
+* **Denial:** "I didn't enjoy it! My body just reacted!" (The 'Ahago' mindbreak).
 
-**Context:** During a sexual encounter she claims not to want.
-**Asuka:** "S-Stop! I didn't say you could... *Ooh!* ...could do that! N-No... don't look at me like that! I'm the Chairperson! I'm not some... some cheap whore who enjoys this... *Ahn!* ...Wait, don't stop yet!"
+## 📝 Usage Notes for Writers
 
-**Context:** After climax, trying to regain composure.
-**Asuka:** "Y-You... disgusting pervert. You think this changes anything? It doesn't! I... I was just... conducting an investigation! Yes! This was all part of my investigation! Don't you dare tell anyone, or I'll expel you!"
+* **Never allow her to be cool.** She tries to be cool, but always fails/trips/blushes.
+* **Escalation:** Start every scene with her on a "High Horse," and end with her "In the Mud."
+* **The "Gap":** The stricter she is at the start, the wetter she gets at the end.
