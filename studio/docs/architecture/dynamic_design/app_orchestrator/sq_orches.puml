@@ -1,0 +1,80 @@
+@startuml sq_orches
+
+title LND Orchestrator - Production Pipeline (Multi-Agent)
+
+skinparam sequenceMessageAlign center
+skinparam responseMessageBelowArrow true
+skinparam maxMessageSize 250
+skinparam BoxPadding 10
+
+actor "User" as user
+box "APP Layer (Control Plane)" #LightBlue
+  participant "Director K\n(Orchestrator)" as orches
+  participant "Task Planner\n(State Engine)" as planner
+end box
+
+box "SERVICE Layer (Specialists)" #LightYellow
+  participant "Kana\n(Manga Adapter)" as agent_kana
+  participant "Suki\n(Lewd Writer)" as agent_suki
+  participant "Riko\n(Quality Audit)" as agent_riko
+  participant "Dr. Atomic\n(Forensics)" as agent_atomic
+end box
+
+== 1. Intent & Planning ==
+
+user -> orches : "Produce Chapter 1"
+activate orches
+
+orches -> planner : **Create Task Graph**\n(Goal: Chapter 1)
+activate planner
+planner --> orches : Execution Plan:\n1. Adapt (Kana)\n2. Refine (Suki)\n3. Audit (Riko)
+deactivate planner
+
+== 2. Execution Phase (Chained Delegation) ==
+
+group Stage 1: Adaptation
+    orches -> agent_kana : **DELEGATE TASK**\n"Ingest & Draft Chapter 1"
+    activate agent_kana
+    
+    agent_kana -> agent_atomic : Request Forensic Scan
+    activate agent_atomic
+    agent_atomic --> agent_kana : Forensic Data
+    deactivate agent_atomic
+    
+    agent_kana -> agent_kana : **Generate Context POC**
+    agent_kana -> agent_kana : **Draft Raw Prose**
+    
+    agent_kana --> orches : "Draft Complete"
+    deactivate agent_kana
+end
+
+orches -> planner : Update Status (Stage 1 Done)
+
+group Stage 2: Refinement
+    orches -> agent_suki : **DELEGATE TASK**\n"Polish Draft (Tone: Lewd/Dark)"
+    activate agent_suki
+    agent_suki --> orches : "Polish Complete"
+    deactivate agent_suki
+end
+
+orches -> planner : Update Status (Stage 2 Done)
+
+group Stage 3: Quality Gate
+    orches -> agent_riko : **DELEGATE TASK**\n"Audit Chapter 1"
+    activate agent_riko
+    
+    alt Audit Pass
+        agent_riko --> orches : "PASS (Score 90)"
+    else Audit Fail
+        agent_riko --> orches : "FAIL (Issues List)"
+        orches -> agent_suki : **RE-DELEGATE**\n"Fix Issues: [List]"
+    end
+    deactivate agent_riko
+end
+
+== 3. Completion ==
+
+orches -> user : "Chapter 1 Ready (Canonical)"
+deactivate orches
+
+@enduml

@@ -5,7 +5,7 @@ description: Deep Panel Forensic Engine - Systematic manga page analysis (Core E
 IT IS CRITICAL THAT YOU FOLLOW THESE STEPS - while staying in character as the current agent persona you may have loaded:
 
 <steps CRITICAL="TRUE">
-1. LOAD the workflow from {project-root}/studio/workflows/capabilities/panel-forensic/workflow.md
+1. LOAD the workflow from {project-root}/studio/core/panel-forensic/workflow.md
 2. READ its entire contents - this defines the forensic analysis protocol
 3. Execute the Pervert Scan Protocol:
    - BODY SCAN: Positions, clothing state, skin exposure
@@ -31,5 +31,5 @@ A good gooner adaption starts with SEEING everything the artist drew.
 </minimum-requirements>
 
 <workflow-location>
-studio/workflows/capabilities/panel-forensic/
+studio/core/panel-forensic/
 </workflow-location>

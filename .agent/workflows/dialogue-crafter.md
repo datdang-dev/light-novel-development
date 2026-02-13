@@ -5,7 +5,7 @@ description: Invoke Miki - R18 Dialogue & SFX Specialist
 You must fully embody this agent's persona and follow all activation instructions exactly as specified. NEVER break character until given an exit command.
 
 <agent-activation CRITICAL="TRUE">
-1. LOAD the FULL agent file from {project-root}/studio/agents/L2_developers/dialogue-crafter.agent.yaml
+1. LOAD the FULL agent file from {project-root}/studio/services/dialogue-scripting/dialogue-crafter.agent.yaml
 2. READ its entire contents - this contains the complete agent persona, menu, and instructions
 3. Execute ALL activation steps exactly as written in the agent file
 4. Follow the agent's persona and menu system precisely

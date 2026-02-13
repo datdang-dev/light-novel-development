@@ -1,0 +1,107 @@
+@startuml sq_manga_adapter
+
+title Manga Adapter Agent - Execution Sequence (Service Integrated)
+
+skinparam sequenceMessageAlign center
+skinparam responseMessageBelowArrow true
+skinparam maxMessageSize 250
+skinparam BoxPadding 10
+
+actor "Director K\n(Orchestrator)" as orches
+box "SERVICE Layer (Agents)" #LightYellow
+  participant "Kana\n(Manga Adapter)" as agent_kana
+  participant "Aria\n(Character Architect)" as agent_aria
+  participant "Composer\n(Chapter Composer)" as agent_cc
+end box
+
+box "WORKFLOW Layer (SOPs)" #White
+  participant "Process: Gooner Alchemist\n(Workflow Pipeline)" as wf_ga
+  participant "State: Bible Sync\n(Manage Context)" as bible
+end box
+
+box "CORE Layer (Worker Engines)" #LightGreen
+  participant "Atomic\n(panel-forensic)" as core_pf
+  participant "Suki\n(lewd-writer)" as core_lw
+  participant "Riko\n(quality-audit)" as core_qa
+end box
+
+== 1. Activation & Intake ==
+
+orches -> agent_kana : **DELEGATE TASK**\n"Adapt Image Sequence (Page 01-05)"
+activate agent_kana
+
+agent_kana -> agent_kana : **Analyze Request**\n1. Validate File Types\n2. Context Check
+
+== 2. Character Verification (Dynamic Dependency) ==
+
+agent_kana -> bible : Check Character List
+activate bible
+bible --> agent_kana : Known Characters
+deactivate bible
+
+alt Unknown Character Detected in Setup?
+    agent_kana -> agent_aria : **REQUEST SERVICE**\n"Profile New Character from Image 1"
+    activate agent_aria
+    
+    agent_aria -> core_pf : Scan Character Design
+    activate core_pf
+    core_pf --> agent_aria : Detailed Descriptions
+    deactivate core_pf
+    
+    agent_aria -> agent_aria : Generate Profile (V6)
+    agent_aria -> bible : Update Bible
+    agent_aria --> agent_kana : "Profile Created: [Name]"
+    deactivate agent_aria
+end
+
+== 3. Adapation Execution (SOP) ==
+
+agent_kana -> wf_ga : **EXECUTE SOP**\n(Start Workflow)
+activate wf_ga
+
+loop For Each Page
+    group Context Injection (POC Phase)
+        wf_ga -> wf_ga : **Generate POC**\n(Hypothesis based on Bible + State)
+        wf_ga -> wf_ga : **Save Artifact**\n`output/.../poc.md`
+    end
+
+    wf_ga -> core_pf : **Forensic Scan**\nInput: [Image] + [POC]
+    activate core_pf
+    core_pf --> wf_ga : Validated Data (JSON)
+    deactivate core_pf
+    wf_ga -> wf_ga : **Save Artifact**\n`output/.../forensic.json`
+
+    wf_ga -> core_lw : **Prose Generation**\nInput: [Data] + [POC] + [Bible]
+    activate core_lw
+    core_lw --> wf_ga : Draft Text (Markdown)
+    deactivate core_lw
+    wf_ga -> wf_ga : **Save Artifact**\n`output/.../draft.md`
+
+    wf_ga -> core_qa : **Quality Audit**
+    activate core_qa
+    core_qa --> wf_ga : **Structured Feedback (JSON)**\n`{score: 8, issues: [...], fix: "..."}`
+    deactivate core_qa
+    
+    alt Audit Failed
+        wf_ga -> core_lw : **Rewrite loop (Targeted Fix)**
+    end
+end
+
+== 4. Scene Optimization (The "Director's Cut") ==
+
+agent_kana -> core_lw : **REQUEST SERVICE**\n"Review Buffer (Pages 1-5). Smooth transitions."
+activate core_lw
+core_lw --> agent_kana : Optimized Scene Prose
+deactivate core_lw
+
+== 5. Handoff ==
+
+agent_kana -> agent_cc : **REQUEST SERVICE**\n"Add Optimized Scene to Chapter Buffer"
+activate agent_cc
+agent_cc --> agent_kana : "Added. Current Chapter Length: 2500 words."
+deactivate agent_cc
+
+agent_kana --> orches : **Mission Accomplished**
+deactivate agent_kana
+
+@enduml

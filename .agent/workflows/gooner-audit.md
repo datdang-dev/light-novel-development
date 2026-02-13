@@ -6,7 +6,7 @@ This workflow is executed by the Gooner Editor agent (Riko).
 
 <execution>
 1. INVOKE the Gooner Editor agent via `/gooner-editor`
-2. The agent will load {project-root}/studio/workflows/capabilities/gooner-audit/workflow.md
+2. The agent will load {project-root}/studio/services/quality-audit/workflow.md
 3. Execute the 100-point scoring system from gooner-audit-engine module
 </execution>
 
@@ -20,5 +20,5 @@ THRESHOLDS (see .agent/rules/quality_gates.md):
 MINIMUM PASS: 85 points
 
 SCORING MODULE: studio/modules/gooner-audit-engine.md
-WORKFLOW: studio/workflows/capabilities/gooner-audit/
+WORKFLOW: studio/services/quality-audit/
 </quick-reference>

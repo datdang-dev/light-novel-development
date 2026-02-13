@@ -1,0 +1,75 @@
+@startuml sq_renpy_adapter
+
+title RenPy Adapter Service - Dynamic Flow (V6)
+
+skinparam sequenceMessageAlign center
+skinparam responseMessageBelowArrow true
+skinparam maxMessageSize 250
+skinparam BoxPadding 10
+
+actor "Orchestrator\n(Director K)" as orches
+box "SERVICE Layer (RenPy Adapter)" #LightCyan
+  participant "RenPy Adapter\n(Agent)" as agent_ra
+  participant "Workflow Engine\n(State)" as wf_ra
+  participant "AST Miner\n(Tool)" as tool_ast
+end box
+
+box "Downstream Services" #LightYellow
+  participant "Kana\n(Manga Adapter)" as agent_kana
+  participant "Bible" as bible
+end box
+
+== 1. Delegation & Initialization ==
+
+orches -> agent_ra : **DELEGATE TASK**\n"Adapt script.rpy (Scene 1)"
+activate agent_ra
+
+agent_ra -> wf_ra : **Initialize Workflow**\n(Input: script.rpy)
+activate wf_ra
+wf_ra --> agent_ra : State Created
+deactivate wf_ra
+
+== 2. Context Mining Phase ==
+
+agent_ra -> tool_ast : **Extract Context (AST)**\nParsing .rpy file
+activate tool_ast
+tool_ast --> agent_ra : **Raw Data**\n- Dialogue Lines\n- Character Tags\n- Backgrounds\n- Music/SFX
+deactivate tool_ast
+
+agent_ra -> agent_ra : **Save Artifact**\n`output/.../context.json`
+
+agent_ra -> bible : **Verify Characters**\n(Match tags to canonical IDs)
+activate bible
+bible --> agent_ra : Confirmed IDs
+deactivate bible
+
+== 3. Semantic Modeling (Audit Upgrade) ==
+
+agent_ra -> agent_ra : **Analyze Semantics**\nInput: [Raw Tags] + [Dialogue]\nGoal: Determine Mood, Objective, Tension
+
+agent_ra -> agent_ra : **Save Artifact**\n`output/.../scene_model.json`
+note right: "Mood: Tense\nObjective: Confession\nLight: Sunset"
+
+== 4. Delegation to Manga Adapter ==
+
+loop For Each Scene / Image Set
+
+    agent_ra -> agent_ra : **Package Context**\n- Image: `images/eileen_happy.png`\n- POC: `scene_model.json` (Rich Context)
+    
+    agent_ra -> agent_kana : **DELEGATE TASK**\n"Adapt this image using this Semantic Model."
+    activate agent_kana
+    
+    agent_kana -> agent_kana : **Forensic & Prose Pipeline**\n(Using Code-Derived POC)
+    agent_kana --> agent_ra : **Draft Prose (Markdown)**
+    deactivate agent_kana
+
+    agent_ra -> agent_ra : **Aggregate Result**
+end
+
+== 5. Final Compilation ==
+
+agent_ra -> agent_ra : **Compile Chapter**
+agent_ra --> orches : "Full Chapter Ready"
+deactivate agent_ra
+
+@enduml

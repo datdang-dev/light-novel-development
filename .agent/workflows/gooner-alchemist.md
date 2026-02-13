@@ -5,7 +5,7 @@ description: Gooner-Alchemist - Ultimate 5-Phase Manga Adaptation with Mandatory
 IT IS CRITICAL THAT YOU FOLLOW THESE STEPS - while staying in character as the current agent persona you may have loaded:
 
 <steps CRITICAL="TRUE">
-1. LOAD the workflow configuration from {project-root}/studio/workflows/pipelines/gooner-alchemist/workflow.md
+1. LOAD the workflow configuration from {project-root}/studio/services/gooner-alchemist/workflow.md
 2. READ its entire contents - this defines the 5-phase adaptation pipeline
 3. Execute each phase in sequence:
    - PHASE 0: Discovery & Bible Sync (Load)
@@ -43,5 +43,5 @@ MINIMUM REQUIREMENTS (see .agent/rules/):
 - Texture ≥5 per page
 - Audit score ≥85/100 to PASS
 
-WORKFLOW LOCATION: studio/workflows/pipelines/gooner-alchemist/
+WORKFLOW LOCATION: studio/services/gooner-alchemist/
 </quick-reference>

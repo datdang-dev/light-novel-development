@@ -1,0 +1,45 @@
+@startuml studio-structure
+
+title LND Studio - 3-Layer Architecture (Structure)
+skinparam componentStyle uml2
+skinparam packageStyle rectangle
+skinparam linetype ortho
+
+package "APP Layer (Application)" {
+    component "Director K\n(Orchestrator)" as APP_ORCHESTRATOR
+    note right of APP_ORCHESTRATOR
+      **Responsibilities:**
+      - Input Analysis & Validation
+      - Dynamic Routing
+      - User Interaction (Menu/CLI)
+    end note
+}
+
+package "SERVICE Layer (Domain Orchestration)" {
+    component "Domain Service\n(Workflow Pipeline)" as SERVICE_DOMAIN
+    database "Context State" as SERVICE_STATE
+    
+    SERVICE_DOMAIN --> SERVICE_STATE : Persist/Load
+    
+    note right of SERVICE_DOMAIN
+      **Responsibilities:**
+      - Workflow Steps Management
+      - Data Transformation
+      - Error Handling & Recovery
+      - Audit Coordination
+    end note
+}
+
+package "CORE Layer (Compute Engines)" {
+    component "Forensic Engine\n(Analysis)" as CORE_FORENSIC
+    component "Prose Engine\n(Generation)" as CORE_PROSE
+    
+    note right of CORE_FORENSIC : Computer Vision\nLayout Analysis
+    note right of CORE_PROSE : LLM Prompting\nStylistic Enforcement
+}
+
+APP_ORCHESTRATOR -down-> SERVICE_DOMAIN : Dispatch Task\n(Image/Script)
+SERVICE_DOMAIN -down-> CORE_FORENSIC : Delegate Analysis
+SERVICE_DOMAIN -down-> CORE_PROSE : Delegate Generation
+
+@enduml
