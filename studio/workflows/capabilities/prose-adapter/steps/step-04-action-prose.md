@@ -36,13 +36,14 @@ Write as forensic observer:
 
 ```
 NEVER use:
-- hôi thối, dơ bẩn, bẩn thỉu, ghê tởm
-- đê tiện, đáng khinh, ô uế
+- Moral judgment words (đê tiện, đồi bại) UNLESS it's the character's internal voice
+- Euphemisms (vùng kín, "chỗ đó") -> USE EXPLICIT TERMS (lồn, cặc)
 ```
 
 ### Step-Specific Rules
 
 - 🎯 Focus on physical action from BUILD to CLIMAX beats
+- 📖 READ AND APPLY: `{project-root}/.agent/rules/lewd_writing_mechanics.md`
 - 🚫 FORBIDDEN to skip any action from forensic report
 - 💬 Maximum sensory density required
 

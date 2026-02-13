@@ -10,31 +10,33 @@ nextStepFile: './step-05b-format-ensure.md'
 
 # Step 5: Dialogue Integration
 
-## STEP GOAL:
+## STEP GOAL
 
 Integrate dialogue and sound effects from the forensic extraction into the prose naturally, maintaining character voices and explicit tone.
 
-## MANDATORY EXECUTION RULES (READ FIRST):
+## MANDATORY EXECUTION RULES (READ FIRST)
 
-### Universal Rules:
+### Universal Rules
 
 - 📖 CRITICAL: Read the complete step file before taking any action
 - ✅ Write prose in {document_output_language} (Vietnamese)
 
-### Dialogue Rules:
+### Dialogue Rules
 
 ```
 LANGUAGE CONSISTENCY:
 - ALL dialogue in Vietnamese
+- ADAPT, DON'T TRANSLATE: Capture intent, not literal words
 - Use romanized Japanese for specific terms ONLY (onii-chan, oppai)
 - NO kanji or hiragana in final prose
 - Maintain crude, degrading tone when appropriate
 ```
 
-### Step-Specific Rules:
+### Step-Specific Rules
 
 - 🎯 Focus on weaving dialogue into existing prose
-- 🚫 FORBIDDEN to change established dialogue translations
+- 📖 READ AND APPLY: `{project-root}/.agent/rules/lewd_writing_mechanics.md`
+- 🔄 REQUIRED to ADAPT dialogue. Do not translate literally. Capture intent and personality.
 - 💬 Match dialogue to action timing from forensics
 
 ## MANDATORY SEQUENCE
@@ -42,6 +44,7 @@ LANGUAGE CONSISTENCY:
 ### 1. Review Dialogue from Forensics
 
 Load dialogue table from forensic report:
+
 - Speaker attributions
 - Bubble types (speech, thought, whisper, shout)
 - SFX with romanizations and meanings
@@ -113,6 +116,7 @@ Check all dialogue:
 ### 6. Update Output File
 
 Update prose sections with dialogue:
+
 - Update frontmatter: `stepsCompleted: [..., 'step-05-dialogue-integration']`
 
 ### 7. Present MENU OPTIONS
@@ -131,7 +135,7 @@ Update prose sections with dialogue:
 **Chọn:** [R] Revise dialogue [C] Continue to Aftermath"
 ```
 
-#### Menu Handling Logic:
+#### Menu Handling Logic
 
 - IF R: Ask what to revise, make changes, redisplay menu
 - IF C: Save/update output file, load `{nextStepFile}`
@@ -140,7 +144,7 @@ Update prose sections with dialogue:
 
 ## 🚨 SYSTEM SUCCESS/FAILURE METRICS
 
-### ✅ SUCCESS:
+### ✅ SUCCESS
 
 - All dialogue integrated naturally
 - All SFX woven into prose
@@ -148,7 +152,7 @@ Update prose sections with dialogue:
 - Timing matches action
 - Vietnamese throughout (romanized JP only for terms)
 
-### ❌ SYSTEM FAILURE:
+### ❌ SYSTEM FAILURE
 
 - Missing dialogue entries
 - SFX not integrated

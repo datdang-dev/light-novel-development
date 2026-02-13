@@ -1,16 +1,61 @@
-# Phase 1: Forensic Analysis 🔬
+---
+name: step-01-forensic-dispatch
+description: Dispatch to Panel Forensic Workflow
+nextStepFile: ./step-02-context-prep.md
+panelForensicWorkflow: {project-root}/studio/workflows/capabilities/panel-forensic/workflow.md
+projectRoot: {project-root}
+---
 
-**Goal:** Execute the Panel Forensic Workflow on the provided input (Image/Page).
+# Step 1: Forensic Analysis 🔬
 
-**Agent:** Prof. Atomic (panel-forensic-analyst)
+## STEP GOAL
 
-**Instructions to Director K:**
-1.  **Identify Input:** Locate the image or page reference provided by the user.
-2.  **Dispatch:** EXECUTE the `panel-forensic` workflow located at:
-    `{project-root}/studio/workflows/capabilities/panel-forensic/workflow.md`
-    (Using `exec` logic: Read the file, process it fully, then return here).
-3.  **Monitor:** Ensure the sub-workflow completes and generates `forensic_report.md`.
-4.  **Transition:** Upon successful completion of forensics, LOAD and EXECUTE the next step:
-    `./steps/step-02-context-prep.md`
+Execute the Panel Forensic Workflow to analyze the input image/page.
 
-**Critical Rule:** Do NOT summarize the report yourself. Just verify its existence and move to production.
+## MANDATORY EXECUTION RULES
+
+- 🛑 **NEVER** skip forensic analysis.
+- 🛑 **ALWAYS** load the sub-workflow fully.
+- ✅ **VERIFY** the forensic report exists before proceeding.
+
+## SEQUENCE OF INSTRUCTIONS
+
+### 1. Identify Input
+
+Locate the image or page reference provided by the user.
+
+### 2. Dispatch to Sub-Workflow
+
+Load and execute the **Panel Forensic Workflow**:
+
+**Workflow Path:** `{panelForensicWorkflow}`
+
+**Instructions:**
+
+- Pass the input image/page to the sub-workflow.
+- Wait for it to complete and generate `forensic_report.md`.
+
+### 3. Verify Output
+
+Check that the report was generated successfully.
+
+### 4. Present MENU OPTIONS
+
+```
+"✅ Forensic Analysis Complete (or skipped if existing).
+
+**Report:** {forensicReportPath}
+
+**Tiếp theo:** Prepare Context
+
+**Chọn:** [C] Continue to Context Prep"
+```
+
+#### Menu Handling Logic
+
+- IF C: Load `{nextStepFile}`
+- IF other: Redisplay menu
+
+## SYSTEM FAILURE METRICS
+
+- Proceeding without forensic report = **CRITICAL FAILURE**

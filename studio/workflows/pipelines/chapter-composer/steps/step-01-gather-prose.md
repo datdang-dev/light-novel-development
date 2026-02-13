@@ -1,33 +1,32 @@
 ---
-name: 'step-01-gather-prose'
-description: 'Collect all page prose files'
-nextStepFile: './step-02-order-review.md'
+name: step-01-gather-prose
+description: Collect all page prose files
+nextStepFile: ./step-02-order-review.md
+projectRoot: {project-root}
 ---
 
-# Step 1: Gather Prose
+# Step 1: Gather Prose 📚
 
-## STEP GOAL:
+## STEP GOAL
 
-Collect all adapted prose files for the chapter.
+Collect all adapted prose files for the target chapter.
 
-## MANDATORY SEQUENCE
+## MANDATORY SEQUENCE OF INSTRUCTIONS
 
 ### 1. Request Chapter Info
 
-```
-"**📚 CHAPTER COMPOSER**
+Ask the user for the Project, Chapter Number, and Page Range.
 
-Cho mình:
-1. **Project name:** 
-2. **Chapter number:**
-3. **Page range:** (hoặc 'all')"
-```
+**Format:**
+`Project: [Manga Name] | Chapter: [01] | Pages: [001-020]`
 
 ### 2. Locate Prose Files
 
-Search in `{output_folder}/_prose/{manga_name}/chapter_{ch}/`
+Scan `{output_folder}/_prose/{manga_name}/chapter_{ch}/` (or equivalent structure).
 
-### 3. List Found Files
+### 3. Verification Table
+
+Generate a status table:
 
 ```markdown
 ## Prose Files Found
@@ -39,7 +38,7 @@ Search in `{output_folder}/_prose/{manga_name}/chapter_{ch}/`
 | ... | ... | ... | ... |
 ```
 
-### 4. Present MENU
+### 4. Present MENU OPTIONS
 
 ```
 "✅ Prose gathered!
@@ -47,7 +46,12 @@ Search in `{output_folder}/_prose/{manga_name}/chapter_{ch}/`
 **Pages found:** {count}
 **All passed audit:** {yes/no}
 
+**Tiếp theo:** Review Order & Continuity
+
 **Chọn:** [C] Continue to Order Review"
 ```
 
----
+#### Menu Handling Logic
+
+- IF C: Load `{nextStepFile}`
+- IF other: Redisplay menu

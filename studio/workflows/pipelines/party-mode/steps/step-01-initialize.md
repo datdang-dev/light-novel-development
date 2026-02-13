@@ -1,54 +1,60 @@
 ---
-name: 'step-01-initialize'
-description: 'Select agents and set discussion topic'
-nextStepFile: './step-02-facilitate.md'
+name: step-01-initialize
+description: Select agents and set discussion topic
+nextStepFile: ./step-02-facilitate.md
 ---
 
-# Step 1: Initialize
+# Step 1: Initialize Party Mode 🎉
 
-## STEP GOAL:
+## STEP GOAL
 
-Select participating agents and define discussion topic.
+Select participating agents and define the discussion topic.
 
-## MANDATORY SEQUENCE
+## MANDATORY SEQUENCE OF INSTRUCTIONS
 
-### 1. Welcome
+### 1. Show Welcome Screen
 
-```
-"**🎉 PARTY MODE - Team Discussion**
+Display the available roster:
 
-Agents available:
-- [A] Aria - Character specialist
-- [S] Suki - Prose writer
-- [M] Miki - Dialogue crafter  
-- [R] Riko - Quality auditor
-- [L] Luna - World builder
-- [T] Tavvy - ST export
+- [A] Aria (Character)
+- [S] Suki (Prose)
+- [M] Miki (Dialogue)
+- [R] Riko (Audit)
+- [L] Luna (World)
+- [T] Tavvy (RenPy/ST)
 
-**Chọn agents** (e.g., 'A, S, M') hoặc [ALL] for everyone:
+### 2. Capture Input
 
-**Discussion topic:**"
-```
+Ask the user to select Agents and Topic.
 
-### 2. Set Parameters
+**Format:**
+`Agents: [A, S, M] | Topic: "Refining Asuka's Tsundere Arc"`
+
+### 3. Configure Session
+
+Store the configuration:
 
 ```yaml
 party_config:
-  agents: [{selected}]
-  topic: "{topic}"
-  format: "round-robin" | "free-form"
-  goal: "{desired outcome}"
+  agents: {user_selection}
+  topic: {topic_input}
+  goal: {desired_outcome}
 ```
 
-### 3. Present MENU
+### 4. Present MENU OPTIONS
 
 ```
-"✅ Party configured!
+"✅ Party Configured!
 
-**Agents:** {list}
+**Agents:** {list_selected_agents}
 **Topic:** {topic}
 
-**Chọn:** [C] Start Discussion"
+**Tiếp theo:** Start Round-Robin Discussion
+
+**Chọn:** [C] Begin Discussion"
 ```
 
----
+#### Menu Handling Logic
+
+- IF C: Load `{nextStepFile}`
+- IF other: Redisplay menu

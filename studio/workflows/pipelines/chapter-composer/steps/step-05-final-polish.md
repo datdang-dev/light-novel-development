@@ -1,47 +1,44 @@
 ---
-name: 'step-05-final-polish'
-description: 'Review and output final chapter'
+name: step-05-final-polish
+description: Review and output final chapter file
 chapterOutput: '{output_folder}/_chapters/{manga_name}/chapter_{ch}.md'
 ---
 
-# Step 5: Final Polish
+# Step 5: Final Review & Output ✨
 
-## STEP GOAL:
+## STEP GOAL
 
-Final review and output of compiled chapter.
+Perform final quality audit and save the compiled chapter.
 
-## MANDATORY SEQUENCE
+## MANDATORY SEQUENCE OF INSTRUCTIONS
 
-### 1. Quality Review
+### 1. Pre-Flight Checklist
 
-- [ ] Continuity verified
-- [ ] Transitions smooth
-- [ ] Formatting consistent
-- [ ] No orphaned content
+- [ ] Continuity verified (Step 2)
+- [ ] Transitions smooth (Step 3)
+- [ ] Formatting consistent (Step 4)
+- [ ] No placeholder text found
 
-### 2. Write Output
+### 2. Generate Output File
 
-Save to `{chapterOutput}`
+Save the compiled content to: `{chapterOutput}`
 
-### 3. Workflow Completion
+### 3. Present MENU OPTIONS
 
 ```
 "✅ CHAPTER COMPOSER COMPLETE!
 
-**Output:** {chapterOutput}
+**Output File:** {chapterOutput}
+**Title:** {title}
+**Words:** ~{count}
 
-**Summary:**
-- Title: {title}
-- Pages: {range}
-- Words: ~{count}
+**Tiếp theo:** Distribution / Release
 
-**Ready for:** reader distribution or release-compiler
-
-**WORKFLOW COMPLETE**"
+**Chọn:** [E] Exit Workflow"
 ```
 
----
+#### Menu Handling Logic
 
-## WORKFLOW END
-
-Chapter compiled and ready.
+- IF [E]:
+  - Notify User: "🎉 Chapter {ch} Compiled Successfully!"
+  - BREAK CHARACTER (Return to Default Handler).

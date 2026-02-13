@@ -61,16 +61,6 @@ Verbs: lan tỏa, bốc lên, tỏa ra
 
 Every penetration and fluid contact MUST mention temperature.
 
----
-
-## SFX FORMAT
-
-> **NOTE**: For SFX format and examples, see `dialogue_format.md` - that is the Single Source of Truth.
-
-SFX must be romanized Japanese (guchu guchu, pan pan) - never Vietnamese.
-
----
-
 ## BANNED WORDS
 
 Never use judgmental descriptors:

@@ -1,27 +1,25 @@
 ---
-name: 'step-02-order-review'
-description: 'Verify sequence and continuity'
-nextStepFile: './step-03-add-transitions.md'
+name: step-02-order-review
+description: Verify Sequence and Continuity
+nextStepFile: ./step-03-add-transitions.md
 ---
 
-# Step 2: Order & Review
+# Step 2: Order & Review 🔍
 
-## STEP GOAL:
+## STEP GOAL
 
-Verify prose files are in correct order and check continuity.
+Verify prose files are in correct order and check continuity between pages.
 
-## MANDATORY SEQUENCE
+## MANDATORY SEQUENCE OF INSTRUCTIONS
 
-### 1. Verify Order
+### 1. Verification Table
 
-Confirm page sequence matches narrative flow.
+Check the end of Page N and start of Page N+1.
+Look for:
 
-### 2. Continuity Check
-
-Between each page pair, verify:
-- Character states match
-- Timeline is consistent
-- No contradictions
+- Clothing state changes
+- Position shifts
+- Dialogue flow
 
 ```markdown
 ## Continuity Check
@@ -32,17 +30,12 @@ Between each page pair, verify:
 | 2→3 | {end state} | {start state} | ✓/⚠️ |
 ```
 
-### 3. Flag Issues
+### 2. Flag Issues
 
-If continuity breaks detected:
-```
-⚠️ Continuity issue: Page 3→4
-  - Page 3 ends: "đã mệt lả"
-  - Page 4 starts: "đứng dậy nhanh nhẹn"
-  - Fix needed: Add transition
-```
+If continuity breaks are detected, list them:
+`⚠️ Page 3→4: Sudden position change without transition.`
 
-### 4. Present MENU
+### 3. Present MENU OPTIONS
 
 ```
 "✅ Order verified!
@@ -50,7 +43,12 @@ If continuity breaks detected:
 **Sequence:** Correct
 **Continuity issues:** {count}
 
+**Tiếp theo:** Add Transitions
+
 **Chọn:** [C] Continue to Transitions"
 ```
 
----
+#### Menu Handling Logic
+
+- IF C: Load `{nextStepFile}`
+- IF other: Redisplay menu

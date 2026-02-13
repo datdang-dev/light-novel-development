@@ -1,72 +1,45 @@
 ---
-name: 'step-02-facilitate'
-description: 'Manage discussion flow'
-nextStepFile: './step-03-summarize.md'
+name: step-02-facilitate
+description: Facilitate Discussion Rounds
+nextStepFile: ./step-03-summarize.md
 ---
 
-# Step 2: Facilitate
+# Step 2: Discussion Facilitation 🎤
 
-## STEP GOAL:
+## STEP GOAL
 
-Manage the discussion, giving each agent turns to contribute.
+Manage the discussion flow, ensuring each selected agent contributes according to their persona.
 
-## FACILITATION RULES
+## MANDATORY SEQUENCE OF INSTRUCTIONS
 
-- Each agent speaks in their voice
-- Moderator keeps discussion on-topic
-- Conflicts are acknowledged, not suppressed
-- Build toward actionable conclusions
+### 1. Execute Discussion Round
 
-## MANDATORY SEQUENCE
+For each selected **Agent** (e.g., Aria, Suki, Miki):
 
-### 1. Round-Robin Format
+- **Invoke Persona:** Speak in character about the `{topic}`.
+- **Offer Insight:** Provide specialized feedback based on their domain (Character, Prose, Dialogue, etc.).
+- **Debate:** Respond to previous agents if conflicting views arise.
 
-```
-For each agent in turn:
-  "**{Agent Name}:**"
-  {Agent speaks on topic from their expertise}
-```
+### 2. Moderator Intervention (Director K)
 
-### 2. Response Handling
+Briefly summarize points of agreement/conflict.
+Ask clarifying questions if the discussion drifts.
 
-After each round:
-- Identify agreements
-- Note disagreements
-- Facilitate resolution if needed
-
-### 3. Dialogue Pattern
+### 3. Present ACTIVE MENU
 
 ```
-**Director K (Moderator):** 
-"Topic này chúng ta cần discuss: {topic}. Bắt đầu với Aria."
+"🔄 **Round Complete.**
 
-**Aria:** 
-"{Character-focused perspective}"
+**Key Points:** {bullet_points_of_round}
 
-**Suki:**
-"{Prose-focused perspective}"
-
-**Miki:**
-"{Dialogue-focused perspective}"
-
-...
-
-**Director K:**
-"Okay, tổng kết: {summary of discussion}"
+**Options:**
+[N] Start Next Round (New sub-topic or rebuttal)
+[Q] Ask Specific Question to Agent
+[S] Conclude & Summarize (Finish Session)"
 ```
 
-### 4. Present MENU
+#### Menu Handling Logic
 
-```
-"**Discussion ongoing...**
-
-**Rounds completed:** {count}
-**Key points:** {list}
-
-**Chọn:**
-[N] Next round
-[S] Summarize & conclude
-[Q] Ask specific agent"
-```
-
----
+- IF [N]: REPEAT Step 1 (New Round).
+- IF [Q]: Ask user for question -> Agent answers -> Redisplay Menu.
+- IF [S]: Load `{nextStepFile}`.

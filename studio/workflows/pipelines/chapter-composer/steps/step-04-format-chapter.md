@@ -1,59 +1,57 @@
 ---
-name: 'step-04-format-chapter'
-description: 'Apply chapter formatting'
-nextStepFile: './step-05-final-polish.md'
+name: step-04-format-chapter
+description: Apply chapter-level formatting
+nextStepFile: ./step-05-final-polish.md
 ---
 
-# Step 4: Format Chapter
+# Step 4: Chapter Assembly & Formatting 📄
 
-## STEP GOAL:
+## STEP GOAL
 
-Apply consistent chapter formatting.
+Compile individual pages into a single cohesive document with chapter structure.
 
-## CHAPTER TEMPLATE
+## MANDATORY SEQUENCE OF INSTRUCTIONS
 
-```markdown
-# Chương {N}: {Title}
+### 1. Construct Metadata
 
-{opening paragraph}
+Identify or Generate:
 
----
+- **Title:** From scene content or user input.
+- **Chapter Number:** From step 1.
+- **Word Count:** Total sum.
 
-{page 1 prose}
+### 2. Apply Template
 
-{transition}
-
-{page 2 prose}
-
-...
-
----
-
-{chapter end/cliffhanger}
-```
-
-## MANDATORY SEQUENCE
-
-### 1. Generate Title
-
-Create evocative chapter title from content.
-
-### 2. Add Chapter Header
+Combine pages and transitions in this structure:
 
 ```markdown
 ---
 chapter: {num}
 title: "{title}"
 pages: [{range}]
-word_count: {count}
+word_count: {new_count}
 ---
+
+# Chương {N}: {Title}
+
+{opening_paragraph}
+
+---
+
+{page_1_content}
+
+{transition_1}
+
+{page_2_content}
+
+...
+
+---
+
+{closing_scene}
 ```
 
-### 3. Assemble Content
-
-Combine all prose with transitions.
-
-### 4. Present MENU
+### 3. Present MENU OPTIONS
 
 ```
 "✅ Chapter formatted!
@@ -61,7 +59,12 @@ Combine all prose with transitions.
 **Title:** Chương {N}: {Title}
 **Word count:** ~{count}
 
-**Chọn:** [C] Continue to Polish"
+**Tiếp theo:** Final Polish & Output
+
+**Chọn:** [C] Continue to Final Polish"
 ```
 
----
+#### Menu Handling Logic
+
+- IF C: Load `{nextStepFile}`
+- IF other: Redisplay menu

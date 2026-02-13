@@ -1,55 +1,63 @@
 ---
-name: 'step-03-summarize'
-description: 'Compile discussion decisions'
+name: step-03-summarize
+description: Compile Discussion Summary
 ---
 
-# Step 3: Summarize
+# Step 3: Conclusion & Action Items 📝
 
-## STEP GOAL:
+## STEP GOAL
 
-Compile discussion outcomes into actionable summary.
+Compile discussion outcomes into an actionable summary.
 
-## MANDATORY SEQUENCE
+## MANDATORY SEQUENCE OF INSTRUCTIONS
 
-### 1. Compile Decisions
+### 1. Synthesize Results
+
+Review the discussion log from Step 2.
+Identify:
+
+- **Key Decisions:** (Agreed upon direction)
+- **Open Questions:** (Needs more research)
+- **Action Items:** (Tasks assigned to specific workflows)
+
+### 2. Generate Artifact
+
+Create a new file: `{project-root}/studio/novels/_discussions/party_summary_{topic_slug}.md`
+
+**Content:**
 
 ```markdown
-## Party Mode Summary
+# Party Mode Summary: {topic}
+**Date:** {today_date}
+**Participants:** {config.agents}
 
-**Topic:** {topic}
-**Participants:** {agents}
-**Date:** {timestamp}
+## 1. Executive Summary
+{brief_overview}
 
-### Key Decisions
-1. {decision 1}
-2. {decision 2}
+## 2. Key Insights
+- **Character (Aria):** {insight}
+- **Prose (Suki):** {insight}
+- **Dialogue (Miki):** {insight}
+- **Other:** {insight}
 
-### Action Items
-- [ ] {action 1} - Owner: {agent}
-- [ ] {action 2} - Owner: {agent}
-
-### Dissenting Views
-- {if any}
-
-### Next Steps
-{what to do next}
+## 3. Action Items
+- [ ] {Task 1}
+- [ ] {Task 2}
 ```
 
-### 2. Workflow Completion
+### 3. Present MENU OPTIONS
 
 ```
-"✅ PARTY MODE COMPLETE!
+"✅ Summary Generated: file://{summary_path}
 
-**Decisions made:** {count}
-**Action items:** {count}
+**Decisions:** {count}
+**Action Items:** {action_item_count}
 
-**Summary saved for reference**
-
-**WORKFLOW COMPLETE**"
+**Chọn:** [E] Exit Party Mode"
 ```
 
----
+#### Menu Handling Logic
 
-## WORKFLOW END
-
-Team discussion concluded with documented outcomes.
+- IF [E]:
+  - Notify User: "🎉 Discussion Concluded."
+  - BREAK CHARACTER (Return to Default Handler).

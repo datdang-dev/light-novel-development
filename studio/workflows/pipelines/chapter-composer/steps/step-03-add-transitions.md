@@ -1,41 +1,38 @@
 ---
-name: 'step-03-add-transitions'
-description: 'Write connecting prose'
-nextStepFile: './step-04-format-chapter.md'
+name: step-03-add-transitions
+description: Write connecting prose for page gaps
+nextStepFile: ./step-04-format-chapter.md
 ---
 
-# Step 3: Add Transitions
+# Step 3: Add Transitions 🌉
 
-## STEP GOAL:
+## STEP GOAL
 
-Write transitional prose to connect pages smoothly.
+Write transitional prose to connect pages smoothly where needed.
 
-## TRANSITION TYPES
+## MANDATORY SEQUENCE OF INSTRUCTIONS
 
-- **Time skip**: "Một lúc sau..."
-- **Scene break**: "* * *"
-- **Continuous**: Connecting sentence
-- **POV shift**: Clear perspective change
+### 1. Identify Gaps
 
-## MANDATORY SEQUENCE
+Look for the `⚠️` gaps identified in Step 2.
+Determine Type:
 
-### 1. Identify Transition Points
+- **Time Skip:** "Một lúc sau..."
+- **Scene Break:** `* * *`
+- **POV Shift:** Change perspective.
+- **Micro-Action:** Small connecting movement.
 
-Between sequential pages, determine transition type needed.
+### 2. Draft Transitions
 
-### 2. Write Transitions
-
-For each gap:
+Write prose to fill the gaps.
 
 ```markdown
 ## Transition: Page {X} → Page {Y}
-
 **Type:** {type}
-**Content:**
-{transition prose}
+**Content:** {new_prose}
 ```
 
-### 3. Present MENU
+### 3. Present MENU OPTIONS
 
 ```
 "✅ Transitions added!
@@ -43,7 +40,12 @@ For each gap:
 **Scene breaks:** {count}
 **Connecting prose:** {count}
 
+**Tiếp theo:** Format Chapter
+
 **Chọn:** [C] Continue to Formatting"
 ```
 
----
+#### Menu Handling Logic
+
+- IF C: Load `{nextStepFile}`
+- IF other: Redisplay menu

@@ -21,13 +21,13 @@ priority: 4
 
 ## CATEGORY OVERVIEW
 
-| Category | Weight | Quick Check |
-|----------|--------|-------------|
-| A: Sensory | 25% | Smell ≥3, texture ≥5, sound ≥3? |
+| Category | Weight | Reference |
+|----------|--------|-----------|
+| A: Sensory | 25% | See `sensory_density.md` |
 | B: Edging | 25% | 60/40 build-up ratio? |
 | C: Fetish | 25% | Power dynamics clear? Residue tracked? |
 | D: Psychological | 15% | Internal conflict shown? |
-| E: Technical | 10% | Format correct? No banned words? |
+| E: Technical | 10% | Format per `dialogue_format.md`? No banned words? |
 
 > **Detailed scoring**: `{project-root}/studio/modules/gooner-audit-engine.md`
 
