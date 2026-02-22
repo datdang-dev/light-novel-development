@@ -2,8 +2,8 @@
 agentName: 'lnd-orchestrator'
 hasSidecar: false
 module: 'stand-alone'
-agentFile: '/home/datdang/working/lnd_dev/studio/agents/L1_management/lnd-orchestrator.agent.yaml'
-validationDate: '2026-02-11'
+agentFile: '/home/datdang/working/lnd_dev/studio/app/lnd-orchestrator.agent.yaml'
+validationDate: '2026-02-13'
 stepsCompleted:
   - v-01-load-review.md
 ---
@@ -12,10 +12,10 @@ stepsCompleted:
 
 ## Agent Overview
 
-**Name:** lnd-orchestrator
+**Name:** lnd-orchestrator (Director K)
 **hasSidecar:** false
 **module:** stand-alone
-**File:** /home/datdang/working/lnd_dev/studio/agents/L1_management/lnd-orchestrator.agent.yaml
+**File:** /home/datdang/working/lnd_dev/studio/app/lnd-orchestrator.agent.yaml
 
 ---
 

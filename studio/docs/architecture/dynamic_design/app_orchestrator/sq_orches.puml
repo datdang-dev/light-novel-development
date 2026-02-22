@@ -10,7 +10,7 @@ skinparam BoxPadding 10
 actor "User" as user
 box "APP Layer (Control Plane)" #LightBlue
   participant "Director K\n(Orchestrator)" as orches
-  participant "Task Planner\n(State Engine)" as planner
+  participant "Task Planner\n(Tool: sequential-thinking)" as planner
 end box
 
 box "SERVICE Layer (Specialists)" #LightYellow
