@@ -30,6 +30,30 @@ Perform self-audit against gooner-audit criteria and PREPARE FOR RECURSIVE UPDAT
 
 ## MANDATORY SEQUENCE
 
+### 0. Gate 0: Anti-Contamination Scan (MUST RUN FIRST)
+
+Before any scoring, scan the entire prose output for CONTEXT LEAKS.
+
+**Prose output MUST NOT contain ANY of these patterns:**
+
+- Internal file names: `*_research`, `*_lexicon`, `workflow.md`, `state.yaml`
+- Agent/service names: `lewd-writer`, `panel-forensic`, `gooner-audit`, `gooner-alchemist`, `Director K`, `lnd-orchestrator`, `Suki`, `Kana`, `Riko`
+- System references: `forensic-gate`, `step-0*`, `.agent.yaml`, `quality_gates`, `sensory_density`
+- Meta-commentary: any sentence that references internal rules, databases, or pipeline mechanics
+
+**WHY:** Knowledge files (`smegma_research.md`, `hentai_lexicon.md`, etc.) are SOURCE MATERIAL only. Extract vocabulary and descriptions FROM them, but NEVER reference them BY NAME in prose. The reader does not know these files exist.
+
+```
+IF ANY pattern found:
+  🚫 GATE 0 FAILED — CONTAMINATION
+  Line {N}: "{contaminated_line}"
+  
+  ACTION: Rewrite contaminated line using ONLY in-world vocabulary.
+  Re-scan until 0 matches.
+  
+  DO NOT proceed to scoring until Gate 0 passes.
+```
+
 ### 1. Sensory Immersion Check (25 points)
 
 ```markdown

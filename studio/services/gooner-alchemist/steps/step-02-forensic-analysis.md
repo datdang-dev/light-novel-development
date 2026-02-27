@@ -15,21 +15,23 @@ analysisFolder: '{output_folder}/_analysis/{project}'
 
 **Progress: Step 2 of 7** - Next: Context Loading
 
-## RULES:
+## RULES
 
 - MUST NOT skip steps.
 - MUST NOT optimize sequence.
 - MUST follow exact instructions.
 - MUST NOT write prose (that's Step 4).
 - MUST process ONE page at a time.
+- 🚨 **STRICT VISUAL RULE**: The `context_horizon.md` is a forward-looking trajectory summary. THE IMAGE IS STILL THE PRIMARY GROUND TRUTH for the current action. Do not hallucinate objects, actions, or characters on the current page if they only appear later in the horizon.
 - ✅ YOU MUST ALWAYS SPEAK OUTPUT in Vietnamese
 
-## CONTEXT:
+## CONTEXT
 
 - Requires pipeline state from Step 1 with `pages_pending` defined.
 - Focus: Invoke /panel-forensic for the CURRENT page only.
+- Input Modifiers: Pass `context_horizon.md` alongside the image to provide trajectory context.
 - Output: Forensic report at `{analysisFolder}/page-{XXX}-forensic.md`
-- Objective: Generate comprehensive visual analysis before prose.
+- Objective: Generate comprehensive visual analysis before prose, informed by the upcoming scene trajectory.
 
 ---
 
@@ -38,6 +40,7 @@ analysisFolder: '{output_folder}/_analysis/{project}'
 ### a) Load Pipeline State
 
 Read `{stateFile}` and extract:
+
 - `current_page` - page being processed
 - `pages_pending` - pages still to process
 - `forensics_completed` - pages already analyzed
@@ -70,6 +73,7 @@ IF current_page IN forensics_completed:
 ### 1. Announce Delegation
 
 OUTPUT to user:
+
 ```
 ─────────────────────────────────────────────
 📤 DELEGATING TO: Prof. Atomic 🔬 (Panel Forensic Analyst)
@@ -82,7 +86,9 @@ OUTPUT to user:
 ### 2. Execute Panel-Forensic Workflow
 
 **CRITICAL**: Load and execute `{panelForensicWorkflow}` with:
-- Input image: `{source_folder}/{current_page}.webp`
+
+- Input image: `{source_folder}/{current_page}.webp` (CURRENT FRAME GROUND TRUTH)
+- Input context: `{output_folder}/{current_page}/context_horizon.md` (UPCOMING FRAME TRAJECTORY)
 - Output path: `{analysisFolder}/page-{current_page}-forensic.md`
 
 **DO NOT analyze the image yourself. INVOKE the workflow.**
@@ -90,6 +96,7 @@ OUTPUT to user:
 ### 3. Wait for Completion
 
 Panel-forensic workflow produces report containing:
+
 1. ✅ Panel Layout
 2. ✅ Character Identification
 3. ✅ Body Scan
@@ -118,16 +125,19 @@ Panel-forensic workflow produces report containing:
 ```
 
 **IF ANY CHECK FAILS:**
+
 ```
 🚫 FORENSIC INCOMPLETE
 Missing: {list_missing_items}
 ACTION: Re-invoke panel-forensic
 ```
+
 LOOP back to Step 2.
 
 ### 5. Update Pipeline State
 
 Update `{stateFile}`:
+
 ```yaml
 forensics_completed:
   - ... existing ...
@@ -137,6 +147,7 @@ forensics_completed:
 ### 6. Present Checkpoint Menu
 
 OUTPUT:
+
 ```
 ✅ Forensic complete for page {current_page}!
 
@@ -150,9 +161,9 @@ OUTPUT:
 
 **HALT and wait for user selection.**
 
-#### Menu Handling Logic:
+#### Menu Handling Logic
 
-- IF C: 
+- IF C:
   - VERIFY forensic file exists (GATE CHECK)
   - IF EXISTS: Update state, load `{nextStepFile}`
   - IF NOT EXISTS: "🚫 Cannot proceed - forensic missing" → Stay here
@@ -160,7 +171,7 @@ OUTPUT:
 - IF V: Display forensic report contents, then redisplay menu
 - IF Any other: Respond helpfully, then redisplay menu
 
-#### EXECUTION RULES:
+#### EXECUTION RULES
 
 - ALWAYS halt and wait for user input after presenting menu
 - ONLY proceed to next step when user selects 'C' AND gate check passes
@@ -168,13 +179,13 @@ OUTPUT:
 
 ---
 
-## REQUIRED OUTPUTS:
+## REQUIRED OUTPUTS
 
 - MUST generate forensic report via /panel-forensic workflow
 - MUST contain ALL 10 required sections
 - MUST update pipeline state with completion
 
-## VERIFICATION CHECKLIST:
+## VERIFICATION CHECKLIST
 
 - [ ] Pipeline state loaded FIRST before any action
 - [ ] Delegation banner displayed

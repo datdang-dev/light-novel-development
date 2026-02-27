@@ -16,7 +16,7 @@ proseFolder: '{output_folder}/_prose/{project}'
 
 **Progress: Step 4 of 7** - Next: Quality Audit
 
-## RULES:
+## RULES
 
 - MUST NOT skip steps.
 - MUST NOT optimize sequence.
@@ -24,7 +24,7 @@ proseFolder: '{output_folder}/_prose/{project}'
 - MUST check forensic gate BEFORE any prose work.
 - ✅ YOU MUST ALWAYS SPEAK OUTPUT in Vietnamese
 
-## CONTEXT:
+## CONTEXT
 
 - Requires forensic report from Step 2.
 - Requires context loaded from Step 3.
@@ -38,6 +38,7 @@ proseFolder: '{output_folder}/_prose/{project}'
 ### a) Load Pipeline State
 
 Read `{stateFile}` and extract:
+
 - `current_page`
 - `forensics_completed`
 - `context_loaded`
@@ -82,11 +83,13 @@ IF current_page NOT IN context_loaded:
 ### 1. Load Required Inputs
 
 **Read forensic report:**
+
 ```
 forensic_content = READ {analysisFolder}/page-{current_page}-forensic.md
 ```
 
 **Extract key data:**
+
 - Panel count
 - Character list
 - SFX list
@@ -96,6 +99,7 @@ forensic_content = READ {analysisFolder}/page-{current_page}-forensic.md
 ### 2. Announce Delegation
 
 OUTPUT:
+
 ```
 ─────────────────────────────────────────────
 📤 DELEGATING TO: Suki ✍️ (Lewd Writer)
@@ -108,8 +112,11 @@ OUTPUT:
 ### 3. Invoke Prose-Adapter
 
 **CRITICAL**: Load and execute `{proseAdapterWorkflow}` with:
-- Forensic path: `{analysisFolder}/page-{current_page}-forensic.md`
+
+- Forensic path: `{analysisFolder}/page-{current_page}-forensic.md` ( GROUND TRUTH )
+- Context path: `{output_folder}/{chapter}/{page}/context_horizon.md` ( UPCOMING SCENE TRAJECTORY )
 - Context: Story bible loaded in Step 3
+- Action Deduplicator: Check `context_horizon.md` for merge recommendations. If flagged, MERGE redundant frames into a single, cohesive Action Beat.
 - Output: `{proseFolder}/page-{current_page}.md`
 
 **DO NOT write prose yourself. INVOKE the workflow.**
@@ -124,6 +131,7 @@ You do NOT write prose yourself
 ### 4. Wait for Completion
 
 Prose-adapter will:
+
 1. ✅ Load context and forensic
 2. ✅ Plan scene structure
 3. ✅ Write environment (sensory density)
@@ -135,13 +143,52 @@ Prose-adapter will:
 
 ### 5. Verify Prose Output
 
-**GATE CHECK - MANDATORY**
+**GATE 0 - ANTI-CONTAMINATION (MANDATORY, RUN FIRST)**
+
+Scan generated prose for context leaks. These patterns MUST NOT appear:
+
+```
+BLOCKED_PATTERNS = [
+  "*_research",      # Internal research file names
+  "*_lexicon",       # Internal lexicon file names  
+  "workflow.md",     # Workflow references
+  "state.yaml",      # Pipeline references
+  "forensic-gate",   # System gate references
+  "step-0",          # Step file references
+  "lewd-writer",     # Agent names
+  "panel-forensic",  # Agent names
+  "gooner-audit",    # Agent names
+  "gooner-alchemist",# Service names
+  "Director K",      # Agent personas
+  "lnd-orchestrator", # System names
+  "sensory_density", # Rule file names
+  "quality_gates",   # Rule file names
+  ".agent.yaml",     # Config files
+  "hentai_lexicon",  # Knowledge base files
+]
+```
+
+```
+IF ANY BLOCKED_PATTERN found in prose:
+  ─────────────────────────────────────────────
+  🚫 GATE 0 FAILED: CONTEXT CONTAMINATION DETECTED
+  📋 Found: {pattern} at line {line_number}
+  📋 Content: "{contaminated_line}"
+  📤 ACTION: Auto-rewrite contaminated lines, re-verify
+  ─────────────────────────────────────────────
+  
+  DO NOT PROCEED TO QUALITY CHECKS
+  FIX contaminated lines FIRST, then re-run Gate 0
+```
+
+**GATE 1 - QUALITY CHECK**
 
 ```markdown
 ## Prose Output Verification
 
 | Check | Expected | Actual | Status |
 |-------|----------|--------|--------|
+| Gate 0 (contamination) | 0 matches | | |
 | File exists | {proseFolder}/page-{current_page}.md | ✓/✗ | |
 | Word count | ≥500 | | |
 | Sensory count | ≥8 | | |
@@ -151,6 +198,7 @@ Prose-adapter will:
 ```
 
 **IF ANY CHECK FAILS:**
+
 ```
 ⚠️ PROSE INCOMPLETE
 Missing: {list_failed_checks}
@@ -160,6 +208,7 @@ ACTION: Re-invoke prose-adapter with feedback
 ### 6. Update Pipeline State
 
 Update `{stateFile}`:
+
 ```yaml
 prose_completed:
   - ... existing ...
@@ -169,6 +218,7 @@ prose_completed:
 ### 7. Present Checkpoint Menu
 
 OUTPUT:
+
 ```
 ✅ Prose generation complete for page {current_page}!
 
@@ -182,7 +232,7 @@ OUTPUT:
 
 **HALT and wait for user selection.**
 
-#### Menu Handling Logic:
+#### Menu Handling Logic
 
 - IF C:
   - VERIFY prose file exists (GATE CHECK)
@@ -194,13 +244,13 @@ OUTPUT:
 
 ---
 
-## REQUIRED OUTPUTS:
+## REQUIRED OUTPUTS
 
 - MUST invoke /prose-adapter workflow (NOT write directly)
 - MUST meet minimum quality thresholds
 - MUST update pipeline state
 
-## VERIFICATION CHECKLIST:
+## VERIFICATION CHECKLIST
 
 - [ ] Forensic gate checked FIRST
 - [ ] Context gate checked
@@ -217,5 +267,6 @@ OUTPUT:
 Director K writing prose = **PROTOCOL VIOLATION**
 Missing forensic file = **GATE BLOCKED - RETURN TO STEP 2**
 Skipping to audit without prose = **PIPELINE FAILURE**
+Internal file names in prose output = **GATE 0 CONTAMINATION - AUTO-REWRITE**
 
-**Master Rule:** FORENSIC GATE. DELEGATE. VERIFY. Never write directly.
+**Master Rule:** FORENSIC GATE. DELEGATE. GATE 0 SCAN. VERIFY. Never write directly.

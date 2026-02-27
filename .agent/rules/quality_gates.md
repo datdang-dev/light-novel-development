@@ -35,6 +35,18 @@ priority: 4
 
 ## QUALITY GATES
 
+### Gate 0: Anti-Contamination (CRITICAL)
+
+Before ANY other gate, scan prose for context leaks:
+
+- [ ] No internal file names in prose (`*_research.md`, `*_lexicon.md`, `workflow.md`)
+- [ ] No agent names in prose (`lewd-writer`, `panel-forensic`, `gooner-audit`)
+- [ ] No system/pipeline references (`state.yaml`, `forensic-gate`, `step-04`)
+- [ ] No meta-commentary about rules (`sensory_density rule says...`)
+- [ ] No English technical terms that break Vietnamese prose immersion
+
+**If Gate 0 fails → AUTOMATIC REWRITE of contaminated lines before any other audit.**
+
 ### Gate 1: Per-Page
 
 Before moving to next page:

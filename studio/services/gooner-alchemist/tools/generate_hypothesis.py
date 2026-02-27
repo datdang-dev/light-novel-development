@@ -3,12 +3,12 @@ import os
 import json
 import datetime
 
-def generate_poc(state_path, bible_path, page_num):
+def generate_hypothesis(state_path, bible_path, page_num):
     """
-    Simulates the generation of a Proof of Concept (POC) hypothesis.
+    Simulates the generation of a Visual Hypothesis.
     In a real implementation, this would call an LLM with the Bible and State context.
     """
-    print(f"Generating POC for Page {page_num}...")
+    print(f"Generating Visual Hypothesis for Page {page_num}...")
     
     # Mock Logic: Read Bible to get character names
     try:
@@ -19,7 +19,7 @@ def generate_poc(state_path, bible_path, page_num):
         characters = ["Unknown"]
 
     # Mock Logic: Create a hypothesis
-    hypothesis = f"""# Context Hypothesis (POC)
+    hypothesis = f"""# Visual Hypothesis
     
 **Page:** {page_num}
 **Timestamp:** {datetime.datetime.now().isoformat()}
@@ -38,7 +38,7 @@ def generate_poc(state_path, bible_path, page_num):
 
     # Determine output path from state (mocking the path extraction)
     # Assuming state_path is like .../_pipeline/project/state.yaml
-    # We want output/chapter/page/poc.md
+    # We want output/chapter/page/visual_hypothesis.md
     
     # For now, let's just save it to a local 'output' dir relative to execution for safety
     # In V6 prod this would be robust. 
@@ -47,12 +47,12 @@ def generate_poc(state_path, bible_path, page_num):
     # But the workflow expects a file.
     output_dir = f"output/chapter_1/page_{page_num}"
     os.makedirs(output_dir, exist_ok=True)
-    output_path = os.path.join(output_dir, "poc.md")
+    output_path = os.path.join(output_dir, "visual_hypothesis.md")
     
     with open(output_path, "w") as f:
         f.write(hypothesis)
         
-    print(f"POC saved to: {output_path}")
+    print(f"Visual Hypothesis saved to: {output_path}")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -61,4 +61,4 @@ if __name__ == "__main__":
     parser.add_argument("--page", required=True)
     args = parser.parse_args()
     
-    generate_poc(args.state, args.bible, args.page)
+    generate_hypothesis(args.state, args.bible, args.page)

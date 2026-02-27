@@ -22,6 +22,8 @@ validateWorkflow: './steps/step-01-context-loading.md'
 - **Step 3:** Environment Prose
 - **Step 4:** Action Prose
 - **Step 5:** Dialogue Integration
+- **Step 5b:** Format Ensure
+- **Step 5c:** Sensory Injection Pass
 - **Step 6:** Aftermath & Polish
 - **Step 7:** Quality Self-Check
 - **Step 8:** Recursive Update

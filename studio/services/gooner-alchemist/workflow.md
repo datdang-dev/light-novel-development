@@ -9,8 +9,8 @@ validateWorkflow: './steps/step-01-initialize.md'
 
 # Gooner Alchemist Pipeline (V6)
 
-**Goal:** The definitive "Studio Grade" manga-to-prose pipeline.
-**Features:** Context Injection (POC), Structured Artifacts, JSON Quality Gates, Service Integration.
+**Goal:** The definitive "Studio Grade" manga-to-prose and video-to-prose pipeline.
+**Features:** Universal Context Horizon, Action Deduplicator, Structured Artifacts, JSON Quality Gates, Service Integration.
 
 **Orchestrator:** Kana (Manga Adapter).
 
@@ -26,17 +26,17 @@ validateWorkflow: './steps/step-01-initialize.md'
 
 ### 2. Adaptation Loop (Per Page or Batch)
 
-**Context Injection Phase**
+**Context Horizon Phase**
 
-- **Step 1b:** Generate POC Hypothesis (`step-01b-generate-poc.md`)
-  - *Input:* Bible + Previous Page State.
-  - *Output:* `output/{ch}/{pg}/poc.md`
-  - *Goal:* "Tell the engine what to look for."
+- **Step 1b:** Generate Context Horizon (`step-01b-context-horizon.md`)
+  - *Input:* Next N frames/pages (`generate_horizon.py`)
+  - *Output:* `output/{ch}/{pg}/context_horizon.md`
+  - *Goal:* "Pre-fetch factual upcoming trajectories and flag Action Deduplication instead of hallucinating the current frame."
 
 **Forensic Phase**
 
 - **Step 2:** Directed Forensic Scan (`step-02-forensic-analysis.md`)
-  - *Input:* Image + `poc.md`
+  - *Input:* Current Image + `context_horizon.md`
   - *Output:* `output/{ch}/{pg}/forensic.json`
   - *Agent:* Panel Forensic (Atomic)
 
@@ -48,7 +48,7 @@ validateWorkflow: './steps/step-01-initialize.md'
 **Prose Generation**
 
 - **Step 4:** Context-Aware Drafting (`step-04-prose-generation.md`)
-  - *Input:* `forensic.json` + `poc.md` + `bible`
+  - *Input:* `forensic.json` + `context_horizon.md` + `bible`
   - *Output:* `output/{ch}/{pg}/draft.md`
   - *Agent:* Lewd Writer (Suki)
 
@@ -71,17 +71,18 @@ validateWorkflow: './steps/step-01-initialize.md'
 
 1. **ARTIFACTS:** All intermediate files MUST be saved to the structure: `{output_folder}/{chapter}/{page_number}/`.
 2. **JSON GATES:** Do not parse "Pass/Fail" text. Parse the JSON output from Audit.
-3. **POC VALIDATION:** If the POC says "Asuka" but Forensic says "Empty", HALT for human review.
-4. **DELEGATION:** Director K does NOT run this. Kana runs this.
+3. **HORIZON VALIDATION:** The `context_horizon.md` dictates Trajectory. The FORENSIC IMAGE dictates current Ground Truth. Do not hallucinate future facts onto the current frame.
+4. **ACTION DEDUPLICATION:** If Context Horizon flags a sequence as Continuous Action, LEWD WRITER MUST MERGE THEM into a single Action Beat instead of writing repetitive short pages.
+5. **DELEGATION:** Director K does NOT run this. Kana runs this.
 
 ---
 
 ## EXECUTION LOOP
 
-For each page:
+For each page/frame:
 
 1. Initialize Step 1
-2. Generate POC Step 1b -> poc.md
+2. Generate Context Horizon Step 1b -> context_horizon.md
 3. Forensic Scan Step 2 -> forensic.json
 4. Context Loading Step 3
 5. Prose Generation Step 4 -> draft.md
