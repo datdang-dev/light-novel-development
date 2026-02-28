@@ -2,9 +2,6 @@
 name: 'step-06-state-persistence'
 description: 'Invoke bible-sync SAVE for state updates'
 
-# Path Definitions
-workflow_path: '{project-root}/studio/services/gooner-alchemist'
-thisStepFile: './step-06-state-persistence.md'
 nextStepFile: './step-07-complete.md'
 bibleSyncWorkflow: '{project-root}/studio/services/bible-sync/workflow.md'
 ---

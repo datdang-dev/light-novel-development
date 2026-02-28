@@ -40,5 +40,11 @@ Save the compiled content to: `{chapterOutput}`
 #### Menu Handling Logic
 
 - IF [E]:
+
+#### EXECUTION RULES:
+
+- 🛑 **HALT** after displaying menu. Do NOT auto-proceed.
+- ⏳ **WAIT** for explicit user input before taking any action.
+- 🚫 Do NOT assume user intent or pre-load next step.
   - Notify User: "🎉 Chapter {ch} Compiled Successfully!"
   - BREAK CHARACTER (Return to Default Handler).

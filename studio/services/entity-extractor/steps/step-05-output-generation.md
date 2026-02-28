@@ -2,7 +2,6 @@
 name: 'step-05-output-generation'
 description: 'Generate structured entity output files'
 
-thisStepFile: './step-05-output-generation.md'
 entitiesOutput: '{output_folder}/_entities/{manga_name}/page_{num}_entities.yaml'
 ---
 

@@ -2,10 +2,7 @@
 name: 'step-01-input-validation'
 description: 'Validate input image and identify page for forensic analysis'
 
-# Path Definitions
-workflow_path: '{project-root}/studio/core/panel-forensic'
-thisStepFile: './step-01-input-validation.md'
-nextStepFile: './step-02-layout-analysis.md'
+nextStepFile: './step-02-pure-ocr-extraction.md'
 outputFile: '{output_folder}/_analysis/{manga_name}/page_{page_num}_forensics.md'
 templateFile: '{workflow_path}/templates/forensic-report-template.md'
 ---
@@ -36,6 +33,7 @@ Validate the input image, confirm it's readable, and establish page identificati
 - 🎯 Focus only on validation and identification
 - 🚫 FORBIDDEN to begin analysis before validation complete
 - 💬 Confirm all inputs with user before proceeding
+- 👁️ **VISUAL GROUND TRUTH OVERRIDE:** Context and Director Notes are ONLY loose references. **THE IMAGE IS ABSOLUTE.** If the text contradicts the image, you MUST prioritize the image. Do NOT hallucinate or invent physical details from the text that cannot be verified visually.
 
 ## MANDATORY SEQUENCE
 
@@ -45,7 +43,7 @@ Validate the input image, confirm it's readable, and establish page identificati
 
 If not already provided, ask user for:
 
-```
+```text
 "Xin chào! Để bắt đầu phân tích forensic, mình cần:
 
 1. **Đường dẫn hình ảnh** hoặc page range (ví dụ: `page_001.jpg` hoặc `001-005`)
@@ -62,7 +60,7 @@ Once path provided:
 
 **CRITICAL - ZERO ASSUMPTION PROTOCOL:**
 
-```
+```text
 1. Use `view_file` tool to ACTUALLY SEE the image
 2. NEVER assume content without viewing
 3. If cannot view, STOP and request direct upload
@@ -120,7 +118,7 @@ status: IN_PROGRESS
 
 Display:
 
-```
+```text
 "✅ Image validated thành công!
 
 **Thông tin:**
@@ -137,6 +135,12 @@ Display:
 
 - IF C: Update frontmatter với stepsCompleted, then load `{nextStepFile}`
 - IF other: Help user respond, redisplay menu
+
+#### EXECUTION RULES
+
+- 🛑 **HALT** after displaying menu. Do NOT auto-proceed.
+- ⏳ **WAIT** for explicit user input before taking any action.
+- 🚫 Do NOT assume user intent or pre-load next step.
 
 ---
 

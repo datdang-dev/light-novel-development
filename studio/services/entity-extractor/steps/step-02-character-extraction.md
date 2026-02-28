@@ -2,7 +2,6 @@
 name: 'step-02-character-extraction'
 description: 'Extract character appearances and traits'
 
-thisStepFile: './step-02-character-extraction.md'
 nextStepFile: './step-03-relationship-mapping.md'
 ---
 

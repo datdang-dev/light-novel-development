@@ -2,7 +2,6 @@
 name: 'step-05-sfx-integration'
 description: 'Add appropriate sound effects'
 
-thisStepFile: './step-05-sfx-integration.md'
 nextStepFile: './step-06-polish-review.md'
 ---
 

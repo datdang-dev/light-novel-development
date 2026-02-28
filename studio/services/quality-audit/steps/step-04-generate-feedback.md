@@ -2,9 +2,6 @@
 name: 'step-04-generate-feedback'
 description: 'Generate specific improvement feedback'
 
-# Path Definitions
-workflow_path: '{project-root}/studio/services/quality-audit'
-thisStepFile: './step-04-generate-feedback.md'
 nextStepFile: './step-05-verdict-report.md'
 ---
 
@@ -149,6 +146,12 @@ Append feedback to audit report:
 
 - IF C: Save audit, load `{nextStepFile}`
 - IF other: Help user respond, redisplay menu
+
+#### EXECUTION RULES:
+
+- 🛑 **HALT** after displaying menu. Do NOT auto-proceed.
+- ⏳ **WAIT** for explicit user input before taking any action.
+- 🚫 Do NOT assume user intent or pre-load next step.
 
 ---
 

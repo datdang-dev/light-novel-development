@@ -2,9 +2,6 @@
 name: 'step-03-category-scoring'
 description: 'Score prose across all 5 quality categories'
 
-# Path Definitions
-workflow_path: '{project-root}/studio/services/quality-audit'
-thisStepFile: './step-03-category-scoring.md'
 nextStepFile: './step-04-generate-feedback.md'
 ---
 
@@ -183,6 +180,12 @@ Append all scoring to audit report:
 
 - IF C: Save audit, load `{nextStepFile}`
 - IF other: Help user respond, redisplay menu
+
+#### EXECUTION RULES:
+
+- 🛑 **HALT** after displaying menu. Do NOT auto-proceed.
+- ⏳ **WAIT** for explicit user input before taking any action.
+- 🚫 Do NOT assume user intent or pre-load next step.
 
 ---
 

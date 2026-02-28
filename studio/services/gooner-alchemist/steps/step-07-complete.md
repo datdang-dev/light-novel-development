@@ -2,9 +2,6 @@
 name: 'step-07-complete'
 description: 'Finalize pipeline and generate summary'
 
-# Path Definitions
-workflow_path: '{project-root}/studio/services/gooner-alchemist'
-thisStepFile: './step-07-complete.md'
 ---
 
 # Step 7: Complete Pipeline

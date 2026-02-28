@@ -2,7 +2,6 @@
 name: 'step-01-context-load'
 description: 'Load character profiles and scene context'
 
-thisStepFile: './step-01-context-load.md'
 nextStepFile: './step-02-voice-calibration.md'
 ---
 

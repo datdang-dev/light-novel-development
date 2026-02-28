@@ -2,28 +2,25 @@
 name: 'step-03-environment-prose'
 description: 'Write setting and atmosphere prose'
 
-# Path Definitions
-workflow_path: '{project-root}/studio/core/lewd-writer'
-thisStepFile: './step-03-environment-prose.md'
-nextStepFile: './step-04-action-prose.md'
+nextStepFile: './step-04-dialogue-driven-action.md'
 ---
 
 # Step 3: Environment Prose
 
-## STEP GOAL:
+## STEP GOAL
 
 Write immersive setting and atmosphere prose that grounds the reader in the scene using the SETUP beats.
 
-## MANDATORY EXECUTION RULES (READ FIRST):
+## MANDATORY EXECUTION RULES (READ FIRST)
 
-### Universal Rules:
+### Universal Rules
 
 - 📖 CRITICAL: Read the complete step file before taking any action
 - ✅ Write prose in {document_output_language} (Vietnamese)
 
-### OBSERVER-CAMERA Perspective:
+### OBSERVER-CAMERA Perspective
 
-```
+```text
 Write as external observer:
 - Describe environment like a camera panning
 - Include ambient sensory details
@@ -31,7 +28,7 @@ Write as external observer:
 - Clinical but evocative
 ```
 
-### Step-Specific Rules:
+### Step-Specific Rules
 
 - 🎯 Focus on SETUP beats only (environment, initial positioning)
 - 🚫 FORBIDDEN to jump to action content
@@ -58,6 +55,7 @@ From forensic environment data, create:
 ```
 
 **Sensory Checklist for Setting:**
+
 - [ ] At least 1 smell mention
 - [ ] At least 1 ambient sound
 - [ ] At least 1 texture/temperature feel
@@ -94,7 +92,7 @@ Bridge from SETUP to BUILD beats:
 
 Check progress:
 
-```
+```text
 Environment Section Sensory Count:
 - Smell: {count} (target: ≥1)
 - Sound: {count} (target: ≥1)  
@@ -104,11 +102,12 @@ Environment Section Sensory Count:
 ### 5. Update Output File
 
 Append environment prose to output:
+
 - Update frontmatter: `stepsCompleted: [..., 'step-03-environment-prose']`
 
 ### 6. Present MENU OPTIONS
 
-```
+```text
 "✅ Environment prose hoàn thành!
 
 **Paragraphs:** {count}
@@ -120,18 +119,24 @@ Append environment prose to output:
 **Tiếp theo:** Action prose writing
 
 **Chọn:** [R] Revise environment [C] Continue to Action Prose"
-```
+```text
 
-#### Menu Handling Logic:
+#### Menu Handling Logic
 
 - IF R: Ask what to revise, make changes, redisplay menu
 - IF C: Save/update output file, load `{nextStepFile}`
+
+#### EXECUTION RULES
+
+- 🛑 **HALT** after displaying menu. Do NOT auto-proceed.
+- ⏳ **WAIT** for explicit user input before taking any action.
+- 🚫 Do NOT assume user intent or pre-load next step.
 
 ---
 
 ## 🚨 SYSTEM SUCCESS/FAILURE METRICS
 
-### ✅ SUCCESS:
+### ✅ SUCCESS
 
 - Setting established with sensory detail
 - Characters positioned
@@ -139,7 +144,7 @@ Append environment prose to output:
 - OBSERVER-CAMERA perspective maintained
 - Smooth transition to action setup
 
-### ❌ SYSTEM FAILURE:
+### ❌ SYSTEM FAILURE
 
 - Jumping straight to explicit content
 - No sensory details in setting

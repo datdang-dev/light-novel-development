@@ -2,9 +2,6 @@
 name: 'step-07-quality-check'
 description: 'Pre-audit quality verification before sending to gooner-audit'
 
-# Path Definitions
-workflow_path: '{project-root}/studio/core/lewd-writer'
-thisStepFile: './step-07-quality-check.md'
 nextStepFile: './step-08-wiki-update.md'
 outputFile: '{output_folder}/_prose/{manga_name}/chapter_{ch}/page_{page_num}_prose.md'
 ---
@@ -43,7 +40,7 @@ Before any scoring, scan the entire prose output for CONTEXT LEAKS.
 
 **WHY:** Knowledge files (`smegma_research.md`, `hentai_lexicon.md`, etc.) are SOURCE MATERIAL only. Extract vocabulary and descriptions FROM them, but NEVER reference them BY NAME in prose. The reader does not know these files exist.
 
-```
+```text
 IF ANY pattern found:
   🚫 GATE 0 FAILED — CONTAMINATION
   Line {N}: "{contaminated_line}"
@@ -127,7 +124,7 @@ IF ANY pattern found:
 | Check | Points | Self-Score | Evidence |
 |-------|--------|------------|----------|
 | E1: Zero-Skip | 0-3 | {score} | All panels covered |
-| E2: Dialogue integrated | 0-3 | {score} | All lines used |
+| E2: Dialogue-Driven | 0-3 | {score} | Chain Reactions used |
 | E3: Grammar/flow | 0-2 | {score} | Smooth prose |
 | E4: Format compliance | 0-2 | {score} | Proper structure |
 
@@ -165,7 +162,7 @@ Update `{outputFile}` frontmatter:
 
 ```yaml
 ---
-stepsCompleted: ['step-01-context-loading', 'step-02-scene-planning', 'step-03-environment-prose', 'step-04-action-prose', 'step-05-dialogue-integration', 'step-06-aftermath-polish', 'step-07-quality-check']
+stepsCompleted: ['step-01-context-loading', 'step-02-scene-planning', 'step-03-environment-prose', 'step-04-dialogue-driven-action', 'step-05b-format-ensure', 'step-05c-sensory-injection', 'step-06-aftermath-polish', 'step-07-quality-check']
 status: READY_FOR_AUDIT
 self_audit_score: {score}
 ---
@@ -173,7 +170,7 @@ self_audit_score: {score}
 
 ### 9. Continue to Recursive Update
 
-```
+```text
 "✅ PROSE ADAPTATION AUDIT COMPLETE!
 
 **Self-Audit Score:** {score}/100 ({status})
@@ -188,6 +185,12 @@ self_audit_score: {score}
 
 - IF C: Save output, load `{nextStepFile}`
 - IF other: Redisplay menu
+
+#### EXECUTION RULES
+
+- 🛑 **HALT** after displaying menu. Do NOT auto-proceed.
+- ⏳ **WAIT** for explicit user input before taking any action.
+- 🚫 Do NOT assume user intent or pre-load next step.
 
 ---
 

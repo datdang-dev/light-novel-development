@@ -2,7 +2,6 @@
 name: 'step-06-polish-review'
 description: 'Final refinement and voice check'
 
-thisStepFile: './step-06-polish-review.md'
 dialogueOutput: '{output_folder}/_dialogue/{scene_id}_dialogue.md'
 ---
 

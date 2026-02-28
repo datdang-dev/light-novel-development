@@ -39,9 +39,9 @@ version: "2.0.0"
 | Category | Points | Focus |
 |----------|--------|-------|
 | A: Sensory Immersion | 25 | Smell, touch, sound, visual, taste |
-| B: Edging Rhythm | 20 | Escalation loops, pacing, aftermath |
-| C: Fetish Exploitation | 20 | Power dynamics, degradation, fetish tags |
-| D: Psychological Depth | 25 | Character voices, reactions, perspective |
+| B: Edging Rhythm | 25 | Escalation loops, pacing, aftermath |
+| C: Fetish Exploitation | 25 | Power dynamics, degradation, fetish tags |
+| D: Psychological Depth | 15 | Character voices, reactions, perspective |
 | E: Technical | 10 | Zero-skip, dialogue integration, format |
 
 ### Pass/Fail Thresholds
@@ -74,6 +74,7 @@ If ANY of these appear, score = 0 and AUTO-FAIL:
 | Gooner Audit Engine | `{project-root}/studio/modules/gooner-audit-engine.md` | 100-point scoring system |
 
 The module contains:
+
 - 5-category scoring rubric (Sensory, Rhythm, Fetish, Psychology, Technical)
 - Automated scoring checklist
 - Keyword detection lists
@@ -98,6 +99,7 @@ The module contains:
 ### 1. Configuration Loading
 
 Load config from `{project-root}/studio/config/config.yaml`:
+
 - `quality_threshold.min_audit_score`
 - `quality_threshold.warn_score`
 
@@ -136,6 +138,7 @@ outputs_to:
 ## REVISION LOOP
 
 If prose fails audit:
+
 1. Generate specific feedback
 2. Return to prose-adapter with feedback
 3. Prose-adapter revises

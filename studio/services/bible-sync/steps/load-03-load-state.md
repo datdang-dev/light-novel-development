@@ -2,9 +2,6 @@
 name: 'load-03-load-state'
 description: 'Load current character states'
 
-# Path Definitions
-workflow_path: '{project-root}/studio/services/bible-sync'
-thisStepFile: './load-03-load-state.md'
 nextStepFile: './load-04-generate-context.md'
 statePath: '{output_folder}/_bible/{project_name}/state'
 ---

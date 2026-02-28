@@ -2,7 +2,6 @@
 name: 'step-04-dialogue-generation'
 description: 'Generate scene-specific dialogue'
 
-thisStepFile: './step-04-dialogue-generation.md'
 nextStepFile: './step-05-sfx-integration.md'
 ---
 

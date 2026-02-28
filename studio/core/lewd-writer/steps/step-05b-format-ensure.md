@@ -2,9 +2,6 @@
 name: 'step-05b-format-ensure'
 description: 'Enforce strict Light Novel dialogue formatting rules'
 
-# Path Definitions
-workflow_path: '{project-root}/studio/core/lewd-writer'
-thisStepFile: './step-05b-format-ensure.md'
 nextStepFile: './step-05c-sensory-injection.md'
 outputFile: '{output_folder}/_prose/{manga_name}/chapter_{ch}/page_{page_num}_prose.md'
 ---
@@ -66,7 +63,7 @@ Check for:
 Update `stepsCompleted` to include `step-05b-format-ensure`.
 
 ```yaml
-stepsCompleted: [..., 'step-05-dialogue-integration', 'step-05b-format-ensure']
+stepsCompleted: [..., 'step-04-dialogue-driven-action', 'step-05b-format-ensure']
 ```
 
 ---

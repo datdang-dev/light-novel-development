@@ -2,9 +2,6 @@
 name: 'step-08-wiki-update'
 description: 'Recursive Universe - Update Story Bible with new facts'
 
-# Path Definitions
-workflow_path: '{project-root}/studio/core/lewd-writer'
-thisStepFile: './step-08-wiki-update.md'
 nextStepFile: './step-09-final-report.md' # Or end
 bibleFile: '{output_folder}/_bible/{project_name}/story-bible.md'
 proseFile: '{output_folder}/_prose/{manga_name}/chapter_{ch}/page_{page_num}_prose.md'
@@ -76,3 +73,9 @@ Append this block to `{bibleFile}` under a "## Dynamic Recursive History" sectio
 
 - IF C: Completion sequence.
 - IF other: Redisplay menu.
+
+#### EXECUTION RULES:
+
+- 🛑 **HALT** after displaying menu. Do NOT auto-proceed.
+- ⏳ **WAIT** for explicit user input before taking any action.
+- 🚫 Do NOT assume user intent or pre-load next step.

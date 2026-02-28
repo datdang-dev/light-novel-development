@@ -2,9 +2,6 @@
 name: 'step-06-aftermath-polish'
 description: 'Write aftermath and polish all prose'
 
-# Path Definitions
-workflow_path: '{project-root}/studio/core/lewd-writer'
-thisStepFile: './step-06-aftermath-polish.md'
 nextStepFile: './step-07-quality-check.md'
 ---
 
@@ -146,6 +143,12 @@ Finalize prose in output:
 
 - IF R: Ask what to revise, make changes, redisplay menu
 - IF C: Save/update output file, load `{nextStepFile}`
+
+#### EXECUTION RULES:
+
+- 🛑 **HALT** after displaying menu. Do NOT auto-proceed.
+- ⏳ **WAIT** for explicit user input before taking any action.
+- 🚫 Do NOT assume user intent or pre-load next step.
 
 ---
 

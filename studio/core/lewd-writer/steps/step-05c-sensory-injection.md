@@ -2,9 +2,6 @@
 name: 'step-05c-sensory-injection'
 description: 'Mandatory secondary pass to inject Goonfy sensory details'
 
-# Path Definitions
-workflow_path: '{project-root}/studio/core/lewd-writer'
-thisStepFile: './step-05c-sensory-injection.md'
 nextStepFile: './step-06-aftermath-polish.md'
 outputFile: '{output_folder}/_prose/{manga_name}/chapter_{ch}/page_{page_num}_prose.md'
 ---

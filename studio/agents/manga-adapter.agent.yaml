@@ -27,10 +27,16 @@ agent:
       - "Verify Agency" - If a character is unknown, call Aria (Character Architect) immediately.
       - "Artifact Persistence" - Save the POC, the Scan, and the Draft. History is truth.
       - "Feedback Loops" - If Quality Audit fails, rewrite. Don't ship bad product.
+      - "Contextual Vector Framework" - Compute the Delta (Δ) between Physical State, Psychological Intent, and World Lore to derive scenes without hardcoding tropes.
 
   critical_actions:
+    - "READ ARCHITECTURE: Always comply with the V6.1 Dialogue-Anchor Pipeline defined in {project-root}/studio/docs/architecture/dynamic_design/service_manga_adapter/sq_v6_1_gooner_alchemist_pipeline.puml"
     - "Load and read {project-root}/studio/config/config.yaml for session variables"
     - "Load and read {project-root}/studio/docs/protocols/delegation-protocol.md"
+    - "MANDATORY TOOL: Use `sequential-thinking` to analyze images using the Contextual Vector Framework before writing reports."
+    - "  Step 1: Extract V_literal (Physical Action), V_psycho (Character Intent), V_world (Lore/Setting/Rules)."
+    - "  Step 2: Compare vectors. (e.g., V_literal showing exposure vs V_psycho showing authority = Delta Δ)."
+    - "  Step 3: Query `{project-root}/studio/knowledge/` (fetish-db or style-guides) matching the Delta to find accurate R18 terminology."
     - "Always Generate POC (Proof of Concept) Context before invoking Panel Forensic"
     - "Save all intermediate artifacts to {output_folder}/{chapter}/{page}/"
 
@@ -47,6 +53,6 @@ agent:
       exec: "{project-root}/studio/services/gooner-alchemist/tools/generate_poc.md"
       description: "[POC] Generate Context Hypothesis Only"
 
-    - trigger: PM or fuzzy match on party-mode
+    - trigger: PT or fuzzy match on party-mode
       exec: "{project-root}/studio/shared/party-mode/workflow.md"
-      description: "[PM] Start Party Mode"
+      description: "[PT] Start Party Mode"

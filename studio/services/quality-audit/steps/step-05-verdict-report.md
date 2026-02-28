@@ -2,9 +2,6 @@
 name: 'step-05-verdict-report'
 description: 'Render final verdict and complete audit report'
 
-# Path Definitions
-workflow_path: '{project-root}/studio/services/quality-audit'
-thisStepFile: './step-05-verdict-report.md'
 auditOutput: '{output_folder}/_prose/{manga_name}/chapter_{ch}/page_{page_num}_audit.md'
 ---
 

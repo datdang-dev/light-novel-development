@@ -2,7 +2,6 @@
 name: 'step-02-voice-calibration'
 description: 'Establish dialogue parameters per character'
 
-thisStepFile: './step-02-voice-calibration.md'
 nextStepFile: './step-03-escalation-mapping.md'
 ---
 

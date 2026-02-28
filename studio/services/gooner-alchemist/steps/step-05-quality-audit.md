@@ -2,9 +2,6 @@
 name: 'step-05-quality-audit'
 description: 'Invoke gooner-audit for quality check'
 
-# Path Definitions
-workflow_path: '{project-root}/studio/services/gooner-alchemist'
-thisStepFile: './step-05-quality-audit.md'
 nextStepOnPass: './step-06-state-persistence.md'
 nextStepOnFail: './step-04-prose-generation.md'
 goonerAuditWorkflow: '{project-root}/studio/services/quality-audit/workflow.md'
@@ -109,6 +106,12 @@ IF verdict == REVIEW (70-84) or FAIL (<70):
 
 - IF PASS + C: Load `{nextStepOnPass}`
 - IF FAIL + R: Load `{nextStepOnFail}` with feedback
+
+#### EXECUTION RULES:
+
+- 🛑 **HALT** after displaying menu. Do NOT auto-proceed.
+- ⏳ **WAIT** for explicit user input before taking any action.
+- 🚫 Do NOT assume user intent or pre-load next step.
 
 ---
 

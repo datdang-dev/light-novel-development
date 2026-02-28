@@ -2,7 +2,6 @@
 name: 'step-07-final-profile'
 description: 'Compile and validate complete character profile'
 
-thisStepFile: './step-07-final-profile.md'
 profileOutput: '{output_folder}/_bible/{project}/characters/{char_id}.md'
 ---
 

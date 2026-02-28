@@ -2,9 +2,6 @@
 name: 'save-03-update-state'
 description: 'Write changes to state files'
 
-# Path Definitions
-workflow_path: '{project-root}/studio/services/bible-sync'
-thisStepFile: './save-03-update-state.md'
 nextStepFile: './save-04-log-events.md'
 statePath: '{output_folder}/_bible/{project_name}/state'
 ---

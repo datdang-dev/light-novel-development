@@ -37,6 +37,6 @@ agent:
       exec: "{project-root}/studio/services/dialogue-scripting/workflow.md"
       description: "[DG] Execute Dialogue Generator (Create Lines)"
 
-    - trigger: PM or fuzzy match on party-mode
+    - trigger: PT or fuzzy match on party-mode
       exec: "{project-root}/studio/shared/party-mode/workflow.md"
-      description: "[PM] Start Party Mode"
+      description: "[PT] Start Party Mode"

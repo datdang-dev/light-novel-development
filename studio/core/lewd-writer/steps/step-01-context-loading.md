@@ -2,9 +2,6 @@
 name: 'step-01-context-loading'
 description: 'Load forensic report and story bible context'
 
-# Path Definitions
-workflow_path: '{project-root}/studio/core/lewd-writer'
-thisStepFile: './step-01-context-loading.md'
 nextStepFile: './step-02-scene-planning.md'
 ---
 
@@ -118,6 +115,12 @@ source_forensics: "{forensics_path}"
 
 - IF C: Save output file, load `{nextStepFile}`
 - IF other: Help user respond, redisplay menu
+
+#### EXECUTION RULES:
+
+- 🛑 **HALT** after displaying menu. Do NOT auto-proceed.
+- ⏳ **WAIT** for explicit user input before taking any action.
+- 🚫 Do NOT assume user intent or pre-load next step.
 
 ---
 

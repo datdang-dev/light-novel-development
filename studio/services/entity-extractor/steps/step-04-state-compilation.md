@@ -2,7 +2,6 @@
 name: 'step-04-state-compilation'
 description: 'Compile physical and emotional states'
 
-thisStepFile: './step-04-state-compilation.md'
 nextStepFile: './step-05-output-generation.md'
 ---
 

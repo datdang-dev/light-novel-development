@@ -2,9 +2,6 @@
 name: 'step-03-context-loading'
 description: 'Invoke bible-sync LOAD for continuity context'
 
-# Path Definitions
-workflow_path: '{project-root}/studio/services/gooner-alchemist'
-thisStepFile: './step-03-context-loading.md'
 nextStepFile: './step-04-prose-generation.md'
 bibleSyncWorkflow: '{project-root}/studio/services/bible-sync/workflow.md'
 ---

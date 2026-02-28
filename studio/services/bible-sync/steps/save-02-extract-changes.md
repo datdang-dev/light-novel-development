@@ -2,9 +2,6 @@
 name: 'save-02-extract-changes'
 description: 'Parse prose for state changes'
 
-# Path Definitions
-workflow_path: '{project-root}/studio/services/bible-sync'
-thisStepFile: './save-02-extract-changes.md'
 nextStepFile: './save-03-update-state.md'
 ---
 

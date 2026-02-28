@@ -2,9 +2,6 @@
 name: 'load-04-generate-context'
 description: 'Generate context document for prose-adapter'
 
-# Path Definitions
-workflow_path: '{project-root}/studio/services/bible-sync'
-thisStepFile: './load-04-generate-context.md'
 contextOutput: '{output_folder}/_bible/{project_name}/prose-context.md'
 ---
 

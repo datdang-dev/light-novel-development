@@ -2,9 +2,6 @@
 name: 'step-01-load-prose'
 description: 'Load prose file and initialize audit document'
 
-# Path Definitions
-workflow_path: '{project-root}/studio/services/quality-audit'
-thisStepFile: './step-01-load-prose.md'
 nextStepFile: './step-02-banned-scan.md'
 ---
 
@@ -115,6 +112,12 @@ prose_source: "{prose_path}"
 
 - IF C: Save audit file, load `{nextStepFile}`
 - IF other: Help user respond, redisplay menu
+
+#### EXECUTION RULES:
+
+- 🛑 **HALT** after displaying menu. Do NOT auto-proceed.
+- ⏳ **WAIT** for explicit user input before taking any action.
+- 🚫 Do NOT assume user intent or pre-load next step.
 
 ---
 

@@ -2,7 +2,6 @@
 name: 'step-01-input-mode'
 description: 'Determine creation mode and gather initial input'
 
-thisStepFile: './step-01-input-mode.md'
 nextStepFile: './step-02-core-identity.md'
 ---
 

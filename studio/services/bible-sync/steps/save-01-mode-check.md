@@ -2,9 +2,6 @@
 name: 'save-01-mode-check'
 description: 'Verify SAVE mode and load approved prose'
 
-# Path Definitions
-workflow_path: '{project-root}/studio/services/bible-sync'
-thisStepFile: './save-01-mode-check.md'
 nextStepFile: './save-02-extract-changes.md'
 ---
 

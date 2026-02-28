@@ -2,9 +2,6 @@
 name: 'step-01-initialize'
 description: 'Initialize pipeline and validate input'
 
-# Path Definitions
-workflow_path: '{project-root}/studio/services/gooner-alchemist'
-thisStepFile: './step-01-initialize.md'
 nextStepFile: './step-02-forensic-analysis.md'
 stateTemplate: '{workflow_path}/resources/pipeline-state-template.yaml'
 stateFile: '{output_folder}/_pipeline/{project}/state.yaml'
@@ -184,6 +181,12 @@ OUTPUT:
   - VERIFY state file created
   - Load `{nextStepFile}`
 - IF Any other: Respond helpfully, redisplay menu
+
+#### EXECUTION RULES:
+
+- 🛑 **HALT** after displaying menu. Do NOT auto-proceed.
+- ⏳ **WAIT** for explicit user input before taking any action.
+- 🚫 Do NOT assume user intent or pre-load next step.
 
 ---
 

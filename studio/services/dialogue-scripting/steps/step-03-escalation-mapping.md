@@ -2,7 +2,6 @@
 name: 'step-03-escalation-mapping'
 description: 'Map dialogue intensity to scene beats'
 
-thisStepFile: './step-03-escalation-mapping.md'
 nextStepFile: './step-04-dialogue-generation.md'
 ---
 

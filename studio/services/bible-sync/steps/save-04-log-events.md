@@ -2,9 +2,6 @@
 name: 'save-04-log-events'
 description: 'Add events to cumulative log'
 
-# Path Definitions
-workflow_path: '{project-root}/studio/services/bible-sync'
-thisStepFile: './save-04-log-events.md'
 logPath: '{output_folder}/_bible/{project_name}/state/cumulative-log.md'
 ---
 

@@ -2,7 +2,6 @@
 name: 'step-01-load-forensics'
 description: 'Load forensic report for entity parsing'
 
-thisStepFile: './step-01-load-forensics.md'
 nextStepFile: './step-02-character-extraction.md'
 ---
 

@@ -66,6 +66,6 @@ agent:
         4. Display the derived tag block.
         5. Optionally suggest additional tags based on current scene context.
 
-    - trigger: PM or fuzzy match on party-mode
+    - trigger: PT or fuzzy match on party-mode
       exec: "{project-root}/studio/shared/party-mode/workflow.md"
-      description: "[PM] Start Party Mode"
+      description: "[PT] Start Party Mode"

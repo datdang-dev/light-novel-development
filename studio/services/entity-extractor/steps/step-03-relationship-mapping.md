@@ -2,7 +2,6 @@
 name: 'step-03-relationship-mapping'
 description: 'Identify character relationships'
 
-thisStepFile: './step-03-relationship-mapping.md'
 nextStepFile: './step-04-state-compilation.md'
 ---
 

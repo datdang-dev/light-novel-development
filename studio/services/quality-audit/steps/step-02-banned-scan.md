@@ -2,9 +2,6 @@
 name: 'step-02-banned-scan'
 description: 'Scan for auto-fail banned words'
 
-# Path Definitions
-workflow_path: '{project-root}/studio/services/quality-audit'
-thisStepFile: './step-02-banned-scan.md'
 nextStepFile: './step-03-category-scoring.md'
 bannedWordsFile: '{workflow_path}/data/banned-words.txt'
 ---
@@ -133,6 +130,12 @@ Add scan results to audit report:
 
 - IF CLEAN + C: Save audit, load `{nextStepFile}`
 - IF VIOLATIONS + F: Generate failure report, complete workflow with FAIL status
+
+#### EXECUTION RULES:
+
+- 🛑 **HALT** after displaying menu. Do NOT auto-proceed.
+- ⏳ **WAIT** for explicit user input before taking any action.
+- 🚫 Do NOT assume user intent or pre-load next step.
 
 ---
 

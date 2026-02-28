@@ -13,15 +13,14 @@ validateWorkflow: './steps/step-01-context-loading.md'
 
 **Documentation:**
 
-- **Full Manifesto & Style Guide:** [See workflow-OLD.md](./workflow-OLD.md)
+- **Full Manifesto & Style Guide:** [See gooner-manifesto.md](./data/gooner-manifesto.md)
 
 **Architecture:**
 
 - **Step 1:** Context Loading
 - **Step 2:** Scene Planning
 - **Step 3:** Environment Prose
-- **Step 4:** Action Prose
-- **Step 5:** Dialogue Integration
+- **Step 4:** Dialogue-Driven Action Prose
 - **Step 5b:** Format Ensure
 - **Step 5c:** Sensory Injection Pass
 - **Step 6:** Aftermath & Polish

@@ -2,7 +2,6 @@
 name: 'step-02-core-identity'
 description: 'Define name, role, and physical description'
 
-thisStepFile: './step-02-core-identity.md'
 nextStepFile: './step-03-psychological-profile.md'
 ---
 

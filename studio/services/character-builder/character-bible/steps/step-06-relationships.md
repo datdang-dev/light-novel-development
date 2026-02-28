@@ -2,7 +2,6 @@
 name: 'step-06-relationships'
 description: 'Define connections to other characters'
 
-thisStepFile: './step-06-relationships.md'
 nextStepFile: './step-07-final-profile.md'
 ---
 

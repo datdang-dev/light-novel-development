@@ -40,20 +40,28 @@ Alice: 「Onii-chan~? Anh đến muộn quá đó~ Ehehe~」
 
 ---
 
-## MOANING PATTERNS
+## HENTAI MOANING SYNTAX (Voice Degradation Scale)
 
-| Intensity | Pattern | Examples |
-|-----------|---------|----------|
-| Light | Soft gasps | "Ah...", "Nn...", "Hya!" |
-| Medium | Rising | "Ahh~ Ahh~", "Kimochi~", "Nnn..." |
-| High | Uncontrolled | "AHHH!", "Dame! Dame!" |
-| Climax | Breaking | "IIIKUUUUU!!♡", "AHIII~!♡♡" |
+Moaning must convey *physical degradation* and *intensity* using Phonetic Approximations (vowel lengthening, trailing H's, stutters). Never use flat, emotionless text.
 
-### Heart Symbol Usage
+| Level | Condition | Phonetic Syntax & Pattern | Examples (Vietnamese/Japanese mix) |
+|---|---|---|---|
+| **Level 1** | Teasing / Foreplay | **Soft Gasps & Stutters**. Full words remain intact but interrupted by commas/ellipses. | "Nn... Ah... Đ-Đừng chạm vào đó... Mới nhạy cảm lắm..." |
+| **Level 2** | Penetration / Pumping | **Vowel Lengthening & Trailing H**. Words are breaking. Use "Ưh", "Aah", "Ooh". | "Aah! Kh-Khoan đã... Vào sâu quá... Ưh... Vỡ mất~!" |
+| **Level 3** | Climaxing / Mind Break | **Loss of Language & Pleading**. Long drawn-out vowels, exclamation marks, begging for bodily fluids. | "Hiiii~!♡ L-Lồn em!! Chết mất!! Cho em tinh trùng đi... Aaaaaahhh~♡♡" |
+| **Level 4** | Ahegao / Gagging | **Guttural/Broken Syllables**. Total vocal cord failure. Involuntary nonsense syllables. | "Ikooo... Bugu... Agah!♡♡♡ Gube..." |
 
-- 1× ♡ = Building pleasure
-- 2× ♡♡ = Peak/climax
-- 3× ♡♡♡ = Mindbreak/ahegao
+### Key Phonetic Rules
+
+1. **The Trailing 'h':** Use `h` to indicate breathiness (e.g., `Aah`, `Ooh`, `Ngh`).
+2. **The Stutter:** Use hyphens to show involuntary jerks or fear (e.g., `A-ahh!`, `Đ-Đừng...`).
+3. **The Guttural Groan:** For deep/anal penetration or intense pain/pleasure, use `Ngh`, `Ughng`.
+
+### Heart Symbol Usage (Pleasure Threshold)
+
+- 1× ♡ = Building pleasure / Sweetness
+- 2× ♡♡ = Peak climax / Uncontrollable orgasm
+- 3× ♡♡♡ = Mindbreak / Ahegao / Total submission
 
 ---
 

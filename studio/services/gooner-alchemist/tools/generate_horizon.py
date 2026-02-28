@@ -28,17 +28,16 @@ def generate_horizon_summary(image_files, mode, start_index):
 **Look-Ahead Window:** {total} upcoming images (Start: {start_index})
 
 ## 1. Concrete Trajectory (Foreshadowing Ground Truth)
-- [VISION MODEL] The action will escalate towards...
-- [VISION MODEL] Guaranteed events in the next {total} frames: ...
+- [SYSTEM] No actual vision model processing available. Agents MUST NOT rely on trajectory data.
+- [SYSTEM] Treat the current frame as the absolute ground truth.
 
 ## 2. Action Deduplicator Flag
-- **Redundancy Detected:** [True/False]
+- **Redundancy Detected:** [False]
 - **Merge Recommendation:** 
-  - If redundant thrusting or static posing is detected across these frames, MERGE them into a single intense Action Beat in the Prose Generation step.
-  - DO NOT write 1-for-1 page prose if the action is static.
+  - [SYSTEM] Auto-deduplication disabled. Generate prose specifically for the current frame.
 
 ---
-*CRITICAL FOR SUKI (LEWD WRITER):* Use this trajectory to foreshadow the climax. Do not treat the current frame in isolation.
+*CRITICAL FOR SUKI (LEWD WRITER):* Treat the current frame as the primary anchor point.
 """
     return summary
 

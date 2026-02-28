@@ -2,9 +2,6 @@
 name: 'load-01-mode-check'
 description: 'Verify LOAD mode and check bible existence'
 
-# Path Definitions
-workflow_path: '{project-root}/studio/services/bible-sync'
-thisStepFile: './load-01-mode-check.md'
 nextStepFile: './load-02-load-characters.md'
 biblePath: '{output_folder}/_bible/{project_name}'
 ---
@@ -127,6 +124,12 @@ Create cumulative-log.md (empty)
 #### Menu Handling Logic:
 
 - IF C: Load `{nextStepFile}`
+
+#### EXECUTION RULES:
+
+- 🛑 **HALT** after displaying menu. Do NOT auto-proceed.
+- ⏳ **WAIT** for explicit user input before taking any action.
+- 🚫 Do NOT assume user intent or pre-load next step.
 
 ---
 

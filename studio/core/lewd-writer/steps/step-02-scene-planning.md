@@ -2,9 +2,6 @@
 name: 'step-02-scene-planning'
 description: 'Plan escalation loops and scene structure'
 
-# Path Definitions
-workflow_path: '{project-root}/studio/core/lewd-writer'
-thisStepFile: './step-02-scene-planning.md'
 nextStepFile: './step-03-environment-prose.md'
 ---
 
@@ -147,6 +144,12 @@ Append scene structure to output file:
 
 - IF C: Save/update output file, load `{nextStepFile}`
 - IF other: Help user respond, redisplay menu
+
+#### EXECUTION RULES:
+
+- 🛑 **HALT** after displaying menu. Do NOT auto-proceed.
+- ⏳ **WAIT** for explicit user input before taking any action.
+- 🚫 Do NOT assume user intent or pre-load next step.
 
 ---
 

@@ -14,6 +14,8 @@ validateWorkflow: './steps/step-01-initialize.md'
 
 **Orchestrator:** Kana (Manga Adapter).
 
+**Architecture Reference:** [V6.1 Gooner Alchemist Pipeline](../../docs/architecture/dynamic_design/service_manga_adapter/sq_v6_1_gooner_alchemist_pipeline.puml)
+
 ---
 
 ## WORKFLOW ARCHITECTURE (V6)
@@ -33,37 +35,35 @@ validateWorkflow: './steps/step-01-initialize.md'
   - *Output:* `output/{ch}/{pg}/context_horizon.md`
   - *Goal:* "Pre-fetch factual upcoming trajectories and flag Action Deduplication instead of hallucinating the current frame."
 
-**Forensic Phase**
+**PHASE 1: Dialogue-Anchor Forensics (V6.1)**
 
-- **Step 2:** Directed Forensic Scan (`step-02-forensic-analysis.md`)
+- **Step 2:** Directed Forensic Scan
   - *Input:* Current Image + `context_horizon.md`
-  - *Output:* `output/{ch}/{pg}/forensic.json`
+  - *Output:* `output/{ch}/{pg}/forensic.md`
   - *Agent:* Panel Forensic (Atomic)
+  - *Protocol:* Execute Pure OCR -> Dialogue Alignment -> Environmental Scan -> Report Assembly.
 
-**Context Loading**
+**PHASE 2: Dialogue-Driven Prose Generation (V6.1)**
 
-- **Step 3:** Load Bible Context (`step-03-context-loading.md`)
-  - *Input:* `forensic.json` (to filter specific lore)
-
-**Prose Generation**
-
-- **Step 4:** Context-Aware Drafting (`step-04-prose-generation.md`)
-  - *Input:* `forensic.json` + `context_horizon.md` + `bible`
+- **Step 3:** Prose Adaptation
+  - *Input:* `forensic.md` + `context_horizon.md` + `bible.md`
   - *Output:* `output/{ch}/{pg}/draft.md`
   - *Agent:* Lewd Writer (Suki)
+  - *Protocol:* Execute Context Loading -> Environment Prose -> Dialogue-Driven Action (Chain Reaction) -> Internal Quality Check (Gate 0).
 
 **Quality Assurance**
 
-- **Step 5:** Structured Audit (`step-05-quality-audit.md`)
+- **Step 4:** Structured Audit (`step-04-quality-audit.md`)
   - *Input:* `draft.md`
   - *Output:* `audit.json` (`{score, issues, fix}`)
-  - *Logic:* If Score < 85 -> **Rewind to Step 4** with `fix` instructions.
+  - *Agent:* Quality Audit (Riko)
+  - *Logic:* If Score < 85 -> **Rewind to Step 3** with `fix` instructions.
 
 ### 3. Commit & Handoff
 
-- **Step 6:** Persist State (`step-06-state-persistence.md`)
-- **Step 7:** Finalize (`step-07-finalize.md`)
-  - *Service:* Call **Composer** to buffer the finished scene.
+- **Step 5:** Persist State
+- **Step 6:** Finalize
+  - *Service:* Call **Composer** to buffer the finished scene or perform "Director's Cut" optimization.
 
 ---
 
@@ -82,10 +82,9 @@ validateWorkflow: './steps/step-01-initialize.md'
 For each page/frame:
 
 1. Initialize Step 1
-2. Generate Context Horizon Step 1b -> context_horizon.md
-3. Forensic Scan Step 2 -> forensic.json
-4. Context Loading Step 3
-5. Prose Generation Step 4 -> draft.md
-6. Quality Audit Step 5 -> audit.json
-7. Persist Step 6
-8. Finalize Step 7
+2. Generate Context Horizon Step 1b -> `context_horizon.md`
+3. Forensic Scan (Phase 1) -> `forensic.md`
+4. Prose Generation (Phase 2) -> `draft.md`
+5. Quality Audit -> `audit.json`
+6. Persist State
+7. Finalize & Handoff

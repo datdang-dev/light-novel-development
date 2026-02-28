@@ -49,3 +49,9 @@ Write prose to fill the gaps.
 
 - IF C: Load `{nextStepFile}`
 - IF other: Redisplay menu
+
+#### EXECUTION RULES:
+
+- 🛑 **HALT** after displaying menu. Do NOT auto-proceed.
+- ⏳ **WAIT** for explicit user input before taking any action.
+- 🚫 Do NOT assume user intent or pre-load next step.

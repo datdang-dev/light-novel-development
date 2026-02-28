@@ -2,9 +2,6 @@
 name: 'step-02-forensic-analysis'
 description: 'Invoke panel-forensic workflow for visual analysis'
 
-# Path Definitions
-workflow_path: '{project-root}/studio/services/gooner-alchemist'
-thisStepFile: './step-02-forensic-analysis.md'
 nextStepFile: './step-03-context-loading.md'
 panelForensicWorkflow: '{project-root}/studio/core/panel-forensic/workflow.md'
 stateFile: '{output_folder}/_pipeline/{project}/state.yaml'
@@ -22,7 +19,7 @@ analysisFolder: '{output_folder}/_analysis/{project}'
 - MUST follow exact instructions.
 - MUST NOT write prose (that's Step 4).
 - MUST process ONE page at a time.
-- 🚨 **STRICT VISUAL RULE**: The `context_horizon.md` is a forward-looking trajectory summary. THE IMAGE IS STILL THE PRIMARY GROUND TRUTH for the current action. Do not hallucinate objects, actions, or characters on the current page if they only appear later in the horizon.
+- 🚨 **STRICT VISUAL RULE**: The `context_horizon.md` is for continuity only. THE IMAGE IS THE ABSOLUTE GROUND TRUTH for the current action. Do not hallucinate objects, actions, characters, or future events that are not explicitly painted on the current page.
 - ✅ YOU MUST ALWAYS SPEAK OUTPUT in Vietnamese
 
 ## CONTEXT
@@ -170,6 +167,12 @@ OUTPUT:
 - IF R: Re-run from Step 2
 - IF V: Display forensic report contents, then redisplay menu
 - IF Any other: Respond helpfully, then redisplay menu
+
+#### EXECUTION RULES:
+
+- 🛑 **HALT** after displaying menu. Do NOT auto-proceed.
+- ⏳ **WAIT** for explicit user input before taking any action.
+- 🚫 Do NOT assume user intent or pre-load next step.
 
 #### EXECUTION RULES
 

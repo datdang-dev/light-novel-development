@@ -2,7 +2,6 @@
 name: 'step-04-fetish-integration'
 description: 'Define sexual preferences as character expression'
 
-thisStepFile: './step-04-fetish-integration.md'
 nextStepFile: './step-05-voice-speech.md'
 ---
 

@@ -2,7 +2,6 @@
 name: 'step-05-voice-speech'
 description: 'Define dialogue patterns and speaking style'
 
-thisStepFile: './step-05-voice-speech.md'
 nextStepFile: './step-06-relationships.md'
 ---
 

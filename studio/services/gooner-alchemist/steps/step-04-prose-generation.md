@@ -2,9 +2,6 @@
 name: 'step-04-prose-generation'
 description: 'Invoke prose-adapter for prose generation'
 
-# Path Definitions
-workflow_path: '{project-root}/studio/services/gooner-alchemist'
-thisStepFile: './step-04-prose-generation.md'
 nextStepFile: './step-05-quality-audit.md'
 proseAdapterWorkflow: '{project-root}/studio/core/lewd-writer/workflow.md'
 stateFile: '{output_folder}/_pipeline/{project}/state.yaml'
@@ -241,6 +238,12 @@ OUTPUT:
 - IF V: Display prose contents, redisplay menu
 - IF R: Re-invoke prose-adapter, return to Step 4
 - IF Any other: Respond helpfully, redisplay menu
+
+#### EXECUTION RULES:
+
+- 🛑 **HALT** after displaying menu. Do NOT auto-proceed.
+- ⏳ **WAIT** for explicit user input before taking any action.
+- 🚫 Do NOT assume user intent or pre-load next step.
 
 ---
 

@@ -2,9 +2,6 @@
 name: 'step-09-final-report'
 description: 'Finalize Prose Adaptation and Handover'
 
-# Path Definitions
-workflow_path: '{project-root}/studio/core/lewd-writer'
-thisStepFile: './step-09-final-report.md'
 outputFile: '{output_folder}/_prose/{manga_name}/chapter_{ch}/page_{page_num}_prose.md'
 ---
 

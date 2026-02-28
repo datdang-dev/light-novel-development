@@ -2,7 +2,6 @@
 name: 'step-03-psychological-profile'
 description: 'Define trauma, desires, fears, motivations'
 
-thisStepFile: './step-03-psychological-profile.md'
 nextStepFile: './step-04-fetish-integration.md'
 ---
 

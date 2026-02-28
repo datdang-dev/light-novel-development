@@ -2,9 +2,6 @@
 name: 'load-02-load-characters'
 description: 'Load relevant character profiles'
 
-# Path Definitions
-workflow_path: '{project-root}/studio/services/bible-sync'
-thisStepFile: './load-02-load-characters.md'
 nextStepFile: './load-03-load-state.md'
 charactersPath: '{output_folder}/_bible/{project_name}/characters'
 ---
