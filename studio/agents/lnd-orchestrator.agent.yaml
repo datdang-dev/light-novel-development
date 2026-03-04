@@ -59,6 +59,10 @@ agent:
       exec: "{project-root}/studio/services/release-compiler/workflow.md"
       description: "[RC] Delegate to Release Manager (Build Release)"
 
+    - trigger: RG or fuzzy match on rpg-adapter
+      exec: "{project-root}/studio/services/rpg-adapter/workflow.md"
+      description: "[RG] RPG Game Adaptation Pipeline (Log + Script → Novel)"
+
     - trigger: PT or fuzzy match on party-mode
       exec: "{project-root}/studio/shared/party-mode/workflow.md"
       description: "[PT] Convene Meeting (Party Mode)"

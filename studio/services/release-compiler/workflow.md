@@ -1,15 +1,15 @@
 ---
 name: "release-compiler"
-description: "Convert developer output to reader-ready format"
-owner: "Director K (lnd-orchestrator)"
-version: "2.0.0"
+description: "Generate delivery packages (Manifests, Web Chat Kits, Archives)"
+owner: "Publisher (release-compiler)"
+version: "6.1.0"
 ---
 
 # Release Compiler Workflow
 
-**Goal:** Transform LND development output (with technical markup, metadata, comments) into clean reader-ready format suitable for distribution.
+**Goal:** Transform LND compiled output into a robust, structured deliverable package tailored for distinct reader experiences (Base Reading, Modded Reading, and interactive AI Web Chat via Grok/ChatGPT).
 
-**Your Role:** You are the publisher, preparing the final release version for readers.
+**Your Role:** You are the Publisher. You ensure Metadata is accurate, Content Warnings are explicit, and files are bundled flawlessly for the end user.
 
 ---
 
@@ -17,65 +17,35 @@ version: "2.0.0"
 
 ### Core Principles
 
-- **Micro-file Design**: Each step is a self-contained instruction file
-- **Just-In-Time Loading**: Only the current step file is in memory
-- **Sequential Enforcement**: Steps must be completed in order
-- **State Tracking**: Document progress in output file frontmatter
-- **Clean Output**: Final product has no development artifacts
+- **Micro-file Design**: Each step is a self-contained instruction file.
+- **Just-In-Time Loading**: Only the current step file is in memory.
+- **Sequential Enforcement**: Steps must be completed in order.
+- **Manifest First**: `release_manifest.json` is the source of truth for every release.
 
 ### Critical Rules (NO EXCEPTIONS)
 
-- 🛑 **NEVER** load multiple step files simultaneously
-- 📖 **ALWAYS** read entire step file before execution
-- 🚫 **NEVER** skip steps or optimize the sequence
-- 💾 **ALWAYS** update frontmatter when completing steps
-- ⏸️ **ALWAYS** halt at menus and wait for user input
-- ✅ **ALWAYS** speak in Vietnamese
+- 🛑 **NEVER** load multiple step files simultaneously.
+- 📖 **ALWAYS** read the entire step file before execution.
+- 🚫 **NEVER** skip steps or optimize the sequence.
+- 🔞 **ALWAYS** explicitly generate R18 / Mind-break / Zero-Refractory Content Warnings in the manifest.
+- ✅ **ALWAYS** speak in Vietnamese during interactions with the user.
 
 ---
 
 | Step | Name | Purpose |
 |------|------|---------|
-| 1 | Input | Select chapters for release |
-| 2 | Clean | Remove dev markup |
-| 3 | Format | Apply reader formatting |
-| 4 | Export | Generate final output |
-
----
-
-## TRANSFORMATIONS
-
-### Remove
-- YAML frontmatter
-- Developer comments
-- Source references
-- Panel numbers
-- Audit metadata
-
-### Apply
-- Chapter headers
-- Scene breaks (stylized)
-- Paragraph formatting
-- Optional: ePub structure
-
----
-
-## OUTPUT FORMATS
-
-- `.md` - Clean markdown
-- `.html` - Web-ready HTML
-- `.txt` - Plain text
-- (future) `.epub` - eBook format
+| 1 | Manifest | Gen `release_manifest.json` (versioning, asset paths) |
+| 2 | Web Chat Kit | Combine AI Prompts + Jailbreak into `megaprompt.txt` |
+| 3 | Package | Final audit of folder structure, ZIP package (Optional) |
 
 ---
 
 ## INITIALIZATION SEQUENCE
 
-### 1. Configuration Loading
+### 1. Configuration Check
 
-Load config from `{project-root}/studio/config/config.yaml`:
-- `output_folder`, `user_name`, `communication_language`
+Ensure the target Alpha/Beta release directory is identified (e.g., `_release/[project_name]`).
 
 ### 2. First Step Execution
 
-Load, read fully, then execute `./steps/step-01-input.md`
+Load, read fully, then execute `./steps/step-01-manifest.md`
