@@ -1,77 +1,191 @@
 ---
 name: 'step-05b-format-ensure'
-description: 'Enforce strict Light Novel dialogue formatting rules'
+description: 'Enforce strict Light Novel formatting: header banner, dialogue, thoughts, SFX'
 
 nextStepFile: './step-05c-sensory-injection.md'
 outputFile: '{output_folder}/_prose/{manga_name}/chapter_{ch}/page_{page_num}_prose.md'
+templateFile: '{project-root}/studio/_templates/light-novel-prose.md'
+dialogueRulesFile: '{project-root}/studio/rules/dialogue_format.md'
 ---
 
-# Step 5b: Ensure Dialogue Format
+# Step 5b: Ensure Format Compliance
 
 ## STEP GOAL
 
-Strictly enforce Light Novel formatting standards for dialogue and thoughts before polishing.
+Strictly enforce ALL Light Novel formatting standards before polishing. This is a **HARD GATE** — prose CANNOT proceed to step-05c if any violation remains.
 
-## ⚠️ CRITICAL FORMATTING RULES (ZERO TOLERANCE)
+## ⚠️ CRITICAL: THIS IS A HARD GATE (ZERO TOLERANCE)
 
-### 1. Dialogue Brackets
+```
+IF ANY FORMAT VIOLATION REMAINS AFTER FIXES:
+  🚫 HALT — DO NOT PROCEED TO STEP-05c
+  🔄 RE-SCAN until 100% clean
+```
 
-- **RULE:** Spoken dialogue MUST use Japanese-style corner brackets `「...」`.
+---
+
+## SECTION 0: HEADER BANNER VALIDATION (MANDATORY)
+
+### Required Structure
+
+Every prose file MUST begin (after YAML frontmatter) with:
+
+```markdown
+# 📖 [Scene Title]
+
+> **📍 Location:** [Location Name]
+> **⏰ Time:** [Time of Day]
+> **👤 POV:** [Character Name or "Ngôi thứ ba quan sát (Camera)"]
+
+---
+```
+
+### Checks
+
+- [ ] `# 📖` header present as first heading?
+- [ ] `📍 Location:` line present?
+- [ ] `⏰ Time:` line present?
+- [ ] `👤 POV:` line present?
+- [ ] `---` separator after header block?
+
+### IF MISSING
+
+Auto-inject the header from `{templateFile}`. Fill placeholders from forensic report context:
+
+- Scene Title → derive from dominant action/setting
+- Location → from forensic Section 1 (Panel Layout) or Section 10 (Continuity)
+- Time → from forensic context or "Không xác định"
+- POV → default to "Ngôi thứ ba quan sát (Camera)"
+
+---
+
+## SECTION 1: DIALOGUE BRACKETS (ZERO TOLERANCE)
+
+### Rule
+
+- **Spoken dialogue** MUST use `「...」` (Japanese corner brackets).
+- **Character attribution** MUST precede dialogue: `Character_Name: 「Content」`
 - **FORBIDDEN:** Standard quotation marks `""` or `""` for speech.
-- **CORRECTION:**
-  - ❌ "Dừng lại!"
-  - ✅ 「Dừng lại!」
 
-### 2. Internal Thoughts
+### Checks
 
-- **RULE:** Internal monologues/thoughts MUST use parentheses `(...)`.
-- **FORBIDDEN:** Italics *text* or quotes `""` for thoughts.
-- **CORRECTION:**
-  - ❌ *Hắn ta đang nhìn mình...*
-  - ❌ "Hắn ta đang nhìn mình..."
-  - ✅ (Hắn ta đang nhìn mình...)
+- [ ] All spoken lines use `「...」`?
+- [ ] All spoken lines have `Name:` prefix?
+- [ ] No stray `"double quotes"` used for speech?
 
-### 3. Sound Effects (SFX)
+### Corrections
 
-- **RULE:** SFX should be in italics `*SFX*` or plain text if capitalized for impact.
-- **standard:** `*Kinh coong~*` or `KINH COONG~`
+- ❌ `"Dừng lại!"` → ✅ `Character: 「Dừng lại!」`
+- ❌ `Cô nói: "Content"` → ✅ `Character: 「Content」`
+
+---
+
+## SECTION 2: INTERNAL THOUGHTS
+
+### Rule
+
+- Internal monologues/thoughts MUST use parentheses `(...)`.
+- **FORBIDDEN:** Italics `*text*` or quotes `""` for thoughts.
+
+### Checks
+
+- [ ] All thoughts in `(...)` format?
+- [ ] No italics used for inner monologue?
+
+### Corrections
+
+- ❌ `*Hắn ta đang nhìn mình...*` → ✅ `(Hắn ta đang nhìn mình...)`
+- ❌ `"Hắn ta đang nhìn mình..."` → ✅ `(Hắn ta đang nhìn mình...)`
+
+---
+
+## SECTION 3: SFX FORMAT VALIDATION
+
+### Rule
+
+- All sound effects MUST use italicized `*SFX: [Sound]*` format.
+- SFX should be Romanized Japanese (e.g., Guchu, Pan, Bikun).
+- **FORBIDDEN:** Inline SFX without the `*SFX:` prefix.
+
+### Checks
+
+- [ ] All SFX lines start with `*SFX:`?
+- [ ] No bare `*Pan Pan*` or `*Guchu*` without prefix?
+
+### Corrections
+
+- ❌ `*Basa... Basa...*` → ✅ `*SFX: Basa... Basa...*`
+- ❌ `*Pan! Pan!*` → ✅ `*SFX: Pan! Pan!*`
+- ❌ Inline `(*Bikun!*)` → ✅ Separate line: `*SFX: Bikun!*`
+
+---
+
+## SECTION 4: FOOTER SEPARATOR
+
+### Rule
+
+Every prose file MUST end with:
+
+```markdown
+---
+***
+```
+
+### Check
+
+- [ ] File ends with `---` followed by `***`?
 
 ---
 
 ## EXECUTION SEQUENCE
 
-### 1. Scan Content
+### 1. Load Content
 
 Read the current state of `{outputFile}`.
 
-### 2. Identify Violations
+### 2. Run All Checks (Sections 0-4)
 
-Check for:
-
-- [ ] Usage of double quotes `"` for dialogue.
-- [ ] Usage of plain italics or quotes for thoughts.
-- [ ] Inconsistent spacing around brackets.
+Scan for ALL violations across all sections simultaneously.
 
 ### 3. Apply Fixes
 
-- **Global Replace:** Convert all `"Speech"` to `「Speech」`.
-- **Global Replace:** Convert all *"Thought"* or "Thought" to `(Thought)`.
-- **Verify:** Ensure no stray quotes remain.
+For each violation found:
 
-### 4. Update Frontmatter
+- Apply the documented correction
+- Log what was fixed
 
-Update `stepsCompleted` to include `step-05b-format-ensure`.
+### 4. Re-Scan (MANDATORY)
+
+After all fixes applied, re-scan the entire file to confirm zero violations remain.
+
+```
+IF violations_remaining > 0:
+  🚫 HALT — Re-apply fixes
+  LOOP until clean
+
+IF violations_remaining == 0:
+  ✅ Format gate PASSED
+  Proceed to step-05c
+```
+
+### 5. Update Frontmatter
 
 ```yaml
-stepsCompleted: [..., 'step-04-dialogue-driven-action', 'step-05b-format-ensure']
+stepsCompleted: [..., 'step-05b-format-ensure']
 ```
 
 ---
 
-## COMPLETION CHECK
+## COMPLETION CHECKLIST
 
-- [ ] All dialogue inside `「...」`?
+- [ ] Header Banner present and complete?
+- [ ] All dialogue inside `「...」` with `Name:` prefix?
 - [ ] All thoughts inside `(...)`?
+- [ ] All SFX in `*SFX: ...*` format?
+- [ ] Footer separator present?
+- [ ] Re-scan confirms zero violations?
 - [ ] File saved with corrections?
 
-If YES, proceed to `step-05c-sensory-injection.md`.
+**ALL boxes must be checked. If ANY is unchecked → HALT.**
+
+If ALL checked → proceed to `{nextStepFile}`.

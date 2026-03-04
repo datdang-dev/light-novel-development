@@ -7,18 +7,18 @@ nextStepFile: './step-04-generate-feedback.md'
 
 # Step 3: Category Scoring
 
-## STEP GOAL:
+## STEP GOAL
 
 Score the prose across all 5 quality categories with specific evidence for each rating.
 
-## MANDATORY EXECUTION RULES (READ FIRST):
+## MANDATORY EXECUTION RULES (READ FIRST)
 
-### Universal Rules:
+### Universal Rules
 
 - 📖 CRITICAL: Read the complete step file before taking any action
 - ✅ YOU MUST speak in Vietnamese
 
-### Scoring Rules:
+### Scoring Rules
 
 ```
 SCORING PRINCIPLES:
@@ -28,7 +28,7 @@ SCORING PRINCIPLES:
 - If in doubt, score lower
 ```
 
-### Step-Specific Rules:
+### Step-Specific Rules
 
 - 🎯 Score ALL categories, no skipping
 - 🚫 FORBIDDEN to give points without evidence
@@ -124,8 +124,12 @@ SCORING PRINCIPLES:
 |----|-------|-----|-------|----------|
 | E1 | Zero-Skip | 3 | {0-3} | {all panels covered?} |
 | E2 | Dialogue integrated | 3 | {0-3} | {all lines used?} |
-| E3 | Grammar/flow | 2 | {0-2} | {prose quality} |
-| E4 | Format compliance | 2 | {0-2} | {proper structure?} |
+| E3 | Grammar/flow | 1 | {0-1} | {prose quality} |
+| E4a | Header Banner (📖📍⏰👤) | 1 | {0-1} | {header present?} |
+| E4b | Dialogue format (Name: 「」) | 1 | {0-1} | {all dialogue formatted?} |
+| E4c | SFX format (*SFX: ...*) | 1 | {0-1} | {all SFX formatted?} |
+
+**⚠️ AUTO-FAIL RULE:** If E4a = 0 (no header banner), entire Category E scores 0/10.
 
 **Subtotal E:** {X}/10
 ```
@@ -155,6 +159,7 @@ SCORING PRINCIPLES:
 ### 7. Update Audit Report
 
 Append all scoring to audit report:
+
 - Update frontmatter: `stepsCompleted: [..., 'step-03-category-scoring']`
 
 ### 8. Present MENU OPTIONS
@@ -176,12 +181,12 @@ Append all scoring to audit report:
 **Chọn:** [C] Continue to Feedback"
 ```
 
-#### Menu Handling Logic:
+#### Menu Handling Logic
 
 - IF C: Save audit, load `{nextStepFile}`
 - IF other: Help user respond, redisplay menu
 
-#### EXECUTION RULES:
+#### EXECUTION RULES
 
 - 🛑 **HALT** after displaying menu. Do NOT auto-proceed.
 - ⏳ **WAIT** for explicit user input before taking any action.
@@ -191,14 +196,14 @@ Append all scoring to audit report:
 
 ## 🚨 SYSTEM SUCCESS/FAILURE METRICS
 
-### ✅ SUCCESS:
+### ✅ SUCCESS
 
 - All 5 categories scored
 - Evidence provided for each score
 - Specific counts documented
 - Total calculated correctly
 
-### ❌ SYSTEM FAILURE:
+### ❌ SYSTEM FAILURE
 
 - Skipping categories
 - Scores without evidence

@@ -89,20 +89,44 @@ description: Quality thresholds and pass/fail criteria for R18 content
 
 ## 🚦 QUALITY GATES
 
+### Gate 0: Format Compliance (HARD FAIL)
+
+**This gate runs BEFORE any scoring. If ANY item fails → score = 0, return to prose-adapter.**
+
+- [ ] Header Banner present? (`# 📖`, `📍 Location:`, `⏰ Time:`, `👤 POV:`)
+- [ ] All dialogue in `「」` brackets with `Name:` prefix?
+- [ ] All SFX in `*SFX: ...*` format?
+- [ ] Template structure matches `light-novel-prose.md`?
+- [ ] Footer separator (`---` + `***`) present?
+
+```
+IF ANY FORMAT ITEM FAILS:
+  Score = 0/100
+  Verdict = FORMAT-FAIL
+  Action = Return to Suki (step-05b-format-ensure)
+  DO NOT proceed to category scoring
+```
+
 ### Gate 1: Per-Page Check
+
 Before moving to next page:
+
 - [ ] Sensory minimums met?
 - [ ] Format correct?
 - [ ] No banned words?
 
 ### Gate 2: Per-Scene Check
+
 Before ending scene:
+
 - [ ] Build-up ratio correct?
 - [ ] Aftermath included?
 - [ ] Continuity tracked?
 
 ### Gate 3: Per-Chapter Check
+
 Before publishing:
+
 - [ ] Full audit score ≥85?
 - [ ] All scenes connected?
 - [ ] Story bible updated?
@@ -112,6 +136,7 @@ Before publishing:
 ## 🔄 REVISION LOOP
 
 If score < 85:
+
 1. Identify lowest scoring categories
 2. Target specific IDs (A1, B2, etc.)
 3. Revise those sections

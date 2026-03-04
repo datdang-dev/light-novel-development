@@ -7,6 +7,8 @@ proseAdapterWorkflow: '{project-root}/studio/core/lewd-writer/workflow.md'
 stateFile: '{output_folder}/_pipeline/{project}/state.yaml'
 analysisFolder: '{output_folder}/_analysis/{project}'
 proseFolder: '{output_folder}/_prose/{project}'
+templateFile: '{project-root}/studio/_templates/light-novel-prose.md'
+dialogueRulesFile: '{project-root}/studio/rules/dialogue_format.md'
 ---
 
 # Step 4: Prose Generation
@@ -72,6 +74,37 @@ IF current_page NOT IN context_loaded:
   
   HALT and wait
 ```
+
+---
+
+## GATE -1: TEMPLATE LOAD (MANDATORY)
+
+**BEFORE any delegation to Suki, you MUST load these format references:**
+
+```
+1. READ {templateFile}     → Extract header structure
+2. READ {dialogueRulesFile} → Extract dialogue/SFX rules
+3. PASS both as context to prose-adapter invocation
+```
+
+```
+🚫 GATE -1 CHECK:
+
+IF template NOT loaded:
+  ─────────────────────────────────────────────
+  🚫 TEMPLATE GATE BLOCKED
+  📋 Missing: {templateFile}
+  📤 ACTION: Load template before proceeding
+  ─────────────────────────────────────────────
+  
+  HALT — DO NOT DELEGATE WITHOUT TEMPLATE
+
+IF template loaded:
+  ✅ Template gate passed — format context active
+  PROCEED to delegation
+```
+
+**WHY THIS EXISTS:** Suki cannot enforce format rules she was never given. This gate ensures format context is always injected into the prose-adapter call.
 
 ---
 
@@ -191,6 +224,7 @@ IF ANY BLOCKED_PATTERN found in prose:
 | Sensory count | ≥8 | | |
 | SFX present | ≥3 | | |
 | Dialogue present | ≥1 | | |
+| Format compliance | Header + 「」Dialogue + *SFX:* | | |
 | Self-audit score | ≥75 | | |
 ```
 
@@ -239,7 +273,7 @@ OUTPUT:
 - IF R: Re-invoke prose-adapter, return to Step 4
 - IF Any other: Respond helpfully, redisplay menu
 
-#### EXECUTION RULES:
+#### EXECUTION RULES
 
 - 🛑 **HALT** after displaying menu. Do NOT auto-proceed.
 - ⏳ **WAIT** for explicit user input before taking any action.
