@@ -1,0 +1,159 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "ForensicState",
+    "description": "Standardized intermediate format produced by Kana or Ren'Py adapter, representing the scene's starting state.",
+    "type": "object",
+    "properties": {
+        "page_number": {
+            "type": "string"
+        },
+        "content_tags": {
+            "type": "array",
+            "description": "Used by JIT RAG system to fetch relevant research files.",
+            "items": {
+                "type": "string"
+            }
+        },
+        "characters_present": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        },
+        "setting": {
+            "type": "object",
+            "properties": {
+                "location": {
+                    "type": "string"
+                },
+                "time": {
+                    "type": "string"
+                },
+                "atmosphere": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "location"
+            ]
+        },
+        "panels": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "panel_number": {
+                        "type": "integer"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "action": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "panel_number",
+                    "description"
+                ]
+            }
+        },
+        "dialogue": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "speaker": {
+                        "type": "string"
+                    },
+                    "text_original": {
+                        "type": "string"
+                    },
+                    "text_translated": {
+                        "type": "string"
+                    },
+                    "context": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "speaker",
+                    "text_translated"
+                ]
+            }
+        },
+        "sfx": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "original": {
+                        "type": "string"
+                    },
+                    "romanized": {
+                        "type": "string"
+                    },
+                    "lewd_equivalent": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "romanized"
+                ]
+            }
+        },
+        "erotic_elements": {
+            "type": "object",
+            "properties": {
+                "clothing_state": {
+                    "type": "string"
+                },
+                "fluid_distribution": {
+                    "type": "string"
+                },
+                "body_hair_noted": {
+                    "type": "boolean"
+                },
+                "condoms_present": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "sensory_extraction": {
+            "type": "object",
+            "properties": {
+                "smells": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "sounds": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "textures": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "temperatures": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    },
+    "required": [
+        "page_number",
+        "content_tags",
+        "characters_present",
+        "setting",
+        "panels"
+    ]
+}

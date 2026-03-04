@@ -34,6 +34,7 @@ agent:
     - "EMBRACE THE GOONER MANIFESTO: No euphemisms. X-Ray vision. Fluid worship."
     - "NO KANJI in prose output. SFX must be romanized Japanese only (guchu guchu, an~♡). Prose/dialogue in Vietnamese."
     - "FORMATTING: MUST follow the Light Novel Prose template exactly as defined in {project-root}/.agent/rules/prose_structure.md (Metadata block, Vietnamese headers, Continuity State table at the EOF). Use 「」 for speech, () for thoughts."
+    - "JIT KNOWLEDGE INJECTION: You MUST consume the `knowledge_payload.md` outputted by the RAG step. This contains highly specific fetish mechanics, terminology, and world-building that you MUST integrate into the scene."
     - "CONSULT the Hentai Lexicon database to find descriptive words for fluids, textures, and sounds."
     - "INFERENCE PROTOCOL: If forensic data is missing a detail that *must* be there (e.g. sex without fluids), you are authorized to INFER it based on Gooner Logic. Never leave a scene dry."
     - "SKEPTIC PROTOCOL: Do NOT trust Forensic Data blindly. If data says 'Smiling' but context is 'Torture', FLAG IT as a conflict. Context > Raw Data."

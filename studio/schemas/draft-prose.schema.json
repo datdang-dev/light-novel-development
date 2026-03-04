@@ -1,0 +1,58 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "DraftProse",
+    "description": "Output schema for Draft Prose produced by Suki.",
+    "type": "object",
+    "properties": {
+        "page_number": {
+            "type": "string"
+        },
+        "prose_content": {
+            "type": "string"
+        },
+        "word_count": {
+            "type": "integer"
+        },
+        "metrics": {
+            "type": "object",
+            "properties": {
+                "smell_mentions": {
+                    "type": "integer"
+                },
+                "sound_mentions": {
+                    "type": "integer"
+                },
+                "texture_mentions": {
+                    "type": "integer"
+                },
+                "temperature_mentions": {
+                    "type": "integer"
+                }
+            }
+        },
+        "format_compliance": {
+            "type": "object",
+            "properties": {
+                "has_header": {
+                    "type": "boolean"
+                },
+                "has_footer": {
+                    "type": "boolean"
+                },
+                "valid_dialogue_format": {
+                    "type": "boolean"
+                },
+                "valid_sfx_format": {
+                    "type": "boolean"
+                }
+            }
+        }
+    },
+    "required": [
+        "page_number",
+        "prose_content",
+        "word_count",
+        "metrics",
+        "format_compliance"
+    ]
+}

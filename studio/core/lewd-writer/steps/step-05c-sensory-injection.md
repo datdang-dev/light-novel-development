@@ -22,7 +22,7 @@ When initially writing action choreography and dialogue, AI models often "forget
 ### Step-Specific Rules
 
 - 🔍 Re-read the drafted prose so far.
-- 📖 READ AND APPLY: `{project-root}/studio/rules/sensory_density.md`
+- 📖 READ AND APPLY: `{project-root}/.agent/rules/sensory_density.md`
 - 🚫 FORBIDDEN to proceed if the page does not meet the minimum sensory counts.
 
 ## MANDATORY SEQUENCE

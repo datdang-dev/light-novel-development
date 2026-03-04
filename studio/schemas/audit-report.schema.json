@@ -1,0 +1,85 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "AuditReport",
+    "description": "Output schema for the Quality Audit performed by Riko.",
+    "type": "object",
+    "properties": {
+        "page_number": {
+            "type": "string"
+        },
+        "status": {
+            "type": "string",
+            "enum": [
+                "PASSED",
+                "FAILED_FORMAT",
+                "FAILED_QUALITY",
+                "FAILED_CONTAMINATION"
+            ]
+        },
+        "total_score": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 100
+        },
+        "category_scores": {
+            "type": "object",
+            "properties": {
+                "sensory_immersion": {
+                    "type": "integer"
+                },
+                "edging_rhythm": {
+                    "type": "integer"
+                },
+                "fetish_psychology": {
+                    "type": "integer"
+                },
+                "technical_execution": {
+                    "type": "integer"
+                },
+                "format_compliance": {
+                    "type": "integer"
+                }
+            }
+        },
+        "feedback": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "category": {
+                        "type": "string"
+                    },
+                    "severity": {
+                        "type": "string",
+                        "enum": [
+                            "CRITICAL",
+                            "WARNING",
+                            "INFO"
+                        ]
+                    },
+                    "message": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "category",
+                    "severity",
+                    "message"
+                ]
+            }
+        },
+        "suggested_rewrites": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            }
+        }
+    },
+    "required": [
+        "page_number",
+        "status",
+        "total_score",
+        "category_scores",
+        "feedback"
+    ]
+}

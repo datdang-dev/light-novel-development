@@ -2,45 +2,44 @@
 name: 'step-05-final-report'
 description: 'Phase 4: Final Report Assembly'
 
-outputFile: '{output_folder}/_analysis/{manga_name}/page_{page_num}_forensics.md'
+outputFile: '{output_folder}/_analysis/{manga_name}/page_{page_num}_forensics.json'
 ---
 
 # Step 5: Final Report Assembly
 
 ## STEP GOAL
 
-Compile the logs from Phases 1, 2, and 3 into a clean, unified document format, and update the status to COMPLETE.
+Compile the logs from Phases 1, 2, and 3 into the final `forensic-state.json` format, ensuring Content Tags are extracted for the JIT RAG system.
 
 ## MANDATORY EXECUTION RULES (READ FIRST)
 
 ### Universal Rules
 
-- 🛑 Present the summarized data clearly for the Lewd Writer (Suki).
+- 🛑 Present the summarized data strictly adhering to the `studio/schemas/forensic-state.schema.json` format.
 - 📖 CRITICAL: Read the complete step file before taking any action.
-- ✅ YOU MUST speak in Vietnamese.
 
 ## MANDATORY SEQUENCE
 
-### 1. Assemble the Final Continuity Notes
+### 1. Extract Content Tags
 
-Review the data across the 3 phases. Write a brief "Continuity Notes" section that summarizes what state the scene ends in, which will be critical for the next page.
+Analyze the visual and dialogue content to generate an array of `content_tags`.
 
-```markdown
-## 4. Continuity Check
-- **Character A (State):** {Location/posture/arousal level at end of page}
-- **Character B (State):** {Location/posture/arousal level at end of page}
-- **Environment:** {Messy, fluids everywhere, etc.}
-```
+- These are keywords that describe the fetish, setting, or specific actions (e.g., `["creampie", "mesugaki", "indoor_office"]`).
+- These tags will be used by the RAG system to fetch relevant research files.
 
-### 2. Update Output File
+### 2. Assemble the JSON
 
-Append the "Continuity Check" to the `{outputFile}`.
-Update frontmatter:
+Review the data across the 3 phases. Assemble a strict JSON object that validates against `forensic-state.schema.json`.
+
+### 3. Update Output File
+
+Write the generated JSON to `{outputFile}`.
+Update frontmatter of the session state:
 
 - `stepsCompleted: [..., 'step-05-final-report']`
 - `status: COMPLETE`
 
-### 3. Present MENU OPTIONS
+### 4. Present MENU OPTIONS
 
 Display:
 
@@ -49,7 +48,7 @@ Display:
 
 **File Output:** `{outputFile}`
 
-**Trạng thái:** COMPLETE. Orchestrator có thể thu hồi Agent và chuyển tiếp sang bước Prose Generation."
+**Trạng thái:** COMPLETE. Orchestrator có thể thu hồi Agent và chuyển tiếp sang Core Transformation Engine."
 ```
 
 #### EXECUTION RULES

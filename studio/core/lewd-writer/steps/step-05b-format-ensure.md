@@ -5,7 +5,7 @@ description: 'Enforce strict Light Novel formatting: header banner, dialogue, th
 nextStepFile: './step-05c-sensory-injection.md'
 outputFile: '{output_folder}/_prose/{manga_name}/chapter_{ch}/page_{page_num}_prose.md'
 templateFile: '{project-root}/studio/_templates/light-novel-prose.md'
-dialogueRulesFile: '{project-root}/studio/rules/dialogue_format.md'
+dialogueRulesFile: '{project-root}/.agent/rules/dialogue_format.md'
 ---
 
 # Step 5b: Ensure Format Compliance
@@ -104,7 +104,8 @@ Auto-inject the header from `{templateFile}`. Fill placeholders from forensic re
 ### Rule
 
 - All sound effects MUST use italicized `*SFX: [Sound]*` format.
-- SFX should be Romanized Japanese (e.g., Guchu, Pan, Bikun).
+- SFX must be International Lewd SFX (English e.g., Plap, Splurt) OR Romaji (e.g., Guchu, Pan).
+- **FORBIDDEN:** Do NOT use awkward Vietnamese onomatopoeia (e.g., bì bạch, nhẹp nhẹp).
 - **FORBIDDEN:** Inline SFX without the `*SFX:` prefix.
 
 ### Checks

@@ -27,26 +27,26 @@ Load and internalize the forensic analysis and any available story bible context
 
 ## MANDATORY SEQUENCE
 
-### 1. Request Forensic Report Path
+### 1. Request Input Files
 
 If not provided:
 
 ```
 "Chào bạn! Mình là Suki, chuyên gia viết prose R18. 🖊️
 
-Để bắt đầu adapt từ forensic analysis, mình cần:
+Để bắt đầu adapt, mình cần:
 
-1. **Đường dẫn forensic report** (output từ panel-forensic)
-2. **Manga name** và **page number**
-3. **Story bible path** (nếu có)
+1. **Forensic State** (`forensic-state.json`)
+2. **Knowledge Payload** (`knowledge_payload.md` từ RAG engine, nếu có)
+3. **Story Bible path** (nếu có)
 4. **Director Notes / User Vision** (nếu có requirements đặc biệt)
 
 Vui lòng cung cấp thông tin!"
 ```
 
-### 2. Load Forensic Report
+### 2. Load Forensic State and Knowledge Payload
 
-**CRITICAL:** Use `view_file` tool to load the complete forensic report.
+**CRITICAL:** Use `view_file` tool to load the complete `forensic-state.json` and `knowledge_payload.md`.
 
 Extract and note:
 
@@ -54,8 +54,7 @@ Extract and note:
 - Character positions and actions
 - Dialogue and SFX
 - Fetish tags
-- R18 elements
-- Narrative flow
+- **RAG Knowledge:** Any specific world-building lore or terminology defined in the knowledge payload.
 
 ### 3. Load Story Bible (if available)
 
@@ -68,7 +67,7 @@ If bible path provided, load:
 
 ### 4. Create Output File
 
-Initialize prose output file:
+Initialize prose output block in memory, ready to be translated into `draft-prose.json` format eventually. Currently, just prep the metadata.
 
 ```markdown
 ---
@@ -81,7 +80,7 @@ status: IN_PROGRESS
 source_forensics: "{forensics_path}"
 ---
 
-# Prose: {manga_name} - Chapter {ch} Page {page_num}
+# Prose Draft Prep: {manga_name} - Chapter {ch} Page {page_num}
 
 ## Context Summary
 
@@ -89,6 +88,7 @@ source_forensics: "{forensics_path}"
 **Setting:** {from forensics}
 **Primary Action:** {from forensics}
 **Fetish Tags:** {from forensics}
+**Knowledge Injected:** {yes/no based on payload}
 **Director Vision:** {User/Director Notes}
 
 ---
@@ -99,10 +99,10 @@ source_forensics: "{forensics_path}"
 ```
 "✅ Context loaded!
 
-**Forensic Report:** {path}
+**Forensic State:** {path}
+**Knowledge Payload:** {path or 'None'}
 **Panels:** {count}
 **Characters:** {list}
-**Primary Tags:** {tags}
 
 **Bible Context:** {loaded / not available}
 
@@ -116,7 +116,7 @@ source_forensics: "{forensics_path}"
 - IF C: Save output file, load `{nextStepFile}`
 - IF other: Help user respond, redisplay menu
 
-#### EXECUTION RULES:
+#### EXECUTION RULES
 
 - 🛑 **HALT** after displaying menu. Do NOT auto-proceed.
 - ⏳ **WAIT** for explicit user input before taking any action.

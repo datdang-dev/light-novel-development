@@ -1,77 +1,117 @@
 ---
 trigger: model_decision
-description: Minimum sensory requirements for R18 prose - counts and vocabulary only
-priority: 3
+description: Mandatory sensory requirements for R18 prose
 ---
 
 # Sensory Density Rules
 
-## MINIMUM COUNTS
+## MINIMUM REQUIREMENTS
 
-| Sense | Per Page | Per Action |
-|-------|----------|------------|
-| Smell | ≥3 | - |
-| Sound/SFX | - | ≥3 |
-| Texture | ≥5 | - |
-| Temperature | Every fluid contact | - |
+| Sense | Minimum per Page | Examples |
+|-------|------------------|----------|
+| Smell | ≥3 | tinh dịch, mồ hôi, mùi lồn |
+| Sound | ≥3 | Plap, Schlick, Glurk |
+| Texture | ≥5 | ướt, nhớp, nóng, cứng |
+| Temperature | Every fluid contact | nóng hổi, lạnh |
 
 ---
 
-## SMELL VOCABULARY
+## 👃 SMELL (≥3 per page)
 
-```text
-Nouns:     tinh dịch, mùi cặc, mùi lồn, mồ hôi, nước miếng
-Adjectives: nồng, tanh, mặn, đặc trưng, quen thuộc  
-Verbs:     xộc vào mũi, phảng phất, lan tỏa, bao phủ
+### Vocabulary Bank (Gooner Expanded)
+
+```
+Nouns: tinh dịch, mùi cặc, mùi lồn, mồ hôi, nước miếng, dâm thủy, tinh huyết, nhụy hoa
+Adjectives: nồng, tanh, mặn, đặc trưng, quen thuộc, đặc quánh, trắng đục, nhầy nhụa
+Verbs: xộc vào mũi, phảng phất, lan tỏa, bao phủ, rỉ ra ròng ròng, ám chặt lấy
 ```
 
-### Example
+### Good Example
 
-```text
+```
 *Mùi tinh dịch — tanh mặn, nồng đặc — xộc thẳng vào mũi cô.*
 ```
 
 ---
 
-## TEXTURE VOCABULARY
+## 🔊 WET SOUNDS (≥3 per action)
 
-```text
-Wet:     ướt, nhớp, dính, nhẫy, trơn
-Firm:    cứng, mềm, căng, chắc, mọng
-Surface: mịn, thô, sần, gồ ghề
+### By Action Type (Gooner Expanded)
+
+```
+Penetration: Plap, Schlick, Squelch, パンパン (Panpan)
+Oral: Glurk, Gluk, チュパ (Chupa)
+Handjob: Siko siko, Schlick
+Cum/Fluids: Splurt, Spurt, ドピュ (Dopyu)
+Impact: Smack, Thwack, Pan
 ```
 
-### Example
+### Good Example
 
-```text
+```
+*Plap. Plap. Âm thanh da thịt đập vào nhau.*
+```
+
+---
+
+## 🖐️ TEXTURE (≥5 per page)
+
+### Vocabulary Bank (Gooner Expanded)
+
+```
+Wet: ướt, nhớp, dính, nhẫy, trơn, ướt sũng, lép nhép
+Firm: cứng, mềm, căng, chắc, mọng, căng cứng, lút cán, chật ních, lấp đầy
+Surface: mịn, thô, sần, gồ ghề, cọ xát, ma sát gắt gao
+```
+
+### Good Example
+
+```
 *Tinh dịch ướt nhớp, dính đọng trên đùi, chảy xuống tất đen.*
 ```
 
 ---
 
-## TEMPERATURE VOCABULARY
+## 🌡️ TEMPERATURE
 
-```text
-Hot:   nóng hổi, nóng rực, ấm nóng, như sắt nung
-Cold:  lạnh, mát, se lạnh
-Verbs: lan tỏa, bốc lên, tỏa ra
+### Vocabulary Bank
+
 ```
-
-### Rule
+Hot: nóng hổi, nóng rực, ấm nóng, như sắt nung, như lửa đốt
+Cold: lạnh, mát, se lạnh
+Spreading: lan tỏa, bốc lên, tỏa ra
+```
 
 Every penetration and fluid contact MUST mention temperature.
 
-## BANNED WORDS
+---
 
-Never use judgmental descriptors:
+## 👁️ VISCERAL BODILY REACTIONS (Show, Don't Tell)
 
-```text
-❌ hôi thối, dơ bẩn, bẩn thỉu
-❌ ghê tởm, kinh tởm, đáng xấu hổ
-❌ đồi bại, tội lỗi, xấu xa
+To convey extreme arousal ("goonfy" intensity), DO NOT just say the character is "aroused" or "feels good." You MUST describe the uncontrollable physical symptoms:
+
+### Symptom Bank
+
+```
+Eyes: Mắt lờ đờ, dại đi, mất tiêu cự, lòng trắng dã ra, ngước lên trần nhà.
+Limbs: Ngón chân quắp chặt, cơ đùi co giật liên hồi, run rẩy bần bật, đầu ngón tay bấu chặt.
+Torso/Posture: Gáy cong lên, lưng ườn cong rập khuôn, bụng dưới tắp lự nhô cao, lồng ngực phập phồng.
+Mouth/Breath: Nước bọt tưa ra từ khóe mồm không thể khép kín, thở hổn hển không ra hơi, cắn chặt môi đến rơm rớm máu.
+Mind: Não bộ đình trệ, ý thức trắng xóa, chỉ còn biết rên rỉ theo bản năng.
 ```
 
-✅ Use neutral sensory descriptions instead:
+---
+
+## ❌ BANNED WORDS (Judgmental)
+
+NEVER use:
+
+```
+hôi thối, dơ bẩn, bẩn thỉu
+ghê tởm, kinh tởm, đáng xấu hổ
+đồi bại, tội lỗi, xấu xa
+```
+
+✅ INSTEAD: Use neutral sensory descriptions
 
 - "mùi nồng đặc trưng" NOT "mùi hôi thối"
-- "dịch nhớp" NOT "chất bẩn"

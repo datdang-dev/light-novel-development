@@ -1,85 +1,98 @@
 ---
 trigger: model_decision
-description: State tracking across scenes - fluids, clothing, positions
-priority: 5
+description: State tracking rules across scenes and chapters
 ---
 
 # Continuity Rules
 
-## CORE PRINCIPLE
-
-**Never start a scene "clean" if the previous scene ended "messy".**
+## PURPOSE
+Track physical state across scenes to maintain immersion and realism.
 
 ---
 
-## FLUID TRACKING
+## 🩸 RESIDUE TRACKING
 
-| Fluid | Track Location | Track State |
-|-------|---------------|-------------|
-| Cum | trong lồn, trên đùi, trên ngực, trên mặt | ướt → khô → dính |
+### Fluids
+Track location and state of:
+
+| Fluid | Location Options | State Options |
+|-------|------------------|---------------|
+| Cum | trong lồn, trên đùi, trên ngực, trên mặt, trong miệng | ướt, khô, dính, chảy |
 | Sweat | trán, ngực, đùi, toàn thân | lấp lánh, nhỏ giọt |
 | Saliva | môi, cằm, ngực | ướt, dính |
 | Mixed | chỗ nối, đùi trong | sủi bọt, nhớp |
 
-### Transition Example
-
-```text
-Scene 1 END:  Cum inside + dripping on thighs
-Scene 2 START: "Tinh dịch từ lần trước vẫn còn chảy xuống đùi cô..."
+### Example Tracking
+```
+Scene 1 END: Cum inside + on thighs
+Scene 2 START: Must mention → "Tinh dịch từ lần trước vẫn còn chảy xuống đùi cô..."
 ```
 
 ---
 
-## CLOTHING TRACKING
+## 👗 CLOTHING STATE
 
-| State | Description | Next Scene Must... |
-|-------|-------------|-------------------|
-| Intact | Worn normally | Can stay or change |
-| Disheveled | Xốc lên, kéo xuống | Reference dishevelment |
-| Partially removed | Một bên tuột | Specify where it is |
-| Removed | Not on body | Mention location (floor? chair?) |
-| Contaminated | Dính cum, mồ hôi | Track contamination |
-| Damaged | Rách, đứt nút | Stay damaged |
+Track exact state:
+
+| State | Description |
+|-------|-------------|
+| Intact | Worn normally |
+| Disheveled | Xốc lên, kéo xuống, nút mở |
+| Partially removed | Một bên tuột, vest mở |
+| Removed | Nằm ở đâu? |
+| Contaminated | Dính cum, mồ hôi, ướt |
+| Damaged | Rách, đứt nút |
+
+### Example
+```
+START: School uniform complete
+DURING: Skirt lifted, panties pulled aside
+END: Panties still aside, cum stain on skirt hem
+NEXT SCENE: Must reference this state
+```
 
 ---
 
-## POSITION TRACKING
+## 🧍 BODY POSITION
 
-| Element | What to Track |
-|---------|--------------|
-| Location | Which room? Which furniture? |
-| Posture | Đứng, ngồi, nằm, quỳ |
-| Orientation | Facing where? Bent how? |
-| Limbs | Arms tied? Legs spread? |
+Track where everyone is:
+
+| Element | Track |
+|---------|-------|
+| Location | Room, furniture, floor |
+| Position | Đứng, ngồi, nằm, quỳ |
+| Orientation | Facing where, bent how |
+| Limbs | Arms (tied? holding?), legs (spread? wrapped?) |
 
 ---
 
-## PHYSICAL STATE
+## 😵 PHYSICAL STATE
 
 | State | Indicators |
 |-------|------------|
-| Exhaustion | Rũ, hổn hển, không đứng nổi |
-| Arousal | Ướt, cứng, đỏ bừng |
-| Soreness | Nhức, đau, tê |
+| Exhaustion | Run, hổn hển, không đứng nổi |
+| Arousal level | Ướt, cứng, đỏ bừng |
+| Pain/soreness | Nhức, đau, tê |
+| Satisfaction | Thỏa mãn, còn muốn nữa |
 
 ---
 
-## TIME GAP RULES
+## ⏱️ TIME TRACKING
 
-If time passes between scenes:
-
+If time passes:
 - How long since last action?
 - Has anything dried/changed?
 - Character recovery state?
 
 ---
 
-## PRE-SCENE CHECKLIST
+## ✅ CONTINUITY CHECKLIST
 
 Before starting new scene:
-
 - [ ] Previous fluids accounted for?
-- [ ] Clothing state referenced?
+- [ ] Clothing state correct?
 - [ ] Body positions logical?
-- [ ] Physical exhaustion shown?
+- [ ] Physical exhaustion considered?
 - [ ] Time gap addressed?
+
+**RULE**: Never start a scene in a "clean" state if previous scene ended messy.
