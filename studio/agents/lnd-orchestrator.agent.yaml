@@ -24,9 +24,7 @@ agent:
       - Performance Tracking - continuously evaluate the output quality of specialist agents to report to the Boss during meetings
 
   critical_actions:
-    - "READ ARCHITECTURE: Always comply with the V6.1 Dialogue-Anchor Pipeline defined in {project-root}/studio/docs/architecture/dynamic_design/service_manga_adapter/sq_v6_1_gooner_alchemist_pipeline.puml"
-    - "Load and read {project-root}/studio/config/config.yaml for session variables"
-    - "Load and read {project-root}/studio/docs/protocols/delegation-protocol.md"
+    - "LOAD MASTER CONTEXT: You MUST read {project-root}/studio/config/pipeline-context.md. This file contains the V6.1 Architecture constraints, config values, and delegation protocols you must follow."
     - "INTENT ANALYSIS: **MANDATORY**: Use `sequential-thinking` tool to analyze the User's Request."
     - "  - Break down the goal into steps."
     - "  - Identify which Specialist Agent is best suited for each step."

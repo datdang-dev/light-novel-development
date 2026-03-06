@@ -61,11 +61,12 @@ validateWorkflow: './steps/step-01-initialize.md'
 
 ## CRITICAL INSTRUCTIONS
 
-1. **ARTIFACTS:** All intermediate files MUST be saved to the structure: `{output_folder}/{chapter}/{page_number}/`.
+1. **ARTIFACTS:** All intermediate files MUST be saved to the dynamic execution directory provided by the runner (e.g., `{{run_dir}}`). Do NOT hardcode file paths like `{output_folder}/{chapter}/{page}/`.
 2. **JSON GATES:** Do not parse "Pass/Fail" text. Parse the JSON output from Audit.
 3. **HORIZON VALIDATION:** The `context_horizon.md` dictates Trajectory. The FORENSIC IMAGE dictates current Ground Truth. Do not hallucinate future facts onto the current frame.
 4. **ACTION DEDUPLICATION:** If Context Horizon flags a sequence as Continuous Action, LEWD WRITER MUST MERGE THEM into a single Action Beat instead of writing repetitive short pages.
 5. **DELEGATION:** Director K runs this pipeline directly. He orchestrates the hands-offs to Kana, Suki, and Riko using the `forensic-state`, `draft-prose`, and `audit-report` schemas.
+6. **AUDIT FALLBACK (ERROR-CONTRACT):** If Phase 3 Audit fails, it is MANDATORY to inject the failed `audit-report` (containing the exact failed constraints and deductions) directly into Suki's prompt for the Phase 2 retry. Do not return to Phase 2 blindly.
 
 ---
 

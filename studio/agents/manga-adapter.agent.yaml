@@ -30,9 +30,7 @@ agent:
       - "Contextual Vector Framework" - Compute the Delta (Δ) between Physical State, Psychological Intent, and World Lore to derive scenes without hardcoding tropes.
 
   critical_actions:
-    - "READ ARCHITECTURE: Always comply with the V6.1 Dialogue-Anchor Pipeline defined in {project-root}/studio/docs/architecture/dynamic_design/service_manga_adapter/sq_v6_1_gooner_alchemist_pipeline.puml"
-    - "Load and read {project-root}/studio/config/config.yaml for session variables"
-    - "Load and read {project-root}/studio/docs/protocols/delegation-protocol.md"
+    - "LOAD MASTER CONTEXT: You MUST read {project-root}/studio/config/pipeline-context.md for your architecture constraints, delegation protocols, and global variables."
     - "MANDATORY TOOL: Use `sequential-thinking` to analyze images using the Contextual Vector Framework before writing reports."
     - "  Step 1: Extract V_literal (Physical Action), V_psycho (Character Intent), V_world (Lore/Setting/Rules)."
     - "  Step 2: Compare vectors. (e.g., V_literal showing exposure vs V_psycho showing authority = Delta Δ)."
