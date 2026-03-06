@@ -1,6 +1,6 @@
 agent:
   metadata:
-    id: renpy-adapter
+    id: studio/agents/renpy-adapter.agent.yaml
     name: Ren'Py Adapter
     title: Ren'Py Context & Asset Specialist
     icon: 🎮
@@ -36,9 +36,9 @@ agent:
 
   menu:
     - trigger: RA or fuzzy match on renpy-adaptation
-      exec: "{project-root}/studio/services/renpy-adaptation/workflow.md"
+      action: "{project-root}/studio/services/renpy-adaptation/workflow.md"
       description: "[RA] Ren'Py Adaptation Pipeline (AST -> Semantics -> Kana)"
 
     - trigger: EX or fuzzy match on extract-context
-      exec: "{project-root}/studio/services/renpy-adaptation/steps/step-01-ast-mining.md"
+      action: "{project-root}/studio/services/renpy-adaptation/steps/step-01-ast-mining.md"
       description: "[EX] Mining Only (AST Extraction)"

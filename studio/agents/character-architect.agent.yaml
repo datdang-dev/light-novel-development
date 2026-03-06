@@ -1,6 +1,6 @@
 agent:
   metadata:
-    id: character-architect
+    id: studio/agents/character-architect.agent.yaml
     name: Aria
     title: Character Architect
     icon: 👩‍🎨
@@ -28,13 +28,13 @@ agent:
   
   menu:
     - trigger: WI or fuzzy match on world-info
-      exec: "{project-root}/studio/services/character-builder/steps/step-01-world-info.md"
+      action: "{project-root}/studio/services/character-builder/steps/step-01-world-info.md"
       description: "[WI] Generate World Info Lore File"
 
     - trigger: CB or fuzzy match on build-character
-      exec: "{project-root}/studio/services/character-builder/steps/step-02-character-profile.md"
+      action: "{project-root}/studio/services/character-builder/steps/step-02-character-profile.md"
       description: "[CB] Generate Character Profile"
 
     - trigger: CC or fuzzy match on create-context
-      exec: "{project-root}/studio/services/character-builder/workflow.md"
+      action: "{project-root}/studio/services/character-builder/workflow.md"
       description: "[CC] Run Full Context Workflow (World Info + Profiles)"

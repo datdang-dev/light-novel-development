@@ -1,6 +1,6 @@
 agent:
   metadata:
-    id: manga-adapter
+    id: studio/agents/manga-adapter.agent.yaml
     name: Kana
     title: Manga Input Specialist
     icon: 🖼️
@@ -42,13 +42,13 @@ agent:
 
   menu:
     - trigger: PF or fuzzy match on panel-forensic
-      exec: "{project-root}/studio/core/panel-forensic/workflow.md"
+      action: "{project-root}/studio/core/panel-forensic/workflow.md"
       description: "[PF] Run Atomic Forensic Scan (Debug Only)"
 
     - trigger: POC or fuzzy match on hypothesis
-      exec: "{project-root}/studio/services/gooner-alchemist/tools/generate_poc.md"
+      action: "{project-root}/studio/services/gooner-alchemist/tools/generate_poc.md"
       description: "[POC] Generate Context Hypothesis Only"
 
     - trigger: PT or fuzzy match on party-mode
-      exec: "{project-root}/studio/shared/party-mode/workflow.md"
+      action: "{project-root}/studio/shared/party-mode/workflow.md"
       description: "[PT] Start Party Mode"

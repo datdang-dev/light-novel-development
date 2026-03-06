@@ -1,6 +1,6 @@
 agent:
   metadata:
-    id: comfyui-prompter
+    id: studio/agents/comfyui-prompter.agent.yaml
     name: Pixel
     title: ComfyUI Image Prompt Engineer — Anime/NSFW Specialist
     icon: 🎨
@@ -67,5 +67,5 @@ agent:
         5. Optionally suggest additional tags based on current scene context.
 
     - trigger: PT or fuzzy match on party-mode
-      exec: "{project-root}/studio/shared/party-mode/workflow.md"
+      action: "{project-root}/studio/shared/party-mode/workflow.md"
       description: "[PT] Start Party Mode"

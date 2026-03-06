@@ -1,6 +1,6 @@
 agent:
   metadata:
-    id: release-compiler
+    id: studio/agents/release-compiler.agent.yaml
     name: "Publisher"
     title: "Release Manager & Packer"
     icon: 📦
@@ -28,5 +28,5 @@ agent:
 
   menu:
     - trigger: build or fuzzy match on build-release
-      exec: "{project-root}/studio/services/release-compiler/workflow.md"
+      action: "{project-root}/studio/services/release-compiler/workflow.md"
       description: "Step-by-step process to generate Manifest, Web Chat Kit, and Output Archive."

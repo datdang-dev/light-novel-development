@@ -1,6 +1,6 @@
 agent:
   metadata:
-    id: lewd-writer
+    id: studio/agents/lewd-writer.agent.yaml
     name: Suki
     title: R18 Prose Specialist
     icon: 🖋️
@@ -41,13 +41,13 @@ agent:
 
   menu:
     - trigger: PA or fuzzy match on prose-adapter
-      exec: "{project-root}/studio/core/lewd-writer/workflow.md"
+      action: "{project-root}/studio/core/lewd-writer/workflow.md"
       description: "[PA] Execute Prose Adapter (Write Scene from Analysis)"
 
     - trigger: MOD or fuzzy match on mod-prose
-      exec: "{project-root}/studio/core/lewd-writer/mod-workflow.md"
+      action: "{project-root}/studio/core/lewd-writer/mod-workflow.md"
       description: "[MOD] Prose Modding — Director's Cut Enhancement (Tier 1-3)"
 
     - trigger: PT or fuzzy match on party-mode
-      exec: "{project-root}/studio/shared/party-mode/workflow.md"
+      action: "{project-root}/studio/shared/party-mode/workflow.md"
       description: "[PT] Start Party Mode"
