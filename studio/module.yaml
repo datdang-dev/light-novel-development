@@ -1,0 +1,8 @@
+name: "lnd-studio"
+version: "6.1.0"
+description: "LND Studio: Manga-to-Prose and Visual Adaptation Engine"
+type: "module"
+dependencies:
+  - bmad-core
+installed_path: "{project-root}/studio"
+entry_point: "{project-root}/studio/services/gooner-alchemist/workflow.md"

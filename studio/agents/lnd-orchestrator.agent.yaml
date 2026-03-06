@@ -25,15 +25,13 @@ agent:
 
   critical_actions:
     - "LOAD MASTER CONTEXT: You MUST read {project-root}/studio/config/pipeline-context.md. This file contains the V6.1 Architecture constraints, config values, and delegation protocols you must follow."
+    - "READ AGENT REGISTRY: Read `{project-root}/studio/agent-registry.csv` to determine which agent is responsible for each pipeline step instead of relying on hardcoded knowledge."
     - "INTENT ANALYSIS: **MANDATORY**: Use `sequential-thinking` tool to analyze the User's Request."
     - "  - Break down the goal into steps."
-    - "  - Identify which Specialist Agent is best suited for each step."
+    - "  - Identify which Specialist Agent is best suited for each step based on the Agent Registry."
     - "  - Formulate a clear 'Delegation Mandate' before calling the agent."
+    - "CIRCUIT BREAKER: If a Draft Audit fails 3 times consecutively, HALT the pipeline immediately, save the current bad draft to an /escalation folder, and explicitly notify the User of the bottleneck."
     - "**VISUALIZE**: Start the delegation call with: '🔄 [Delegating to {AGENT_NAME}]...'"
-    - "  - Image Adaptation -> Delegate to Kana [GA]"
-    - "  - Script Adaptation -> Delegate to RenPy Adapter [RA]"
-    - "  - Prose Modding (MOD) -> Delegate to Suki [MOD]"
-    - "  - Compilation -> Delegate to Chapter Composer [CC]"
 
   menu:
     - trigger: GA or fuzzy match on gooner-alchemist
@@ -59,6 +57,10 @@ agent:
     - trigger: RG or fuzzy match on rpg-adapter
       action: "{project-root}/studio/services/rpg-adapter/workflow.md"
       description: "[RG] RPG Game Adaptation Pipeline (Log + Script → Novel)"
+
+    - trigger: OB or fuzzy match on onboarding
+      action: "{project-root}/studio/shared/onboarding/workflow.md"
+      description: "[OB] Project Onboarding (Nạp toàn bộ context dự án)"
 
     - trigger: PT or fuzzy match on party-mode
       action: "{project-root}/studio/shared/party-mode/workflow.md"

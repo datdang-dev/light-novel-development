@@ -1,0 +1,11 @@
+Agent_Code,Agent_Name,Agent_File,Description
+GA,Kana,manga-adapter.agent.yaml,"Manga Input and Forensic Visualization"
+MOD,Suki,lewd-writer.agent.yaml,"R18 Prose Generation and Modification"
+QA,Riko,gooner-editor.agent.yaml,"Quality Assurance and Formatting Audit"
+DIR,Director K,lnd-orchestrator.agent.yaml,"Master Orchestrator"
+CB,Aria,character-architect.agent.yaml,"Character Profiling and Bible Update"
+CC,Composer,release-compiler.agent.yaml,"Chapter Compilation and Release"
+SE,Mavis,system-engineer.agent.yaml,"High-level Studio Architecture and Workflow Optimization"
+LM,Luna,world-weaver.agent.yaml,"World Weaver & Scene Planner"
+DC,Miki,dialogue-crafter.agent.yaml,"Dialogue & SFX Specialist"
+CE,Orion,continuity-enforcer.agent.yaml,"Continuity Enforcer & State Tracker"

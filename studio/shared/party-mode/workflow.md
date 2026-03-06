@@ -13,7 +13,7 @@ validateWorkflow: './steps/step-01-initialize.md'
 
 **Documentation:**
 
-- **Full Agent List & Principles:** [See workflow-OLD.md](./workflow-OLD.md)
+- **Full Agent List:** [See agent-registry.csv](../../agent-registry.csv)
 
 **Architecture:**
 

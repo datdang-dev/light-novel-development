@@ -88,6 +88,22 @@ OUTPUT to user:
 - Input context: `{output_folder}/{current_page}/context_horizon.md` (UPCOMING FRAME TRAJECTORY)
 - Output path: `{analysisFolder}/page-{current_page}-forensic.md`
 
+**⚡ FORENSIC CACHE (Performance Optimization):**
+
+```text
+previous_page = current_page - 1
+previous_forensic = {analysisFolder}/page-{previous_page}-forensic.md
+
+IF previous_forensic EXISTS:
+  → Pass as BASELINE context to panel-forensic
+  → Tell Kana: "Previous page had these characters, setting, and smells.
+    Focus only on CHANGES from this baseline."
+  → This reduces analysis time by ~50% for consecutive same-scene pages.
+
+IF previous_forensic NOT EXISTS:
+  → Proceed normally with full analysis (first page of chapter)
+```
+
 **DO NOT analyze the image yourself. INVOKE the workflow.**
 
 ### 3. Wait for Completion
@@ -168,7 +184,7 @@ OUTPUT:
 - IF V: Display forensic report contents, then redisplay menu
 - IF Any other: Respond helpfully, then redisplay menu
 
-#### EXECUTION RULES:
+#### EXECUTION RULES
 
 - 🛑 **HALT** after displaying menu. Do NOT auto-proceed.
 - ⏳ **WAIT** for explicit user input before taking any action.

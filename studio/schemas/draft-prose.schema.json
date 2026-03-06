@@ -28,7 +28,8 @@
                 "temperature_mentions": {
                     "type": "integer"
                 }
-            }
+            },
+            "additionalProperties": false
         },
         "format_compliance": {
             "type": "object",
@@ -45,7 +46,8 @@
                 "valid_sfx_format": {
                     "type": "boolean"
                 }
-            }
+            },
+            "additionalProperties": false
         }
     },
     "required": [
@@ -54,5 +56,6 @@
         "word_count",
         "metrics",
         "format_compliance"
-    ]
+    ],
+    "additionalProperties": false
 }

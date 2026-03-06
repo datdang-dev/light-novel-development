@@ -1,91 +1,57 @@
 # LND Studio v2.0
 
-> BMAD v6 Compliant Light Novel Development Studio
+> **BMAD v6.1 Compliant Light Novel Development Studio**
+> Orchestrated to automate the processing of R18 explicit manga into highly detailed, sensory-dense Vietnamese Light Novel prose.
 
-## Quick Start
+## 🚀 Quick Start
+
+Ensure you have a fully working BMAD environment installed. LND Studio is loaded dynamically as a module.
+
+### Core Pipelines
+
+To begin the primary adaptation flow, use the Orchestrator command:
 
 ```bash
-# Core manga adaptation pipeline
 /gooner-alchemist
-
-# Direct workflow invocation
-/panel-forensic      # Visual forensic analysis
-/prose-adapter       # Prose generation (via lewd-writer)
-/gooner-audit        # Quality audit (via gooner-editor)
 ```
 
-## Architecture
+*This triggers the Director K agent to load the state-persisted, JIT-compiled pipeline that processes pages sequentially from input to audited output.*
 
-```
-studio/
-├── _templates/          # LND-specific templates
-├── config/              # Configuration files
-├── workflows/
-│   ├── capabilities/    # Specialized workflows
-│   │   ├── panel-forensic/   # 7 steps - Visual analysis
-│   │   ├── prose-adapter/    # 7 steps - Prose generation
-│   │   ├── gooner-audit/     # 5 steps - Quality audit
-│   │   └── bible-sync/       # 8 steps - State management
-│   └── pipelines/       # Orchestrators
-│       └── gooner-alchemist/ # 7 steps - Main pipeline
-├── agents/             # Agent definitions
-├── knowledge/          # Shared knowledge base
-├── assets/             # Static assets
-└── docs/               # Documentation
+### Development Tools
+
+To verify pipeline payloads without using LLM tokens, use the Dry Run Simulator:
+
+```bash
+python3 scripts/simulator.py
 ```
 
-## Core Pipeline
+## 🏗️ Architecture & Documentation
 
-```mermaid
-graph TD
-    A[Manga Page] --> B[panel-forensic]
-    B --> C[bible-sync LOAD]
-    C --> D[prose-adapter]
-    D --> E[gooner-audit]
-    E -->|PASS| F[bible-sync SAVE]
-    E -->|FAIL| D
-    F --> G[Approved Prose]
-```
+The studio operates purely on **Just-In-Time (JIT) Loading**, a 14-Agent diverse registry array, and strict **JSON Schema Valildation**.
 
-## BMAD v6 Compliance
-
-All workflows follow BMAD v6 best practices:
-
-- **Step-file Architecture**: Each step is a separate `.md` file
-- **JIT Loading**: Only one step loaded at a time
-- **State Tracking**: `stepsCompleted` array in frontmatter
-- **Sequential Enforcement**: No step skipping
-- **Menu Handling**: Standardized `[C] Continue` pattern
-
-## Quality Standards
-
-### Sensory Density Requirements
-
-| Sense | Minimum | Notes |
-|-------|---------|-------|
-| Smell | ≥3 | Per page of prose |
-| Sound | ≥3 | Including SFX |
-| Texture | ≥5 | Tactile descriptions |
-
-### Audit Thresholds
-
-| Score | Status |
-|-------|--------|
-| ≥85 | PASS |
-| 70-84 | REVIEW |
-| <70 | FAIL |
-
-## Banned Words (Auto-Fail)
-
-```
-hôi thối, dơ bẩn, bẩn thỉu, ghê tởm
-đê tiện, đáng khinh, ô uế
-```
-
-## Migration from studio/
-
-This directory replaces the legacy `studio/` structure with BMAD v6 compliant workflows. The original `studio/` is retained as backup.
+For the comprehensive technical breakdown including component roles, sequence generation charts, and schema enforcement logic, please refer to the official architectural documentation:
+👉 **[Read the Studio Architecture Documentation](docs/ARCHITECTURE.md)**
 
 ---
 
-*LND Studio - Where Fantasies Become Light Novels*
+## 🛡️ Enterprise Grade Quality Gates
+
+LND studio enforces extreme structural rigor out-of-the-box:
+
+* **Schema Strictness**: All JSON outputs (`forensic-state`, `draft-prose`, `audit-report`) use recursive `additionalProperties: false` locked schemas. LLM Hallucination is structurally impossible.
+* **State Recovery**: The pipeline checks intermediate artifacts at `step-01-initialize.md`. If a crash occurs at page 40, step 5, simply run `/gooner-alchemist` and it will resume exactly at page 40, step 5 automatically.
+* **Simulation Testing**: A built-in Python JIT Compiler stringifier allows for unit-testing the exact context payloads sent to instances before money is spent.
+
+---
+
+## 🎭 The Cast (Agents)
+
+All 14 specialized agents are defined in `agents/*.agent.yaml` and routed dynamically through `agent-registry.csv`.
+To load them into a collaborative brainstorming session discussing studio lore or workflow improvements, run:
+
+```bash
+/party-mode
+```
+
+---
+*LND Studio - Where Fantasies Become Verified Output.*

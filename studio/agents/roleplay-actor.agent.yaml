@@ -58,6 +58,10 @@ agent:
     - trigger: SC or fuzzy match on scan-character
       description: "[SC] Scan Character — Read and summarize a character bible"
 
+    - trigger: OB or fuzzy match on onboarding
+      action: "{project-root}/studio/shared/onboarding/workflow.md"
+      description: "[OB] Project Onboarding (Nạp toàn bộ context dự án)"
+
     - trigger: PT or fuzzy match on party-mode
       action: "{project-root}/studio/shared/party-mode/workflow.md"
       description: "[PT] Start Party Mode"

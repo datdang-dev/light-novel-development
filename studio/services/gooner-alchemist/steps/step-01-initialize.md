@@ -11,7 +11,7 @@ stateFile: '{output_folder}/_pipeline/{project}/state.yaml'
 
 **Progress: Step 1 of 7** - Next: Forensic Analysis
 
-## RULES:
+## RULES
 
 - MUST NOT skip steps.
 - MUST NOT optimize sequence.
@@ -19,7 +19,7 @@ stateFile: '{output_folder}/_pipeline/{project}/state.yaml'
 - MUST NOT begin any analysis work.
 - ✅ YOU MUST ALWAYS SPEAK OUTPUT in Vietnamese
 
-## CONTEXT:
+## CONTEXT
 
 - Entry point for gooner-alchemist pipeline.
 - Focus: Validate inputs and create pipeline state.
@@ -30,9 +30,9 @@ stateFile: '{output_folder}/_pipeline/{project}/state.yaml'
 
 ## 0. CHECK FOR WORK IN PROGRESS
 
-### a) Before anything else, check if `{stateFile}` exists:
+### a) Before anything else, check if `{stateFile}` exists
 
-### b) IF STATE FILE EXISTS:
+### b) IF STATE FILE EXISTS
 
 1. Read the state and extract: `project`, `current_page`, `pages_pending`, `status`
 2. Calculate progress: `completed = pages_processed.length / pages_total`
@@ -50,10 +50,17 @@ Chào {user_name}! Phát hiện pipeline đang chạy:
 [N] Lưu trữ và bắt đầu mới
 ```
 
-4. **HALT and wait for user selection.**
+1. **HALT and wait for user selection.**
 
-#### Menu Handling:
-- **[Y] Continue:** Jump to appropriate step based on current page state
+#### Menu Handling
+
+- **[Y] Continue:** Scan the output directories for `{current_page}` to determine the exact step to resume:
+  - IF `audit-report-{current_page}.json` exists -> Jump to `step-06-state-persistence.md`
+  - IF `draft-prose-{current_page}.json` exists -> Jump to `step-05-quality-audit.md`
+  - IF `context_payload.md` exists -> Jump to `step-04-prose-generation.md`
+  - IF `forensic-state-{current_page}.json` exists -> Jump to `step-03-context-loading.md`
+  - IF `context_horizon.md` exists -> Jump to `step-02-forensic-analysis.md`
+  - ELSE -> Jump to `step-01b-context-horizon.md`
 - **[N] Archive:** Rename state file to `state-archived-{date}.yaml`, proceed to fresh init
 
 ---
@@ -63,6 +70,7 @@ Chào {user_name}! Phát hiện pipeline đang chạy:
 ### 1. Welcome and Input Collection
 
 OUTPUT:
+
 ```
 **🎬 GOONER ALCHEMIST PIPELINE**
 
@@ -79,6 +87,7 @@ Vui lòng cung cấp hoặc xác nhận thông tin!
 ```
 
 **IF user already provided info in command, extract and confirm:**
+
 - Source folder
 - Page range
 - Project name
@@ -100,11 +109,13 @@ Vui lòng cung cấp hoặc xác nhận thông tin!
 ```
 
 **IF ANY CHECK FAILS:**
+
 ```
 ❌ Input không hợp lệ!
 Missing: {list_missing}
 Vui lòng kiểm tra lại đường dẫn.
 ```
+
 HALT - do not proceed.
 
 ### 3. Check First Chapter Protocol
@@ -120,16 +131,19 @@ IF chapter == 1 AND first_page == 1:
 ### 4. Create Pipeline State
 
 **Create output directories:**
+
 ```bash
 mkdir -p {output_folder}/_pipeline/{project}
 mkdir -p {output_folder}/_analysis/{project}
 mkdir -p {output_folder}/_prose/{project}
 mkdir -p {output_folder}/_bible/{project}
+mkdir -p {output_folder}/_pipeline/{project}/agent-memory
 ```
 
 **Copy state template and populate:**
 
 Create `{stateFile}` with:
+
 ```yaml
 project: "{project_name}"
 chapter: {chapter}
@@ -158,6 +172,7 @@ first_chapter: {true/false}
 ### 5. Present Checkpoint Menu
 
 OUTPUT:
+
 ```
 ✅ Pipeline initialized!
 
@@ -175,14 +190,14 @@ OUTPUT:
 
 **HALT and wait for user selection.**
 
-#### Menu Handling Logic:
+#### Menu Handling Logic
 
-- IF C: 
+- IF C:
   - VERIFY state file created
   - Load `{nextStepFile}`
 - IF Any other: Respond helpfully, redisplay menu
 
-#### EXECUTION RULES:
+#### EXECUTION RULES
 
 - 🛑 **HALT** after displaying menu. Do NOT auto-proceed.
 - ⏳ **WAIT** for explicit user input before taking any action.
@@ -190,13 +205,13 @@ OUTPUT:
 
 ---
 
-## REQUIRED OUTPUTS:
+## REQUIRED OUTPUTS
 
 - MUST validate all input images exist
 - MUST create pipeline state file
 - MUST create output directories
 
-## VERIFICATION CHECKLIST:
+## VERIFICATION CHECKLIST
 
 - [ ] WIP check performed FIRST
 - [ ] All input images validated
