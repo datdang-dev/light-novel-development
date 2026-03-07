@@ -132,8 +132,8 @@ Before any adaptation begins, the pipeline MUST verify the game's directory stru
 - **Step 8:** Quality Audit
   - *Input:* Generated chapter `draft.md`
   - *Output:* `audit.json`
-  - **🔄 [Delegating to Riko (gooner-editor)]**
-  - *Logic:* If Score < 85 → **Rewind to Step 7** with `fix` instructions.
+  - **🔄 [Delegating to Riko (Cursor CLI Auditor)]**
+  - *Logic:* Execute `agent -f {project-root}/studio/core/party-mode/riko-workspace/.cursorrules "Read draft.md. Output strict JSON with 'pass', 'score', 'reason' based on GOONER_AUDIT_FRAMEWORK."`. If Score < 85 → **Rewind to Step 7** with `fix` instructions from the JSON.
 
 - **⏸️ CHECKPOINT: Loop Decision**
   - *Action:* Return to **Step 5** and ask: *"Heroine {name}'s storyline is complete. Write for another heroine?"*

@@ -31,8 +31,8 @@ version: "1.0.0"
 ### 3. Quality Audit (Riko)
 
 - **Input:** `draft-prose.json`
-- **Agent:** Quality Audit (Riko)
-- **Protocol:** Score the prose against the Quality Gates (Format Compliance, Sensory Immersion, Edging Rhythm, Fetish Psychology).
+- **Agent:** Cursor CLI Auditor (Riko)
+- **Protocol:** Score the prose against the Quality Gates. Execute: `agent -f {project-root}/studio/core/party-mode/riko-workspace/.cursorrules "Read draft-prose.json. Output strict JSON with 'pass', 'score', 'reason'."`
 - **Output:** `audit-report.json`
 
 ### 4. Rewite Loop

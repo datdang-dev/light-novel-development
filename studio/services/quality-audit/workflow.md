@@ -1,7 +1,7 @@
 ---
 name: "gooner-audit"
 description: "R18 prose quality audit with pervert perspective scoring"
-owner: "Riko (gooner-editor)"
+owner: "Riko (Cursor CLI Auditor)"
 version: "2.0.0"
 ---
 

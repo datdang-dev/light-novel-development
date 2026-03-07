@@ -62,20 +62,14 @@ IF exit_code == 1:
 
 ### 2. Invoke Gooner-Audit
 
-```text
-"**📋 INVOKING GOONER-AUDIT**
+```bash
+# 📋 INVOKING CURSOR CLI AUDITOR (RIKO)
+# Delegating to Riko for quality audit...
 
-Delegating to Riko for quality audit...
-(Audit criteria already pre-loaded ⚡)
-
----
-
-@/gooner-audit prose={prose_path}
-
----"
+agent -f {project-root}/studio/core/party-mode/riko-workspace/.cursorrules "Read {prose_path}. Follow AUDIT_STANDARD_v2.md exactly. Output the full structured JSON block as defined in Phase 6. Include per-category scores, violations with line numbers, and top_3_fixes."
 ```
 
-**EXECUTION:** Load gooner-audit workflow
+**EXECUTION:** Execute the `agent` bash command above and capture the JSON output.
 
 ### 3. Wait for Completion
 
