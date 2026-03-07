@@ -68,6 +68,7 @@ validateWorkflow: './steps/step-01-initialize.md'
 4. **ACTION DEDUPLICATION:** If Context Horizon flags a sequence as Continuous Action, LEWD WRITER MUST MERGE THEM into a single Action Beat instead of writing repetitive short pages.
 5. **DELEGATION:** Director K runs this pipeline directly. He orchestrates the hands-offs to Kana, Suki, and Riko using the `forensic-state`, `draft-prose`, and `audit-report` schemas.
 6. **AUDIT FALLBACK (ERROR-CONTRACT):** If Phase 3 Audit fails, it is MANDATORY to inject the failed `audit-report` (containing the exact failed constraints and deductions) directly into Suki's prompt for the Phase 2 retry. Do not return to Phase 2 blindly.
+7. **AUDIT LOOP BREAKER:** The Orchestrator MUST track `"audit_attempts": N` in the `state.yaml` file for each page. If `audit_attempts >= 3` and the page still fails, the Orchestrator MUST **STOP** the loop, record `last_error` in the state, and escalate to the user. Do NOT infinitely loop.
 
 ---
 

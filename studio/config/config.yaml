@@ -15,7 +15,7 @@ release_folder: "{output_folder}/_release"
 # User Settings
 user_name: "master"
 communication_language: "Vietnamese"
-document_output_language: "English"
+document_output_language: "Vietnamese"
 
 # Workflow Paths
 workflows_path: "{project_root}/workflows"
