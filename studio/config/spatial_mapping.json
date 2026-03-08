@@ -1,0 +1,41 @@
+{
+    "version": "1.0.0",
+    "zoom_mapping": [
+        {
+            "min": 2.0,
+            "max": 10.0,
+            "shot": "Extreme Close-up",
+            "desc": "Tập trung cực sát vào chi tiết (mắt, môi, điểm tiếp xúc)"
+        },
+        {
+            "min": 1.5,
+            "max": 1.9,
+            "shot": "Close-up",
+            "desc": "Cận cảnh khuôn mặt hoặc bộ phận cơ thể, tạo áp lực thị giác"
+        },
+        {
+            "min": 1.0,
+            "max": 1.4,
+            "shot": "Medium Shot",
+            "desc": "Góc quay từ thắt lưng trở lên, rõ ràng biểu cảm và hành động"
+        },
+        {
+            "min": 0.5,
+            "max": 0.9,
+            "shot": "Full Shot",
+            "desc": "Thấy toàn bộ cơ thể nhân vật, nhấn mạnh tư thế đứng"
+        },
+        {
+            "min": 0.0,
+            "max": 0.4,
+            "shot": "Long Shot",
+            "desc": "Nhân vật đứng từ xa, nhấn mạnh bối cảnh xung quanh"
+        }
+    ],
+    "position_mapping": {
+        "left": "Bên trái, góc nhìn nghiêng",
+        "right": "Bên phải, đối diện trực tiếp",
+        "center": "Chính diện, trung tâm khung hình",
+        "truecenter": "Cận trung tâm, bao phủ tầm mắt"
+    }
+}

@@ -5,22 +5,23 @@ version: "1.0.0"
 type: "core-extension"
 ---
 
-# 🥂 Party Mode Orchestrator
+# 🥂 Party Mode Orchestrator (Meeting Session)
 
 ## Overview
 
-The Party Mode Orchestrator is a structural extension for LND Studio that shifts execution from a single API-bound LLM to a hybrid, command-line-driven "War Room". It allows **Antigravity** (the Architect) to dynamically invoke specialized AI CLIs natively in the terminal to prevent self-bias and bypass provider-specific limitations.
+The Party Mode Orchestrator is a structural extension for LND Studio that enables collaborative, multi-agent discussions. It allows **Antigravity** (the Meeting Chair) to dynamically convene specialized agents (Ren, Kana, Suki, Riko, etc.) to brainstorm, plan, and optimize studio workflows.
 
 ## Role Assignments
 
-- **Antigravity (Chair / Orchestrator):** Manages the meeting, analyzes forensic data (Kana role), and writes the R18 prose (Suki role).
-- **Cursor CLI (`agent`):** Acts as the ruthless Quality Auditor (Riko role). Enforces `canon-rules.md` objectively.
+- **Antigravity (Meeting Chair):** Facilitates the session, synthesizes inputs, and maintains the agenda.
+- **Specialized Agents:** Participants provide domain-specific insights based on their individual personas and professional rulesets.
+- **Cursor CLI (`agent`):** Invoked for formal, unbiased auditing when the meeting results in critical rule changes or code generation.
 
 ## Architecture & Integration
 
-- **Agent:** `studio/core/party-mode/agents/war-room-orchestrator.agent.yaml`
-- **Workflow:** `studio/core/party-mode/workflows/war-room-debate.md`
+- **Agent:** `studio/core/party-mode/agents/meeting-chair.agent.yaml`
+- **Workflow:** `studio/core/party-mode/workflows/meeting-session.md`
 
 ## Usage
 
-Instead of deploying the traditional `gooner-alchemist` pipeline via text prompts, the User activates Party Mode by instructing Antigravity: "Let's run Party Mode on chapter X, page Y". Antigravity will then assume the `war-room-orchestrator` persona and orchestrate the CLIs.
+Activate by instructing Antigravity: "Start a meeting about X" or "Run Party Mode for Y". The Chair will then define the agenda and invite the relevant participant pool.
