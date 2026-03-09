@@ -23,23 +23,25 @@ version: "1.0.0"
 
 ### 2. Prose Generation (Suki)
 
-- **Input:** `forensic-state.json` + `knowledge_payload.md` + `bible.md`
+- **Input:** `forensic-state.json` + `knowledge_payload.md` + `bible.md` + `continuity-ledger.json`
 - **Agent:** Lewd Writer (Suki)
-- **Protocol:** Generate R18 prose strictly adhering to the sensory rules, character voice, and formatting conventions.
+- **Protocol:** Generate R18 prose. Suki MUST read the `continuity-ledger.json` to maintain outfit, fluid, and stamina consistency from previous pages.
 - **Output:** `draft-prose.json`
 
 ### 3. Quality Audit (Riko)
 
-- **Input:** `draft-prose.json`
+- **Input:** `draft-prose.json` + `continuity-ledger.json`
 - **Agent:** Cursor CLI Auditor (Riko)
-- **Protocol:** Score the prose against the Quality Gates. Execute: `agent -f {project-root}/studio/core/party-mode/riko-workspace/.cursorrules "Read draft-prose.json. Output strict JSON with 'pass', 'score', 'reason'."`
+- **Protocol:** Score the prose and generate a `continuity_update`. Execute: `agent -f {project-root}/studio/core/party-mode/riko-workspace/.cursorrules "Read draft-prose.json and continuity-ledger.json. Output strict JSON."`
 - **Output:** `audit-report.json`
 
-### 4. Rewite Loop
+### 4. Rewrite & Commit Loop
 
 - **Logic:** If `audit-report.json` score < 85, OR if `status` != "PASSED":
-  - **Rewind to Step 2.** Suki must rewrite the prose incorporating the constraints and suggested rewrites from `audit-report.json`.
-  - Loop until `status` == "PASSED".
+  - **Rewind to Step 2.** Suki must rewrite incorporating fix instructions.
+- **On PASS:**
+  - **Commit State:** Director K must update `continuity-ledger.json` using the `continuity_update` block from Riko's audit report.
+  - Loop finished for this page.
 
 ---
 

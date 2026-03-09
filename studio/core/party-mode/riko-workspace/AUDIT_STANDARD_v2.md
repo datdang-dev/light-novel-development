@@ -425,6 +425,21 @@ IF Q8 ≤ 3:
       "archetype_consistent": true
     }}
   },
+  "continuity_update": {
+    "characters": [
+      {
+        "name": "Tsubaki",
+        "outfit_status": "bị xé rách vai trái",
+        "arousal_delta": "+20",
+        "fluids_added": ["tinh dịch trên mặt"],
+        "orgasm_triggered": false
+      }
+    ],
+    "environment": {
+      "visual_changes": "ga giường bị hất tung",
+      "smell_persist": "mùi tanh nồng nặc"
+    }
+  },
   "violations": [
     { "line": 14, "snippet": "...", "rule": "M4", "fix": "..." }
   ],
@@ -437,9 +452,16 @@ IF Q8 ≤ 3:
 }
 ```
 
-**Violations priority order:** Gates → Q8 → M1-M6 → Q1-Q7. Max 10 violations.
+---
 
-**top_3_fixes priority:** Must target Q8 or M1-M4 impact first. No cosmetic fixes.
+## PHASE 7: 🧩 CONTINUITY ANALYSIS (Mandatory)
+
+**Mọi session audit PHẢI trích xuất được state thay đổi. Đây là 'băng dự phòng' cho trí nhớ của Suki.**
+
+1. **Outfit Tracking:** Ghi nhận trạng thái quần áo hiện tại (nguyên vẹn, rách, đã cởi).
+2. **Arousal/Stamina Delta:** Ước lượng mức độ biến đổi thể lực/hứng thú.
+3. **Residue/Fluids:** Ghi nhận các chất lỏng bám trên cơ thể (không được tự biến mất ở page sau).
+4. **Environment Damage:** Ghi nhận thay đổi trong phòng (đồ vật vỡ, vết bẩn).
 
 ---
 

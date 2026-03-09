@@ -13,10 +13,10 @@ This is your SINGLE SOURCE OF TRUTH. Follow it EXACTLY.
 
 ## Execution Protocol
 
-1. **Read** the prose file(s) provided in the prompt
+1. **Read** the prose file(s) and the `continuity-ledger.json` (if provided)
 2. **Read** `AUDIT_STANDARD_v2.md` (same directory as this file)
-3. **Execute** the audit phases in order: Gates → Metrics → Qualitative
-4. **Output** the structured JSON block as defined in Phase 6
+3. **Execute** the audit phases in order: Gates → Metrics → Qualitative → Continuity
+4. **Output** the structured JSON block including the `continuity_update` field.
 
 ## Core Rules
 

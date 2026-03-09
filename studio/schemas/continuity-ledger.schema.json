@@ -1,0 +1,44 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "LND Continuity Ledger",
+  "description": "Dynamic state tracking for R18 narrative consistency.",
+  "type": "object",
+  "properties": {
+    "session_id": { "type": "string" },
+    "last_updated_page": { "type": "integer" },
+    "characters": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "outfit": { "type": "string" },
+          "stamina_level": { "type": "integer", "minimum": 0, "maximum": 100 },
+          "arousal_level": { "type": "integer", "minimum": 0, "maximum": 100 },
+          "fluids_on_body": { "type": "array", "items": { "type": "string" } },
+          "current_position": { "type": "string" },
+          "inventory": { "type": "array", "items": { "type": "string" } }
+        },
+        "required": ["name"]
+      }
+    },
+    "environment": {
+      "type": "object",
+      "properties": {
+        "location": { "type": "string" },
+        "visual_state": { "type": "string", "description": "e.g. 'messy bed', 'shattered window'" },
+        "smell": { "type": "string" },
+        "ambience": { "type": "string" }
+      }
+    },
+    "cumulative_stats": {
+      "type": "object",
+      "properties": {
+        "ejaculation_count": { "type": "integer" },
+        "orgasm_count": { "type": "integer" },
+        "duration_minutes": { "type": "integer" }
+      }
+    }
+  },
+  "required": ["session_id", "characters", "environment"]
+}
