@@ -84,3 +84,5 @@ sources/
 *source*
 *output*
 *.kilo*
+*bmad*
+.agent
