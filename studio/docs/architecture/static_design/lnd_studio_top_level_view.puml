@@ -1,0 +1,151 @@
+@startuml lnd_studio_top_level_view
+
+title LND Studio v7.0 — Top-Level Architecture View
+skinparam componentStyle uml2
+skinparam packageStyle rectangle
+skinparam linetype ortho
+skinparam padding 4
+skinparam nodesep 20
+skinparam ranksep 30
+
+' ============================================================
+' AGENTS (external boundary)
+' ============================================================
+package "Agents (14 Specialists)" as AGENTS #e8e8e8 {
+    actor "Director K\n(Orchestrator)" as DIR
+    actor "Kana\n(Visual Analysis)" as KANA
+    actor "Suki\n(Prose Generation)" as SUKI
+    actor "Riko\n(Quality Audit)" as RIKO
+    actor "Aria\n(Character Builder)" as ARIA
+    actor "Miki\n(Dialogue & SFX)" as MIKI
+    actor "Orion\n(Continuity)" as ORION
+    actor "Others\n(+7 agents)" as OTHER_AGENTS
+}
+
+' ============================================================
+' CORE LAYER — Foundation Engines
+' ============================================================
+package "core/ — Foundation Engines" as CORE #ffe0e0 {
+    component "panel-forensic\n(5 steps)" as PF
+    component "lewd-writer\n(9 steps)" as LW
+    component "transformation-engine" as TE
+    component "party-mode\n(meetings)" as PM
+
+    note as N_CORE
+        Heavy processing
+        Step-based workflows
+        Hard gates & progression
+    end note
+}
+
+' ============================================================
+' SERVICES LAYER — Business Logic Pipelines
+' ============================================================
+package "services/ — Domain Pipelines (12)" as SERVICES #e0ffe0 {
+    component "gooner-alchemist\n(8-step pipeline)" as GA
+    component "quality-audit\n(100-pt scoring)" as QA
+    component "bible-sync\n(LOAD/SAVE)" as BS
+    component "dialogue-scripting" as DS
+    component "character-builder" as CB
+    component "entity-extractor" as EE
+
+    package "Output Services" as OUT_SVC {
+        component "chapter-composer" as CC
+        component "release-compiler" as RC
+        component "renpy-adaptation" as RA
+        component "rpg-adapter" as RPG
+        component "st-card-export" as ST
+        component "scene-expansion" as SE
+    }
+}
+
+' ============================================================
+' MODULES LAYER — Reusable Knowledge Utilities
+' ============================================================
+package "modules/ — Knowledge Modules (5)" as MODULES #e0e0ff {
+    component "sfx-lookup" as SFX
+    component "fetish-guidance" as FG
+    component "gooner-audit-engine" as GAE
+    component "style-enforcer" as STYLE
+    component "sillytavern-export" as STE
+}
+
+' ============================================================
+' SHARED — Cross-cutting Capabilities
+' ============================================================
+package "shared/ — Cross-cutting" as SHARED #fff5e0 {
+    component "agent-memory\n(persistent learning)" as AM
+    component "onboarding\n(context grounding)" as OB
+}
+
+' ============================================================
+' INFRASTRUCTURE — Config, Schemas, Knowledge
+' ============================================================
+package "Infrastructure" as INFRA #f0f0f0 {
+    database "config/\n(pipeline-context\nprofiles, corpus)" as CONFIG
+    database "schemas/\n(4 JSON schemas)" as SCHEMAS
+    database "knowledge/\n(fetish-db, glossaries)" as KNOWLEDGE
+    database ".agent/rules/\n(10 writing rules)" as RULES
+    folder "assets/ templates/" as ASSETS
+    folder "scripts/ tools/" as TOOLS
+}
+
+' ============================================================
+' RELATIONSHIPS — Agent → Skill
+' ============================================================
+DIR --> GA : orchestrates
+KANA --> PF : primary skill
+SUKI --> LW : primary skill
+RIKO --> QA : primary skill
+ARIA --> CB
+MIKI --> DS
+ORION --> BS
+
+' ============================================================
+' RELATIONSHIPS — Service → Core (delegation)
+' ============================================================
+GA -down-> PF : Step 2:\nForensic Analysis
+GA -down-> LW : Step 4:\nProse Generation
+GA -down-> QA : Step 5:\nQuality Gate
+
+' ============================================================
+' RELATIONSHIPS — Service → Module (composition)
+' ============================================================
+QA ..> GAE : scoring engine
+DS ..> SFX : SFX lookup
+LW ..> FG : fetish patterns
+LW ..> STYLE : style rules
+ST ..> STE : export logic
+
+' ============================================================
+' RELATIONSHIPS — Cross-cutting
+' ============================================================
+GA ..> BS : Step 6:\nState Persist
+GA ..> AM : memory\nread/write
+SHARED -[hidden]down- INFRA
+
+' ============================================================
+' RELATIONSHIPS — Infrastructure
+' ============================================================
+CORE ..> SCHEMAS : validate output
+CORE ..> RULES : enforce style
+SERVICES ..> CONFIG : load context
+SERVICES ..> KNOWLEDGE : load data
+MODULES ..> ASSETS : read templates
+
+' ============================================================
+' LEGEND
+' ============================================================
+legend right
+    |= Color |= Layer |= Count |
+    | <#ffe0e0> | Core Engines | 4 |
+    | <#e0ffe0> | Domain Services | 12 |
+    | <#e0e0ff> | Knowledge Modules | 5 |
+    | <#fff5e0> | Shared Capabilities | 2 |
+    | <#f0f0f0> | Infrastructure | 15 dirs total |
+    ---
+    → = Primary dispatch (strong coupling)
+    ..> = Composition (loose coupling)
+endlegend
+
+@enduml
