@@ -1,11 +1,11 @@
-# LND Studio Architecture (v3.0)
+# LND Studio Architecture (v4.0)
 
-> **BMAD v6.1 Compliant Framework for Light Novel Development**
+> **BMAD v7.0 Compliant Framework for Light Novel Development**
 > Documented by Paige, Technical Documentation Specialist.
 
 ## 1. Top-Level Structure
 
-LND Studio is structured as a dedicated BMAD Module, governed by `module.yaml`. It follows the **SKILL.md Convention** for all components — every service, core engine, and module has a standardized `SKILL.md` entry point with YAML frontmatter, activation protocol, and routing tables.
+LND Studio is structured as a dedicated BMAD Module, governed by `module.yaml` (v7.0.0). It follows the **SKILL.md Convention** for all components — every service, core engine, and module has a standardized `SKILL.md` entry point with YAML frontmatter, activation protocol, and routing tables.
 
 ```text
 lnd_dev/
@@ -44,13 +44,21 @@ lnd_dev/
     │   ├── style-enforcer/        # Style & archetype validation
     │   └── sillytavern-export/    # ST V3 card export logic
     │
-    ├── config/                    # Global pipeline context
+    ├── shared/                    # Cross-cutting shared skills
+    │   ├── agent-memory/          # Persistent learning layer
+    │   └── onboarding/            # Context grounding session
+    │
+    ├── config/                    # Global pipeline context + data
+    │   ├── profiles/              # Character profiles
+    │   └── corpus/                # Character corpus data
     ├── schemas/                   # Strict JSON Schemas (4 schemas)
     ├── knowledge/                 # Knowledge base (fetish-db, glossaries, style-guides)
     ├── _templates/                # Scaffolding templates
     │   └── new-skill-template/    # Starter for new skills
-    ├── scripts/                   # Utility scripts
-    └── tools/                     # External tools (RPG decrypter, etc.)
+    ├── scripts/                   # Python automation scripts
+    ├── tools/                     # External tools (RPG decrypter, etc.)
+    ├── rules/                     # Studio-level rule hub
+    └── output/                    # Runtime output (generated files)
 ```
 
 ---
@@ -76,6 +84,28 @@ component-name/
 - `## Steps` — table mapping step files
 - `## Dependencies` — agent, schemas, modules
 - `## Quick Reference` — intent → trigger → route mapping
+
+### Two-Layer Documentation Pattern
+
+Services follow a two-layer documentation pattern:
+
+| Layer | File | Purpose |
+|-------|------|---------|
+| **Entry Point** | `SKILL.md` | Overview, activation protocol, routing — what an agent reads first |
+| **Implementation Reference** | `references/workflow.md` | Detailed step logic, scoring rubrics, schemas — what an agent reads during execution |
+
+`SKILL.md` is the **single source of truth** for discovery and routing. `workflow.md` contains implementation details that are too verbose for the entry point.
+
+### Path Conventions
+
+Two path prefixes are used across the studio:
+
+| Prefix | Scope | Example |
+|--------|-------|---------|
+| `{project-root}/studio/...` | Studio-internal paths | `{project-root}/studio/config/config.yaml` |
+| `{project-root}/.agent/rules/...` | Project-level writing rules | `{project-root}/.agent/rules/sensory_density.md` |
+
+The `.agent/rules/` directory lives at the project root (not inside studio) because these rules apply to the entire project, not just the studio framework.
 
 ---
 
@@ -136,3 +166,25 @@ All JSON outputs use recursive `"additionalProperties": false` constraints:
 - `draft-prose.schema.json` — word counts, format compliance, sensory thresholds
 - `audit-report.schema.json` — grading logic, actionable rewrites
 - `continuity-ledger.schema.json` — state persistence across pages
+
+---
+
+## 6. Directory Organization Rationale
+
+| Directory | Count | Purpose |
+|-----------|-------|---------|
+| `core/` | 4 | Foundation engines — heavy computation |
+| `services/` | 12 | Business-logic pipelines — orchestration |
+| `modules/` | 5 | Reusable knowledge-backed utilities |
+| `shared/` | 2 | Cross-cutting capabilities (memory, onboarding) |
+| `agents/` | 14 | BMAD agent YAML definitions |
+| `config/` | — | Pipeline context, profiles, corpus, knowledge config |
+| `knowledge/` | — | Fetish-db, glossaries, style-guides |
+| `schemas/` | 4 | JSON Schema validation |
+| `docs/` | — | Documentation, audit history |
+| `scripts/` | 4 | Python automation (extract, repair, simulate) |
+| `tools/` | — | External repos (RPG-Maker-MV-Decrypter) |
+| `_templates/` | — | Scaffolding templates for new skills |
+| `rules/` | 1 | Studio-level rule hub (indexes `.agent/rules/`) |
+| `assets/` | — | Static assets (SFX library, ST templates) |
+| `output/` | — | Runtime generated files |
