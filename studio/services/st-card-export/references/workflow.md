@@ -49,9 +49,10 @@ version: "2.0.0"
 
 | Module | Path | Purpose |
 |--------|------|---------|
-| SillyTavern Export | `{project-root}/studio/modules/sillytavern-export.md` | ST V3 format spec |
+| SillyTavern Export | `{project-root}/studio/modules/sillytavern-export/SKILL.md` | ST V3 format spec |
 
 The module contains:
+
 - V3 JSON schema
 - Field mapping from LND profiles
 - Template generation patterns
@@ -84,6 +85,7 @@ The module contains:
 ### 1. Configuration Loading
 
 Load config from `{project-root}/studio/config/config.yaml`:
+
 - `output_folder`, `user_name`, `communication_language`
 
 ### 2. First Step Execution

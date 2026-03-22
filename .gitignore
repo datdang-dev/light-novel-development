@@ -86,3 +86,4 @@ sources/
 *.kilo*
 *bmad*
 .agent
+*scan*

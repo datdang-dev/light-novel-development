@@ -2,19 +2,37 @@
 
 > **Location**: `studio/modules/`
 
-Knowledge-backed modules that extend agent capabilities.
+Knowledge-backed modules that extend agent capabilities. Each module follows the SKILL.md convention with a standardized entry point, activation protocol, and composable structure.
 
 ---
 
 ## Available Modules
 
-| Module | Purpose | Knowledge Source |
-|--------|---------|------------------|
-| [🔊 sfx-lookup](./sfx-lookup.md) | SFX tra cứu, dịch, gợi ý | `glossaries/`, `fetish-db/moaning*` |
-| [🔞 fetish-guidance](./fetish-guidance.md) | Fetish patterns & escalation | `fetish-db/` (30 files) |
-| [🔥 gooner-audit-engine](./gooner-audit-engine.md) | 100-point QA scoring | `docs/GOONER_AUDIT_FRAMEWORK.md` |
-| [✍️ style-enforcer](./style-enforcer.md) | Archetype & style validation | `style-guides/`, `fetish-db/*_research` |
-| [📤 sillytavern-export](./sillytavern-export.md) | ST V3 card export | `docs/sillytavern-expert-sidecar/` |
+| Module | Directory | Purpose |
+|--------|-----------|---------|
+| [🔊 sfx-lookup](./sfx-lookup/SKILL.md) | `sfx-lookup/` | SFX tra cứu, dịch, gợi ý |
+| [🔞 fetish-guidance](./fetish-guidance/SKILL.md) | `fetish-guidance/` | Fetish patterns & escalation |
+| [🔥 gooner-audit-engine](./gooner-audit-engine/SKILL.md) | `gooner-audit-engine/` | 100-point QA scoring |
+| [✍️ style-enforcer](./style-enforcer/SKILL.md) | `style-enforcer/` | Archetype & style validation |
+| [📤 sillytavern-export](./sillytavern-export/SKILL.md) | `sillytavern-export/` | ST V3 card export |
+
+---
+
+## Module Structure (SKILL.md Convention)
+
+Each module follows this standard layout:
+
+```
+module-name/
+├── SKILL.md          # Entry point: YAML frontmatter + Overview + Activation
+└── references/       # Static knowledge refs and original documentation
+```
+
+### SKILL.md Requirements
+
+- **YAML frontmatter** with `name` and `description`
+- **On Activation** section with numbered setup steps
+- **Quick Reference** table mapping intents to triggers
 
 ---
 
@@ -42,30 +60,20 @@ Knowledge-backed modules that extend agent capabilities.
 
 ---
 
-## Usage
-
-Modules are referenced by agents during workflow execution. To use manually:
-
-```
-# View module capabilities
-cat studio/modules/sfx-lookup.md
-
-# Reference in agent workflow
-"Apply sfx-lookup module to suggest SFX for this scene"
-```
-
----
-
 ## Adding New Modules
 
-1. Create `{module-name}.md` in this directory
-2. Include:
-   - Purpose section
-   - Knowledge References table
-   - Capabilities list
-   - Integration Points
-   - Usage Examples
-3. Update this README
+1. Create a new directory: `modules/{module-name}/`
+2. Copy the template from `_templates/new-skill-template/`
+3. Write a proper `SKILL.md` with:
+   - YAML frontmatter (`name`, `description`)
+   - `## Overview` — what the module does
+   - `## On Activation` — setup steps
+   - `## Capabilities` — what it provides
+   - `## Integration Points` — which agents use it
+   - `## Quick Reference` — trigger table
+4. Add a `references/` directory for knowledge sources
+5. Update `module.yaml` with the new module entry
+6. Update this README
 
 ---
 

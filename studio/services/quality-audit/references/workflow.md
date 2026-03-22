@@ -71,7 +71,7 @@ If ANY of these appear, score = 0 and AUTO-FAIL:
 
 | Module | Path | Purpose |
 |--------|------|---------|
-| Gooner Audit Engine | `{project-root}/studio/modules/gooner-audit-engine.md` | 100-point scoring system |
+| Gooner Audit Engine | `{project-root}/studio/modules/gooner-audit-engine/SKILL.md` | 100-point scoring system |
 
 The module contains:
 
