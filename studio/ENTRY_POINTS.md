@@ -1,51 +1,53 @@
-# studio Entry Points
+# Studio Entry Points (V7.0)
 
-## Main Pipeline
+## Main Pipelines
+
+| Command | Skill Path | Orchestrator | Purpose |
+|---------|-----------|--------------|---------|
+| `/gooner-alchemist` | `services/gooner-alchemist/SKILL.md` | Director K | Complete 8-Step manga→prose adaptation (Forensics -> Context -> Suki -> Riko -> Save). |
+| `/renpy-adaptation` | `services/renpy-adaptation/SKILL.md` | Director K | Parse .rpy game scripts into AST and generate complete prose chapters. |
+
+---
+
+## Core Tooling & Forensic Pipelines
+
+| Command | Skill Path | Owner | Purpose |
+|---------|-----------|-------|---------|
+| `/panel-forensic` | `core/panel-forensic/SKILL.md` | Prof. Atomic | Deep visual extraction (ATOMIC matrix) from images. |
+| `/manga-adapter` | `core/manga-adapter/SKILL.md` | Kana | Create POC context vectors bridging literal imagery to psychological intent. |
+| `/lewd-writer` | `core/lewd-writer/SKILL.md` | Suki | Raw R18 prose generation based on JIT context. |
+| `/gooner-audit` | `services/quality-audit/SKILL.md` | Riko | Grade drafted prose out of 100 points, auto-rewrite if sensory targets fail. |
+
+---
+
+## Capabilities & State
+
+| Command | Skill Path | Owner | Purpose |
+|---------|-----------|-------|---------|
+| `/bible-sync` | `services/bible-sync/SKILL.md` | Orion | Cross-scene continuity ledger verification. |
+| `/character-architect`| `services/character-builder/SKILL.md` | Aria | Character bible creation. |
+| `/dialogue-crafter`| `services/dialogue-scripting/SKILL.md` | Miki | Generates explicit dialogue snippets & selects SFX from DB. |
+
+---
+
+## Team & Development
 
 | Command | Skill Path | Purpose |
 |---------|-----------|---------|
-| `/gooner-alchemist` | `services/gooner-alchemist/SKILL.md` | Complete manga→prose adaptation |
-
----
-
-## Capability Workflows
-
-| Command | Skill Path | Owner | Steps | Purpose |
-|---------|-----------|-------|-------|---------|
-| `/panel-forensic` | `core/panel-forensic/SKILL.md` | Kana | 5 | Visual forensic analysis |
-| `/prose-adapter` | `core/lewd-writer/SKILL.md` | Suki | 10 | Prose generation |
-| `/gooner-audit` | `services/quality-audit/SKILL.md` | Riko | 5 | Quality scoring |
-| `/bible-sync` | `services/bible-sync/SKILL.md` | Director K | 8 | State management (LOAD/SAVE) |
-| `/entity-extractor` | `services/entity-extractor/SKILL.md` | Director K | 5 | Character data extraction |
-| `/character-bible` | `services/character-builder/SKILL.md` | Aria | 2 | Character creation |
-| `/dialogue-generator` | `services/dialogue-scripting/SKILL.md` | Miki | 6 | R18 dialogue & SFX |
-| `/scene-expansion` | `services/scene-expansion/SKILL.md` | Suki | 6 | Outline → full prose |
-| `/st-card-export` | `services/st-card-export/SKILL.md` | Tavvy | 5 | SillyTavern cards |
-
----
-
-## Pipeline Workflows
-
-| Command | Skill Path | Steps | Purpose |
-|---------|-----------|-------|---------|
-| `/party-mode` | `core/party-mode/SKILL.md` | 3 | Multi-agent discussion |
-| `/chapter-composer` | `services/chapter-composer/SKILL.md` | 5 | Compile pages → chapter |
-| `/release-compiler` | `services/release-compiler/SKILL.md` | 3 | Dev → reader format |
+| `/party-mode` | `core/party-mode/SKILL.md` | Multi-agent collaboration / brainstorming session with all 14 agents. |
+| `/release-compiler` | `services/release-compiler/SKILL.md` | Merge atomic page files into a polished chapter volume for readers. |
 
 ---
 
 ## Quick Reference
 
 ```bash
-# Full adaptation
+# Full Manga Adaptation (Pipeline)
 /gooner-alchemist
 
-# Just analyze
-/panel-forensic
+# Ren'Py VN Script Adaptation
+/renpy-adaptation
 
-# Create character
-/character-bible
-
-# Team brainstorm
+# Team brainstorm (Ask architecture questions)
 /party-mode
 ```
