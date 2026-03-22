@@ -3,7 +3,7 @@ name: 'step-02-forensic-analysis'
 description: 'Invoke panel-forensic workflow for visual analysis'
 
 nextStepFile: './step-03-context-loading.md'
-panelForensicWorkflow: '{project-root}/studio/core/panel-forensic/workflow.md'
+panelForensicWorkflow: '{project-root}/studio/core/panel-forensic/references/workflow.md'
 stateFile: '{output_folder}/_pipeline/{project}/state.yaml'
 analysisFolder: '{output_folder}/_analysis/{project}'
 ---

@@ -6,6 +6,20 @@ from pathlib import Path
 PROJECT_ROOT = Path("/home/datdang/working/lnd_dev")
 OUTPUT_DIR = PROJECT_ROOT / "_bmad-output" / "_prose" / "simulation_test"
 
+PRIORITY_HEADER = """## 0. PRIORITY HEADER (STRICT PRECEDENCE)
+
+If any instructions conflict, resolve them in this exact order:
+
+1. Runtime Task Instructions
+2. Output Contracts / Schemas
+3. Canon Rules
+4. Scene-specific Payloads
+5. Persona / Heuristics
+
+Lower-priority guidance MUST NOT override higher-priority constraints.
+When in doubt, obey the highest-priority source and ignore the conflicting lower layer.
+"""
+
 def read_file(filepath):
     """Đọc nội dung một file text."""
     try:
@@ -56,6 +70,10 @@ def simulate_jit_payload():
     print("[+] Đang đọc Mechanics Rules...")
     mechanics_path = PROJECT_ROOT / ".agent" / "rules" / "lewd_writing_mechanics.md"
     mechanics_rules = read_file(mechanics_path)
+
+    print("[+] Đang đọc Global Rule Hub...")
+    global_rules_path = PROJECT_ROOT / "studio" / "rules" / "global_rule_hub.md"
+    global_rules = read_file(global_rules_path)
     
     # 2. Sinh ra Forensic Mock hoặc Load Forensic có thật
     print("[+] Đang lấy dữ liệu trinh sát (Forensic State)...")
@@ -67,21 +85,27 @@ def simulate_jit_payload():
     
     final_payload = f"""# === GOONER ALCHEMIST FINAL PAYLOAD ===
 
+{PRIORITY_HEADER}
+
 ## 1. STUDIO MASTER CONTEXT
 {master_context}
 
 ---
-## 2. PROJECT MECHANICS (LEWD WRITING)
+## 2. GLOBAL OVERRIDES & FORMATTING RULES
+{global_rules}
+
+---
+## 3. PROJECT MECHANICS (LEWD WRITING)
 {mechanics_rules}
 
 ---
-## 3. CURRENT SCENE STATE (FORENSIC)
+## 4. CURRENT SCENE STATE (FORENSIC)
 ```json
 {forensic_state}
 ```
 
 ---
-## 4. ACTION REQUIRED
+## 5. ACTION REQUIRED
 Hỡi Suki! Bạn đã có toàn bộ bối cảnh của studio, toàn bộ quy tắc 18+ bắt buộc, và cấu trúc chính xác của trang truyện này.
 Hãy viết luồng suy nghĩ của bạn, sau đó trả về chuẩn xác theo format `draft-prose.schema.json`.
 """

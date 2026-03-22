@@ -57,9 +57,10 @@ def auto_repair(data, schema, path="root"):
             data[field] = default
             repairs.append(f"[AUTO-FIX] Added missing field '{path}.{field}' with default {default}")
 
-    # Fix 2: Recalculate word_count if present but wrong
-    if 'word_count' in data and 'content' in data:
-        actual_count = len(str(data['content']).split())
+    # Fix 2: Recalculate word_count if present but wrong.
+    # Draft prose payloads store the body under `prose_content`.
+    if 'word_count' in data and 'prose_content' in data:
+        actual_count = len(str(data['prose_content']).split())
         if data['word_count'] != actual_count:
             repairs.append(f"[AUTO-FIX] Corrected word_count: {data['word_count']} -> {actual_count}")
             data['word_count'] = actual_count

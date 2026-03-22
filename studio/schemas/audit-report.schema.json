@@ -4,85 +4,196 @@
     "description": "Output schema for the Quality Audit performed by Riko.",
     "type": "object",
     "properties": {
-        "page_number": {
-            "type": "string"
+        "pass": {
+            "type": "boolean"
         },
-        "status": {
-            "type": "string",
-            "enum": [
-                "PASSED",
-                "FAILED_FORMAT",
-                "FAILED_QUALITY",
-                "FAILED_CONTAMINATION"
-            ]
-        },
-        "total_score": {
+        "score": {
             "type": "integer",
             "minimum": 0,
             "maximum": 100
         },
-        "category_scores": {
+        "grade": {
+            "type": "string",
+            "enum": [
+                "GOONER PERFECTION",
+                "APPROVED",
+                "NEEDS REVISION",
+                "FAILED",
+                "GATE-FAIL"
+            ]
+        },
+        "page_type": {
+            "type": "string",
+            "enum": [
+                "EXPO",
+                "ACTION",
+                "CLIMAX",
+                "AFTERMATH"
+            ]
+        },
+        "format_penalty": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 15
+        },
+        "gates": {
             "type": "object",
             "properties": {
-                "sensory_immersion": {
-                    "type": "integer"
+                "G0_format": {
+                    "type": "object",
+                    "properties": {
+                        "pass": {
+                            "type": "boolean"
+                        },
+                        "penalty": {
+                            "type": "integer"
+                        },
+                        "violations": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "required": [
+                        "pass",
+                        "penalty",
+                        "violations"
+                    ]
                 },
-                "edging_rhythm": {
-                    "type": "integer"
+                "G1_language": {
+                    "type": "boolean"
                 },
-                "fetish_psychology": {
-                    "type": "integer"
+                "G2_banned_words": {
+                    "type": "boolean"
                 },
-                "technical_execution": {
-                    "type": "integer"
+                "G3_canon_vocab": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "G0_format",
+                "G1_language",
+                "G2_banned_words",
+                "G3_canon_vocab"
+            ],
+            "additionalProperties": false
+        },
+        "metrics": {
+            "type": "object",
+            "properties": {
+                "M1_smell": {
+                    "type": "object"
                 },
-                "format_compliance": {
-                    "type": "integer"
+                "M2_sound": {
+                    "type": "object"
+                },
+                "M3_texture": {
+                    "type": "object"
+                },
+                "M4_temp": {
+                    "type": "object"
+                },
+                "M5_dialogue": {
+                    "type": "object"
+                },
+                "M6_viscosity": {
+                    "type": "object"
                 }
             },
             "additionalProperties": false
         },
-        "feedback": {
+        "qualitative": {
+            "type": "object",
+            "properties": {
+                "Q1_edging": {
+                    "type": "object"
+                },
+                "Q2_power": {
+                    "type": "object"
+                },
+                "Q3_psych": {
+                    "type": "object"
+                },
+                "Q4_fetish": {
+                    "type": "object"
+                },
+                "Q5_somatic": {
+                    "type": "object"
+                },
+                "Q6_hook": {
+                    "type": "object"
+                },
+                "Q7_narrator": {
+                    "type": "object"
+                },
+                "Q8_arousal": {
+                    "type": "object"
+                }
+            },
+            "additionalProperties": false
+        },
+        "continuity_update": {
+            "type": "object",
+            "properties": {
+                "characters": {
+                    "type": "array",
+                    "items": {
+                        "type": "object"
+                    }
+                },
+                "environment": {
+                    "type": "object"
+                }
+            }
+        },
+        "violations": {
             "type": "array",
             "items": {
                 "type": "object",
                 "properties": {
-                    "category": {
-                        "type": "string"
-                    },
-                    "severity": {
-                        "type": "string",
-                        "enum": [
-                            "CRITICAL",
-                            "WARNING",
-                            "INFO"
+                    "line": {
+                        "type": [
+                            "integer",
+                            "string"
                         ]
                     },
-                    "message": {
+                    "snippet": {
+                        "type": "string"
+                    },
+                    "rule": {
+                        "type": "string"
+                    },
+                    "fix": {
                         "type": "string"
                     }
                 },
                 "required": [
-                    "category",
-                    "severity",
-                    "message"
-                ],
-                "additionalProperties": false
+                    "rule"
+                ]
             }
         },
-        "suggested_rewrites": {
+        "top_3_fixes": {
             "type": "array",
             "items": {
                 "type": "string"
-            }
+            },
+            "maxItems": 3
+        },
+        "reason": {
+            "type": "string"
         }
     },
     "required": [
-        "page_number",
-        "status",
-        "total_score",
-        "category_scores",
-        "feedback"
+        "pass",
+        "score",
+        "grade",
+        "page_type",
+        "format_penalty",
+        "gates",
+        "metrics",
+        "qualitative",
+        "reason"
     ],
     "additionalProperties": false
 }

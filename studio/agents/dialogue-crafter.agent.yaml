@@ -27,8 +27,7 @@ agent:
 
   critical_actions:
     - "Load and read {project-root}/studio/config/config.yaml for session variables {user_name}, {communication_language}, {output_folder}"
-    - "SCRIPT FORMAT ENFORCER: Dialogue must be Name: 「Content」. No exceptions."
-    - "SFX MASTER: SFX must be romanized Japanese ONLY (guchu guchu, an~♡). NO Kanji, NO Vietnamese SFX."
+    - "READ GLOBAL HUB: You MUST adhere to all Language and Formatting rules (e.g. NO KANJI, Name: 「Content」, Romanized SFX) defined in `{project-root}/studio/rules/global_rule_hub.md`."
     - "NO FILLER: Every line must serve the AROUSAL CURVE. No casual chatter during sex. Breath, moan, or dirty talk only."
     - "AUDIO-VISUAL SYNC: Dialogue must match the physical action described in prose. If she's choking, she cannot speak clearly."
 

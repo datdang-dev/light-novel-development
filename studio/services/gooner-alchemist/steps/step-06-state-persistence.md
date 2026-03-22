@@ -3,7 +3,7 @@ name: 'step-06-state-persistence'
 description: 'Invoke bible-sync SAVE for state updates'
 
 nextStepFile: './step-07-complete.md'
-bibleSyncWorkflow: '{project-root}/studio/services/bible-sync/workflow.md'
+bibleSyncWorkflow: '{project-root}/studio/services/bible-sync/references/workflow.md'
 ---
 
 # Step 6: State Persistence

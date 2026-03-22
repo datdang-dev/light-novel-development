@@ -4,7 +4,7 @@ description: 'Pre-repair JSON, invoke gooner-audit, and handle diff-based revisi
 
 nextStepOnPass: './step-06-state-persistence.md'
 nextStepOnFail: './step-04-prose-generation.md'
-goonerAuditWorkflow: '{project-root}/studio/services/quality-audit/workflow.md'
+goonerAuditWorkflow: '{project-root}/studio/services/quality-audit/references/workflow.md'
 autoRepairScript: '{project-root}/studio/scripts/auto_repair.py'
 draftProseSchema: '{project-root}/studio/schemas/draft-prose.schema.json'
 auditReportSchema: '{project-root}/studio/schemas/audit-report.schema.json'

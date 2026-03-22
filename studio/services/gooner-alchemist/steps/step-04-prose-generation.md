@@ -3,7 +3,7 @@ name: 'step-04-prose-generation'
 description: 'Invoke prose-adapter for prose generation'
 
 nextStepFile: './step-05-quality-audit.md'
-proseAdapterWorkflow: '{project-root}/studio/core/lewd-writer/workflow.md'
+proseAdapterWorkflow: '{project-root}/studio/core/lewd-writer/references/workflow.md'
 stateFile: '{output_folder}/_pipeline/{project}/state.yaml'
 analysisFolder: '{output_folder}/_analysis/{project}'
 proseFolder: '{output_folder}/_prose/{project}'
@@ -181,7 +181,7 @@ Scan generated prose for context leaks. These patterns MUST NOT appear:
 BLOCKED_PATTERNS = [
   "*_research",      # Internal research file names
   "*_lexicon",       # Internal lexicon file names  
-  "workflow.md",     # Workflow references
+  "references/workflow.md",     # Workflow references
   "state.yaml",      # Pipeline references
   "forensic-gate",   # System gate references
   "step-0",          # Step file references

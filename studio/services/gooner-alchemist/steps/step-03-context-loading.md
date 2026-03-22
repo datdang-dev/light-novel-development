@@ -3,7 +3,7 @@ name: 'step-03-context-loading'
 description: 'Invoke bible-sync LOAD and JIT Context Sharding for continuity context'
 
 nextStepFile: './step-04-prose-generation.md'
-bibleSyncWorkflow: '{project-root}/studio/services/bible-sync/workflow.md'
+bibleSyncWorkflow: '{project-root}/studio/services/bible-sync/references/workflow.md'
 analysisFolder: '{output_folder}/_analysis/{project}'
 ---
 
@@ -101,6 +101,7 @@ SKIP rules that are NOT relevant to the current scene type.
 
 | Check | Status |
 |-------|--------|
+| Priority Header injected | ✓/✗ |
 | Bible-sync context | ✓/✗ |
 | Characters loaded | {count} |
 | States loaded | ✓/✗ |
@@ -129,5 +130,12 @@ Update pipeline doc:
 
 **Chọn:** [C] Continue to Prose"
 ```
+
+**MANDATORY:** The generated `context_payload.md` must prepend a strict Priority Header with this precedence order:
+1. Runtime Task Instructions
+2. Output Contracts / Schemas
+3. Canon Rules
+4. Scene-specific Payloads
+5. Persona / Heuristics
 
 ---

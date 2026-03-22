@@ -7,7 +7,7 @@ description: 'Step 01b: Generate Context Horizon'
 
 **Progress: Step 1b of 7** - Next: Forensic Analysis
 
-**Goal:** Look ahead `N` frames/pages to build a factual Scene Trajectory and identify continuous Action Beats for Suki to foreshadow and deduplicate. **CRITICAL:** This replaces predictive hallucination with actual upcoming visual evidence.
+**Goal:** Preserve the horizon stage in the pipeline while generating a clearly labeled placeholder `context_horizon.md`. **CRITICAL:** The current `generate_horizon.py` implementation is a stub and does **not** replace predictive hallucination with actual upcoming visual evidence.
 
 ## 0. PRE-EXECUTION GATE (MANDATORY)
 
@@ -63,8 +63,9 @@ python3 {project-root}/studio/services/gooner-alchemist/tools/generate_horizon.p
 Check that `context_horizon.md` exists. It should contain:
 
 - **Look-Ahead Window:** Confirmation of frames analyzed.
-- **Concrete Trajectory:** Foreshadowing anchor points.
-- **Action Deduplicator Flag:** Instructions on whether to merge redundant frames.
+- **Stub Status:** Explicit warning that no vision-based trajectory analysis was performed.
+- **Concrete Trajectory (Disabled):** Instruction to treat the current frame as ground truth.
+- **Action Deduplicator Flag:** Explicit note that auto-deduplication is disabled in the stub.
 
 ```markdown
 IF FILE NOT EXISTS:

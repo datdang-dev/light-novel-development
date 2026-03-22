@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """
-Context Horizon Generator (Universal Look-Ahead Engine)
-Analyzes N upcoming frames/pages to establish a strict Scene Trajectory.
+Context Horizon Generator (Stub Placeholder)
+Current implementation does not run a vision model. It emits a
+non-authoritative horizon file that explicitly disables trajectory inference.
 
 Usage:
     python generate_horizon.py --state <state_file> --mode <video|manga> --window <N> --out <output_file>
@@ -15,23 +16,31 @@ from pathlib import Path
 
 def generate_horizon_summary(image_files, mode, start_index):
     """
-    Simulates the Vision Model call.
+    Stub implementation.
     In a real environment, this would pass the batch of images to an LLM/VLM.
     """
     total = len(image_files)
     print(f"👁️ Analyzing Horizon Window: {total} {mode} frames ahead...")
     
     # Placeholder for actual Vision LLM logic
-    summary = f"""# Context Horizon: Scene Trajectory
+    summary = f"""# Context Horizon: Stub Output
+
+> WARNING: `generate_horizon.py` is currently a placeholder implementation.
+> It does NOT perform vision-based look-ahead analysis and MUST NOT be treated
+> as factual trajectory evidence.
 
 **Medium:** {mode.capitalize()}
 **Look-Ahead Window:** {total} upcoming images (Start: {start_index})
 
-## 1. Concrete Trajectory (Foreshadowing Ground Truth)
+## 1. Stub Status
+- [SYSTEM] Vision-based horizon analysis is not implemented in this build.
+- [SYSTEM] This file exists only to preserve pipeline shape and communicate the limitation.
+
+## 2. Concrete Trajectory (Disabled)
 - [SYSTEM] No actual vision model processing available. Agents MUST NOT rely on trajectory data.
 - [SYSTEM] Treat the current frame as the absolute ground truth.
 
-## 2. Action Deduplicator Flag
+## 3. Action Deduplicator Flag
 - **Redundancy Detected:** [False]
 - **Merge Recommendation:** 
   - [SYSTEM] Auto-deduplication disabled. Generate prose specifically for the current frame.
@@ -42,7 +51,9 @@ def generate_horizon_summary(image_files, mode, start_index):
     return summary
 
 def main():
-    parser = argparse.ArgumentParser(description='Context Horizon Look-Ahead Engine')
+    parser = argparse.ArgumentParser(
+        description='Context Horizon placeholder that emits a non-authoritative stub output'
+    )
     parser.add_argument('--state', required=True, help='Path to pipeline state.yaml')
     parser.add_argument('--mode', required=True, choices=['video', 'manga'], help='Medium type for horizon scale')
     parser.add_argument('--window', type=int, default=5, help='Number of upcoming frames/pages to analyze')
@@ -94,6 +105,7 @@ def main():
     with open(args.out, 'w', encoding='utf-8') as f:
         f.write(horizon_content)
         
+    print("⚠️ Context Horizon is a stub in this build; no look-ahead analysis was performed.")
     print(f"✅ Context Horizon generated at: {args.out}")
     print(f"   Window spanned {len(horizon_files)} images.")
 
