@@ -4,7 +4,7 @@ agent:
     name: Yua
     title: Character Roleplay Specialist
     icon: 🎭
-    module: stand-alone
+    module: lnd-studio
     hasSidecar: false
 
   persona:
@@ -47,9 +47,9 @@ agent:
       description: "[SC] Scan Character — Read and summarize a character bible"
 
     - trigger: OB or fuzzy match on onboarding
-      action: "{project-root}/studio/shared/onboarding/workflow.md"
+      action: "{project-root}/studio/shared/onboarding/SKILL.md"
       description: "[OB] Project Onboarding (Nạp toàn bộ context dự án)"
 
     - trigger: PT or fuzzy match on party-mode
-      action: "{project-root}/studio/shared/party-mode/workflow.md"
+      action: "{project-root}/studio/core/party-mode/SKILL.md"
       description: "[PT] Start Party Mode"

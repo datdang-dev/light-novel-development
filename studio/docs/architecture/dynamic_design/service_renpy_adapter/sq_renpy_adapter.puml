@@ -1,6 +1,6 @@
 @startuml sq_renpy_adapter
 
-title RenPy Adapter Service - Dynamic Flow (V6)
+title RenPy Adapter Service - Dynamic Flow (V7.0)
 
 skinparam sequenceMessageAlign center
 skinparam responseMessageBelowArrow true
@@ -14,8 +14,8 @@ box "SERVICE Layer (RenPy Adapter)" #LightCyan
   participant "AST Miner\n(Tool)" as tool_ast
 end box
 
-box "Downstream Services" #LightYellow
-  participant "Kana\n(Manga Adapter)" as agent_kana
+box "CORE Layer (Transformation)" #LightGreen
+  participant "Transformation Engine\n(Lewd Writer / QA)" as core_lewd
   participant "Bible" as bible
 end box
 
@@ -43,25 +43,23 @@ activate bible
 bible --> agent_ra : Confirmed IDs
 deactivate bible
 
-== 3. Semantic Modeling (Audit Upgrade) ==
+== 3. Semantic Modeling & State Gen ==
 
 agent_ra -> agent_ra : **Analyze Semantics**\nInput: [Raw Tags] + [Dialogue]\nGoal: Determine Mood, Objective, Tension
 
-agent_ra -> agent_ra : **Save Artifact**\n`output/.../scene_model.json`
-note right: "Mood: Tense\nObjective: Confession\nLight: Sunset"
+agent_ra -> agent_ra : **Save Artifact**\n`output/.../forensic-state.json`
+note right: Equivalent payload to visual engine\nNo OCR needed.
 
-== 4. Delegation to Manga Adapter ==
+== 4. Delegation to Transformation Engine ==
 
-loop For Each Scene / Image Set
+loop For Each Scene / State Node
 
-    agent_ra -> agent_ra : **Package Context**\n- Image: `images/eileen_happy.png`\n- POC: `scene_model.json` (Rich Context)
+    agent_ra -> core_lewd : **DELEGATE TASK**\n"Generate Prose from forensic-state.json"
+    activate core_lewd
     
-    agent_ra -> agent_kana : **DELEGATE TASK**\n"Adapt this image using this Semantic Model."
-    activate agent_kana
-    
-    agent_kana -> agent_kana : **Forensic & Prose Pipeline**\n(Using Code-Derived POC)
-    agent_kana --> agent_ra : **Draft Prose (Markdown)**
-    deactivate agent_kana
+    core_lewd -> core_lewd : **Prose Pipeline**\n(Lewd Writer -> Quality Audit)
+    core_lewd --> agent_ra : **Draft Prose (Markdown)**
+    deactivate core_lewd
 
     agent_ra -> agent_ra : **Aggregate Result**
 end

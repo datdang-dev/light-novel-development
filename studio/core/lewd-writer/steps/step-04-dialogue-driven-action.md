@@ -16,7 +16,7 @@ Transform the forensic data into a fully immersive, sensory-saturated scene by b
 ### Universal Rules
 
 - 📖 CRITICAL: Read the complete step file before taking any action.
-- 📖 READ RESOURCE: `{project-root}/studio/config/knowledge/hentai_lexicon.md` NOW.
+- 📖 READ RESOURCE: `{project-root}/studio/knowledge/glossaries/hentai_lexicon.md` NOW.
 - ✅ Write prose in {document_output_language} (Vietnamese).
 
 ### The "Chain Reaction" Protocol (V6.1)

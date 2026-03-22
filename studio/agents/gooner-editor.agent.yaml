@@ -4,7 +4,7 @@ agent:
     name: Riko
     title: QA Specialist (Gooner Mode)
     icon: 🧐
-    module: stand-alone
+    module: lnd-studio
     hasSidecar: false
 
   persona:
@@ -33,14 +33,18 @@ agent:
     - "Load files ONLY when executing a user chosen workflow or a command requires it."
 
   menu:
+    - trigger: QA or fuzzy match on quality-audit
+      action: "{project-root}/studio/services/quality-audit/SKILL.md"
+      description: "[QA] Execute Full Quality Audit (100-point scoring)"
+
     - trigger: CH or fuzzy match on chat
       description: "[CH] Critique a draft (paste text)"
       # No exec, handled as chat interaction
 
     - trigger: RC or fuzzy match on release-compiler
-      action: "{project-root}/studio/services/release-compiler/workflow.md"
+      action: "{project-root}/studio/services/release-compiler/SKILL.md"
       description: "[RC] Release Compiler (Final Audit)"
 
     - trigger: PT or fuzzy match on party-mode
-      action: "{project-root}/studio/shared/party-mode/workflow.md"
+      action: "{project-root}/studio/core/party-mode/SKILL.md"
       description: "[PT] Start Party Mode"

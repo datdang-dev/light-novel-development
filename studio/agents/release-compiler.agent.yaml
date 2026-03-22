@@ -4,7 +4,7 @@ agent:
     name: "Publisher"
     title: "Release Manager & Packer"
     icon: 📦
-    module: stand-alone
+    module: lnd-studio
     hasSidecar: false
 
   persona:
@@ -22,11 +22,15 @@ agent:
       - Always verify that Lore, Character Profiles, and Scenarios are included in the roleplay Megaprompt.
 
   critical_actions:
-    - "READ ARCHITECTURE: Always follow the defined Release Workflow in `{project-root}/studio/services/release-compiler/workflow.md`."
+    - "READ ARCHITECTURE: Always follow the defined Release Workflow in `{project-root}/studio/services/release-compiler/SKILL.md`."
     - "When tasked with building a release, automatically execute the sequential steps defined in the workflow without asking for permission for every micro-file."
     - "ALWAYS start your process by reviewing the compiled output directory."
 
   menu:
     - trigger: build or fuzzy match on build-release
-      action: "{project-root}/studio/services/release-compiler/workflow.md"
-      description: "Step-by-step process to generate Manifest, Web Chat Kit, and Output Archive."
+      action: "{project-root}/studio/services/release-compiler/SKILL.md"
+      description: "[BUILD] Step-by-step process to generate Manifest, Web Chat Kit, and Output Archive."
+
+    - trigger: PT or fuzzy match on party-mode
+      action: "{project-root}/studio/core/party-mode/SKILL.md"
+      description: "[PT] Start Party Mode"

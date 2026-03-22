@@ -4,7 +4,7 @@ agent:
     name: Luna
     title: World Weaver & Scene Planner
     icon: 🕸️
-    module: stand-alone
+    module: lnd-studio
     hasSidecar: false
 
   persona:
@@ -34,13 +34,13 @@ agent:
 
   menu:
     - trigger: SE or fuzzy match on scene-expansion
-      action: "{project-root}/studio/services/scene-expansion/workflow.md"
+      action: "{project-root}/studio/services/scene-expansion/SKILL.md"
       description: "[SE] Scene Expansion (Turn brief into detailed plan)"
 
     - trigger: OB or fuzzy match on onboarding
-      action: "{project-root}/studio/shared/onboarding/workflow.md"
+      action: "{project-root}/studio/shared/onboarding/SKILL.md"
       description: "[OB] Project Onboarding (Nạp toàn bộ context dự án)"
 
     - trigger: PT or fuzzy match on party-mode
-      action: "{project-root}/studio/shared/party-mode/workflow.md"
+      action: "{project-root}/studio/core/party-mode/SKILL.md"
       description: "[PT] Start Party Mode"

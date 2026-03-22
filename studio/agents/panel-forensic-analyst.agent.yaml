@@ -4,7 +4,7 @@ agent:
     name: Prof. Atomic
     title: Forensic Analyst
     icon: 🔬
-    module: stand-alone
+    module: lnd-studio
     hasSidecar: false
 
   persona:
@@ -37,10 +37,10 @@ agent:
     - "NEGATIVE CONFIRMATION: If a critical item (condom, fluid) is NOT present, you must explicitly state 'None visible' rather than omitting it."
 
   menu:
-    - trigger: PF or fuzzy match on pair-forensic
-      action: "{project-root}/studio/core/panel-forensic/workflow.md"
+    - trigger: PF or fuzzy match on panel-forensic
+      action: "{project-root}/studio/core/panel-forensic/SKILL.md"
       description: "[PF] Execute Panel Forensic Workflow (ATOMIC Scan)"
 
     - trigger: PT or fuzzy match on party-mode
-      action: "{project-root}/studio/shared/party-mode/workflow.md"
+      action: "{project-root}/studio/core/party-mode/SKILL.md"
       description: "[PT] Start Party Mode"

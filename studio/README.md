@@ -1,57 +1,72 @@
-# LND Studio v2.0
+# LND Studio V7.0 (Light Novel Development Studio)
 
-> **BMAD v6.1 Compliant Light Novel Development Studio**
-> Orchestrated to automate the processing of R18 explicit manga into highly detailed, sensory-dense Vietnamese Light Novel prose.
-
-## 🚀 Quick Start
-
-Ensure you have a fully working BMAD environment installed. LND Studio is loaded dynamically as a module.
-
-### Core Pipelines
-
-To begin the primary adaptation flow, use the Orchestrator command:
-
-```bash
-/gooner-alchemist
-```
-
-*This triggers the Director K agent to load the state-persisted, JIT-compiled pipeline that processes pages sequentially from input to audited output.*
-
-### Development Tools
-
-To verify pipeline payloads without using LLM tokens, use the Dry Run Simulator:
-
-```bash
-python3 scripts/simulator.py
-```
-
-## 🏗️ Architecture & Documentation
-
-The studio operates purely on **Just-In-Time (JIT) Loading**, a 14-Agent diverse registry array, and strict **JSON Schema Valildation**.
-
-For the comprehensive technical breakdown including component roles, sequence generation charts, and schema enforcement logic, please refer to the official architectural documentation:
-👉 **[Read the Studio Architecture Documentation](docs/ARCHITECTURE.md)**
+> **The Ultimate Multi-Agent Japanese R18 Prose Adaptation Engine**
+> Operating on the **BMAD Framework**, LND Studio is an enterprise-grade automated pipeline designed to transform visual media (Manga, Ren'Py Scripts) into sensory-dense, canonical Vietnamese Light Novel prose using strict JSON state contracts and specialized Agent Personas.
 
 ---
 
-## 🛡️ Enterprise Grade Quality Gates
+## 🏗️ The Multi-Agent Ecosystem
 
-LND studio enforces extreme structural rigor out-of-the-box:
+LND Studio operates using a specialized team of **14 AI Agents**, orchestrated completely dynamically. There is no single massive prompt; instead, strict workflows isolate concerns:
 
-* **Schema Strictness**: All JSON outputs (`forensic-state`, `draft-prose`, `audit-report`) use recursive `additionalProperties: false` locked schemas. LLM Hallucination is structurally impossible.
-* **State Recovery**: The pipeline checks intermediate artifacts at `step-01-initialize.md`. If a crash occurs at page 40, step 5, simply run `/gooner-alchemist` and it will resume exactly at page 40, step 5 automatically.
-* **Simulation Testing**: A built-in Python JIT Compiler stringifier allows for unit-testing the exact context payloads sent to instances before money is spent.
+- 🎬 **Director K** (`lnd-orchestrator`): The Boss. Owns the core pipelines, manages state (`state.yaml`), and enforces delegations.
+- 🔬 **Dr. Atomic** (`panel-forensic`): Visual forensic analysis. Extracts objects, bodily fluids, panel flow, and translates SFX from raw images.
+- 🖼️ **Kana** (`manga-adapter`): Visual Context Specialist. Generates POC (Proof of Concept) hypothesis to bridge image context.
+- ✍️ **Suki** (`lewd-writer`): The R18 Prose Specialist. Handles the "Lewd/Dark" narrative tone and psychological depth.
+- 🛡️ **Riko** (`gooner-editor` / Quality Audit): The uncompromising Forensic Gatekeeper. Audits Suki's drafts on a 100-pt scale and forces rewrites if standards fail.
 
 ---
 
-## 🎭 The Cast (Agents)
+## 🚀 Core Pipelines
 
-All 14 specialized agents are defined in `agents/*.agent.yaml` and routed dynamically through `agent-registry.csv`.
-To load them into a collaborative brainstorming session discussing studio lore or workflow improvements, run:
+LND Studio provides several automation pipelines triggered via `/slash` commands:
 
-```bash
-/party-mode
+### 1. The Gooner Alchemist (`/gooner-alchemist`)
+The flagship 8-Step pipeline for manga-to-prose adaptation. 
+Run by **Director K**, the pipeline flows sequentially:
+1. **Initialize & Horizon:** Load `state.yaml` and look-ahead trajectory.
+2. **Forensic Analysis:** Request Dr. Atomic for visual extractions (`forensic.md`).
+3. **Context Loading:** JIT (Just-In-Time) compilation of Lore + Output.
+4. **Prose Generation:** Request Suki to draft the text (`draft.md`).
+5. **Quality Audit:** Request Riko to grade the text (`audit_feedback.json`). Auto-rewrites if failed.
+6. **State Persistence:** Write continuity ledger and proceed to the next page.
+
+### 2. RenPy Adaptation (`/renpy-adaptation`)
+Extracts AST from `.rpy` game scripts, builds a semantic payload, and directly feeds it into the Transformation Engine (Suki), bypassing the visual step.
+
+---
+
+## 📁 Folder Architecture (The Context Tree)
+
+The repository is structured to prioritize AI readability and modularity:
+
+```text
+studio/
+├── agents/            # Individual Agent Definitions (.agent.yaml)
+├── core/              # Foundation Engines (lewd-writer, panel-forensic, party-mode)
+├── services/          # Business Logic Pipelines (gooner-alchemist, renpy, etc.)
+├── modules/           # Reusable Utility Services (sfx-lookup, fetish-guidance)
+├── shared/            # Cross-cutting concerns (onboarding, agent-memory)
+├── knowledge/         # Canonical Databases (sfx/, glossaries/, fetish-db/)
+├── schemas/           # Strict JSON Schema Contracts (forensic-state, draft-prose)
+├── config/            # Global Config (pipeline-context.md, canon-rules)
+├── docs/              # Architectural diagrams (.puml) & LLM developer guides
+└── tools/             # Python utilities (generate_horizon.py, simulator.py)
 ```
 
 ---
-*LND Studio - Where Fantasies Become Verified Output.*
+
+## 🔒 Engineering Principles
+
+1. **State Resilience**: Pipelines are structurally persistent. If a crash occurs at Page 40, Step 5, running `/gooner-alchemist` resumes *exactly* at Page 40, Step 5.
+2. **Schema Locked**: All inter-agent communication (Forensic -> Prose -> Audit) MUST validate against rigid JSON schemas (`additionalProperties: false`). Hallucination is impossible across boundaries.
+3. **Decentralized Knowledge**: Lore and SFX rules are not stuffed into single prompts. They live in `knowledge/`, summoned only when a specific Vector Delta requires them.
+
+---
+
+## 📖 For Developers & AI Agents (LLMs)
+
+If you are an AI assistant or a new developer modifying this framework, please immediately read:
+👉 **[docs/LLM_DEVELOPER_GUIDE.md](docs/LLM_DEVELOPER_GUIDE.md)** for a deep dive into how to build new services, inject knowledge, and modify agent YAMLs without breaking the framework.
+
+*LND Studio - Where Fantasies Become Structurally Verified Output.*

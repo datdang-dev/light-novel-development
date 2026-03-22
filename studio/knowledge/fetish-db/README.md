@@ -33,14 +33,14 @@
 | [paizuri_research.md](./paizuri_research.md) | Titfuck dialogue, visual descriptions | ✅ v1.0 |
 | [filming_research.md](./filming_research.md) | ハメ撮り, blackmail, streaming, POV | ✅ v1.0 |
 | [handjob_thighjob_research.md](./handjob_thighjob_research.md) | 手コキ, 素股, edging, near-miss | ✅ v1.0 |
-| [moaning_sfx_research.md](./moaning_sfx_research.md) | 喘ぎ声, grunts, wet SFX, progressions | ✅ v1.0 |
+| [moaning_sfx_research.md](../sfx/moaning_sfx_research.md) | 喘ぎ声, grunts, wet SFX, progressions | ✅ v1.0 |
 
 ## 📖 SFX Reference Files
 
 | File | Description | Entries |
 |------|-------------|---------|
-| [japanese_sfx_dictionary.md](./japanese_sfx_dictionary.md) | Complete A-Z SFX dictionary | 3000+ |
-| [r18_sfx_quickref.yaml](./r18_sfx_quickref.yaml) | Curated R18 sounds (quick lookup) | 100+ |
+| [japanese_sfx_dictionary.md](../sfx/japanese_sfx_dictionary.md) | Complete A-Z SFX dictionary | 3000+ |
+| [r18_sfx_quickref.yaml](../sfx/r18_sfx_quickref.yaml) | Curated R18 sounds (quick lookup) | 100+ |
 
 ### ✅ Completed Research
 

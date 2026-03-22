@@ -33,7 +33,7 @@ Before any scoring, scan the entire prose output for CONTEXT LEAKS.
 
 **Prose output MUST NOT contain ANY of these patterns:**
 
-- Internal file names: `*_research`, `*_lexicon`, `workflow.md`, `state.yaml`
+- Internal file names: `*_research`, `*_lexicon`, `SKILL.md`, `state.yaml`
 - Agent/service names: `lewd-writer`, `panel-forensic`, `gooner-audit`, `gooner-alchemist`, `Director K`, `lnd-orchestrator`, `Suki`, `Kana`, `Riko`
 - System references: `forensic-gate`, `step-0*`, `.agent.yaml`, `quality_gates`, `sensory_density`
 - Meta-commentary: any sentence that references internal rules, databases, or pipeline mechanics

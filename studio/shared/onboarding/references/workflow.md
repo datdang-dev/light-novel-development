@@ -38,7 +38,7 @@ Read and internalize the following files:
 
 Read and internalize the following files (if they exist):
 
-- `{project-root}/studio/config/knowledge/hentai_lexicon.md` — Domain-specific vocabulary
+- `{project-root}/studio/knowledge/glossaries/hentai_lexicon.md` — Domain-specific vocabulary
 - `{project-root}/studio/knowledge/fetish-db/README.md` — Fetish categorization system
 - `{project-root}/studio/core/lewd-writer/data/gooner-manifesto.md` — Core writing philosophy
 

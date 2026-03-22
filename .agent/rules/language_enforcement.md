@@ -12,12 +12,15 @@ All prose, dialogue, thoughts, and narration MUST be in Vietnamese.
 
 ## Exceptions
 
-| Element | Allowed Non-Vietnamese | Example |
+| Element | Allowed Vocabulary | Example |
 |---------|----------------------|---------|
-| SFX | Romanized Japanese | *guchu guchu*, *pan pan* |
+| SFX (Actions) | International Lewd SFX | *Plap*, *Glurk*, *Schlick*, *Splurt*, *Smack* |
+| SFX (Ambient) | Romanized Japanese | *guchu guchu*, *pan pan*, *biku biku* |
 | Honorifics | Romanized Japanese | -san, -sama, -chan, onii-chan |
 | Character names | Original (romanized) | Reira Kurain, Kida |
 | Moaning | Romanized patterns | "Ahh~", "Nnnn~", "Iku!" |
+
+> **Note on SFX:** Gooner target audience is highly familiar with English/romanized hentai SFX from doujinshi translations. Do NOT use awkward Vietnamese SFX (e.g., "bì bạch", "nhẹp nhẹp").
 
 ## BANNED in Output
 

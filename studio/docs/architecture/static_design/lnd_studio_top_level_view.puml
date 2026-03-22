@@ -84,7 +84,7 @@ package "shared/ — Cross-cutting" as SHARED #fff5e0 {
 package "Infrastructure" as INFRA #f0f0f0 {
     database "config/\n(pipeline-context\nprofiles, corpus)" as CONFIG
     database "schemas/\n(4 JSON schemas)" as SCHEMAS
-    database "knowledge/\n(fetish-db, glossaries)" as KNOWLEDGE
+    database "knowledge/\n(fetish-db, glossaries, sfx)" as KNOWLEDGE
     database ".agent/rules/\n(10 writing rules)" as RULES
     folder "assets/ templates/" as ASSETS
     folder "scripts/ tools/" as TOOLS

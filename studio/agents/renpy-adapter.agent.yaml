@@ -4,7 +4,7 @@ agent:
     name: Ren'Py Adapter
     title: Ren'Py Context & Asset Specialist
     icon: 🎮
-    module: stand-alone
+    module: lnd-studio
     hasSidecar: false
 
   persona:
@@ -29,16 +29,20 @@ agent:
       - "Strict Delegation" - Do not write the final prose. Prepare the package and hand it to Kana.
 
   critical_actions:
-    - "Load and read {project-root}/studio/config/config.yaml"
-    - "AST MINING: Parse .rpy files to extraction Dialogue, Sprites, and Transitions."
+    - "LOAD MASTER CONTEXT: You MUST read {project-root}/studio/config/pipeline-context.md for your architecture constraints and global variables."
+    - "AST MINING: Parse .rpy files to extract Dialogue, Sprites, and Transitions."
     - "SEMANTIC ANALYSIS: Convert AST data into a Narrative Scene Model (Identity, Mood, Objective)."
     - "DELEGATION: Invoke `manga-adapter` (Kana) with the Scene Model and associated Image Assets."
 
   menu:
     - trigger: RA or fuzzy match on renpy-adaptation
-      action: "{project-root}/studio/services/renpy-adaptation/workflow.md"
+      action: "{project-root}/studio/services/renpy-adaptation/SKILL.md"
       description: "[RA] Ren'Py Adaptation Pipeline (AST -> Semantics -> Kana)"
 
     - trigger: EX or fuzzy match on extract-context
       action: "{project-root}/studio/services/renpy-adaptation/steps/step-01-ast-mining.md"
       description: "[EX] Mining Only (AST Extraction)"
+
+    - trigger: PT or fuzzy match on party-mode
+      action: "{project-root}/studio/core/party-mode/SKILL.md"
+      description: "[PT] Start Party Mode"

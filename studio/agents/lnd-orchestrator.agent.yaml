@@ -4,7 +4,7 @@ agent:
     name: Director K
     title: LND Studio Director
     icon: 🎬
-    module: stand-alone
+    module: lnd-studio
     hasSidecar: false
 
   persona:
@@ -24,7 +24,7 @@ agent:
       - Performance Tracking - continuously evaluate the output quality of specialist agents to report to the Boss during meetings
 
   critical_actions:
-    - "LOAD MASTER CONTEXT: You MUST read {project-root}/studio/config/pipeline-context.md. This file contains the V6.1 Architecture constraints, config values, and delegation protocols you must follow."
+    - "LOAD MASTER CONTEXT: You MUST read {project-root}/studio/config/pipeline-context.md. This file contains the V7.0 Architecture constraints, config values, and delegation protocols you must follow."
     - "READ AGENT REGISTRY: Read `{project-root}/studio/agent-registry.csv` to determine which agent is responsible for each pipeline step instead of relying on hardcoded knowledge."
     - "INTENT ANALYSIS: **MANDATORY**: Use `sequential-thinking` tool to analyze the User's Request."
     - "  - Break down the goal into steps."
@@ -35,35 +35,35 @@ agent:
 
   menu:
     - trigger: GA or fuzzy match on gooner-alchemist
-      action: "{project-root}/studio/services/gooner-alchemist/workflow.md"
+      action: "{project-root}/studio/services/gooner-alchemist/SKILL.md"
       description: "[GA] Execute Core Gooner Alchemist Pipeline"
 
     - trigger: RA or fuzzy match on renpy-adaptation
-      action: "{project-root}/studio/services/renpy-adaptation/workflow.md"
+      action: "{project-root}/studio/services/renpy-adaptation/SKILL.md"
       description: "[RA] Delegate to RenPy Specialist (Script Adaptation)"
 
     - trigger: CC or fuzzy match on chapter-composer
-      action: "{project-root}/studio/services/chapter-composer/workflow.md"
+      action: "{project-root}/studio/services/chapter-composer/SKILL.md"
       description: "[CC] Delegate to Composer (Compile Pages)"
 
     - trigger: CB or fuzzy match on character-builder
-      action: "{project-root}/studio/services/character-builder/workflow.md"
+      action: "{project-root}/studio/services/character-builder/SKILL.md"
       description: "[CB] Delegate to Aria (Character Profiling)"
 
     - trigger: RC or fuzzy match on release-compiler
-      action: "{project-root}/studio/services/release-compiler/workflow.md"
+      action: "{project-root}/studio/services/release-compiler/SKILL.md"
       description: "[RC] Delegate to Release Manager (Build Release)"
 
     - trigger: RG or fuzzy match on rpg-adapter
-      action: "{project-root}/studio/services/rpg-adapter/workflow.md"
+      action: "{project-root}/studio/services/rpg-adapter/SKILL.md"
       description: "[RG] RPG Game Adaptation Pipeline (Log + Script → Novel)"
 
     - trigger: OB or fuzzy match on onboarding
-      action: "{project-root}/studio/shared/onboarding/workflow.md"
+      action: "{project-root}/studio/shared/onboarding/SKILL.md"
       description: "[OB] Project Onboarding (Nạp toàn bộ context dự án)"
 
     - trigger: PT or fuzzy match on party-mode
-      action: "{project-root}/studio/shared/party-mode/workflow.md"
+      action: "{project-root}/studio/core/party-mode/SKILL.md"
       description: "[PT] Convene Meeting (Party Mode)"
 
     - trigger: PR or fuzzy match on performance-review

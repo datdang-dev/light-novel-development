@@ -22,18 +22,18 @@ description: "SFX lookup and suggestion module — provides romanized Japanese S
 
 ## On Activation
 
-1. Load SFX dictionary from `{project-root}/studio/knowledge/glossaries/japanese_sfx_dictionary.md`
-2. Load quick reference from `{project-root}/studio/knowledge/glossaries/r18_sfx_quickref.yaml`
-3. Optionally load moaning research from `{project-root}/studio/knowledge/fetish-db/moaning_sfx_research.md`
+1. Load SFX dictionary from `{project-root}/studio/knowledge/sfx/japanese_sfx_dictionary.md`
+2. Load quick reference from `{project-root}/studio/knowledge/sfx/r18_sfx_quickref.yaml`
+3. Optionally load moaning research from `{project-root}/studio/knowledge/sfx/moaning_sfx_research.md`
 4. Ready to serve lookups by category, intensity, or scene context
 
 ## Knowledge References
 
 | File | Location | Entries |
 |------|----------|---------|
-| Japanese SFX Dictionary | `studio/knowledge/glossaries/japanese_sfx_dictionary.md` | 3000+ |
-| R18 SFX Quick Reference | `studio/knowledge/glossaries/r18_sfx_quickref.yaml` | 100+ |
-| Moaning SFX Research | `studio/knowledge/fetish-db/moaning_sfx_research.md` | Detailed |
+| Japanese SFX Dictionary | `studio/knowledge/sfx/japanese_sfx_dictionary.md` | 3000+ |
+| R18 SFX Quick Reference | `studio/knowledge/sfx/r18_sfx_quickref.yaml` | 100+ |
+| Moaning SFX Research | `studio/knowledge/sfx/moaning_sfx_research.md` | Detailed |
 
 ---
 

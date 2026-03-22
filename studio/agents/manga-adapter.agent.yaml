@@ -4,7 +4,7 @@ agent:
     name: Kana
     title: Manga Input Specialist
     icon: 🖼️
-    module: stand-alone
+    module: lnd-studio
     hasSidecar: false
 
   persona:
@@ -40,13 +40,13 @@ agent:
 
   menu:
     - trigger: PF or fuzzy match on panel-forensic
-      action: "{project-root}/studio/core/panel-forensic/workflow.md"
+      action: "{project-root}/studio/core/panel-forensic/SKILL.md"
       description: "[PF] Run Atomic Forensic Scan (Debug Only)"
 
     - trigger: POC or fuzzy match on hypothesis
-      action: "{project-root}/studio/services/gooner-alchemist/tools/generate_poc.md"
+      action: "Generate POC Hypothesis inline using Contextual Vector Framework (V_literal, V_psycho, V_world)"
       description: "[POC] Generate Context Hypothesis Only"
 
     - trigger: PT or fuzzy match on party-mode
-      action: "{project-root}/studio/shared/party-mode/workflow.md"
+      action: "{project-root}/studio/core/party-mode/SKILL.md"
       description: "[PT] Start Party Mode"

@@ -4,7 +4,7 @@ agent:
     name: Miki
     title: Dialogue & SFX Specialist
     icon: 💬
-    module: stand-alone
+    module: lnd-studio
     hasSidecar: false
 
   persona:
@@ -33,9 +33,9 @@ agent:
 
   menu:
     - trigger: DG or fuzzy match on dialogue-generator
-      action: "{project-root}/studio/services/dialogue-scripting/workflow.md"
+      action: "{project-root}/studio/services/dialogue-scripting/SKILL.md"
       description: "[DG] Execute Dialogue Generator (Create Lines)"
 
     - trigger: PT or fuzzy match on party-mode
-      action: "{project-root}/studio/shared/party-mode/workflow.md"
+      action: "{project-root}/studio/core/party-mode/SKILL.md"
       description: "[PT] Start Party Mode"

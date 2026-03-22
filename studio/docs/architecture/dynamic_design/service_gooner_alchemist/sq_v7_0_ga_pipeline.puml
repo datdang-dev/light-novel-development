@@ -1,0 +1,73 @@
+@startuml sq_v7_0_ga_pipeline
+
+title Gooner Alchemist - V7.0 Pipeline Execution
+
+skinparam sequenceMessageAlign center
+skinparam responseMessageBelowArrow true
+skinparam maxMessageSize 250
+skinparam BoxPadding 10
+
+actor "Orchestrator\n(Director K)" as orches
+box "PIPELINE Layer" #White
+  participant "Gooner Alchemist\n(Pipeline Context)" as wf_ga
+  participant "State: Ledger\n(state.yaml)" as state
+end box
+
+box "SPECIALIST Layer (Agents)" #LightYellow
+  participant "Dr. Atomic\n(Forensics)" as core_pf
+  participant "Suki\n(Lewd Writer)" as core_lw
+  participant "Riko\n(Quality Audit)" as core_qa
+end box
+
+== 0. Initialization & Context ==
+
+orches -> wf_ga : **EXECUTE PIPELINE**
+activate wf_ga
+
+wf_ga -> state : Load Previous State
+activate state
+state --> wf_ga : Pending Pages List
+deactivate state
+
+loop For Each Pending Page
+    == 1. Universal Context Horizon (Step 1b) ==
+    wf_ga -> wf_ga : **Generate Horizon**\n(Tool: generate_horizon.py)\nInput: [State]
+    wf_ga -> wf_ga : **Save Artifact**\n`output/.../context_horizon.md`
+
+    == 2. Forensic Analysis (Step 2) ==
+    wf_ga -> core_pf : **Forensic Scan**\nInput: [Image] + [context_horizon.md]
+    activate core_pf
+    core_pf -> core_pf : Panel, Characters, SFX, Lewd Scan
+    core_pf --> wf_ga : **Validated Report** (10 Sections)
+    deactivate core_pf
+    wf_ga -> wf_ga : **Save Artifact**\n`output/.../forensic.md`
+
+    == 3. Context Loading (Step 3) ==
+    wf_ga -> wf_ga : **JIT Compilation**\nInput: [Forensic] + [Bible] + [Rules]
+
+    == 4. Prose Generation (Step 4) ==
+    wf_ga -> core_lw : **Draft Prose**\nInput: [JIT Context]
+    activate core_lw
+    core_lw -> core_lw : Dialogue-Driven Chain Reaction
+    core_lw --> wf_ga : **Draft Text (Markdown)**
+    deactivate core_lw
+    wf_ga -> wf_ga : **Save Artifact**\n`output/.../draft.md`
+
+    == 5. Quality Audit (Step 5) ==
+    wf_ga -> core_qa : **Quality Gate**\nInput: [Draft]
+    activate core_qa
+    core_qa --> wf_ga : **JSON Score & Issues**
+    deactivate core_qa
+    
+    alt Audit Failed
+        wf_ga -> core_lw : **RE-DELEGATE**\nFix Issues
+    end
+
+    == 6. Persistence & Completion (Step 6-7) ==
+    wf_ga -> state : **Update Ledger**\n(Mark page done)
+end
+
+orches <-- wf_ga : **Pipeline Complete**
+deactivate wf_ga
+
+@enduml

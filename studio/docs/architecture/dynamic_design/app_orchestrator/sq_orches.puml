@@ -1,6 +1,6 @@
 @startuml sq_orches
 
-title LND Orchestrator - Production Pipeline (Multi-Agent)
+title LND Orchestrator - Gooner Alchemist Pipeline (V7.0)
 
 skinparam sequenceMessageAlign center
 skinparam responseMessageBelowArrow true
@@ -14,67 +14,64 @@ box "APP Layer (Control Plane)" #LightBlue
 end box
 
 box "SERVICE Layer (Specialists)" #LightYellow
-  participant "Kana\n(Manga Adapter)" as agent_kana
+  participant "Dr. Atomic\n(Forensics)" as agent_atomic
   participant "Suki\n(Lewd Writer)" as agent_suki
   participant "Riko\n(Quality Audit)" as agent_riko
-  participant "Dr. Atomic\n(Forensics)" as agent_atomic
 end box
 
 == 1. Intent & Planning ==
 
-user -> orches : "Produce Chapter 1"
+user -> orches : "Run Gooner Alchemist"
 activate orches
 
-orches -> planner : **Create Task Graph**\n(Goal: Chapter 1)
+orches -> planner : **Create Task Graph**\n(Goal: Process Pending Pages)
 activate planner
-planner --> orches : Execution Plan:\n1. Adapt (Kana)\n2. Refine (Suki)\n3. Audit (Riko)
+planner --> orches : Execution Plan:\n1. Init & Horizon\n2. Forensics (Atomic)\n3. Prose (Suki)\n4. Audit (Riko)
 deactivate planner
 
-== 2. Execution Phase (Chained Delegation) ==
+== 2. Execution Phase (8-Step Pipeline) ==
 
-group Stage 1: Adaptation
-    orches -> agent_kana : **DELEGATE TASK**\n"Ingest & Draft Chapter 1"
-    activate agent_kana
-    
-    agent_kana -> agent_atomic : Request Forensic Scan
-    activate agent_atomic
-    agent_atomic --> agent_kana : Forensic Data
-    deactivate agent_atomic
-    
-    agent_kana -> agent_kana : **Generate Context POC**
-    agent_kana -> agent_kana : **Draft Raw Prose**
-    
-    agent_kana --> orches : "Draft Complete"
-    deactivate agent_kana
+group Step 1-1b: Initialization & Horizon
+    orches -> orches : **Load Pipeline Context**
+    orches -> orches : **Check State / Horizon Check**\n(Generate Context Horizon)
 end
 
-orches -> planner : Update Status (Stage 1 Done)
+group Step 2: Forensic Analysis
+    orches -> agent_atomic : **DELEGATE TASK**\n"Run Panel Forensic Scan"
+    activate agent_atomic
+    agent_atomic --> orches : **Forensic Report**\n(10 Sections)
+    deactivate agent_atomic
+end
 
-group Stage 2: Refinement
-    orches -> agent_suki : **DELEGATE TASK**\n"Polish Draft (Tone: Lewd/Dark)"
+group Step 3-4: Context Loading & Prose Generation
+    orches -> orches : **Compile JIT Context**
+    orches -> agent_suki : **DELEGATE TASK**\n"Draft Prose (Using Forensic + Bibles)"
     activate agent_suki
-    agent_suki --> orches : "Polish Complete"
+    agent_suki --> orches : **Draft Markdown Text**
     deactivate agent_suki
 end
 
-orches -> planner : Update Status (Stage 2 Done)
-
-group Stage 3: Quality Gate
-    orches -> agent_riko : **DELEGATE TASK**\n"Audit Chapter 1"
+group Step 5: Quality Gate
+    orches -> agent_riko : **DELEGATE TASK**\n"Audit Output (Score 0-100)"
     activate agent_riko
     
     alt Audit Pass
-        agent_riko --> orches : "PASS (Score 90)"
+        agent_riko --> orches : "PASS (Score > threshold)"
     else Audit Fail
         agent_riko --> orches : "FAIL (Issues List)"
-        orches -> agent_suki : **RE-DELEGATE**\n"Fix Issues: [List]"
+        orches -> agent_suki : **RE-DELEGATE**\n"Fix Targeted Issues: [List]"
     end
     deactivate agent_riko
 end
 
+group Step 6-7: Persistence & Complete
+    orches -> orches : **Save State & Ledger**
+    orches -> planner : Update Status (Page Done)
+end
+
 == 3. Completion ==
 
-orches -> user : "Chapter 1 Ready (Canonical)"
+orches -> user : "Pipeline Execution Complete"
 deactivate orches
 
 @enduml
