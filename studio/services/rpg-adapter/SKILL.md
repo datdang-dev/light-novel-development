@@ -1,39 +1,50 @@
 ---
 name: rpg-adapter
-description: "RPG game log adaptation pipeline — processes RPG Maker game logs and translation scripts into context routing for world/character foundation and novel loop."
+description: "RPG Maker MV/MZ game-to-novel adaptation pipeline — extracts dialogue, characters, and world data from game files to generate light novel prose. Supports data-only mode (no playthrough log required). Use when the user says 'adapt RPG game', 'process game log', 'RPG to novel', or 'extract game events'."
 ---
 
 # RPG Adapter Pipeline
 
 ## Overview
 
-The RPG Adapter is a **V1 pipeline** for adapting RPG Maker game content into light novel prose. It processes game logs and translation scripts through context routing to establish world/character foundations, then feeds into the standard novel generation loop.
+The RPG Adapter is a pipeline for adapting **RPG Maker MV/MZ** game content into R18 light novel prose. It works in two modes:
 
-This pipeline is in early development — currently containing reference documentation only.
+- **Data-Only Mode** (recommended): Extracts directly from `Map*.json`, `CommonEvents.json`, `Actors.json`, and `ManualTransFile.json` — no playthrough log needed.
+- **Log-Assisted Mode**: Uses a TimelineLogger.js playthrough log for scene ordering (optional enhancement).
 
 ## On Activation
 
-1. Load RPG game log or translation script
-2. Reference workflow documentation in `references/`
-3. Route to appropriate processing path
+1. Ask user for game root path
+2. Auto-detect engine version (MV `www/data/` vs MZ flat `data/`)
+3. Reference workflow documentation in `./references/`
+4. Route to appropriate processing path
 
 ## Structure
 
 | Path | Purpose |
 |------|---------|
-| `references/` | Pipeline documentation and reference materials |
+| `./references/` | Pipeline documentation and reference materials |
+| `./steps/` | Progressive step files for the 3-phase pipeline |
+| `./scripts/` | Deterministic Python utilities for data processing |
 
-> **Note**: Step files are not yet implemented. This pipeline currently operates from reference documentation.
+## Scripts
+
+| Script | Purpose |
+|--------|---------|
+| `./scripts/validate_game_structure.py` | Validate RPG Maker directory structure (MV + MZ) |
+| `./scripts/build_map_index.py` | Build map lookup index from MapInfos.json |
+| `./scripts/extract_character_events.py` | **Core tool** — extract all events for a specific character across all maps + CommonEvents |
+| `./scripts/parse_playthrough_log.py` | Parse TimelineLogger.js logs (optional, log-assisted mode only) |
 
 ## Dependencies
 
 - **Orchestrator**: Director K (`DIR` — `lnd-orchestrator.agent.yaml`)
-- **Tools**: `{project-root}/studio/tools/RPG-Maker-MV-Decrypter/` (for encrypted game asset extraction)
-- **Downstream**: Transformation Engine (once forensic state is produced)
+- **Downstream**: lewd-writer (Suki), character-architect (Aria), world-weaver (Luna)
 
 ## Quick Reference
 
 | Intent | Trigger | Route |
 |--------|---------|-------|
-| **Adapt RPG game** | Provide game log/script | Load reference documentation |
-| **Decrypt RPG assets** | Use decrypter tool | `tools/RPG-Maker-MV-Decrypter/` |
+| **Adapt RPG game** | Provide game path | Load `./steps/step-01-initialize.md` |
+| **Extract character** | Provide actor name/ID | Run `./scripts/extract_character_events.py` |
+| **Decrypt assets** | Need encrypted images | See studio tools (RPG-Maker-MV-Decrypter) |
