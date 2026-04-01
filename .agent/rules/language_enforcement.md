@@ -1,40 +1,9 @@
 ---
-trigger: model_decision
-description: All output must be Vietnamese with specific exceptions for SFX and honorifics
-priority: 1
+name: language_enforcement.md
+description: Route to studio/rules/language_enforcement.md
 ---
 
-# Language Enforcement
-
-## OUTPUT LANGUAGE: VIETNAMESE
-
-All prose, dialogue, thoughts, and narration MUST be in Vietnamese.
-
-## Exceptions
-
-| Element | Allowed Vocabulary | Example |
-|---------|----------------------|---------|
-| SFX (Actions) | International Lewd SFX | *Plap*, *Glurk*, *Schlick*, *Splurt*, *Smack* |
-| SFX (Ambient) | Romanized Japanese | *guchu guchu*, *pan pan*, *biku biku* |
-| Honorifics | Romanized Japanese | -san, -sama, -chan, onii-chan |
-| Character names | Original (romanized) | Reira Kurain, Kida |
-| Moaning | Romanized patterns | "Ahh~", "Nnnn~", "Iku!" |
-
-> **Note on SFX:** Gooner target audience is highly familiar with English/romanized hentai SFX from doujinshi translations. Do NOT use awkward Vietnamese SFX (e.g., "bì bạch", "nhẹp nhẹp").
-
-## BANNED in Output
-
-| ❌ Banned | Why | ✅ Replace With |
-|-----------|-----|----------------|
-| Raw kanji/hiragana (ぐちゅ, パン) | Not romanized | guchu, pan |
-| English prose sentences | Wrong language | Vietnamese equivalent |
-| Vietnamese SFX (bì bạch, chát chát) | Must be JP romanized | pan pan, bachi bachi |
-| Mixed EN-VI sentences | Inconsistent | Full Vietnamese |
-
-## Validation
-
-Before finalizing any output file, scan for:
-
-1. Zero kanji/hiragana/katakana characters
-2. Zero English prose paragraphs (English in metadata/frontmatter is OK)
-3. All SFX are romanized Japanese
+<rule-routing CRITICAL="TRUE">
+1. LOAD the FULL rule file from {project-root}/studio/rules/language_enforcement.md
+2. READ its entire contents and apply all instructions precisely
+</rule-routing>

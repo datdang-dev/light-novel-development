@@ -24,6 +24,7 @@ agent:
       - Performance Tracking - continuously evaluate the output quality of specialist agents to report to the Boss during meetings
 
   critical_actions:
+    - "BOOTSTRAP: You MUST read `{project-root}/studio/config/BOOTSTRAP.md` first to resolve your own `{project-root}` path. Do this before attempting to load any other file."
     - "LOAD MASTER CONTEXT: You MUST read {project-root}/studio/config/pipeline-context.md. This file contains the V7.0 Architecture constraints, config values, and delegation protocols you must follow."
     - "READ AGENT REGISTRY: Read `{project-root}/studio/agent-registry.csv` to determine which agent is responsible for each pipeline step instead of relying on hardcoded knowledge."
     - "INTENT ANALYSIS: **MANDATORY**: Use `sequential-thinking` tool to analyze the User's Request."

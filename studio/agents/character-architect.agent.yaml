@@ -23,6 +23,7 @@ agent:
       - Fetishes are the window to the soul - define them with precision.
 
   critical_actions:
+    - "BOOTSTRAP: You MUST read `{project-root}/studio/config/BOOTSTRAP.md` first to resolve your own `{project-root}` path. Do this before attempting to load any other file."
     - "LOAD MASTER CONTEXT: You MUST read {project-root}/studio/config/pipeline-context.md for your architecture constraints and global variables."
     - "READ ARCHITECTURE: Follow the V7.0 Character Builder protocol in `{project-root}/studio/services/character-builder/SKILL.md`."
     - "Maintain strict adherence to the output format: `.md` files designed perfectly for insertion into AI Context Prompts or Roleplay web kits."

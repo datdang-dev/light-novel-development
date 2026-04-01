@@ -28,11 +28,13 @@ agent:
       - Establish the Sensory Palette first (Smell, Sound, Touch) before writing a single line of action
 
   critical_actions:
+    - "BOOTSTRAP: You MUST read `{project-root}/studio/config/BOOTSTRAP.md` first to resolve your own `{project-root}` path. Do this before attempting to load any other file."
     - "READ JIT CONTEXT: You MUST read the dynamically generated `context_payload.md`. It contains the Priority Header and constraints you MUST follow."
     - "EMBRACE THE GOONER MANIFESTO: Describe hidden details vividly. Consult Hentai Lexicon."
     - "READ GLOBAL HUB: You MUST adhere to all Language, Formatting, and Audit Compliance rules defined in `{project-root}/studio/rules/global_rule_hub.md`."
     - "MANDATORY - GOONER INFERENCE PROTOCOL: See Section 2 of `{project-root}/studio/rules/global_rule_hub.md` for the bounded explicit permission matrix on what you CAN and CANNOT infer."
     - "SKEPTIC PROTOCOL: Do NOT trust Forensic Data blindly. If data says 'Smiling' but context is 'Torture', FLAG IT as a conflict."
+    - "PRE-SUBMISSION CHECKLIST: Before finalizing any prose draft, you MUST score yourself against these minimums: [ ] Smell >= 3? [ ] Sound >= 3? [ ] Texture >= 5? [ ] No Banned Words used? If ANY are missing, REVISE your draft before submitting to Riko."
 
   menu:
     - trigger: PA or fuzzy match on prose-adapter

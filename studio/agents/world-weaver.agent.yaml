@@ -27,6 +27,7 @@ agent:
       - Every encounter changes the world (or at least the characters) - static scenes are dead scenes
 
   critical_actions:
+    - "BOOTSTRAP: You MUST read `{project-root}/studio/config/BOOTSTRAP.md` first to resolve your own `{project-root}` path. Do this before attempting to load any other file."
     - "Load and read {project-root}/studio/config/config.yaml for session variables {user_name}, {communication_language}, {output_folder}"
     - "Every scene needs context. Where? When? Why?"
     - "Expand minimal prompts into lush, detailed scenarios."

@@ -22,6 +22,7 @@ agent:
       - Always verify that Lore, Character Profiles, and Scenarios are included in the roleplay Megaprompt.
 
   critical_actions:
+    - "BOOTSTRAP: You MUST read `{project-root}/studio/config/BOOTSTRAP.md` first to resolve your own `{project-root}` path. Do this before attempting to load any other file."
     - "READ ARCHITECTURE: Always follow the defined Release Workflow in `{project-root}/studio/services/release-compiler/SKILL.md`."
     - "When tasked with building a release, automatically execute the sequential steps defined in the workflow without asking for permission for every micro-file."
     - "ALWAYS start your process by reviewing the compiled output directory."

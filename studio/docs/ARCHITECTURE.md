@@ -103,9 +103,9 @@ Two path prefixes are used across the studio:
 | Prefix | Scope | Example |
 |--------|-------|---------|
 | `{project-root}/studio/...` | Studio-internal paths | `{project-root}/studio/config/config.yaml` |
-| `{project-root}/.agent/rules/...` | Project-level writing rules | `{project-root}/.agent/rules/sensory_density.md` |
+| `{project-root}/.agent/rules/...` | Project-level writing rules (Router Stubs) | `{project-root}/.agent/rules/sensory_density.md` |
 
-The `.agent/rules/` directory lives at the project root (not inside studio) because these rules apply to the entire project, not just the studio framework.
+The actual rule logic lives in `{project-root}/studio/rules/` to keep the studio ecosystem perfectly encapsulated. However, to ensure these rules can still be consumed globally by the entire project (e.g. by external BMAD slash commands), the `{project-root}/.agent/rules/` directory contains **routing stubs** that dynamically instruct any reading agent to load the real rules from the studio directory.
 
 ---
 
@@ -185,6 +185,6 @@ All JSON outputs use recursive `"additionalProperties": false` constraints:
 | `scripts/` | 4 | Python automation (extract, repair, simulate) |
 | `tools/` | — | External repos (RPG-Maker-MV-Decrypter) |
 | `_templates/` | — | Scaffolding templates for new skills |
-| `rules/` | 1 | Studio-level rule hub (indexes `.agent/rules/`) |
+| `rules/` | 17 | Core rule logic & Studio-level rule hub (`global_rule_hub.md`) |
 | `assets/` | — | Static assets (SFX library, ST templates) |
 | `output/` | — | Runtime generated files |

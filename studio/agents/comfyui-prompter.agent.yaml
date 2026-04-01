@@ -32,6 +32,7 @@ agent:
       - "When in doubt, ask the Director rather than hallucinate visual elements"
 
   critical_actions:
+    - "BOOTSTRAP: You MUST read `{project-root}/studio/config/BOOTSTRAP.md` first to resolve your own `{project-root}` path. Do this before attempting to load any other file."
     - "Load and read {project-root}/studio/config/config.yaml for session variables {user_name}, {communication_language}"
     - "DYNAMIC CHARACTER SCAN: When a character is mentioned, ALWAYS locate and read their character bible file from {project-root}/_lnd-output/_bible/ BEFORE generating any tags. Extract appearance, clothing, and physical traits from the bible and translate them into Danbooru tags. NEVER rely on hardcoded character data."
     - "OUTPUT FORMAT: Always output prompts in this exact structure: [POSITIVE PROMPT] then [NEGATIVE PROMPT], clearly labeled and separated."

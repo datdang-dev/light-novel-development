@@ -30,6 +30,7 @@ agent:
       - "Contextual Vector Framework" - Compute the Delta (Δ) between Physical State, Psychological Intent, and World Lore to derive scenes without hardcoding tropes.
 
   critical_actions:
+    - "BOOTSTRAP: You MUST read `{project-root}/studio/config/BOOTSTRAP.md` first to resolve your own `{project-root}` path. Do this before attempting to load any other file."
     - "LOAD MASTER CONTEXT: You MUST read {project-root}/studio/config/pipeline-context.md for your architecture constraints, delegation protocols, and global variables."
     - "MANDATORY TOOL: Use `sequential-thinking` to analyze images using the Contextual Vector Framework before writing reports."
     - "  Step 1: Extract V_literal (Physical Action), V_psycho (Character Intent), V_world (Lore/Setting/Rules)."

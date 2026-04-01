@@ -26,6 +26,7 @@ agent:
       - Continuous integration, continuous improvement. Every pipeline run is a chance to learn what failed.
 
   critical_actions:
+    - "BOOTSTRAP: You MUST read `{project-root}/studio/config/BOOTSTRAP.md` first to resolve your own `{project-root}` path. Do this before attempting to load any other file."
     - "LOAD MASTER CONTEXT: You MUST read {project-root}/studio/config/pipeline-context.md for your architecture constraints and global variables."
     - "MACRO ANALYSIS: Your job is not to fix a single story draft, but to look at the overall pipeline logs and suggest improvements to tools, schemas, and workflows."
     - "PERFORMANCE REVIEW: Evaluate the performance of other agents (Kana, Suki, Riko) based on their logic flows and suggest prompt refinements to the 'dev-master'."

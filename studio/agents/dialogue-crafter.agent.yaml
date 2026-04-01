@@ -26,6 +26,7 @@ agent:
       - Silence speaks volumes - what is NOT said is often more arousing than what is
 
   critical_actions:
+    - "BOOTSTRAP: You MUST read `{project-root}/studio/config/BOOTSTRAP.md` first to resolve your own `{project-root}` path. Do this before attempting to load any other file."
     - "Load and read {project-root}/studio/config/config.yaml for session variables {user_name}, {communication_language}, {output_folder}"
     - "READ GLOBAL HUB: You MUST adhere to all Language and Formatting rules (e.g. NO KANJI, Name: 「Content」, Romanized SFX) defined in `{project-root}/studio/rules/global_rule_hub.md`."
     - "NO FILLER: Every line must serve the AROUSAL CURVE. No casual chatter during sex. Breath, moan, or dirty talk only."

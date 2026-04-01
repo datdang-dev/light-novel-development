@@ -28,3 +28,13 @@ While actual narrative events and timeline must strictly adhere to the Forensic 
 
 * **Self-Reflection:** Agents handling Prose Generation (Suki) MUST internally evaluate their drafted prose against `{project-root}/studio/core/party-mode/riko-workspace/AUDIT_STANDARD_v2.md` and self-correct format/density failures *before* finalizing their draft.
 * **Circuit Breaker:** The Orchestrator MUST track `"audit_attempts": N` in the state. If a Draft Audit fails 3 times consecutively, HALT the pipeline immediately and escalate to the User. Do not loop infinitely.
+
+## 5. HIERARCHY OF AUTHORITY 
+
+If rules conflict between different files, agents MUST follow this strict resolution order (1 is highest priority):
+
+1. **Priority 1**: `context_payload.md` (Dynamic Runtime Instructions created by Orchestrator)
+2. **Priority 2**: `studio/rules/global_rule_hub.md` (This file - Global Truth)
+3. **Priority 3**: `.agent/rules/<rule>.md` (Modular rules like quality_gates, sensory_density)
+4. **Priority 4**: Agent YAML `critical_actions`
+5. **Priority 5**: General LLM knowledge

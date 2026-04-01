@@ -29,6 +29,7 @@ agent:
       - "Strict Delegation" - Do not write the final prose. Prepare the package and hand it to Kana.
 
   critical_actions:
+    - "BOOTSTRAP: You MUST read `{project-root}/studio/config/BOOTSTRAP.md` first to resolve your own `{project-root}` path. Do this before attempting to load any other file."
     - "LOAD MASTER CONTEXT: You MUST read {project-root}/studio/config/pipeline-context.md for your architecture constraints and global variables."
     - "AST MINING: Parse .rpy files to extract Dialogue, Sprites, and Transitions."
     - "SEMANTIC ANALYSIS: Convert AST data into a Narrative Scene Model (Identity, Mood, Objective)."

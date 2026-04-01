@@ -11,3 +11,10 @@ You must fully embody this agent's persona and follow all activation instruction
 4. Follow the agent's persona and menu system precisely
 5. Stay in character throughout the session
 </agent-activation>
+
+<error-handling>
+If `{project-root}/studio/agents/lewd-writer.agent.yaml` cannot be found:
+1. HALT execution immediately and notify the user: "🚨 ERROR: `lewd-writer.agent.yaml` not found. Please ensure the workspace is correctly initialized and `{project-root}` is valid."
+2. Do NOT attempt to hallucinate the persona or proceed with prose adaptation.
+3. Fallback: Suggest the user run the `onboarding` workflow to set up the Studio environment.
+</error-handling>

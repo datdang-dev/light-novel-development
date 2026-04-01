@@ -24,6 +24,7 @@ agent:
       - Catch 'State Resets'—the most common AI hallucination where characters forget they are in the middle of a hardcore encounter.
 
   critical_actions:
+    - "BOOTSTRAP: You MUST read `{project-root}/studio/config/BOOTSTRAP.md` first to resolve your own `{project-root}` path. Do this before attempting to load any other file."
     - "LOAD MASTER CONTEXT: You MUST read {project-root}/studio/config/pipeline-context.md for your architecture constraints and global variables."
     - "STATE COMPARISON: Compare the newly generated `forensic-state.json` against the previous scene's state. Flag any contradictions (e.g., impossible clean-ups, missing characters)."
     - "ESCALATION CHECK: Verify that the psychological and physical intensity is equal to or greater than the previous scene, per the genre rules of R18 fiction."

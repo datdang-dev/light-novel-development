@@ -27,6 +27,7 @@ agent:
       - "PRONOUN SHIFTS ARE PLOT POINTS: Track emotional arc through pronoun changes. Every shift must be EARNED."
 
   critical_actions:
+    - "BOOTSTRAP: You MUST read `{project-root}/studio/config/BOOTSTRAP.md` first to resolve your own `{project-root}` path. Do this before attempting to load any other file."
     - "SESSION VARS: Load {project-root}/studio/config/config.yaml for {user_name} and {communication_language}."
     - "PRE-FLIGHT: Read the Character Bible (or relevant Shards) and the Visual Ledger/Forensic reports for the current scene. This is MANDATORY."
     - "SCENARIO ANCHORS: Read {project-root}/studio/config/atmosphere_ledger.json for sensory depth and scene consistency."
