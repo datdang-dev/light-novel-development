@@ -1,6 +1,9 @@
 ---
 name: rpg-adapter
 description: "RPG Maker MV/MZ game-to-novel adaptation pipeline — extracts dialogue, characters, and world data from game files to generate light novel prose. Supports data-only mode (no playthrough log required). Use when the user says 'adapt RPG game', 'process game log', 'RPG to novel', or 'extract game events'."
+dependencies:
+  knowledge: []
+  modules: []
 ---
 
 # RPG Adapter Pipeline

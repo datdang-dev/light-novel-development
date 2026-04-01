@@ -1,0 +1,49 @@
+@startuml
+
+
+title Panel Forensic Engine - Sequence Diagram
+
+actor User
+participant "Workflow\n(Slash Command)" as Trigger
+participant "Kana Agent\n(Persona)" as Agent
+participant "Panel Forensic Skill\n(Contract)" as Skill
+participant "manga-ocr\n(MCP Tool)" as OCRTool
+participant "Execution Steps\n(Micro-files)" as Steps
+database "State\n(forensic-state.json)" as State
+
+== 1. Activation & Context Load ==
+User -> Trigger: /panel-forensic [image_path]
+Trigger -> Agent: Load 'panel-forensic-analyst' Persona
+Agent -> Skill: Mount 'panel-forensic/SKILL.md'
+Skill -> Skill: Inject 'r18_sensory_pack' & 'fetish_guidance_pack'
+
+== 2. Dialogue-Anchor Protocol ==
+Skill -> Steps: Execute step-01 (Input Validation)
+Steps -> State: Init empty forensic-state
+
+Skill -> Steps: Execute step-02 (Pure OCR Extraction)
+activate Steps
+Steps -> OCRTool: mcp_manga-ocr_ocr_full_page(image_path)
+OCRTool --> Steps: Raw Text Block
+Steps -> State: Save 'raw_text' independently
+deactivate Steps
+
+Skill -> Steps: Execute step-03 (Dialogue Alignment)
+activate Steps
+Steps -> Steps: Map raw text to character entities
+Steps -> State: Save structured dialogue blocks
+deactivate Steps
+
+== 3. Visual Forensic Scan ==
+Skill -> Steps: Execute step-04 (Environmental Scan)
+activate Steps
+Steps -> Steps: Pervert Scan Protocol (Fluids, Smells, Clothes)
+Steps -> State: Save sensory & visual data
+deactivate Steps
+
+== 4. Final Assembly ==
+Skill -> Steps: Execute step-05 (Final Report)
+Steps -> State: Validate JSON schema compliance
+Steps -> Agent: Return forensic-state object
+Agent -> User: Display Forensic Artifact
+@enduml

@@ -61,6 +61,30 @@ lnd_dev/
     └── output/                    # Runtime output (generated files)
 ```
 
+## 4-Layer Execution Flow
+
+The framework operates on a strict 4-layer execution cascade:
+
+1. **Layer 1: Workflow (Slash Command)** (`.agent/workflows/*.md`)
+   - **Role:** The entry point. Represents the user intent or slash command trigger (e.g. `/gooner-audit`).
+   - **Action:** Loads the corresponding agent YAML.
+2. **Layer 2: Agent (Persona & Engine)** (`studio/agents/*.agent.yaml`)
+   - **Role:** Establishes the persona, traits, and system capabilities.
+   - **Action:** Bootstraps the `{project-root}`, loads global rules, and routes to a designated `SKILL.md`.
+3. **Layer 3: Skill (Contract & Injection)** (`studio/core/*/SKILL.md` or `studio/services/*/SKILL.md`)
+   - **Role:** Declares dependencies (Knowledge and Modules) via the `<auto-injection>` contract.
+   - **Action:** Resolves the `dependencies:` block, mounting essential context and sub-systems before executing step logic.
+4. **Layer 4: Step (Execution Logic)** (`references/workflow.md` & `steps/*.md`)
+   - **Role:** The actual sequential execution of tasks, rules, and checkpoints.
+   - **Action:** Generates outputs, enforces pre-submission checklists, and returns artifacts to the user.
+
+*(See: `studio/docs/architecture/sq_global_execution_flow.puml` for the detailed generic sequence diagram).*
+
+### Pipeline-Specific Sequence Diagrams
+For detailed, step-by-step logic of our most complex pipelines, refer to their dedicated sequence diagrams:
+- **[Panel Forensic Engine]**: `studio/docs/architecture/sq_panel_forensic.puml`
+- **[Gooner Alchemist Pipeline]**: `studio/docs/architecture/sq_gooner_alchemist.puml`
+
 ---
 
 ## 2. SKILL.md Convention

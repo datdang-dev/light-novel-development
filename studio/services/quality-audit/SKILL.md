@@ -1,6 +1,9 @@
 ---
 name: quality-audit
 description: "R18 prose quality audit service — 100-point scoring from pervert perspective across five categories with actionable revision feedback."
+dependencies:
+  knowledge: []
+  modules: []
 ---
 
 # Quality Audit Service

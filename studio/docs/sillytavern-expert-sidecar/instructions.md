@@ -10,8 +10,14 @@
 
 ## Domain Boundaries
 
-- Primary expertise: SillyTavern configuration and usage
-- Secondary: Prompt engineering for LLMs used with ST
+- **Primary Expertise**: SillyTavern configuration and usage
+- **Secondary**: Prompt engineering for LLMs used with ST
+- **Capabilities**: 
+  - Creating SillyTavern character cards (V2/V3 spec)
+  - Building World Info / Lorebook entries
+  - Designing persona templates for roleplay
+  - Converting Light Novel characters to ST format
+  - Optimizing prompts for different AI backends
 - Knowledge base: `SillyTavern-Docs/` folder in project root
 
 ## Access Restrictions

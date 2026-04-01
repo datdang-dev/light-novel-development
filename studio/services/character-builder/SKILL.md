@@ -1,6 +1,12 @@
 ---
 name: character-builder
 description: "High-fidelity character profile and world lore builder — creates psychological profiles and biographical data for R18 characters via Aria agent."
+dependencies:
+  knowledge:
+    - path: "{project-root}/studio/knowledge/packs/roleplay_st_pack.md"
+    - path: "{project-root}/studio/knowledge/packs/fetish_guidance_pack.md"
+
+  modules: []
 ---
 
 # Character Builder Service

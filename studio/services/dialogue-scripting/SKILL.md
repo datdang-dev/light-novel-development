@@ -1,6 +1,12 @@
 ---
 name: dialogue-scripting
 description: "R18 dialogue and SFX generation service — creates degradation dialogue, voice-calibrated speech, and Japanese SFX mapping via Miki agent."
+dependencies:
+  knowledge:
+    - path: "{project-root}/studio/knowledge/packs/narrative_style_pack.md"
+    - path: "{project-root}/studio/knowledge/packs/r18_sensory_pack.md"
+
+  modules: []
 ---
 
 # Dialogue Scripting Service

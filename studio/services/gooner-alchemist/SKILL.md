@@ -1,6 +1,12 @@
 ---
 name: gooner-alchemist
 description: "Ultimate manga-to-prose adaptation pipeline — 8-step orchestrated flow from initialization through forensic analysis, prose generation, quality audit, to state persistence."
+dependencies:
+  knowledge:
+    - path: "{project-root}/studio/knowledge/packs/narrative_style_pack.md"
+    - path: "{project-root}/studio/knowledge/packs/fetish_guidance_pack.md"
+
+  modules: []
 ---
 
 # Gooner Alchemist Pipeline

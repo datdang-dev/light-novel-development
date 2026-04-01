@@ -1,6 +1,13 @@
 ---
 name: lewd-writer
 description: "Core R18 prose generation engine — transforms forensic analysis into gooner-grade, sensory-saturated Vietnamese Light Novel prose via Suki agent. Use when the user says '/prose-adapter', '/lewd-writer', or 'write prose'."
+dependencies:
+  knowledge:
+    - path: "{project-root}/studio/knowledge/packs/narrative_style_pack.md"
+    - path: "{project-root}/studio/knowledge/packs/r18_sensory_pack.md"
+    - path: "{project-root}/studio/knowledge/packs/fetish_guidance_pack.md"
+
+  modules: []
 ---
 
 # Lewd Writer Engine

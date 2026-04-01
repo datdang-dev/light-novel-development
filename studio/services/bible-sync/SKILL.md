@@ -1,6 +1,9 @@
 ---
 name: bible-sync
 description: "Story bible and continuity state synchronization — manages LOAD and SAVE modes for character, relationship, and environmental state across adaptation sessions."
+dependencies:
+  knowledge: []
+  modules: []
 ---
 
 # Bible Sync Service

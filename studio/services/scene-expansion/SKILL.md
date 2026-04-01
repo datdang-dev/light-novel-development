@@ -1,6 +1,9 @@
 ---
 name: scene-expansion
 description: "Scene expansion service — transforms brief scene summaries or outlines into full R18 prose with escalation, sensory density, and character voice integration."
+dependencies:
+  knowledge: []
+  modules: []
 ---
 
 # Scene Expansion Service

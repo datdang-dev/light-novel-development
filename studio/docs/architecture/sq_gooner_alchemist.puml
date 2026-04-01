@@ -1,0 +1,58 @@
+@startuml
+
+
+title Gooner Alchemist - 5-Phase Sequence Diagram
+
+actor User
+participant "Workflow\n(Slash Command)" as Trigger
+participant "Director K Agent\n(Orchestrator)" as Orchestrator
+participant "Gooner Alchemist Skill\n(Contract)" as Skill
+participant "Sub-Systems\n(Core/Services)" as Modules
+database "Output\n(chapter_prose.md)" as Output
+
+== 1. Orchestrator Initialization ==
+User -> Trigger: /gooner-alchemist [corpus_path]
+Trigger -> Orchestrator: Load 'lnd-orchestrator' Persona
+Orchestrator -> Skill: Route to 'gooner-alchemist/SKILL.md'
+Skill -> Skill: Inject 'narrative_style_pack' & 'fetish_guidance_pack'
+
+== 2. Phase Execution Cascade ==
+
+group Phase 1: Input Analysis & Triage
+    Skill -> Modules: Invoke Validation Module
+    Modules --> Skill: Verified corpus integrity
+end
+
+group Phase 2: Parallel Visual & Transcript Alignment
+    Skill -> Modules: Call 'Panel Forensic' (Core)
+    Modules --> Skill: Returns forensic-state.json
+end
+
+group Phase 3: R18 Detail Expansion (The Alchemist Phase)
+    Skill -> Modules: Inject sensory packs
+    Modules -> Modules: Amplify smells, fluids, psychological states
+    Modules --> Skill: Returns expanded_script.json
+end
+
+group Phase 4: Prose Synthesis
+    Skill -> Modules: Call 'Lewd Writer' (Core)
+    Modules -> Modules: Apply Mesugaki / R18 LightNovel Style
+    Modules --> Skill: Returns raw prose structure
+end
+
+group Phase 5: Mandatory Gooner Audit
+    Skill -> Modules: Call 'Quality Audit' (Services)
+    Modules -> Modules: Enforce 'Pervert POV' checks
+    Modules --> Skill: Returns audit score
+    
+    alt Score is Below Threshold
+        Skill -> Modules: Reject sequence & request rewrite (Phase 4)
+    else Score is Passing
+        Skill -> Output: Commit chapter_prose.md
+    end
+end
+
+== 3. Finalization ==
+Skill -> Orchestrator: Return artifact mapping
+Orchestrator -> User: Present Final Chapter
+@enduml

@@ -1,6 +1,9 @@
 ---
 name: party-mode
 description: "Multi-agent collaborative discussion facilitator — structured meetings between LND Studio specialist agents chaired by Antigravity."
+dependencies:
+  knowledge: []
+  modules: []
 ---
 
 # Party Mode

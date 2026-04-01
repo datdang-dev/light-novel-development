@@ -1,6 +1,11 @@
 ---
 name: st-card-export
 description: "SillyTavern character card export service — converts LND character profiles into SillyTavern V3 card format (JSON/PNG) with lorebooks."
+dependencies:
+  knowledge:
+    - path: "{project-root}/studio/knowledge/packs/roleplay_st_pack.md"
+
+  modules: []
 ---
 
 # ST Card Export Service

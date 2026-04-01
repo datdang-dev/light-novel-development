@@ -1,6 +1,9 @@
 ---
 name: release-compiler
 description: "Release packaging service — transforms compiled output into delivery packages including manifests, web chat kits, and distribution archives."
+dependencies:
+  knowledge: []
+  modules: []
 ---
 
 # Release Compiler Service

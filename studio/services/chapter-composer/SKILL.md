@@ -1,6 +1,9 @@
 ---
 name: chapter-composer
 description: "Chapter compilation service — merges individual page prose files into cohesive chapter documents with transitions and continuity verification."
+dependencies:
+  knowledge: []
+  modules: []
 ---
 
 # Chapter Composer Service

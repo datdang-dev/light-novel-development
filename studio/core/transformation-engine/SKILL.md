@@ -1,6 +1,9 @@
 ---
 name: transformation-engine
 description: "Core abstraction layer — input-agnostic pipeline that orchestrates knowledge injection, prose generation (Suki), and quality audit (Riko) into a verified draft-prose.json."
+dependencies:
+  knowledge: []
+  modules: []
 ---
 
 # Transformation Engine

@@ -1,6 +1,9 @@
 ---
 name: renpy-adaptation
 description: "Ren'Py game-to-prose adaptation pipeline — extracts semantic models from Ren'Py scripts via AST mining and delegates to the standard prose generation flow."
+dependencies:
+  knowledge: []
+  modules: []
 ---
 
 # Ren'Py Adaptation Pipeline

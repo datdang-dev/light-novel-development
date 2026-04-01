@@ -1,6 +1,9 @@
 ---
 name: entity-extractor
 description: "Structured character and entity data extraction from forensic reports — parses visual analysis to populate story bible entries."
+dependencies:
+  knowledge: []
+  modules: []
 ---
 
 # Entity Extractor Service

@@ -14,6 +14,16 @@ validateWorkflow: './steps/step-01-input-validation.md'
 **The Dialogue-Anchor Core Philosophy:**
 Vision models hallucinate when overwhelmed by complex R18 visuals. To prevent this, text extraction (OCR) must happen completely independently of, and strictly prior to, any visual context analysis.
 
+**The Forensic Scanning Philosophy:**
+The forensic phase exists to FORCE thorough examination of every detail. A good gooner adaption starts with SEEING everything the artist drew.
+
+**Minimum Requirements (Pervert Scan Protocol):**
+- Identify ALL characters in frame and document their positions.
+- Document clothing state (0-100% dressed) and skin exposure.
+- List ≥3 potential smells (see `sensory_density.md`).
+- List ≥3 potential sounds (see `dialogue_format.md` for SFX).
+- Note any "evidence" items (condoms, fluids, sweat, saliva, semen, stains, residue).
+
 **Architecture:**
 
 - **Step 1:** Input Validation
