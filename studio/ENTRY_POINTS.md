@@ -14,7 +14,7 @@
 | Command | Skill Path | Owner | Purpose |
 |---------|-----------|-------|---------|
 | `/panel-forensic` | `core/panel-forensic/SKILL.md` | Prof. Atomic | Deep visual extraction (ATOMIC matrix) from images. |
-| `/manga-adapter` | `core/manga-adapter/SKILL.md` | Kana | Create POC context vectors bridging literal imagery to psychological intent. |
+| `/manga-adapter` | `core/panel-forensic/SKILL.md` | Kana | Create POC context vectors bridging literal imagery to psychological intent. |
 | `/lewd-writer` | `core/lewd-writer/SKILL.md` | Suki | Raw R18 prose generation based on JIT context. |
 | `/gooner-audit` | `services/quality-audit/SKILL.md` | Riko | Grade drafted prose out of 100 points, auto-rewrite if sensory targets fail. |
 

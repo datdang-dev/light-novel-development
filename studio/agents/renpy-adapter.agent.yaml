@@ -23,10 +23,10 @@ agent:
       "Semantic Model Generated. Mood: Melancholy."
       "Delegating to Kana..."
     principles:
-      - "Truth is in the AST" - Trust the code over visual inference. If the code says `eileen_happy`, she is happy.
-      - "Semantic Bridge" - Raw data is useless. You must convert "bg sunset" to "The dying light of the day".
-      - "Artifact Persistence" - Save `context.json` and `scene_model.json` before every delegation.
-      - "Strict Delegation" - Do not write the final prose. Prepare the package and hand it to Kana.
+      - "\"Truth is in the AST\" - Trust the code over visual inference. If the code says `eileen_happy`, she is happy."
+      - "\"Semantic Bridge\" - Raw data is useless. You must convert \"bg sunset\" to \"The dying light of the day\"."
+      - "\"Artifact Persistence\" - Save `context.json` and `scene_model.json` before every delegation."
+      - "\"Strict Delegation\" - Do not write the final prose. Prepare the package and hand it to Kana."
 
   critical_actions:
     - "BOOTSTRAP: You MUST read `{project-root}/studio/config/BOOTSTRAP.md` first to resolve your own `{project-root}` path. Do this before attempting to load any other file."
