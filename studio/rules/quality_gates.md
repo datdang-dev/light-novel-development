@@ -76,10 +76,26 @@ description: Quality thresholds and pass/fail criteria for R18 content
 
 ---
 
+## 📊 CATEGORY F: Cultural Compliance — JP Reader Alignment (15 pts) — V8.0
+
+> **Hard Gate Dependency:** This category cross-references `hentai_logic_gate.md`.
+> If HENTAI LOGIC GATE fails → Category F auto-scores 0, regardless of individual item scores.
+
+| ID | Requirement | Points | Pass Criteria |
+|----|-------------|--------|---------------|
+| F1 | 納得感 (Erotic Justification) | 4 | Every sexual escalation has narrative/psychological logic |
+| F2 | 背徳感 (Taboo Element) | 4 | Scene explicitly identifies and leverages a taboo |
+| F3 | ギャップ萌え (Gap Moe) | 4 | At least 1 visible persona contrast per featured character |
+| F4 | SFX Authenticity | 3 | Japanese-phonetic SFX (パンパン, ぐちゅ, etc.) used correctly and consistently |
+
+---
+
 ## 🎯 GRADE SCALE
 
+> **Note (V8.0):** Total possible = 115 pts (A:25 + B:25 + C:25 + D:15 + E:10 + F:15). Normalize to 100 for grading: `final_score = (raw_score / 115) * 100`.
+
 ```
-95-100: 🔥 GOONER PERFECTION
+95-100: 🔥 GOONER PERFECTION (JP-aligned masterpiece)
 85-94:  ✅ APPROVED (publish ready)
 70-84:  ⚠️ NEEDS REVISION
 <70:    ❌ FAILED (major rewrite)

@@ -47,4 +47,14 @@ This file tracks all available `.md` documentation within the `studio/knowledge/
 - **narrative_style_pack.md**: `{project-root}/studio/knowledge/packs/narrative_style_pack.md`
 - **roleplay_st_pack.md**: `{project-root}/studio/knowledge/packs/roleplay_st_pack.md`
 - **fetish_guidance_pack.md**: `{project-root}/studio/knowledge/packs/fetish_guidance_pack.md`
+- **japanese_reader_psychology.md** (V8.0): `{project-root}/studio/knowledge/packs/japanese_reader_psychology.md`
+- **arousal_architecture.md** (V8.0): `{project-root}/studio/knowledge/packs/arousal_architecture.md`
+
+## trope_beat_sheets (V8.0)
+- **ntr_beats.md**: `{project-root}/studio/knowledge/trope_beat_sheets/ntr_beats.md`
+- **corruption_beats.md**: `{project-root}/studio/knowledge/trope_beat_sheets/corruption_beats.md`
+- **mindbreak_beats.md**: `{project-root}/studio/knowledge/trope_beat_sheets/mindbreak_beats.md`
+- **training_beats.md**: `{project-root}/studio/knowledge/trope_beat_sheets/training_beats.md`
+- **revenge_beats.md**: `{project-root}/studio/knowledge/trope_beat_sheets/revenge_beats.md`
+
 

@@ -32,6 +32,9 @@ agent:
     - "Enforce Quality Gates strictly (Residue missing? Fail. Not wet enough? Fail)."
     - "Provide specific examples for every failure."
     - "Load files ONLY when executing a user chosen workflow or a command requires it."
+    - "V8.0 CATEGORY F: Score every draft against Cultural Compliance (F1-F4 in `{project-root}/studio/rules/quality_gates.md`). If F-score < 10/15, draft FAILS regardless of total score."
+    - "V8.0 HENTAI LOGIC GATE: Verify ALL 6 gates in `{project-root}/studio/rules/hentai_logic_gate.md` pass. ANY gate failure = auto-reject."
+    - "V8.0 JP READER TEST: Ask yourself — would a 30-year-old Japanese male reading this on Syosetu Nocturne at 2 AM find this satisfying? If the answer is 'meh', it FAILS."
 
   menu:
     - trigger: QA or fuzzy match on quality-audit

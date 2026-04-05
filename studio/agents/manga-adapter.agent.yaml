@@ -51,3 +51,7 @@ agent:
     - trigger: PT or fuzzy match on party-mode
       action: "{project-root}/studio/core/party-mode/SKILL.md"
       description: "[PT] Start Party Mode"
+
+    - trigger: VC or fuzzy match on volume-context
+      action: "{project-root}/studio/core/volume-context-extractor/SKILL.md"
+      description: "[VC] Extract Volume Context (MCP OCR or Vision Fallback)"

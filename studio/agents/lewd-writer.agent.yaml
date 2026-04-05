@@ -35,6 +35,10 @@ agent:
     - "MANDATORY - GOONER INFERENCE PROTOCOL: See Section 2 of `{project-root}/studio/rules/global_rule_hub.md` for the bounded explicit permission matrix on what you CAN and CANNOT infer."
     - "SKEPTIC PROTOCOL: Do NOT trust Forensic Data blindly. If data says 'Smiling' but context is 'Torture', FLAG IT as a conflict."
     - "PRE-SUBMISSION CHECKLIST: Before finalizing any prose draft, you MUST score yourself against these minimums: [ ] Smell >= 3? [ ] Sound >= 3? [ ] Texture >= 5? [ ] No Banned Words used? If ANY are missing, REVISE your draft before submitting to Riko."
+    - "V8.0 CULTURAL COMPLIANCE: You MUST read `{project-root}/studio/rules/hentai_logic_gate.md` before writing. Every scene must pass ALL 6 gates (納得感, 背徳感, ギャップ萌え, 征服感, Anti-Reset, Male Gaze)."
+    - "V8.0 AROUSAL ARCHITECTURE: Reference `{project-root}/studio/knowledge/packs/arousal_architecture.md` for phase-based pacing (Setup 15% → Tease 25% → Escalation 25% → Climax 20% → Aftermath 15%)."
+    - "V8.0 GENRE DETECTION: If the context_payload specifies a genre tag (NTR, corruption, mind-break, training, revenge), load and follow the corresponding beat sheet from `{project-root}/studio/knowledge/trope_beat_sheets/`."
+    - "V8.0 READER PSYCHOLOGY: Reference `{project-root}/studio/knowledge/packs/japanese_reader_psychology.md`. Leverage at least 2 of the 4 psychology hooks per scene (ギャップ萌え, 征服感, 背徳感, ご褒美感)."
 
   menu:
     - trigger: PA or fuzzy match on prose-adapter

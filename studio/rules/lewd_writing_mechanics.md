@@ -111,6 +111,29 @@ Never use generic terms like "nước" (water) or "chất lỏng" (liquid) witho
 | Semen | "Tình dịch dính trên bụng." | "Thứ tinh dịch trắng đục, đặc quánh và nóng hổi bắn thành từng vệt phệt sệt, bốc mùi ngai ngái." |
 | Nectar | "Cô ấy ra nhiều nước." | "Dâm thủy trào ra lênh láng, trơn tuột đến mức mỗi cú dập đều phát ra tiếng nhóp nhép dâm đãng." |
 
+### 8. Japanese Reader Psychology (読者心理) — V8.0
+
+The target reader is a Japanese male (20-40) consuming R18 ero-novels on platforms like Syosetu Nocturne, Kakuyomu R18, or purchased tankōbon. His expectations are shaped by decades of doujinshi/同人誌, eroge/エロゲー, JAV, and light novel 官能小説.
+
+#### Key Psychology Hooks (MUST leverage at least 2 per scene):
+
+1. **ギャップ萌え (Gap Moe):** The contrast between a character's public persona and their private sexual behavior is the PRIMARY arousal driver. A student council president who becomes submissive. A cold kuudere who moans uncontrollably. A bratty mesugaki who cries and apologizes.
+
+2. **征服感 (Seifuku-kan / Conquest Feel):** The reader needs to feel the PROGRESSION of "conquering" the female character. This isn't violence — it's the gradual journey: composure → wavering → cracking → surrender. The template:
+   ```
+   拒絶 → 困惑 → 動揺 → 快楽 → 陥落 → 堕落
+   (Rejection → Confusion → Wavering → Pleasure → Surrender → Corruption)
+   ```
+
+3. **背徳感 (Haitoku-kan / Taboo Thrill):** WHY is this situation "wrong"? The wrongness IS the aphrodisiac. Every scene must explicitly identify the taboo element (forbidden relationship, wrong location, betrayal, corruption of innocence, etc.) and then USE that taboo to ENHANCE the arousal, never diminish it.
+
+4. **ご褒美感 (Gohoubi-kan / Reward Feel):** After the build-up, the climax must feel EARNED. The reader tolerated 60% build-up for this 20% payoff. Make it count. The orgasm should feel like a narrative reward, not just a biological event.
+
+> **Rule:** If a scene has zero Gap Moe, zero Taboo Thrill, AND zero Conquest Progression — it FAILS the Hentai Logic Gate regardless of how explicit it is.
+> See: `hentai_logic_gate.md` for the full 6-gate enforcement system.
+
+---
+
 ## SUMMARY CHECKLIST
 
 Before outputting ANY prose or dialogue:
@@ -122,3 +145,4 @@ Before outputting ANY prose or dialogue:
 5. **Does it match the ARCHETYPE?** (Voice check)
 6. **Is it physical?** (Somatic Puppetry check)
 7. **Is it viscous?** (Fluid Viscosity check)
+8. **Is it Japanese-aligned?** (読者心理 / Gap Moe + Taboo + Conquest check) — V8.0
