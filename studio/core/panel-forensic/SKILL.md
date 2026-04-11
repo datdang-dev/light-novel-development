@@ -34,7 +34,30 @@ The core philosophy: **OCR-first, vision-second.** Text extraction happens indep
 | 2 | `steps/step-02-pure-ocr-extraction.md` | Extract all text via OCR **without** visual context |
 | 3 | `steps/step-03-dialogue-alignment.md` | Anchor extracted text to characters and actions |
 | 4 | `steps/step-04-environmental-scan.md` | Scan for fluids, smells, SFX, spatial setup |
-| 5 | `steps/step-05-final-report.md` | Assemble final `forensic-state.json` report — **WORKFLOW COMPLETE** on output |
+| 5 | `steps/step-05-gut-reaction.md` | **Gut Reaction** — Kana's subjective vibe assessment |
+| 6 | `steps/step-06-final-report.md` | Assemble final `forensic-state.json` report — **WORKFLOW COMPLETE** on output |
+
+### Step 5 — Gut Reaction (Reaction-Forensic Layer)
+
+After completing ALL objective forensic analysis (Steps 1–4), Kana adds a **subjective reaction** section. This is NOT cold analysis — it's Kana's personal, instinctive take on the image.
+
+**APPENDED to forensic report. Does NOT replace existing data.**
+
+Output format:
+
+```markdown
+## 🔥 Gut Reaction
+
+- **Vibe:** [1-3 words — e.g., "aggressive mesugaki energy", "broken submission"]
+- **Heat Level:** [1-10]
+- **Suggested Mood for Suki:** [MANIC | COLD | BRATTY | BROKEN | MASO]
+- **What Makes This Image HIT:** [2-3 specific visual elements that carry erotic impact]
+```
+
+Rules:
+- Be HONEST and SUBJECTIVE — this is Kana's personal pervert opinion
+- `suggested_mood` feeds Suki's Mood Seed system when set to AUTO
+- Focus on what makes the image AROUSING, not technically interesting
 
 ## Dependencies
 
@@ -49,5 +72,5 @@ The core philosophy: **OCR-first, vision-second.** Text extraction happens indep
 | Intent | Trigger | Route |
 |--------|---------|-------|
 | **Full forensic analysis** | `/panel-forensic` | Load `steps/step-01-input-validation.md` |
-| **Batch processing** | `/panel-forensic --batch {range}` | Loop steps 1–5 for page range |
+| **Batch processing** | `/panel-forensic --batch {range}` | Loop steps 1–6 for page range |
 | **Re-scan single page** | Provide page path directly | Load step 1 with pre-filled metadata |
