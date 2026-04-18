@@ -47,7 +47,7 @@ validateWorkflow: './steps/step-01-initialize.md'
 
 - **Step 3:** Invoke Core Transformation Engine
   - *Input:* `forensic.json` + `context_horizon.md` + JIT Compiled Context
-  - *JIT Compilation:* Before invoking Suki, compile `{project-root}/studio/config/pipeline-context.md` and `{project-root}/.agent/rules/lewd_writing_mechanics.md` into the agent payload `context_payload.md` to prevent mid-execution disk reads.
+  - *JIT Compilation:* Before invoking Suki, compile `{project-root}/studio/config/pipeline-context.md` and `{project-root}/studio/rules/lewd_writing_mechanics.md` into the agent payload `context_payload.md` to prevent mid-execution disk reads.
   - *Engine:* `studio/core/transformation-engine/workflow.md`
   - *Goal:* Perform the strict Prose Generation -> Quality Audit -> Rewrite loop agnostically.
   - *Output:* Verified `draft.json`

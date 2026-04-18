@@ -52,6 +52,22 @@ Construct the prose paragraph by paragraph. **Do not pre-write dry actions.** In
 ```markdown
 ### Writing Guidelines:
 
+**MANDATORY PRE-REQUISITE (COT SCRATCHPAD):**
+Before writing the actual prose for the scene beat, you MUST output a `<think>` block applying the Deep Forensic Framework and verifying the active Modules.
+
+```xml
+<think>
+[Deep Forensic Application]
+- Facade vs Reality: (What are they hiding vs what the body is doing?)
+- Heat Map & Friction: (Where is the primary physical contact?)
+- Hentai Logic: (What is the psychological kink of this beat?)
+
+[Voice & Module Enforcement]
+- Active Archetype: (Target voice)
+- Enabled Modules: (List selected modules from lewd_modules.md)
+</think>
+```
+
 For each parsed dialogue/SFX:
 
 1. **Pre-speech (Sensory build-up):**

@@ -60,24 +60,24 @@ scene_tags = EXTRACT content_tags from forensic_data
 
 ```text
 ALWAYS LOAD (Tier 1 — Core, ~500 tokens):
-  ✅ {project-root}/.agent/rules/dialogue_format.md
+  ✅ {project-root}/studio/rules/dialogue_format.md
   ✅ {project-root}/studio/schemas/draft-prose.schema.json (structure only)
 
 IF scene_tags CONTAINS "bedroom" OR "bathroom" OR "explicit":
-  ✅ {project-root}/.agent/rules/sensory_density.md
-  ✅ {project-root}/.agent/rules/lewd_writing_mechanics.md
+  ✅ {project-root}/studio/rules/sensory_density.md
+  ✅ {project-root}/studio/rules/lewd_writing_mechanics.md
   ✅ {project-root}/studio/core/lewd-writer/data/sensory-vocabulary.md
 
 IF scene_tags CONTAINS "dialogue-heavy" OR "confrontation":
-  ✅ {project-root}/.agent/rules/character_voice.md
-  ✅ {project-root}/.agent/rules/dialogue_format.md (full version)
+  ✅ {project-root}/studio/rules/character_voice.md
+  ✅ {project-root}/studio/rules/dialogue_format.md (full version)
 
 IF scene_tags CONTAINS "aftermath" OR "post-climax":
-  ✅ {project-root}/.agent/rules/sensory_density.md
-  ✅ {project-root}/.agent/rules/environmental_atmosphere.md
+  ✅ {project-root}/studio/rules/sensory_density.md
+  ✅ {project-root}/studio/rules/environmental_atmosphere.md
 
 IF scene_tags CONTAINS "intro" OR "transition":
-  ✅ {project-root}/.agent/rules/environmental_atmosphere.md
+  ✅ {project-root}/studio/rules/environmental_atmosphere.md
   (Skip heavy sensory/lewd rules — save ~40% tokens)
 
 SKIP rules that are NOT relevant to the current scene type.

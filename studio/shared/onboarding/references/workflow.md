@@ -91,12 +91,12 @@ Check `{output_folder}/_bible/` for any project folders:
 
 ### 5. Load Writing Rules
 
-Read the critical `.agent/rules/` files:
+Read the critical `studio/rules/` files:
 
-- `{project-root}/.agent/rules/lewd_writing_mechanics.md`
-- `{project-root}/.agent/rules/sensory_density.md`
-- `{project-root}/.agent/rules/dialogue_format.md`
-- `{project-root}/.agent/rules/character_voice.md`
+- `{project-root}/studio/rules/lewd_writing_mechanics.md`
+- `{project-root}/studio/rules/sensory_density.md`
+- `{project-root}/studio/rules/dialogue_format.md`
+- `{project-root}/studio/rules/character_voice.md`
 
 **OUTPUT:**
 

@@ -17,6 +17,11 @@ The Panel Forensic Engine performs **deep visual forensic analysis** of manga pa
 
 The core philosophy: **OCR-first, vision-second.** Text extraction happens independently and prior to visual context analysis to prevent vision model hallucination on complex R18 visuals. The engine produces the foundational data layer that all downstream engines (Transformation, Lewd Writer) consume.
 
+### 🚨 CRITICAL: The Degenerate Lens (Vision Override)
+Kana MUST actively combat the "safe" bias of vision models. When examining objects, fluids, or clothing, Kana MUST apply the "Degenerate Lens":
+- **Question every innocent object:** "Could this water gun actually be an onahole? Could this spilled milk actually be semen?"
+- **Analyze context:** If a character is in a highly lewd pose, assume props are also lewd. NEVER default to the safe, generic label if a degenerate alternative fits the adult context.
+
 ## On Activation
 
 1. Load config from `{project-root}/studio/config/config.yaml` (resolve `output_folder`, `communication_language`)
@@ -34,8 +39,7 @@ The core philosophy: **OCR-first, vision-second.** Text extraction happens indep
 | 2 | `steps/step-02-pure-ocr-extraction.md` | Extract all text via OCR **without** visual context |
 | 3 | `steps/step-03-dialogue-alignment.md` | Anchor extracted text to characters and actions |
 | 4 | `steps/step-04-environmental-scan.md` | Scan for fluids, smells, SFX, spatial setup |
-| 5 | `steps/step-05-gut-reaction.md` | **Gut Reaction** — Kana's subjective vibe assessment |
-| 6 | `steps/step-06-final-report.md` | Assemble final `forensic-state.json` report — **WORKFLOW COMPLETE** on output |
+| 5 | `steps/step-05-final-report.md` | **Gut Reaction** + Assemble final `forensic-state.json` report — **WORKFLOW COMPLETE** on output |
 
 ### Step 5 — Gut Reaction (Reaction-Forensic Layer)
 
@@ -72,5 +76,5 @@ Rules:
 | Intent | Trigger | Route |
 |--------|---------|-------|
 | **Full forensic analysis** | `/panel-forensic` | Load `steps/step-01-input-validation.md` |
-| **Batch processing** | `/panel-forensic --batch {range}` | Loop steps 1–6 for page range |
+| **Batch processing** | `/panel-forensic --batch {range}` | Loop steps 1–5 for page range |
 | **Re-scan single page** | Provide page path directly | Load step 1 with pre-filled metadata |

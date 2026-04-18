@@ -102,22 +102,23 @@ Pre-plan where sensory elements will go:
 | Texture | ≥5 | P1: fabric, P2: skin, P3: moisture, P4+: action |
 ```
 
-### 4. Character Voice Planning
+### 4. Character Voice, Archetype & Module Planning
 
-From bible or forensics, establish:
+**MANDATORY:** Suki MUST analyze the scene context and resolve the target Voice Archetype from `lewd_archetypes.md`.
 
 ```markdown
-### Character Voices
+### Character Voices & Modules
 
 **{Character A}:**
-- Speech pattern: {formal/crude/etc}
-- Dialogue style: {demanding/pleading/etc}
-- Key phrases: {established}
+- **Resolved Archetype:** (e.g., The Cold Authority / The Broken)
+- **Enabled Modules:** `[Cold & Deadpan]`, `[Sensory Overload]`, `[Asterisked Thoughts]`
+- **Speech pattern:** {formal/crude/stuttering}
+- **Key phrases:** {established}
 
 **{Character B}:**
-- Speech pattern: {description}
-- Dialogue style: {description}
-- Key phrases: {established}
+- **Resolved Archetype:** {description}
+- **Enabled Modules:** {description}
+- **Dialogue style:** {description}
 ```
 
 ### 5. Update Output File

@@ -5,7 +5,7 @@ description: 'Enforce strict Light Novel formatting: header banner, dialogue, th
 nextStepFile: './step-05c-sensory-injection.md'
 outputFile: '{output_folder}/_prose/{manga_name}/chapter_{ch}/page_{page_num}_prose.md'
 templateFile: '{project-root}/studio/_templates/light-novel-prose.md'
-dialogueRulesFile: '{project-root}/.agent/rules/dialogue_format.md'
+dialogueRulesFile: '{project-root}/studio/rules/dialogue_format.md'
 ---
 
 # Step 5b: Ensure Format Compliance

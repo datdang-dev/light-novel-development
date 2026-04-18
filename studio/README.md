@@ -7,7 +7,7 @@
 
 ## 🏗️ The Multi-Agent Ecosystem
 
-LND Studio operates using a specialized team of **14 AI Agents**, orchestrated completely dynamically. There is no single massive prompt; instead, strict workflows isolate concerns:
+LND Studio operates using a specialized team of **16 AI Agents**, orchestrated completely dynamically. There is no single massive prompt; instead, strict workflows isolate concerns:
 
 - 🎬 **Director K** (`lnd-orchestrator`): The Boss. Owns the core pipelines, manages state (`state.yaml`), and enforces delegations.
 - 🔬 **Dr. Atomic** (`panel-forensic`): Visual forensic analysis. Extracts objects, bodily fluids, panel flow, and translates SFX from raw images.

@@ -8,7 +8,7 @@ stateFile: '{output_folder}/_pipeline/{project}/state.yaml'
 analysisFolder: '{output_folder}/_analysis/{project}'
 proseFolder: '{output_folder}/_prose/{project}'
 templateFile: '{project-root}/studio/_templates/light-novel-prose.md'
-dialogueRulesFile: '{project-root}/.agent/rules/dialogue_format.md'
+dialogueRulesFile: '{project-root}/studio/rules/dialogue_format.md'
 ---
 
 # Step 4: Prose Generation

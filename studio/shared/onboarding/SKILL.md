@@ -25,7 +25,7 @@ All output is in **Vietnamese**.
 | 2 | World & Lore Context | `hentai_lexicon.md`, `fetish-db/README.md`, `gooner-manifesto.md` |
 | 3 | Active Project State | Scan `{output_folder}/_pipeline/` for `state.yaml` |
 | 4 | Character Bible | Scan `{output_folder}/_bible/` for character profiles |
-| 5 | Writing Rules | Load `.agent/rules/` files (lewd_writing_mechanics, sensory_density, dialogue_format, character_voice) |
+| 5 | Writing Rules | Load `studio/rules/` files (lewd_writing_mechanics, sensory_density, dialogue_format, character_voice) |
 | 6 | Summary | Present onboarding report and wait for user input |
 
 ## Expected Output
@@ -41,4 +41,4 @@ Tôi đã nắm bắt: Studio architecture, agents, lore, dự án hiện tại,
 
 - **Config**: `module.yaml`, `agent-registry.csv`, `pipeline-context.md`
 - **Knowledge**: `fetish-db/`, `hentai_lexicon.md`, `gooner-manifesto.md`
-- **Rules**: `.agent/rules/` (project-root level)
+- **Rules**: `studio/rules/` (project-root level)

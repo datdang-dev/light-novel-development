@@ -35,6 +35,6 @@ If rules conflict between different files, agents MUST follow this strict resolu
 
 1. **Priority 1**: `context_payload.md` (Dynamic Runtime Instructions created by Orchestrator)
 2. **Priority 2**: `studio/rules/global_rule_hub.md` (This file - Global Truth)
-3. **Priority 3**: `.agent/rules/<rule>.md` (Modular rules like quality_gates, sensory_density)
+3. **Priority 3**: `studio/rules/<rule>.md` (Modular rules like quality_gates, sensory_density)
 4. **Priority 4**: Agent YAML `critical_actions`
 5. **Priority 5**: General LLM knowledge

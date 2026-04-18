@@ -38,6 +38,7 @@ This file tracks all available `.md` documentation within the `studio/knowledge/
 ## sfx
 - **japanese_sfx_dictionary.md**: `{project-root}/studio/knowledge/sfx/japanese_sfx_dictionary.md`
 - **moaning_sfx_research.md**: `{project-root}/studio/knowledge/sfx/moaning_sfx_research.md`
+- **r18_sfx_quickref.yaml**: `{project-root}/studio/knowledge/sfx/r18_sfx_quickref.yaml`
 
 ## glossaries
 - **hentai_lexicon.md**: `{project-root}/studio/knowledge/glossaries/hentai_lexicon.md`
