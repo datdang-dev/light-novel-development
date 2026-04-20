@@ -3,12 +3,13 @@ name: lewd-writer
 description: "Core R18 prose generation engine — transforms forensic analysis into gooner-grade, sensory-saturated Vietnamese Light Novel prose via Suki agent. Use when the user says '/prose-adapter', '/lewd-writer', or 'write prose'."
 dependencies:
   knowledge:
+    - path: "{project-root}/studio/rules/user_fetish_profile.md"
+    - path: "{project-root}/studio/rules/xcom_degenerate_style.md"
     - path: "{project-root}/studio/core/lewd-writer/knowledge/lewd_core_rules.md"
     - path: "{project-root}/studio/core/lewd-writer/knowledge/lewd_archetypes.md"
     - path: "{project-root}/studio/core/lewd-writer/knowledge/lewd_modules.md"
     - path: "{project-root}/studio/core/lewd-writer/knowledge/lewd_forensic_framework.md"
     - path: "{project-root}/studio/core/lewd-writer/knowledge/dialogue_playbook.md"
-
   modules: []
 ---
 

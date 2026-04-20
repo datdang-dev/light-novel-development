@@ -60,23 +60,37 @@ V3 supports embedding lorebook entries directly in the card:
 }
 ```
 
-#### Entry Fields
+#### Full Entry Fields Schema
 
-| Field | Purpose |
-|-------|---------|
-| `keys` | Primary trigger keywords |
-| `secondary_keys` | Optional filter keys |
-| `content` | Text to inject |
-| `enabled` | Active toggle |
-| `position` | Insertion position |
-| `constant` | Always include |
-| `selective` | Use secondary keys |
-| `insertion_order` | Priority (higher = later) |
-| `probability` | Trigger chance % |
-| `depth` | Injection depth |
-| `group` | Inclusion group name |
+| Core Field | Purpose |
+|------------|---------|
+| `keys` | Array of primary trigger keywords (e.g. `["school", "classroom"]`) |
+| `secondary_keys` | Array of optional filter keys |
+| `content` | Text to inject, can use macros `{{char}}` / `{{user}}` |
+| `enabled` | Active toggle (`true`/`false`) |
+| `position` | Insertion block (`"before_char"` / `"after_char"`) |
+| `constant` | Always include, ignoring keys (`true`/`false`) |
+| `selective` | Requires secondary keys logic to pass (`true`/`false`) |
+| `insertion_order` | Priority (higher = placed later in prompt) |
+| `use_regex` | Are the keys regex patterns? (`true`/`false`) |
 
-## Usage
+#### Full Extensions Schema (inside `extensions: {}`)
+
+| Extension Field | Description | Type / Default |
+|-----------------|-------------|----------------|
+| `position` | Enum equivalent for placement (`0`=before, `1`=after, `2`=before_example...) | Integer |
+| `selectiveLogic` | Logic for secondary keys (`0`=AND ANY, `1`=AND ALL, `2`=NOT ANY, `3`=NOT ALL) | Integer |
+| `role` | @ Depth Role (`0`=system, `1`=user, `2`=assistant) | Integer |
+| `vectorized` | Use semantic matching instead of keyword matching? | Boolean |
+| `sticky` | Stays active for X messages after trigger | Integer |
+| `cooldown` | Cannot trigger for X messages after triggering | Integer |
+| `delay` | Must wait X messages from chat start to be eligible | Integer |
+| `group` | Inclusion group name for mutual exclusion | String |
+| `group_weight` | Lottery weight when choosing from group | Integer (100) |
+| `prevent_recursion`| Prevents this entry from activating other entries | Boolean |
+| `delay_until_recursion`| Only triggers via another entry, not directly | Boolean |
+| `automation_id` | Identifier for external script/API hooks | String |
+| `triggers` | Array of trigger conditions / generation filters | Array of Strings |
 
 1. Copy `SillyTavern_V3_Template.json`
 2. Rename to your character name

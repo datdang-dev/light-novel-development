@@ -175,6 +175,60 @@ Enabled by default.
 - "king" won't match "liking"
 - Disable for CJK languages
 
+## Advanced: V3 JSON CPreset Schema
+
+When embedding lorebook entries directly into a V3 character card (instead of attaching a separate World Info file), each entry must include an `extensions` block with all parameters.
+
+**JSON Schema Example:**
+```json
+{
+  "id": 1,
+  "keys": ["school", "classroom"],
+  "secondary_keys": [],
+  "content": "A prestigious high school...",
+  "comment": "Main Location",
+  "enabled": true,
+  "position": "before_char",
+  "use_regex": false,
+  "constant": true,
+  "selective": false,
+  "insertion_order": 10,
+  "extensions": {
+    "position": 0,
+    "exclude_recursion": false,
+    "display_index": 0,
+    "probability": 100,
+    "useProbability": true,
+    "depth": 4,
+    "selectiveLogic": 0,
+    "outlet_name": "",
+    "group": "",
+    "group_override": false,
+    "group_weight": 100,
+    "prevent_recursion": false,
+    "delay_until_recursion": false,
+    "scan_depth": null,
+    "match_whole_words": null,
+    "use_group_scoring": false,
+    "case_sensitive": null,
+    "automation_id": "",
+    "role": 0,
+    "vectorized": false,
+    "sticky": 0,
+    "cooldown": 0,
+    "delay": 0,
+    "match_persona_description": false,
+    "match_character_description": false,
+    "match_character_personality": false,
+    "match_character_depth_prompt": false,
+    "match_scenario": false,
+    "match_creator_notes": false,
+    "triggers": [],
+    "ignore_budget": false
+  }
+}
+```
+
 ## Character Lore
 
 Bind World Info to specific characters:

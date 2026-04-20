@@ -88,3 +88,6 @@ sources/
 .agent
 *scan*
 hitomi*
+.gitnexus
+.claude
+*archive*

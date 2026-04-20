@@ -139,21 +139,59 @@ gnarled trunk, and warmth pulses beneath the bark.*
   - Creator's Notes
   - Tags
 
-## Quick Reference: Character Card V2 Spec
+## Quick Reference: Character Card V3 Spec
+
+SillyTavern V3 character cards wrap the main properties inside a `data` object, while also duplicating key fields at the root.
 
 ```json
 {
-  "name": "Seraphina",
+  "name": "Character Name",
   "description": "...",
   "personality": "...",
   "scenario": "...",
   "first_mes": "...",
   "mes_example": "...",
-  "creator_notes": "...",
-  "system_prompt": "...",
-  "post_history_instructions": "...",
-  "tags": ["fantasy", "healer"],
-  "creator": "username",
-  "character_version": "1.0"
+  "creatorcomment": "...",
+  "avatar": "none",
+  "talkativeness": "0.5",
+  "fav": false,
+  "tags": ["tag1"],
+  "spec": "chara_card_v3",
+  "spec_version": "3.0",
+  "data": {
+    "name": "Character Name",
+    "description": "...",
+    "personality": "...",
+    "scenario": "...",
+    "first_mes": "...",
+    "mes_example": "...",
+    "creator_notes": "...",
+    "system_prompt": "Optional system prompt injection",
+    "post_history_instructions": "Optional jailbreak/instruction injection",
+    "tags": ["tag1"],
+    "avatar": "none",
+    "talkativeness": "0.5",
+    "fav": false,
+    "alternate_greetings": [
+      "![Vol 1 - Cover](/path/to/img.webp)",
+      "*Greeting 1...*"
+    ],
+    "extensions": {
+      "depth_prompt": {
+        "prompt": "Same as system prompt usually",
+        "depth": 4,
+        "role": "system"
+      }
+    },
+    "character_book": {
+      "name": "Embedded Lorebook",
+      "entries": []
+    }
+  }
 }
 ```
+
+### Greeting as Scene Pattern
+V3 allows rich visual greetings. You can embed images inside the `first_mes` or `alternate_greetings` like a Light Novel chapter opening:
+`![Vol 1 - Cover](url_or_path)`
+When writing alternate greetings, treat them as alternate entry points to the scenario or completely alternative scenarios.

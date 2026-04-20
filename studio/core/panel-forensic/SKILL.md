@@ -3,6 +3,7 @@ name: panel-forensic
 description: "Core visual forensic analysis engine — performs atomic-level manga page analysis using Dialogue-Anchor Protocol via Kana agent. Use when the user says '/panel-forensic', 'analyze manga page', or 'forensic analysis'."
 dependencies:
   knowledge:
+    - path: "{project-root}/studio/rules/user_fetish_profile.md"
     - path: "{project-root}/studio/knowledge/packs/r18_sensory_pack.md"
     - path: "{project-root}/studio/knowledge/packs/fetish_guidance_pack.md"
 
@@ -56,6 +57,7 @@ Output format:
 - **Heat Level:** [1-10]
 - **Suggested Mood for Suki:** [MANIC | COLD | BRATTY | BROKEN | MASO]
 - **What Makes This Image HIT:** [2-3 specific visual elements that carry erotic impact]
+- **Fetish Exploitation Vector:** [Identify exactly how this image triggers the Core Kinks listed in `studio/rules/user_fetish_profile.md`. If none are obviously present, deduce the closest possible connection.]
 ```
 
 Rules:

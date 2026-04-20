@@ -1,0 +1,6 @@
+external/
+node_modules/
+dist/
+.git/
+*.json
+*.md
