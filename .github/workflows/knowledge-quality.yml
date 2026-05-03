@@ -1,0 +1,211 @@
+name: Knowledge Architecture Quality
+
+on:
+  pull_request:
+    paths:
+      - 'studio/knowledge/**'
+      - 'studio/core/**/SKILL.md'
+      - 'studio/services/**/SKILL.md'
+      - 'studio/modules/**/SKILL.md'
+      - 'studio/shared/**/SKILL.md'
+  push:
+    branches: [master, main]
+
+jobs:
+  yaml-parse:
+    name: SKILL.md YAML Validation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Validate all SKILL.md YAML frontmatter
+        run: |
+          python3 -c "
+import yaml, os, sys
+
+errors = []
+files = []
+for root in ['studio/core', 'studio/services', 'studio/modules', 'studio/shared']:
+    if not os.path.exists(root):
+        continue
+    for entry in os.listdir(root):
+        sk = os.path.join(root, entry, 'SKILL.md')
+        if os.path.isfile(sk):
+            files.append(sk)
+
+for f in sorted(files):
+    with open(f) as fh:
+        content = fh.read()
+    lines = content.split('\n')
+    dashes = [i for i, l in enumerate(lines) if l.strip() == '---']
+    if len(dashes) < 2:
+        errors.append(f'{f}: missing YAML frontmatter (only {len(dashes)} --- marker)')
+        continue
+    yaml_text = '\n'.join(lines[dashes[0]+1:dashes[1]])
+    try:
+        doc = yaml.safe_load(yaml_text)
+        if doc is None:
+            errors.append(f'{f}: YAML frontmatter is null')
+    except Exception as e:
+        errors.append(f'{f}: {str(e)[:80]}')
+
+if errors:
+    print('YAML VALIDATION FAILED')
+    for e in errors:
+        print(e)
+    sys.exit(1)
+else:
+    print(f'OK: {len(files)}/ {len(files)} SKILL.md YAML frontmatter valid')
+
+          "
+
+  knowledge-sync:
+    name: Knowledge Index Sync
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Check knowledge-index.yaml sync
+        run: |
+          python3 -c "
+import yaml, os, sys, subprocess
+
+PROJECT_ROOT = os.getcwd()
+KNOWLEDGE_ROOT = os.path.join(PROJECT_ROOT, 'studio', 'knowledge')
+INDEX_FILE = os.path.join(KNOWLEDGE_ROOT, 'knowledge-index.yaml')
+
+# Load index
+with open(INDEX_FILE) as f:
+    idx = yaml.safe_load(f)
+entries = idx.get('index', [])
+
+# List physical files
+result = subprocess.run(
+    ['find', 'studio/knowledge', '-type', 'f'],
+    capture_output=True, text=True
+)
+phys = set()
+for f in result.stdout.strip().split('\n'):
+    if f:
+        rel = f.replace('studio/knowledge/', '')
+        phys.add(rel)
+
+idx_files = set(e.get('file', '') for e in entries)
+
+orphans = phys - idx_files
+missing = idx_files - phys
+
+errors = []
+if orphans:
+    errors.append(f'Orphan files not in index: {sorted(orphans)}')
+if missing:
+    errors.append(f'Index entries without physical files: {sorted(missing)}')
+
+if errors:
+    print('KNOWLEDGE SYNC FAILED')
+    for e in errors:
+        print(e)
+    sys.exit(1)
+else:
+    print(f'OK: {len(phys)} physical files, {len(idx_files)} index entries — fully synced')
+          "
+
+  anti-slop:
+    name: Anti-Slop Validation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run anti-slop validator on knowledge files
+        run: |
+          python3 -c "
+import re, sys, math
+from collections import Counter
+from pathlib import Path
+
+PROJECT_ROOT = Path(os.getcwd())
+
+def entropy(text, window=50):
+    if len(text) < window:
+        return 0
+    vals = []
+    for i in range(len(text)-window+1):
+        chunk = text[i:i+window]
+        counts = Counter(chunk)
+        total = len(chunk)
+        e = -sum((c/total)*math.log2(c/total) for c in counts.values())
+        vals.append(e)
+    return sum(vals)/len(vals) if vals else 0
+
+def ngram_ratio(text, n=3):
+    grams = [text[i:i+n] for i in range(len(text)-n+1)]
+    if not grams:
+        return 0
+    c = Counter(grams)
+    repeats = sum(v-1 for v in c.values() if v > 1)
+    return repeats / len(grams)
+
+SENSORY_TOKENS = ['濡れた','熱','汗','震え','喘ぎ','吐息','締め付け','にじみ','ぬめり',
+                  '疼き','疼く','熱く','火照り','冷たい','ゾクゾク','うずうず',
+                  '甘く','切なく','じんわり','じんわり広がる','むせ返る','涙',
+                  '唾液','じっとり','ねっとり','べっとり','とろけ','溶け','つるつる']
+
+def sensory_density(text):
+    cnt = sum(len(re.findall(re.escape(t), text)) for t in SENSORY_TOKENS)
+    return cnt / (len(text)/100) if len(text) else 0
+
+THRESH_ENTROPY = 3.5
+THRESH_NGRAM = 0.05
+THRESH_SENSORY = 0.20
+
+errors = []
+warns = []
+
+knowledge_dir = PROJECT_ROOT / 'studio' / 'knowledge'
+for md in knowledge_dir.rglob('*.md'):
+    if md.name == 'INDEX.md':
+        continue
+    try:
+        text = md.read_text(encoding='utf-8', errors='ignore')
+    except:
+        continue
+
+    e = entropy(text, 50)
+    n = ngram_ratio(text, 3)
+    s = sensory_density(text)
+
+    if e < THRESH_ENTROPY:
+        errors.append(f'{md.relative_to(PROJECT_ROOT)}: entropy={e:.2f} < {THRESH_ENTROPY} (too repetitive)')
+    elif n > THRESH_NGRAM:
+        errors.append(f'{md.relative_to(PROJECT_ROOT)}: ngram3={n:.3f} > {THRESH_NGRAM} (AI slop detected)')
+    elif s < THRESH_SENSORY:
+        warns.append(f'{md.relative_to(PROJECT_ROOT)}: sensory={s:.2f} < {THRESH_SENSORY} (low visceral density)')
+
+if errors:
+    print('ANTI-SLOP VALIDATION FAILED')
+    for e in errors:
+        print(f'  ERROR: {e}')
+    for w in warns:
+        print(f'  WARN: {w}')
+    sys.exit(1)
+else:
+    total = len(list(knowledge_dir.rglob('*.md')))
+    print(f'OK: {total - 1} knowledge files validated')
+    for w in warns:
+        print(f'  WARN: {w}')
+          "

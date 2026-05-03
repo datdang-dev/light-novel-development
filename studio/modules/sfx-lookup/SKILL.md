@@ -1,7 +1,23 @@
 ---
 name: sfx-lookup
-description: SFX lookup and suggestion module — provides romanized Japanese SFX categorized
-  by type, intensity, and scene context for R18 prose generation.------
+description: "SFX lookup and suggestion module — provides romanized Japanese SFX categorized by type, intensity, and scene context for R18 prose generation. Integrates with dialogue-crafter and lewd-writer to inject audio texture at appropriate prose moments."
+owner: "datdang"
+version: "1.0.0"
+tags: [sfx, sound, audio, japanese, romanized, moaning]
+injection:
+  always:
+    - "{{project_root}}/studio/knowledge/sfx/japanese_sfx_dictionary.md"
+  triggers:
+    - scene_tag: "explicit|r18|sexual|audio|sound"
+      loads:
+        - "{{project_root}}/studio/knowledge/sfx/r18_sfx_quickref.yaml"
+        - "{{project_root}}/studio/knowledge/sfx/moaning_sfx_research.md"
+dependencies:
+  knowledge:
+    - path: "{{project_root}}/studio/knowledge/sfx/japanese_sfx_dictionary.md"
+    - path: "{{project_root}}/studio/knowledge/sfx/r18_sfx_quickref.yaml"
+    - path: "{{project_root}}/studio/knowledge/sfx/moaning_sfx_research.md"
+  modules: []
 ---
 
 ## On Activation
