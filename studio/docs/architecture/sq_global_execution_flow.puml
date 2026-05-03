@@ -1,0 +1,55 @@
+@startuml
+
+
+title LND Studio V7.0 - Global Execution Sequence Diagram
+
+actor User
+participant ".agent/workflows/\n(Slash Command)" as Workflow
+participant "studio/agents/\n(Persona & Engine)" as Agent
+participant "SKILL.md\n(Contract & Injection)" as Skill
+participant "knowledge/\n(Domain Context)" as Knowledge
+participant "modules/\n(Sub-systems)" as Modules
+participant "references/workflow.md\n(Step Logic)" as Steps
+
+== 1. Workflow Trigger (Layer 1) ==
+User -> Workflow: Trigger Slash Command (e.g. /gooner-audit)
+activate Workflow
+Workflow -> Workflow: Parse instruction parameters
+Workflow -> Agent: LOAD FULL agent yaml (e.g. gooner-editor)
+
+== 2. Agent Bootstrap (Layer 2) ==
+activate Agent
+Agent -> Agent: Resolve {project-root} via `BOOTSTRAP.md`
+Agent -> Agent: Load Global Rules (`global_rule_hub.md`)
+Agent -> Skill: Route to designated SKILL.md via action mapping
+
+== 3. Skill & Auto-Injection (Layer 3) ==
+activate Skill
+Skill -> Skill: Parse YAML Frontmatter & `dependencies` contract
+Skill -> Knowledge: Request Read-Only Context (from `knowledge/`)
+activate Knowledge
+Knowledge --> Skill: Mount context
+deactivate Knowledge
+
+Skill -> Modules: Hook into scoring systems/tools (from `modules/`)
+activate Modules
+Modules --> Skill: Bind interfaces
+deactivate Modules
+
+Skill -> Steps: Invoke core methodology / logic
+deactivate Skill
+
+== 4. Step Execution & Quality Gate (Layer 4) ==
+activate Steps
+Steps -> Steps: Execute Micro-file tasks (1..N)
+Steps -> Steps: Enforce Pre-Submission Checklists
+Steps -> Agent: Return output blob
+deactivate Steps
+
+Agent -> Workflow: Pass Output
+deactivate Agent
+
+Workflow -> User: Render Final Artifact
+deactivate Workflow
+
+@enduml

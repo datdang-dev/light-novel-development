@@ -1,0 +1,191 @@
+# LND Studio Knowledge Index
+# Maps knowledge files to skills that use them
+# Generated: 2026-05-02
+# Pattern: RAG-ready index for scene-aware knowledge injection
+
+index:
+  # ─────────────────────────────────────────────────────────────
+  #fetish-db/
+  # ─────────────────────────────────────────────────────────────
+  - file: "fetish-db/maid_research.md"
+    tags: ["maid", "servant", "costume"]
+    used_by: ["lewd-writer", "gooner-alchemist"]
+
+  - file: "fetish-db/ntr_research.md"
+    tags: ["ntr", "cheating", "betrayal", "psychological"]
+    used_by: ["lewd-writer", "gooner-alchemist"]
+
+  - file: "fetish-db/creampie_research.md"
+    tags: ["creampie", "internal", "ejaculation"]
+    used_by: ["lewd-writer"]
+
+  - file: "fetish-db/anal_research.md"
+    tags: ["anal", "backdoor"]
+    used_by: ["lewd-writer"]
+
+  - file: "fetish-db/blowjob_research.md"
+    tags: ["oral", "blowjob", "deepthroat"]
+    used_by: ["lewd-writer"]
+
+  - file: "fetish-db/paizuri_research.md"
+    tags: ["paizuri", "titfuck", "breasts"]
+    used_by: ["lewd-writer"]
+
+  - file: "fetish-db/public_use_research.md"
+    tags: ["public", "exhibition", "degradation"]
+    used_by: ["lewd-writer"]
+
+  - file: "fetish-db/mindbreak_research.md"
+    tags: ["mindbreak", "corruption", "psychological"]
+    used_by: ["lewd-writer"]
+
+  - file: "fetish-db/gangbang_research.md"
+    tags: ["gangbang", "multi", "group"]
+    used_by: ["lewd-writer"]
+
+  - file: "fetish-db/lactation_research.md"
+    tags: ["lactation", "milk", "nursing"]
+    used_by: ["lewd-writer"]
+
+  - file: "fetish-db/pregnant_research.md"
+    tags: ["pregnant", "breeding", " knock-up"]
+    used_by: ["lewd-writer"]
+
+  - file: "fetish-db/hypnosis_research.md"
+    tags: ["hypnosis", "mind-control", "suggestion"]
+    used_by: ["lewd-writer"]
+
+  - file: "fetish-db/blackmail_research.md"
+    tags: ["blackmail", "leverage", "coercion"]
+    used_by: ["lewd-writer"]
+
+  - file: "fetish-db/condom_fetish_research.md"
+    tags: ["condom", "latex", "safe-sex"]
+    used_by: ["lewd-writer"]
+
+  # ─────────────────────────────────────────────────────────────
+  # sfx/
+  # ─────────────────────────────────────────────────────────────
+  - file: "sfx/japanese_sfx_dictionary.md"
+    tags: ["sfx", "romanized", "impact", "wet"]
+    used_by: ["lewd-writer", "dialogue-crafter"]
+
+  - file: "sfx/r18_sfx_quickref.yaml"
+    tags: ["sfx", "quickref", "on-demand"]
+    used_by: ["lewd-writer", "dialogue-crafter", "gooner-editor"]
+
+  - file: "sfx/moaning_sfx_research.md"
+    tags: ["moaning", "voice", "pleasure"]
+    used_by: ["lewd-writer", "dialogue-crafter"]
+
+  # ─────────────────────────────────────────────────────────────
+  # glossaries/
+  # ─────────────────────────────────────────────────────────────
+  - file: "glossaries/hentai_lexicon.md"
+    tags: ["lexicon", "terminology", "vocabulary"]
+    used_by: ["lewd-writer", "panel-forensic"]
+
+  # ─────────────────────────────────────────────────────────────
+  # packs/
+  # ─────────────────────────────────────────────────────────────
+  - file: "packs/r18_sensory_pack.md"
+    tags: ["sensory", "immersion", "atmosphere"]
+    used_by: ["lewd-writer", "panel-forensic", "quality-audit"]
+
+  - file: "packs/narrative_style_pack.md"
+    tags: ["style", "narrative", "pacing"]
+    used_by: ["gooner-alchemist", "lewd-writer"]
+
+  - file: "packs/fetish_guidance_pack.md"
+    tags: ["fetish", "escalation", "pattern"]
+    used_by: ["gooner-alchemist", "panel-forensic"]
+
+  - file: "packs/roleplay_st_pack.md"
+    tags: ["roleplay", "sillytavern", "character"]
+    used_by: ["roleplay-actor", "world-weaver"]
+
+  - file: "packs/japanese_reader_psychology.md"
+    tags: ["psychology", "reader", "engagement"]
+    used_by: ["lewd-writer"]
+
+  - file: "packs/arousal_architecture.md"
+    tags: ["arousal", "structure", "escalation"]
+    used_by: ["lewd-writer"]
+
+  # ─────────────────────────────────────────────────────────────
+  # trope_beat_sheets/
+  # ─────────────────────────────────────────────────────────────
+  - file: "trope_beat_sheets/ntr_beats.md"
+    tags: ["ntr", "trope", "beat-sheet"]
+    used_by: ["lewd-writer"]
+
+  - file: "trope_beat_sheets/corruption_beats.md"
+    tags: ["corruption", "trope", "beat-sheet"]
+    used_by: ["lewd-writer"]
+
+  - file: "trope_beat_sheets/mindbreak_beats.md"
+    tags: ["mindbreak", "trope", "beat-sheet"]
+    used_by: ["lewd-writer"]
+
+  - file: "trope_beat_sheets/training_beats.md"
+    tags: ["training", "trope", "beat-sheet"]
+    used_by: ["lewd-writer"]
+
+  - file: "trope_beat_sheets/revenge_beats.md"
+    tags: ["revenge", "trope", "beat-sheet"]
+    used_by: ["lewd-writer"]
+
+  # ─────────────────────────────────────────────────────────────
+  # style-guides/
+  # ─────────────────────────────────────────────────────────────
+  - file: "style-guides/MESUGAKI_DIALOGUE_STYLE.md"
+    tags: ["dialogue", "mesugaki", "style"]
+    used_by: ["lewd-writer", "dialogue-crafter"]
+
+  - file: "style-guides/R18_LIGHTNOVEL_CULTURE_GUIDE.md"
+    tags: ["culture", "light-novel", "japanese"]
+    used_by: ["lewd-writer", "panel-forensic"]
+
+# ─────────────────────────────────────────────────────────────
+# Scene Tag Mapping (for injection triggers)
+# ─────────────────────────────────────────────────────────────
+scene_tags:
+  bedroom:
+    keywords: ["bedroom", "bed", "sleep", "intimate"]
+    loads:
+      - "rules/sensory_density.md"
+      - "rules/lewd_writing_mechanics.md"
+
+  explicit:
+    keywords: ["explicit", "r18", "sexual", "porn"]
+    loads:
+      - "knowledge/packs/r18_sensory_pack.md"
+      - "knowledge/packs/fetish_guidance_pack.md"
+
+  dialogue-heavy:
+    keywords: ["dialogue", "conversation", "confrontation", "tension"]
+    loads:
+      - "rules/character_voice.md"
+      - "rules/dialogue_format.md"
+
+  aftermath:
+    keywords: ["aftermath", "post-climax", "lingering", "relaxation"]
+    loads:
+      - "rules/sensory_density.md"
+      - "rules/environmental_atmosphere.md"
+
+  intro:
+    keywords: ["intro", "transition", "setup", "beginning"]
+    loads:
+      - "rules/environmental_atmosphere.md"
+
+# ─────────────────────────────────────────────────────────────
+# Metadata
+# ─────────────────────────────────────────────────────────────
+metadata:
+  version: "7.0"
+  last_updated: "2026-05-02"
+  total_knowledge_files: 35
+  total_scene_tags: 5
+  index_pattern: "RAG-ready"
+  injection_mode: "hybrid"  # always + triggers

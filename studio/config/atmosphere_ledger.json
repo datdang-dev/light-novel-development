@@ -1,0 +1,72 @@
+{
+    "version": "1.0.0",
+    "comment": "Core sensory mapping for RenPy-to-Prose adaptation",
+    "locations": {
+        "bg school_roof": {
+            "name": "Sân thượng trường học",
+            "lighting": "Nắng gắt, chói chang",
+            "sounds": [
+                "tiếng gió rít",
+                "tiếng loa trường xa xăm",
+                "tiếng chim bồ câu"
+            ],
+            "smells": [
+                "mùi bê tông nóng",
+                "mùi rỉ sét lan can"
+            ],
+            "textures": [
+                "bê tông thô ráp",
+                "kim loại nóng"
+            ]
+        },
+        "bg school_roof_sunset": {
+            "name": "Sân thượng (Hoàng hôn)",
+            "lighting": "Ánh vàng cam nhuộm đỏ không gian, bóng đổ dài",
+            "sounds": [
+                "gió thổi nhẹ",
+                "tiếng ve cuối mùa",
+                "xoạt xoạt áo quần"
+            ],
+            "smells": [
+                "mùi nắng tắt",
+                "mùi ozone"
+            ],
+            "textures": [
+                "mặt đất còn giữ nhiệt",
+                "gió se lạnh"
+            ]
+        },
+        "bg classroom_empty": {
+            "name": "Lớp học vắng người",
+            "lighting": "Ánh sáng đèn huỳnh quang nhợt nhạt",
+            "sounds": [
+                "tiếng quạt trần quay đều",
+                "tiếng bước chân vang vọng"
+            ],
+            "smells": [
+                "mùi phấn viết",
+                "mùi gỗ bàn ghế cũ"
+            ],
+            "textures": [
+                "mặt bàn trơn nhẵn",
+                "ghế lạnh"
+            ]
+        },
+        "bg bedroom_night": {
+            "name": "Phòng ngủ (Ban đêm)",
+            "lighting": "Ánh đèn ngủ dịu nhẹ, đổ bóng mờ ảo",
+            "sounds": [
+                "tiếng đồng hồ tích tắc",
+                "hơi thở nhẹ nhàng"
+            ],
+            "smells": [
+                "mùi chăn gối sạch",
+                "mùi xả vải"
+            ],
+            "textures": [
+                "vải nệm mềm mại",
+                "không khí ấm áp"
+            ]
+        }
+    }
+}

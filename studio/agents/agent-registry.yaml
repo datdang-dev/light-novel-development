@@ -1,0 +1,181 @@
+# LND Studio Agent Registry
+# SINGLE SOURCE OF TRUTH for all agent definitions
+# Generated: 2026-05-02
+# Supersedes: agent-registry.csv
+
+agents:
+  # ─────────────────────────────────────────────────────────────
+  # LAYER 1: Abstract / Orchestration
+  # ─────────────────────────────────────────────────────────────
+  - id: lnd-orchestrator
+    name: Director K
+    title: LND Studio Director
+    icon: 🎬
+    skill: services/gooner-alchemist
+    role: Master Orchestrator
+    layer: 1
+    owned_by: null  # Top-level orchestrator
+    owns:
+      - manga-adapter
+      - lewd-writer
+      - gooner-editor
+      - character-architect
+      - dialogue-crafter
+      - world-weaver
+    delegates_to:
+      - services/gooner-alchemist
+      - services/quality-audit
+      - services/bible-sync
+
+  # ─────────────────────────────────────────────────────────────
+  # LAYER 2: Specialist Agents
+  # ─────────────────────────────────────────────────────────────
+  - id: manga-adapter
+    name: Kana
+    title: Visual Context Specialist
+    icon: 🖼️
+    skill: core/panel-forensic
+    role: Visual Forensic Analysis
+    layer: 2
+    owned_by: lnd-orchestrator
+    parent_relationship: "Owned by Director K"
+
+  - id: lewd-writer
+    name: Suki
+    title: R18 Prose Specialist
+    icon: ✍️
+    skill: core/lewd-writer
+    role: R18 Prose Generation
+    layer: 2
+    owned_by: lnd-orchestrator
+    parent_relationship: "Owned by Director K"
+
+  - id: gooner-editor
+    name: Riko
+    title: Quality Gatekeeper
+    icon: 🛡️
+    skill: services/quality-audit
+    role: Quality Audit & Rewrites
+    layer: 2
+    owned_by: lnd-orchestrator
+    parent_relationship: "Owned by Director K"
+
+  - id: character-architect
+    name: Aria
+    title: Character Profiler
+    icon: 👤
+    skill: services/character-builder
+    role: Character Profiling & Bible
+    layer: 2
+    owned_by: lnd-orchestrator
+    parent_relationship: "Owned by Director K"
+
+  - id: dialogue-crafter
+    name: Miki
+    title: Dialogue & SFX Specialist
+    icon: 💬
+    skill: services/dialogue-scripting
+    role: Dialogue Generation & SFX
+    layer: 2
+    owned_by: lnd-orchestrator
+    parent_relationship: "Owned by Director K"
+
+  - id: world-weaver
+    name: Luna
+    title: World Builder
+    icon: 🌍
+    skill: null  # No dedicated service, uses shared knowledge
+    role: World Building & Lore
+    layer: 2
+    owned_by: lnd-orchestrator
+    parent_relationship: "Owned by Director K"
+
+  # ─────────────────────────────────────────────────────────────
+  # LAYER 2: Extended Agents (Not directly owned, project-scoped)
+  # ─────────────────────────────────────────────────────────────
+  - id: roleplay-actor
+    name: Actor
+    title: Roleplay Actor
+    icon: 🎭
+    skill: core/roleplay-engine
+    role: Interactive Roleplay
+    layer: 2
+    owned_by: null  # Project-level, not studio-specific
+
+  - id: re-specialist
+    name: RE Specialist
+    title: Regex Specialist
+    icon: 🔍
+    skill: modules/lnd-re-specialist
+    role: Regex & Pattern Matching
+    layer: 2
+    owned_by: null  # Utility agent
+
+  - id: comfyui-prompter
+    name: ComfyUI Prompter
+    title: Image Prompt Engineer
+    icon: 🎨
+    skill: null  # No dedicated service
+    role: ComfyUI Integration
+    layer: 2
+    owned_by: null  # External integration agent
+
+# ─────────────────────────────────────────────────────────────
+# LAYER 3: Service Pipeline Reference
+# ─────────────────────────────────────────────────────────────
+services:
+  - id: gooner-alchemist
+    path: services/gooner-alchemist/SKILL.md
+    description: "Manga-to-Novel adaptation pipeline"
+    primary_agent: lnd-orchestrator
+
+  - id: quality-audit
+    path: services/quality-audit/SKILL.md
+    description: "100-point prose quality audit"
+    primary_agent: gooner-editor
+
+  - id: bible-sync
+    path: services/bible-sync/SKILL.md
+    description: "Story bible persistence"
+    primary_agent: character-architect
+
+  - id: character-builder
+    path: services/character-builder/SKILL.md
+    description: "Character profile builder"
+    primary_agent: character-architect
+
+  - id: dialogue-scripting
+    path: services/dialogue-scripting/SKILL.md
+    description: "Dialogue and SFX generation"
+    primary_agent: dialogue-crafter
+
+  - id: scene-expansion
+    path: services/scene-expansion/SKILL.md
+    description: "Outline to full prose"
+    primary_agent: lewd-writer
+
+  - id: chapter-composer
+    path: services/chapter-composer/SKILL.md
+    description: "Pages to chapter compilation"
+    primary_agent: lnd-orchestrator
+
+  - id: release-compiler
+    path: services/release-compiler/SKILL.md
+    description: "Final delivery packaging"
+    primary_agent: lnd-orchestrator
+
+# ─────────────────────────────────────────────────────────────
+# Metadata
+# ─────────────────────────────────────────────────────────────
+metadata:
+  version: "7.0"
+  last_updated: "2026-05-02"
+  total_agents: 10
+  total_services: 8
+  architecture_layers:
+    - "-1: Infrastructure (schemas, rules, shared)"
+    - "0: Knowledge Base (knowledge/)"
+    - "1: Abstract/Orchestration (lnd-orchestrator)"
+    - "2: Specialist Agents (owned agents)"
+    - "3: Services/Workflows (services/, core/, modules/)"
+    - "4: Resources (steps/, resources/, tools/)"

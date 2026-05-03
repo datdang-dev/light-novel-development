@@ -1,0 +1,73 @@
+@startuml sq_renpy_adapter
+
+title RenPy Adapter Service - Dynamic Flow (V7.0)
+
+skinparam sequenceMessageAlign center
+skinparam responseMessageBelowArrow true
+skinparam maxMessageSize 250
+skinparam BoxPadding 10
+
+actor "Orchestrator\n(Director K)" as orches
+box "SERVICE Layer (RenPy Adapter)" #LightCyan
+  participant "RenPy Adapter\n(Agent)" as agent_ra
+  participant "Workflow Engine\n(State)" as wf_ra
+  participant "AST Miner\n(Tool)" as tool_ast
+end box
+
+box "CORE Layer (Transformation)" #LightGreen
+  participant "Transformation Engine\n(Lewd Writer / QA)" as core_lewd
+  participant "Bible" as bible
+end box
+
+== 1. Delegation & Initialization ==
+
+orches -> agent_ra : **DELEGATE TASK**\n"Adapt script.rpy (Scene 1)"
+activate agent_ra
+
+agent_ra -> wf_ra : **Initialize Workflow**\n(Input: script.rpy)
+activate wf_ra
+wf_ra --> agent_ra : State Created
+deactivate wf_ra
+
+== 2. Context Mining Phase ==
+
+agent_ra -> tool_ast : **Extract Context (AST)**\nParsing .rpy file
+activate tool_ast
+tool_ast --> agent_ra : **Raw Data**\n- Dialogue Lines\n- Character Tags\n- Backgrounds\n- Music/SFX
+deactivate tool_ast
+
+agent_ra -> agent_ra : **Save Artifact**\n`output/.../context.json`
+
+agent_ra -> bible : **Verify Characters**\n(Match tags to canonical IDs)
+activate bible
+bible --> agent_ra : Confirmed IDs
+deactivate bible
+
+== 3. Semantic Modeling & State Gen ==
+
+agent_ra -> agent_ra : **Analyze Semantics**\nInput: [Raw Tags] + [Dialogue]\nGoal: Determine Mood, Objective, Tension
+
+agent_ra -> agent_ra : **Save Artifact**\n`output/.../forensic-state.json`
+note right: Equivalent payload to visual engine\nNo OCR needed.
+
+== 4. Delegation to Transformation Engine ==
+
+loop For Each Scene / State Node
+
+    agent_ra -> core_lewd : **DELEGATE TASK**\n"Generate Prose from forensic-state.json"
+    activate core_lewd
+    
+    core_lewd -> core_lewd : **Prose Pipeline**\n(Lewd Writer -> Quality Audit)
+    core_lewd --> agent_ra : **Draft Prose (Markdown)**
+    deactivate core_lewd
+
+    agent_ra -> agent_ra : **Aggregate Result**
+end
+
+== 5. Final Compilation ==
+
+agent_ra -> agent_ra : **Compile Chapter**
+agent_ra --> orches : "Full Chapter Ready"
+deactivate agent_ra
+
+@enduml

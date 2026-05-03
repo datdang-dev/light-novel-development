@@ -1,0 +1,199 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "AuditReport",
+    "description": "Output schema for the Quality Audit performed by Riko.",
+    "type": "object",
+    "properties": {
+        "pass": {
+            "type": "boolean"
+        },
+        "score": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 100
+        },
+        "grade": {
+            "type": "string",
+            "enum": [
+                "GOONER PERFECTION",
+                "APPROVED",
+                "NEEDS REVISION",
+                "FAILED",
+                "GATE-FAIL"
+            ]
+        },
+        "page_type": {
+            "type": "string",
+            "enum": [
+                "EXPO",
+                "ACTION",
+                "CLIMAX",
+                "AFTERMATH"
+            ]
+        },
+        "format_penalty": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 15
+        },
+        "gates": {
+            "type": "object",
+            "properties": {
+                "G0_format": {
+                    "type": "object",
+                    "properties": {
+                        "pass": {
+                            "type": "boolean"
+                        },
+                        "penalty": {
+                            "type": "integer"
+                        },
+                        "violations": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "required": [
+                        "pass",
+                        "penalty",
+                        "violations"
+                    ]
+                },
+                "G1_language": {
+                    "type": "boolean"
+                },
+                "G2_banned_words": {
+                    "type": "boolean"
+                },
+                "G3_canon_vocab": {
+                    "type": "boolean"
+                }
+            },
+            "required": [
+                "G0_format",
+                "G1_language",
+                "G2_banned_words",
+                "G3_canon_vocab"
+            ],
+            "additionalProperties": false
+        },
+        "metrics": {
+            "type": "object",
+            "properties": {
+                "M1_smell": {
+                    "type": "object"
+                },
+                "M2_sound": {
+                    "type": "object"
+                },
+                "M3_texture": {
+                    "type": "object"
+                },
+                "M4_temp": {
+                    "type": "object"
+                },
+                "M5_dialogue": {
+                    "type": "object"
+                },
+                "M6_viscosity": {
+                    "type": "object"
+                }
+            },
+            "additionalProperties": false
+        },
+        "qualitative": {
+            "type": "object",
+            "properties": {
+                "Q1_edging": {
+                    "type": "object"
+                },
+                "Q2_power": {
+                    "type": "object"
+                },
+                "Q3_psych": {
+                    "type": "object"
+                },
+                "Q4_fetish": {
+                    "type": "object"
+                },
+                "Q5_somatic": {
+                    "type": "object"
+                },
+                "Q6_hook": {
+                    "type": "object"
+                },
+                "Q7_narrator": {
+                    "type": "object"
+                },
+                "Q8_arousal": {
+                    "type": "object"
+                }
+            },
+            "additionalProperties": false
+        },
+        "continuity_update": {
+            "type": "object",
+            "properties": {
+                "characters": {
+                    "type": "array",
+                    "items": {
+                        "type": "object"
+                    }
+                },
+                "environment": {
+                    "type": "object"
+                }
+            }
+        },
+        "violations": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "line": {
+                        "type": [
+                            "integer",
+                            "string"
+                        ]
+                    },
+                    "snippet": {
+                        "type": "string"
+                    },
+                    "rule": {
+                        "type": "string"
+                    },
+                    "fix": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "rule"
+                ]
+            }
+        },
+        "top_3_fixes": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "maxItems": 3
+        },
+        "reason": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "pass",
+        "score",
+        "grade",
+        "page_type",
+        "format_penalty",
+        "gates",
+        "metrics",
+        "qualitative",
+        "reason"
+    ],
+    "additionalProperties": false
+}

@@ -1,0 +1,63 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Pipeline State",
+  "description": "LND Studio pipeline execution state",
+  "type": "object",
+  "required": ["pipeline_name", "current_step", "status", "audit_attempts"],
+  "properties": {
+    "pipeline_name": {
+      "type": "string",
+      "description": "Name of the pipeline being executed"
+    },
+    "current_step": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Current step index in the pipeline"
+    },
+    "steps_completed": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "List of completed step names"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["running", "paused", "completed", "failed", "halted"],
+      "description": "Current pipeline status"
+    },
+    "audit_attempts": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 10,
+      "description": "Number of audit retry attempts (circuit breaker at 3)"
+    },
+    "failed_gate": {
+      "type": "string",
+      "nullable": true,
+      "description": "Which gate failed (for hentai_logic_gate)"
+    },
+    "last_error": {
+      "type": "string",
+      "nullable": true,
+      "description": "Last error message"
+    },
+    "run_dir": {
+      "type": "string",
+      "description": "Session output directory"
+    },
+    "agent_outputs": {
+      "type": "object",
+      "additionalProperties": {"type": "string"},
+      "description": "Map of agent ID to output file path"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "State file creation timestamp"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Last update timestamp"
+    }
+  }
+}

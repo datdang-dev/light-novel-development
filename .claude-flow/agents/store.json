@@ -1,0 +1,44 @@
+{
+  "agents": {
+    "lnd-audit-coder": {
+      "agentId": "lnd-audit-coder",
+      "agentType": "code-reviewer",
+      "status": "terminated",
+      "health": 1,
+      "taskCount": 0,
+      "config": {
+        "model": "sonnet"
+      },
+      "createdAt": "2026-05-03T06:43:18.001Z",
+      "model": "sonnet",
+      "modelRoutedBy": "explicit"
+    },
+    "lnd-audit-security": {
+      "agentId": "lnd-audit-security",
+      "agentType": "security-reviewer",
+      "status": "terminated",
+      "health": 1,
+      "taskCount": 0,
+      "config": {
+        "model": "sonnet"
+      },
+      "createdAt": "2026-05-03T06:43:18.157Z",
+      "model": "sonnet",
+      "modelRoutedBy": "explicit"
+    },
+    "lnd-audit-arch": {
+      "agentId": "lnd-audit-arch",
+      "agentType": "architect",
+      "status": "terminated",
+      "health": 1,
+      "taskCount": 0,
+      "config": {
+        "model": "sonnet"
+      },
+      "createdAt": "2026-05-03T06:43:18.343Z",
+      "model": "sonnet",
+      "modelRoutedBy": "explicit"
+    }
+  },
+  "version": "3.0.0"
+}
