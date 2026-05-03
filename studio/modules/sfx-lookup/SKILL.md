@@ -1,23 +1,7 @@
 ---
 name: sfx-lookup
-description: "SFX lookup and suggestion module — provides romanized Japanese SFX categorized by type, intensity, and scene context for R18 prose generation."
----
-
-# 🔊 SFX Lookup Module
-
-> **Purpose**: Tra cứu và gợi ý SFX phù hợp cho scenes.
-
----
-
-## ⚠️ SFX Format Rules
-
-> [!IMPORTANT]
-> **SFX MUST be in ROMANIZED JAPANESE only.**
->
-> - ❌ NO Vietnamese SFX (không dùng: nhẹp nhẹp, bì bạch)
-> - ❌ NO Kanji (không dùng: 喘ぎ声, 濡れ音)
-> - ✅ ONLY Romanized: guchu guchu, pachi pachi, nn~♡
-
+description: SFX lookup and suggestion module — provides romanized Japanese SFX categorized
+  by type, intensity, and scene context for R18 prose generation.------
 ---
 
 ## On Activation
@@ -35,7 +19,6 @@ description: "SFX lookup and suggestion module — provides romanized Japanese S
 | R18 SFX Quick Reference | `studio/knowledge/sfx/r18_sfx_quickref.yaml` | 100+ |
 | Moaning SFX Research | `studio/knowledge/sfx/moaning_sfx_research.md` | Detailed |
 
----
 
 ## Capabilities
 
@@ -77,7 +60,6 @@ Level 3: aaaa~♡♡
 Level 4: ikuuu~♡♡♡
 ```
 
----
 
 ## Integration Points
 

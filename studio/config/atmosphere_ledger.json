@@ -1,6 +1,14 @@
 {
     "version": "1.0.0",
     "comment": "Core sensory mapping for RenPy-to-Prose adaptation",
+    "quality_gates": {
+        "min_sensory_density": 0.20,
+        "max_boilerplate_ratio": 0.10,
+        "require_dialogue_sfx": true,
+        "japanese_sfx_mandatory": true,
+        "entropy_threshold": 3.5,
+        "max_repeated_ngrams": 0.05
+    },
     "locations": {
         "bg school_roof": {
             "name": "Sân thượng trường học",

@@ -15,6 +15,21 @@ Do NOT use the following overused AI tropes:
 - "Eyes widened in shock"
 - "Sending jolts of electricity"
 - "A primal growl"
+- "Passionately"
+- "Intensely"
+- "As expected"
+- "She felt a wave of"
+- "He couldn't help but"
+- "She breathed a sigh"
+- "Time seemed to stop"
+- "The world faded away"
+- "A soft moan escaped her lips" (generic — must be character-specific)
+- "He thrust into her" (use visceral verb + context)
+- "She wrapped her arms around him" (use precise grip/action description)
+- "She stared into his eyes" (must be subtext-laden, not generic)
+- "The room fell silent" (overused scene-transition)
+- "He smiled mischievously" (use actual dialogue/action to show)
+- "Her heart raced" (use physical manifestation instead)
 
 ## 2. No Moralizing or Summarizing
 
@@ -34,3 +49,25 @@ Instead of stating "She felt embarrassed," describe the physical manifestation: 
 ## 5. No Perfect Synchronization
 
 Sex and intimacy are messy. Characters should be clumsy, out of breath, misspeak, or have conflicting physical reactions. Avoid writing synchronized, perfectly choreographed scenes.
+
+## 6. Entropy & Variance Checks
+
+Before finalizing any prose output, run these checks:
+
+**Entropy Test (sliding window, size=50 chars):**
+- Compute character-level entropy over the output
+- REJECT if average entropy < 3.5 (low variance = slop)
+- REJECT if 3+ consecutive sentences start with same 3 words
+
+**N-gram Repeat Test (n=3..6):**
+- Flag repeated n-grams appearing >5% of output
+- REJECT if any n-gram ratio > 0.05
+
+**Sensory Density Test:**
+- Count sensory tokens: [濡れた, 熱, 汗, 震え, 喘ぎ, 吐息, 締め付け, にじみ, ぬめり, etc.]
+- REQUIRE: ≥3 sensory tokens per 100 characters in explicit scenes
+- REJECT if density < 0.20
+
+**Dialogue SFX Test:**
+- Every dialogue line MUST include at least one SFX or physical reaction
+- REJECT if dialogue lacks embodied response
