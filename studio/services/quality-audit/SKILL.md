@@ -1,7 +1,21 @@
 ---
-name: quality-audit-service
-description: Auto-generated frontmatter placeholder
+name: quality-audit
+description: R18 prose quality audit service — 100-point scoring from pervert perspective
+  across five categories with actionable revision feedback.
+injection:
+  always:
+  - '{{project_root}}/studio/docs/GOONER_AUDIT_FRAMEWORK.md'
+  triggers:
+  - scene_tag: explicit|r18|sexual
+    loads:
+    - '{{project_root}}/studio/knowledge/packs/r18_sensory_pack.md'
+dependencies:
+  knowledge:
+  - path: '{{project_root}}/studio/rules/anti_slop.md'
+  - path: '{{project_root}}/studio/knowledge/packs/r18_sensory_pack.md'
+  modules: []
 ---
+
 
 # Quality Audit Service
 

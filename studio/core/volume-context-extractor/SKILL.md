@@ -1,6 +1,21 @@
 ---
-name: volume-context-extractor-
-description: Auto-generated frontmatter placeholder
+name: volume-context-extractor
+description: "Kana's Volume Scanner — scans entire manga volume or image batch to extract global narrative context, character registry, and timeline before atomic panel processing. Uses MCP OCR (Japanese) or Vision fallback (CJK complex layouts) to establish ground truth and prevent hallucinations."
+owner: "datdang"
+version: "1.0.0"
+tags: [volume, manga, ocr, context, batch, kana]
+injection:
+  always:
+    - "{{project_root}}/studio/rules/canon-rules.md"
+  triggers:
+    - scene_tag: "manga|volume|batch|scan"
+      loads:
+        - "{{project_root}}/studio/core/panel-forensic/SKILL.md"
+dependencies:
+  knowledge:
+    - path: "{{project_root}}/studio/knowledge/packs/narrative_style_pack.md"
+    - path: "{{project_root}}/studio/knowledge/glossaries/hentai_lexicon.md"
+  modules: []
 ---
 
 # Volume Context Extractor 

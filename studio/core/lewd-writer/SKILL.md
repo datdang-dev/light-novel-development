@@ -1,6 +1,38 @@
 ---
 name: lewd-writer
-description: Auto-generated frontmatter placeholder
+description: Core R18 prose generation engine — transforms forensic analysis into
+  gooner-grade, sensory-saturated Vietnamese Light Novel prose via Suki agent. Use
+  when the user says '/prose-adapter', '/lewd-writer', or 'write prose'.
+injection:
+  always:
+  - '{{project_root}}/studio/rules/dialogue_format.md'
+  - '{{project_root}}/studio/rules/anti_slop.md'
+  triggers:
+  - scene_tag: bedroom|explicit|intimate|sex
+    loads:
+    - '{{project_root}}/studio/rules/sensory_density.md'
+    - '{{project_root}}/studio/rules/lewd_writing_mechanics.md'
+  - scene_tag: dialogue-heavy|confrontation|tension
+    loads:
+    - '{{project_root}}/studio/rules/character_voice.md'
+    - '{{project_root}}/studio/rules/dialogue_format.md'
+  - scene_tag: aftermath|post-climax|lingering
+    loads:
+    - '{{project_root}}/studio/rules/sensory_density.md'
+    - '{{project_root}}/studio/rules/environmental_atmosphere.md'
+  - scene_tag: intro|transition|setup
+    loads:
+    - '{{project_root}}/studio/rules/environmental_atmosphere.md'
+dependencies:
+  knowledge:
+  - path: '{{project_root}}/studio/rules/user_fetish_profile.md'
+  - path: '{{project_root}}/studio/rules/xcom_degenerate_style.md'
+  - path: '{{project_root}}/studio/core/lewd-writer/knowledge/lewd_core_rules.md'
+  - path: '{{project_root}}/studio/core/lewd-writer/knowledge/lewd_archetypes.md'
+  - path: '{{project_root}}/studio/core/lewd-writer/knowledge/lewd_modules.md'
+  - path: '{{project_root}}/studio/core/lewd-writer/knowledge/lewd_forensic_framework.md'
+  - path: '{{project_root}}/studio/core/lewd-writer/knowledge/dialogue_playbook.md'
+  modules: []
 ---
 
 # Lewd Writer Engine

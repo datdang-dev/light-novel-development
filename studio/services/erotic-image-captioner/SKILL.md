@@ -1,7 +1,23 @@
 ---
-name: erotic-image-captioner-pipeline
-description: Auto-generated frontmatter placeholder
+name: erotic-image-captioner
+description: 'Lightweight 4-step pipeline: Image → Forensic Analysis (Kana) → Scene
+  Prelude (Luna) → Erotic Caption (Suki Caption Mode with Mood Seed). Outputs short,
+  explicit R18 image captions with narrative context.'
+injection:
+  always:
+  - '{{project_root}}/studio/config/canon-rules.md'
+  triggers:
+  - scene_tag: explicit|r18|sexual
+    loads:
+    - '{{project_root}}/studio/knowledge/packs/r18_sensory_pack.md'
+    - '{{project_root}}/studio/knowledge/packs/arousal_architecture.md'
+dependencies:
+  knowledge:
+  - path: '{{project_root}}/studio/knowledge/packs/r18_sensory_pack.md'
+  - path: '{{project_root}}/studio/knowledge/glossaries/hentai_lexicon.md'
+  modules: []
 ---
+
 
 # Erotic Image Captioner Pipeline
 

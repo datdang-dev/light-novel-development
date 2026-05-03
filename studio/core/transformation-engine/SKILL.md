@@ -1,6 +1,25 @@
 ---
 name: transformation-engine
-description: Auto-generated frontmatter placeholder
+description: "Director K's orchestration layer — takes forensic-state.json from any upstream source (manga forensics, Ren'Py extraction), runs knowledge injection, delegates to lewd-writer and quality-audit, manages rewrite loop until score >= 85. Input-agnostic; any source producing valid forensic-state.json can plug in."
+owner: "datdang"
+version: "1.0.0"
+tags: [orchestration, pipeline, director, rewrite-loop, rag]
+injection:
+  always:
+    - "{{project_root}}/studio/rules/canon-rules.md"
+    - "{{project_root}}/studio/config/atmosphere_ledger.json"
+  triggers:
+    - scene_tag: "explicit|r18|adaptation|transformation"
+      loads:
+        - "{{project_root}}/studio/knowledge/packs/arousal_architecture.md"
+        - "{{project_root}}/studio/rules/anti_slop.md"
+dependencies:
+  knowledge:
+    - path: "{{project_root}}/studio/knowledge/packs/arousal_architecture.md"
+    - path: "{{project_root}}/studio/knowledge/packs/r18_sensory_pack.md"
+    - path: "{{project_root}}/studio/knowledge/packs/fetish_guidance_pack.md"
+    - path: "{{project_root}}/studio/knowledge/glossaries/hentai_lexicon.md"
+  modules: []
 ---
 
 # Transformation Engine

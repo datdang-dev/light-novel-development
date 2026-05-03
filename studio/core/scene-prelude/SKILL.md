@@ -1,7 +1,25 @@
 ---
-name: scene-prelude-engine
-description: Auto-generated frontmatter placeholder
+name: scene-prelude
+description: Luna's Scene Prelude engine — generates an erotic narrative context (micro-scenario)
+  from Kana's forensic data, bridging raw visual analysis to Suki's caption writing.
+  Outputs a structured scenario seed that maximizes erotic tension and narrative coherence.
+injection:
+  always:
+  - '{{project_root}}/studio/rules/user_fetish_profile.md'
+  - '{{project_root}}/studio/config/canon-rules.md'
+  triggers:
+  - scene_tag: explicit|r18|sexual
+    loads:
+    - '{{project_root}}/studio/rules/xcom_degenerate_style.md'
+    - '{{project_root}}/studio/core/scene-prelude/knowledge/prelude_framework.md'
+dependencies:
+  knowledge:
+  - path: '{{project_root}}/studio/knowledge/packs/arousal_architecture.md'
+  - path: '{{project_root}}/studio/knowledge/packs/fetish_guidance_pack.md'
+  - path: '{{project_root}}/studio/knowledge/glossaries/hentai_lexicon.md'
+  modules: []
 ---
+
 
 # Scene Prelude Engine
 

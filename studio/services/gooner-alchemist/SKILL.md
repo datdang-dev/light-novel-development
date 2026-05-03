@@ -1,6 +1,22 @@
 ---
-name: gooner-alchemist-pipeline
-description: Auto-generated frontmatter placeholder
+name: gooner-alchemist
+description: Ultimate manga-to-prose adaptation pipeline — 8-step orchestrated flow
+  from initialization through forensic analysis, prose generation, quality audit,
+  to state persistence.
+injection:
+  always:
+  - '{{project_root}}/studio/config/pipeline-context.md'
+  - '{{project_root}}/studio/config/canon-rules.md'
+  triggers:
+  - scene_tag: bedroom|explicit|intimate
+    loads:
+    - '{{project_root}}/studio/knowledge/packs/narrative_style_pack.md'
+    - '{{project_root}}/studio/knowledge/packs/fetish_guidance_pack.md'
+dependencies:
+  knowledge:
+  - path: '{{project_root}}/studio/knowledge/packs/narrative_style_pack.md'
+  - path: '{{project_root}}/studio/knowledge/packs/fetish_guidance_pack.md'
+  modules: []
 ---
 
 # Gooner Alchemist Pipeline

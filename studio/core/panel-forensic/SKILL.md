@@ -1,6 +1,25 @@
 ---
-name: panel-forensic-engine
-description: Auto-generated frontmatter placeholder
+name: panel-forensic
+description: Core visual forensic analysis engine — performs atomic-level manga page
+  analysis using Dialogue-Anchor Protocol via Kana agent. Use when the user says '/panel-forensic',
+  'analyze manga page', or 'forensic analysis'.
+injection:
+  always:
+  - '{{project_root}}/studio/rules/user_fetish_profile.md'
+  triggers:
+  - scene_tag: explicit|r18|sexual
+    loads:
+    - '{{project_root}}/studio/knowledge/packs/r18_sensory_pack.md'
+    - '{{project_root}}/studio/knowledge/packs/fetish_guidance_pack.md'
+  - scene_tag: dialogue-heavy|text-heavy
+    loads:
+    - '{{project_root}}/studio/rules/dialogue_format.md'
+dependencies:
+  knowledge:
+  - path: '{{project_root}}/studio/rules/user_fetish_profile.md'
+  - path: '{{project_root}}/studio/knowledge/packs/r18_sensory_pack.md'
+  - path: '{{project_root}}/studio/knowledge/packs/fetish_guidance_pack.md'
+  modules: []
 ---
 
 # Panel Forensic Engine

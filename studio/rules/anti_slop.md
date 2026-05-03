@@ -10,6 +10,8 @@ The goal of the LND Studio is to produce raw, visceral, and character-driven pro
 
 Do NOT use the following overused AI tropes:
 
+### English / Generic
+
 - "A shiver went down her spine"
 - "A mix of fear and excitement"
 - "Eyes widened in shock"
@@ -30,6 +32,49 @@ Do NOT use the following overused AI tropes:
 - "The room fell silent" (overused scene-transition)
 - "He smiled mischievously" (use actual dialogue/action to show)
 - "Her heart raced" (use physical manifestation instead)
+
+### Vietnamese (R18-specific)
+
+#### Generic physical reactions (use specific body parts)
+- `trái tim đập thình thịch` → specify actual breath rhythm or chest sensation
+- `cơ thể run rẩy` → specify which muscles, how intense
+- `mặt đỏ bừng` / `đỏ mặt` → use ửng hồng, nóng rát tai, mồ hôi trán
+- `đôi mắt long lanh` / `ánh mắt sáng long lanh` → use wetness, pupil dilation, focus
+- `hơi thở gấp gáp` → use ho, ha, or actual breath sounds
+- `môi mấp máy` → use actual words or just SFX
+
+#### Clichéd body part metaphors
+- `ửng hồng như hoa đào` / `hoa anh đào` → no flower metaphors
+- `trắng nõi nà` / `trắng như tuyết` → describe texture (lạnh, ướt, mềm)
+- `khuôn chậu` / `đường cong quyến rũ` → use concrete grip/position
+- `ánh lên` / `long lanh` → specify wetness, sweat, or reflected light
+- `ngực rung lên` → use actual breath or SFX
+- `cơ thể mềm nhũn` → specify what causes it (legs, spine, arms)
+
+#### Overly poetic / clinical
+- `nụ cười quyến rũ` → use smirk, grin, or forced smile with context
+- `ánh mắt tràn đầy ham muốn` → use pupil, focus, or gaze direction
+- `cơ thể mịn màng` / `làn da mượt mà` → describe actual texture (ướt, nhờn, nóng)
+- `hương thơm quyến rũ` → use specific smell (mồ hôi, nước hoa hư, vị)
+- `giọng nói run rẩy` → use stutter, pitch break, or actual words
+- `khoảnh khắc vĩnh hằng` / `thời gian ngừng trôi` → end with physical sensation instead
+- `tình yêu tuôn trào` → no abstract emotional summaries
+- `ánh trăng rọi` / `ánh nến` → specify actual light source
+
+#### AI dialogue patterns
+- `Em yêu anh` (out of character)
+- `Anh làm em sướng quá` (generic)
+- `Em không thể chống lại anh được` (overused power dynamic)
+- `Cậu... cậu điên rồi!` (misdirected shock)
+- `N-no... đừng...` (generic resistance — must escalate to real speech)
+- Responses that don't match character archetype (mesugaki ≠ shocked victim)
+
+### Rules
+
+1. **No flower metaphors** — flowers don't describe wetness, heat, or pleasure
+2. **No abstract emotions** — everything must map to physical sensation
+3. **Pronoun register fixed** — cậu-tớ characters NEVER switch to mày-tao (even after corruption; the CONTENT gets degenerate, the REGISTER stays)
+4. **SFX required on every dialogue line** — silence = failure
 
 ## 2. No Moralizing or Summarizing
 

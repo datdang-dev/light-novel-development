@@ -1,6 +1,25 @@
 ---
-name: novel-development-pipeline-(nd)
-description: Auto-generated frontmatter placeholder
+name: novel-development
+description: 'Ultimate Novel Development Pipeline — A slow-paced, deeply contextualized
+  narrative engine. Orchestrated flow: Kana (Visuals) -> Luna (World/Pacing) -> Suki
+  (Long-form Prose).'
+injection:
+  always:
+  - '{{project_root}}/studio/rules/user_fetish_profile.md'
+  - '{{project_root}}/studio/rules/xcom_degenerate_style.md'
+  triggers:
+  - scene_tag: explicit|r18|sexual
+    loads:
+    - '{{project_root}}/studio/knowledge/packs/arousal_architecture.md'
+    - '{{project_root}}/studio/knowledge/packs/fetish_guidance_pack.md'
+  - scene_tag: world-building|intro
+    loads:
+    - '{{project_root}}/studio/knowledge/packs/japanese_reader_psychology.md'
+dependencies:
+  knowledge:
+  - path: '{{project_root}}/studio/rules/user_fetish_profile.md'
+  - path: '{{project_root}}/studio/rules/xcom_degenerate_style.md'
+  modules: []
 ---
 
 # Novel Development Pipeline (ND)

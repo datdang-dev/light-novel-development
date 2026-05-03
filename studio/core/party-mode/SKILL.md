@@ -1,7 +1,15 @@
 ---
 name: party-mode
-description: Auto-generated frontmatter placeholder
+description: Multi-agent collaborative discussion facilitator — structured meetings
+  between LND Studio specialist agents chaired by Antigravity.
+injection:
+  always: []
+  triggers: []
+dependencies:
+  knowledge: []
+  modules: []
 ---
+
 
 # Party Mode
 

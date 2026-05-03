@@ -1,7 +1,13 @@
 ---
-name: agent-memory-layer
-description: Auto-generated frontmatter placeholder
+name: agent-memory
+description: Persistent learning layer for specialist agents — records what works
+  and what fails across pipeline runs. Use when the user says 'save learnings', 'load
+  memory', or 'agent memory'.
+dependencies:
+  knowledge: []
+  modules: []
 ---
+
 
 # Agent Memory Layer
 

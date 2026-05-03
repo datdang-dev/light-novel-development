@@ -1,7 +1,25 @@
 ---
-name: ren'py-adaptation-pipeline
-description: Auto-generated frontmatter placeholder
+name: renpy-adaptation
+description: Ren'Py game-to-prose adaptation pipeline — extracts semantic models from
+  Ren'Py scripts via AST mining and delegates to the standard prose generation flow.
+injection:
+  always:
+  - '{{project_root}}/studio/knowledge/packs/narrative_style_pack.md'
+  triggers:
+  - scene_tag: explicit|r18|sexual
+    loads:
+    - '{{project_root}}/studio/knowledge/packs/r18_sensory_pack.md'
+    - '{{project_root}}/studio/knowledge/packs/fetish_guidance_pack.md'
+  - scene_tag: dialogue-heavy|visual-novel
+    loads:
+    - '{{project_root}}/studio/knowledge/packs/japanese_reader_psychology.md'
+dependencies:
+  knowledge:
+  - path: '{{project_root}}/studio/knowledge/packs/narrative_style_pack.md'
+  - path: '{{project_root}}/studio/knowledge/packs/r18_sensory_pack.md'
+  modules: []
 ---
+
 
 # Ren'Py Adaptation Pipeline
 

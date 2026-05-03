@@ -1,7 +1,13 @@
 ---
-name: project-onboarding
-description: Auto-generated frontmatter placeholder
+name: onboarding
+description: Context grounding session — gives AI agents full project awareness before
+  discussion, planning, or roleplay tasks. Use when the user says '/onboard', 'project
+  onboarding', or 'load context'.
+dependencies:
+  knowledge: []
+  modules: []
 ---
+
 
 # Project Onboarding
 

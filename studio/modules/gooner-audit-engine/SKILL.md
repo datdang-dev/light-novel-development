@@ -3,7 +3,13 @@ name: gooner-audit-engine
 description: Automated 100-point scoring engine for R18 prose — scores across 5 categories
   (Sensory, Edging, Fetish, Psychology, Technical) with keyword density detection
   and fix suggestions.------
+dependencies:
+  knowledge:
+  - path: '{{project_root}}/studio/rules/anti_slop.md'
+  - path: '{{project_root}}/studio/knowledge/packs/r18_sensory_pack.md'
+  modules: []
 ---
+
 
 ## Scoring Categories (100 Points Total)
 

@@ -2,7 +2,11 @@
 name: sillytavern-export
 description: Build SillyTavern V3 character cards from Markdown files. Supports character
   export, lorebook embedding, and batch processing.------
+dependencies:
+  knowledge: []
+  modules: []
 ---
+
 
 ## On Activation (Agent Mode)
 

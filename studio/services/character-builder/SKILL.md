@@ -1,6 +1,22 @@
 ---
-name: character-builder-service
-description: Auto-generated frontmatter placeholder
+name: character-builder
+description: High-fidelity character profile and world lore builder — creates psychological
+  profiles and biographical data for R18 characters via Aria agent.
+injection:
+  always:
+  - '{{project_root}}/studio/knowledge/packs/roleplay_st_pack.md'
+  triggers:
+  - scene_tag: explicit|r18|sexual
+    loads:
+    - '{{project_root}}/studio/knowledge/packs/fetish_guidance_pack.md'
+  - scene_tag: character-creation|profile
+    loads:
+    - '{{project_root}}/studio/knowledge/packs/japanese_reader_psychology.md'
+dependencies:
+  knowledge:
+  - path: '{{project_root}}/studio/knowledge/packs/roleplay_st_pack.md'
+  - path: '{{project_root}}/studio/knowledge/packs/fetish_guidance_pack.md'
+  modules: []
 ---
 
 # Character Builder Service

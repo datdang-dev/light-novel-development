@@ -1,6 +1,22 @@
 ---
 name: manga-context-extractor
-description: Auto-generated frontmatter placeholder
+description: "Batch manga volume orchestrator — runs OCR across entire manga volume, parses translated output, and synthesizes into manga_context.md timeline files. Upstream to Kana's panel-forensic for atomic processing."
+owner: "datdang"
+version: "1.0.0"
+tags: [manga, batch, ocr, context, pipeline]
+validateWorkflow: "./references/workflow.md"
+injection:
+  always:
+    - "{{project_root}}/studio/rules/canon-rules.md"
+  triggers:
+    - scene_tag: "manga|volume|batch|ocr"
+      loads:
+        - "{{project_root}}/studio/core/volume-context-extractor/SKILL.md"
+dependencies:
+  knowledge:
+    - path: "{{project_root}}/studio/knowledge/packs/narrative_style_pack.md"
+    - path: "{{project_root}}/studio/knowledge/glossaries/hentai_lexicon.md"
+  modules: []
 ---
 
 # Manga Context Extractor

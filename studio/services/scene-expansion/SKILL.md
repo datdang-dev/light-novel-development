@@ -1,7 +1,32 @@
 ---
 name: scene-expansion
-description: Auto-generated frontmatter placeholder
+description: Scene expansion service — transforms brief scene summaries or outlines
+  into full R18 prose with escalation, sensory density, and character voice integration.
+injection:
+  always:
+  - '{{project_root}}/studio/rules/dialogue_format.md'
+  - '{{project_root}}/studio/rules/anti_slop.md'
+  triggers:
+  - scene_tag: bedroom|explicit|intimate|sex
+    loads:
+    - '{{project_root}}/studio/rules/sensory_density.md'
+    - '{{project_root}}/studio/rules/lewd_writing_mechanics.md'
+  - scene_tag: dialogue-heavy|confrontation
+    loads:
+    - '{{project_root}}/studio/rules/character_voice.md'
+  - scene_tag: aftermath|post-climax
+    loads:
+    - '{{project_root}}/studio/rules/sensory_density.md'
+    - '{{project_root}}/studio/rules/environmental_atmosphere.md'
+dependencies:
+  knowledge:
+  - path: '{{project_root}}/studio/knowledge/packs/arousal_architecture.md'
+  - path: '{{project_root}}/studio/knowledge/packs/r18_sensory_pack.md'
+  - path: '{{project_root}}/studio/knowledge/packs/fetish_guidance_pack.md'
+  - path: '{{project_root}}/studio/knowledge/glossaries/hentai_lexicon.md'
+  modules: []
 ---
+
 
 # Scene Expansion Service
 
