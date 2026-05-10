@@ -1,0 +1,63 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Scene Context",
+  "description": "LND Studio scene context output from world-weaver",
+  "type": "object",
+  "required": ["scene_id", "location", "atmosphere"],
+  "properties": {
+    "scene_id": {
+      "type": "string",
+      "description": "Unique scene identifier"
+    },
+    "location": {
+      "type": "object",
+      "properties": {
+        "name": {"type": "string"},
+        "type": {"type": "string", "description": "e.g., indoor, outdoor, fantasy"},
+        "details": {"type": "string"}
+      }
+    },
+    "time": {
+      "type": "object",
+      "properties": {
+        "period": {"type": "string", "description": "e.g., night, afternoon, dawn"},
+        "relative": {"type": "string", "description": "Relative to previous scene"}
+      }
+    },
+    "atmosphere": {
+      "type": "object",
+      "properties": {
+        "mood": {"type": "string"},
+        "lighting": {"type": "string"},
+        "sounds": {"type": "array", "items": {"type": "string"}},
+        "smells": {"type": "array", "items": {"type": "string"}},
+        "temperature": {"type": "string"}
+      }
+    },
+    "characters_present": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {"type": "string"},
+          "role": {"type": "string"},
+          "state": {"type": "string"}
+        }
+      }
+    },
+    "power_dynamic": {
+      "type": "string",
+      "description": "e.g., dominant/submissive, equal, shifting"
+    },
+    "genre_tags": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "e.g., ['NTR', 'corruption', 'mind-break']"
+    },
+    "continuity_from": {
+      "type": "string",
+      "nullable": true,
+      "description": "Previous scene ID if continuation"
+    }
+  }
+}

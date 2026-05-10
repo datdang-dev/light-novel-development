@@ -1,0 +1,82 @@
+# LND Studio Banned Words List
+# Format: one phrase per line
+# Category markers: [CLINICAL] [SLOP] [JUDGMENTAL] [EN_SLOP]
+# Used by: output_validator.py, anti_slop_validator.py
+
+# === CLINICAL (Vietnamese) ===
+[CLINICAL] âm đạo
+[CLINICAL] dương vật
+[CLINICAL] giao cấu
+[CLINICAL] quan hệ tình dục
+[CLINICAL] quan hệ
+
+# === SLOP: Clichéd Body Metaphors (Vietnamese) ===
+[SLOP] ửng hồng như hoa đào
+[SLOP] hoa anh đào
+[SLOP] trắng nõi nà
+[SLOP] trắng như tuyết
+[SLOP] khuôn chậu
+[SLOP] đường cong quyến rũ
+[SLOP] ánh lên
+[SLOP] long lanh
+[SLOP] ngực rung lên
+[SLOP] cơ thể mềm nhũn
+[SLOP] ửng hồng
+[SLOP] trắng nõi
+
+# === SLOP: Generic Physical Reactions ===
+[SLOP] trái tim đập thình thịch
+[SLOP] cơ thể run rẩy
+[SLOP] đỏ mặt
+[SLOP] đôi mắt long lanh
+[SLOP] ánh mắt sáng long lanh
+[SLOP] hơi thở gấp gáp
+[SLOP] môi mấp máy
+
+# === SLOP: Overly Poetic ===
+[SLOP] nụ cười quyến rũ
+[SLOP] ánh mắt tràn đầy ham muốn
+[SLOP] cơ thể mịn màng
+[SLOP] làn da mượt mà
+[SLOP] hương thơm quyến rũ
+[SLOP] giọng nói run rẩy
+[SLOP] khoảnh khắc vĩnh hằng
+[SLOP] thời gian ngừng trôi
+[SLOP] tình yêu tuôn trào
+[SLOP] ánh trăng rọi
+[SLOP] ánh nến
+
+# === JUDGMENTAL (Vietnamese) ===
+[JUDGMENTAL] hôi thối
+[JUDGMENTAL] dơ bẩn
+[JUDGMENTAL] bẩn thỉu
+[JUDGMENTAL] ghê tởm
+[JUDGMENTAL] kinh tởm
+[JUDGMENTAL] đáng xấu hổ
+[JUDGMENTAL] đồi bại
+[JUDGMENTAL] tội lỗi
+[JUDGMENTAL] xấu xa
+
+# === EN_SLOP: English Generic Phrases ===
+[EN_SLOP] a shiver went down her spine
+[EN_SLOP] a mix of fear and excitement
+[EN_SLOP] eyes widened in shock
+[EN_SLOP] sending jolts of electricity
+[EN_SLOP] a primal growl
+[EN_SLOP] she felt a wave of
+[EN_SLOP] he couldn't help but
+[EN_SLOP] she breathed a sigh
+[EN_SLOP] time seemed to stop
+[EN_SLOP] the world faded away
+[EN_SLOP] a soft moan escaped her lips
+[EN_SLOP] he thrust into her
+[EN_SLOP] she wrapped her arms around him
+[EN_SLOP] she stared into his eyes
+[EN_SLOP] the room fell silent
+[EN_SLOP] he smiled mischievously
+[EN_SLOP] her heart raced
+
+# === SLOP: Vietnamese AI Dialogue Patterns ===
+[SLOP] em yêu anh
+[SLOP] anh làm em sướng quá
+[SLOP] em không thể chống lại anh được

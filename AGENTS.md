@@ -1,7 +1,7 @@
 <!-- gitnexus:start -->
 # GitNexus — Code Intelligence
 
-This project is indexed by GitNexus as **lnd_dev** (21899 symbols, 44872 relationships, 300 execution flows). Use the GitNexus MCP tools to understand code, assess impact, and navigate safely.
+This project is indexed by GitNexus as **lnd_dev** (22298 symbols, 45407 relationships, 300 execution flows). Use the GitNexus MCP tools to understand code, assess impact, and navigate safely.
 
 > If any GitNexus tool warns the index is stale, run `npx gitnexus analyze` in terminal first.
 
@@ -39,25 +39,5 @@ This project is indexed by GitNexus as **lnd_dev** (21899 symbols, 44872 relatio
 | Rename / extract / split / refactor | `.claude/skills/gitnexus/gitnexus-refactoring/SKILL.md` |
 | Tools, resources, schema reference | `.claude/skills/gitnexus/gitnexus-guide/SKILL.md` |
 | Index, status, clean, wiki CLI commands | `.claude/skills/gitnexus/gitnexus-cli/SKILL.md` |
-| Work in the Scripts area (2381 symbols) | `.claude/skills/generated/scripts/SKILL.md` |
-| Work in the Tts area (388 symbols) | `.claude/skills/generated/tts/SKILL.md` |
-| Work in the Public area (225 symbols) | `.claude/skills/generated/public/SKILL.md` |
-| Work in the Endpoints area (222 symbols) | `.claude/skills/generated/endpoints/SKILL.md` |
-| Work in the Slash-commands area (105 symbols) | `.claude/skills/generated/slash-commands/SKILL.md` |
-| Work in the Stable-diffusion area (95 symbols) | `.claude/skills/generated/stable-diffusion/SKILL.md` |
-| Work in the Libs area (94 symbols) | `.claude/skills/generated/libs/SKILL.md` |
-| Work in the Vectors area (89 symbols) | `.claude/skills/generated/vectors/SKILL.md` |
-| Work in the Autocomplete area (72 symbols) | `.claude/skills/generated/autocomplete/SKILL.md` |
-| Work in the Engine area (72 symbols) | `.claude/skills/generated/engine/SKILL.md` |
-| Work in the Memory area (60 symbols) | `.claude/skills/generated/memory/SKILL.md` |
-| Work in the Regex area (50 symbols) | `.claude/skills/generated/regex/SKILL.md` |
-| Work in the Middleware area (49 symbols) | `.claude/skills/generated/middleware/SKILL.md` |
-| Work in the Expressions area (49 symbols) | `.claude/skills/generated/expressions/SKILL.md` |
-| Work in the Cluster_527 area (48 symbols) | `.claude/skills/generated/cluster-527/SKILL.md` |
-| Work in the Quick-reply area (42 symbols) | `.claude/skills/generated/quick-reply/SKILL.md` |
-| Work in the Cluster_530 area (38 symbols) | `.claude/skills/generated/cluster-530/SKILL.md` |
-| Work in the Backends area (36 symbols) | `.claude/skills/generated/backends/SKILL.md` |
-| Work in the Api area (35 symbols) | `.claude/skills/generated/api/SKILL.md` |
-| Work in the Ui area (34 symbols) | `.claude/skills/generated/ui/SKILL.md` |
 
 <!-- gitnexus:end -->

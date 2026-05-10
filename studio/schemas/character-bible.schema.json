@@ -1,0 +1,83 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Character Bible",
+  "description": "LND Studio character profile and bible entry",
+  "type": "object",
+  "required": ["character_id", "name", "profile"],
+  "properties": {
+    "character_id": {
+      "type": "string",
+      "description": "Unique identifier for the character"
+    },
+    "name": {
+      "type": "string",
+      "description": "Character display name"
+    },
+    "aliases": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "Alternative names or nicknames"
+    },
+    "profile": {
+      "type": "object",
+      "required": ["appearance", "personality"],
+      "properties": {
+        "appearance": {
+          "type": "object",
+          "properties": {
+            "hair": {"type": "string"},
+            "eyes": {"type": "string"},
+            "body_type": {"type": "string"},
+            "height": {"type": "string"},
+            "distinguishing_features": {
+              "type": "array",
+              "items": {"type": "string"}
+            },
+            "default_outfit": {"type": "string"},
+            "current_outfit_state": {"type": "string"}
+          }
+        },
+        "personality": {
+          "type": "object",
+          "properties": {
+            "archetype": {"type": "string"},
+            "speech_pattern": {"type": "string"},
+            "pronoun_register": {"type": "string", "description": "e.g., cậu-tớ, anh-em, mày-tao"},
+            "traits": {
+              "type": "array",
+              "items": {"type": "string"}
+            }
+          }
+        }
+      }
+    },
+    "relationships": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "target": {"type": "string"},
+          "type": {"type": "string"},
+          "dynamic": {"type": "string"}
+        }
+      }
+    },
+    "continuity_state": {
+      "type": "object",
+      "properties": {
+        "last_seen_chapter": {"type": "string"},
+        "physical_state": {"type": "string"},
+        "clothing_state": {"type": "string"},
+        "emotional_state": {"type": "string"}
+      }
+    },
+    "source_project": {
+      "type": "string",
+      "description": "Which project this character belongs to"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

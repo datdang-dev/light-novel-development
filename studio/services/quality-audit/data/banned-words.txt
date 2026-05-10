@@ -1,0 +1,20 @@
+# Banned Words — Quality Audit
+# This file is maintained at: studio/data/banned-words.txt
+# See that file for the full categorized list.
+# This copy exists for backward compatibility with quality-audit step-02-banned-scan.md
+# To update, edit studio/data/banned-words.txt
+
+# Quick reference of critical banned words (subset):
+âm đạo
+dương vật
+giao cấu
+quan hệ
+ửng hồng
+ánh lên
+trắng nõi
+khuôn chậu
+hôi thối
+dơ bẩn
+ghê tởm
+đồi bại
+tội lỗi

@@ -1,0 +1,348 @@
+================================================================================
+PROPOSAL: Production-Ready Pipeline for LND_DEV Manga-to-Novel Adaptation
+================================================================================
+Author  : Hermes Agent
+Date    : 2026-05-07
+Version : 1.0
+Status  : DRAFT — pending datdang approval
+
+================================================================================
+1. OBJECTIVE
+================================================================================
+Enable reliable end-to-end volume adaptation (forensic -> prose -> audit) that
+can run unattended for multiple chapters/volumes.
+
+Key goals:
+  - Eliminate manual errors and silent crashes.
+  - Guarantee policy compliance (R18 assets, knowledge packs).
+  - Produce auditable artefacts with versioning.
+  - Support batch processing of >100 pages with parallel page-forensic.
+
+================================================================================
+2. CURRENT GAPS (PROD-READY CHECKLIST)
+================================================================================
+Gap # | Description                                    | Severity
+------+------------------------------------------------+----------
+G01   | No mandatory pre-flight verification.         | CRITICAL
+      | Pipeline crashes silently if manga-ocr or    |
+      | vision model is unavailable.                 |
+G02   | Agent YAML not schema-validated.             | HIGH
+      | Typo in id/triggers breaks routing.          |
+G03   | State files accumulate indefinitely.         | MEDIUM
+      | No cleanup / archiving policy.               |
+G04   | No automated testing of knowledge packs,     | HIGH
+      | SKILL.md logic, or schema conformity.        |
+G05   | No CI/CD gate; changes land untested.        | HIGH
+G06   | Observability only manual glance.            | MEDIUM
+      | No metrics, no alerts.                        |
+G07   | Dependency drift on external services         | MEDIUM
+      | (manga-ocr MCP, vision model).                |
+
+================================================================================
+3. RECOMMENDED SOLUTION
+================================================================================
+
+--- 3A. MANDATORY PRE-FLIGHT CHECK -----------------------------------------
+
+File: studio/scripts/preflight_check.py
+
+Purpose:
+  Run BEFORE any pipeline stage. Abort immediately if any check fails.
+  Write detailed error to {RUN_DIR}/logs/preflight.err and exit with code != 0.
+
+Checks (in order):
+
+  1. VISION MODEL
+     - Send a 1x1 PNG test image to current model.
+     - If "model does not support image input" -> FAIL.
+     - Record model name in {RUN_DIR}/logs/preflight.log.
+
+  2. MANGA-OCR PACKAGE
+     - Run: pip show manga-ocr
+     - If not installed -> FAIL.
+     - If version mismatch (compare against locked version) -> WARN.
+
+  3. MCP MANGA-OCR SERVER
+     - Run: hermes mcp list  (or equivalent)
+     - If "manga-ocr" not in list -> FAIL.
+     - Check health endpoint returns version string.
+
+  4. KNOWLEDGE PACKS EXIST
+     - studio/rules/user_fetish_profile.md        -> MUST exist
+     - studio/knowledge/packs/r18_sensory_pack.md  -> MUST exist
+     - studio/knowledge/packs/fetish_guidance_pack.md -> MUST exist
+     - If any missing -> FAIL.
+
+  5. AGENT YAML SCHEMA VALIDATION
+     - Run yamllint on all *.agent.yaml files.
+     - Validate against JSON Schema for agent YAML structure.
+     - If lint errors or schema violations -> FAIL.
+
+  6. OUTPUT DIRECTORY WRITABLE
+     - Test-write a temp file to {RUN_DIR}.
+     - If not writable -> FAIL.
+
+  7. FORENSIC-STATE SCHEMA
+     - Validate studio/schemas/forensic-state.schema.json is valid JSON Schema.
+
+Exit codes:
+  0   = all checks passed, pipeline may proceed.
+  !=0 = one or more checks failed. Read logs/preflight.err.
+
+--- 3B. CI VALIDATION (GITHUB ACTIONS) ------------------------------------
+
+File: .github/workflows/ci.yml
+
+Trigger: on every push to main and on all PRs.
+
+Steps:
+  Step 1  — yamllint
+            yamllint studio/agents/*.yaml
+
+  Step 2  — YAML Schema validation
+            python -m jsonschema -i studio/schemas/forensic-state.schema.json
+            (also validate all *.agent.yaml against agent schema)
+
+  Step 3  — Knowledge validator
+            python studio/scripts/knowledge_validator.py
+
+  Step 4  — Preflight check (headless)
+            python studio/scripts/preflight_check.py
+
+  Step 5  — Unit tests (if tests/ exists)
+            pytest tests/ -v
+
+  Step 6  — Lint Python scripts
+            pylint studio/scripts/*.py --errors-only
+
+Gate: ALL steps must pass. PRs blocked on failure.
+Notification: Slack/Telegram webhook on failure.
+
+--- 3C. CLEANUP & ARCHIVING POLICY ----------------------------------------
+
+Trigger: After successful volume adaptation completion.
+
+Policy:
+  1. ARCHIVE
+     - Move {RUN_DIR}/_analysis/{VOLUME}/* to
+       {STUDIO}/archive/{VOLUME}_YYYYMMDD/
+     - Include: forensic-state.json, draft-prose.json, audit-report.json,
+       pipeline.ndigest logs.
+     - Tag the archive commit with git tag: archive/{VOLUME}_YYYYMMDD
+
+  2. PRUNE
+     - Run prune_artifacts.py (cronjob or post-run hook).
+     - Delete temp files in {RUN_DIR}/_analysis/ older than 30 days.
+     - Keep only last 2 active volumes in {RUN_DIR} for quick rollback.
+
+  3. LOG ROTATION
+     - Compress logs older than 7 days: {RUN_DIR}/logs/*.log -> *.log.gz
+     - Delete compressed logs older than 90 days.
+
+File: studio/scripts/prune_artifacts.py
+  - Accepts: --max-age-days=30, --keep-volumes=2
+  - Dry-run mode: --dry-run (prints what would be deleted)
+  - Writes audit log to {RUN_DIR}/logs/prune_audit.log
+
+--- 3D. OBSERVABILITY LAYER -----------------------------------------------
+
+Structured logging standard (JSON Lines):
+
+File: {RUN_DIR}/logs/pipeline.ndigest
+
+Format (one JSON object per line):
+{
+  "stage":      "forensic|prose|audit|cleanup",
+  "page":       1,
+  "volume":     "vol_042",
+  "start_ts":   "2026-05-07T03:00:00Z",
+  "end_ts":     "2026-05-07T03:00:45Z",
+  "duration_s": 45,
+  "agent":      "Kana",
+  "model":      "claude-sonnet-4-20250514",
+  "tokens_used": 1234,
+  "result":     "PASS|FAIL|SKIP",
+  "error_msg":  "optional error detail"
+}
+
+Optional (if infra exists):
+  - Ship via fluent-bit or filebeat to ELK / Loki.
+  - Dashboard: Grafana panel showing pass/fail rate per stage.
+
+--- 3E. PRODUCTION ORCHESTRATION ------------------------------------------
+
+TWO OPTIONS. Pick one based on infra appetite.
+
+OPTION A — Hermes-native (RECOMMENDED for start)
+================================================================================
+  Approach:
+    - Write new skill: studio/pipeline_orchestrator/SKILL.md
+    - Director K (lnd-orchestrator) activates this skill on volume-start.
+    - Skill loops over pages, calls delegate_task for each stage.
+    - Artefacts stored in {RUN_DIR} with versioned filenames.
+
+  Skill interface:
+    Inputs:
+      volume_id     : string  (e.g., "vol_042")
+      page_range    : [start, end]
+      model_override: string  (optional)
+
+    Pipeline steps per page:
+      1. PREFLIGHT     -> run preflight_check.py
+      2. KANA          -> panel-forensic (delegate_task, sub-agent)
+                           Output: _analysis/{VOLUME}/page_{N}_forensics.json
+      3. ARIA          -> character-builder (update bible)
+                           Output: _analysis/{VOLUME}/character-bible.json
+      4. SUKI          -> lewd-writer (delegate_task)
+                           Input:  forensics + bible
+                           Output: _analysis/{VOLUME}/page_{N}_prose.json
+      5. RIKO          -> quality-audit
+                           Input:  prose
+                           Output: _analysis/{VOLUME}/page_{N}_audit.json
+      6. ARCHIVE       -> prune_artifacts.py (on volume complete)
+
+    Cronjob registration:
+      Schedule : "0 3 * * *"   (03:00 UTC daily, adjust for UTC+7 = 10:00 JST)
+      repeat   : 0             (run until cancelled)
+      notify_on_complete: true -> Telegram/email alert on batch done
+      workdir  : /home/datdang/working/lnd_dev
+      skills   : ["lnd-dev-studio", "studio/pipeline_orchestrator"]
+
+    Benefits:
+      - Zero new infra.
+      - Single-repo, easy git management.
+      - Full pipeline visible in Hermes cronjob dashboard.
+      - Retry via cronjob re-run.
+
+    Drawbacks:
+      - No built-in DAG visualization.
+      - Cronjob granularity = whole pipeline (not per-page retry).
+
+================================================================================
+
+OPTION B — External durable orchestrator (TEMPORAL) [scale later]
+================================================================================
+  Approach:
+    - Deploy Temporal server via docker compose on a dedicated VM.
+    - Register each pipeline stage as a Temporal Activity:
+        Activity_F PreflightCheck
+        Activity_K KanaForensic
+        Activity_A AriaBibleUpdate
+        Activity_S SukiProse
+        Activity_R RikoAudit
+        Activity_C CleanupArchive
+    - Each Activity calls: hermes delegate_task (blocking, returns result)
+    - Workflow definition:
+        INIT -> FORENSIC_LOOP (par/for each page N) -> BIBLE_UPDATE
+             -> PROSE_LOOP (seq) -> AUDIT_LOOP -> ARCHIVE -> DONE
+
+    Advantages:
+      - Built-in retry policies with exponential backoff.
+      - Visibility UI (Temporal Web) with per-activity timeline.
+      - Dead-letter queue for failed pages.
+      - Can run parallel page-forensic (fan-out).
+      - Exactly-once execution guarantees.
+
+    Overhead:
+      - New infra (Temporal cluster + PostgreSQL).
+      - Separate deployment pipeline.
+      - Migration effort if Option A was running.
+
+    Recommendation:
+      - Start with Option A. If volume count grows to >50 concurrent
+        adaptations OR you need multi-team governance, migrate to Option B.
+
+================================================================================
+
+================================================================================
+4. IMPLEMENTATION ROADMAP
+================================================================================
+
+Phase | Step | Action                                           | Owner | Deliverable
+------+------+--------------------------------------------------+-------+-------------------------
+  1   | 1.1  | Create preflight_check.py                        | Dev   | Script exits 0/pass,
+      |      | Verify vision+manga-ocr+schema                  |       | writes preflight.err
+      |      |                                                  |       | on fail.
+------+------+--------------------------------------------------+-------+-------------------------
+  1   | 1.2  | Create agent YAML JSON schema                   | Dev   | agent-schema.json used
+      |      | Validate all *.agent.yaml against it            |       | in CI step 2.
+------+------+--------------------------------------------------+-------+-------------------------
+  2   | 2.1  | Add .github/workflows/ci.yml                    | Dev   | CI passes on all PRs.
+      |      | yamllint + schema + validator + preflight       |       |
+------+------+--------------------------------------------------+-------+-------------------------
+  2   | 2.2  | Create prune_artifacts.py                       | Dev   | Dry-run tested.
+      |      | Test archive + prune for one sample volume      |       | Archive dir created.
+------+------+--------------------------------------------------+-------+-------------------------
+  3   | 3.1  | Add JSON-line logging to each core skill        | Dev   | pipeline.ndigest appears
+      |      | panel-forensic, lewd-writer, quality-audit      |       | under logs/.
+------+------+--------------------------------------------------+-------+-------------------------
+  3   | 3.2  | Create studio/pipeline_orchestrator/SKILL.md   | Dev   | Accepts volume_id,
+      |      | Director K activates on volume-start            |       | loops all stages.
+------+------+--------------------------------------------------+-------+-------------------------
+  4   | 4.1  | Register cronjob pipeline_orchestrator         | Dev   | Runs nightly, sends
+      |      | Schedule: "0 3 * * *"                           |       | notify on complete.
+------+------+--------------------------------------------------+-------+-------------------------
+  4   | 4.2  | Update README.md with dev-ops checklist        | Docs  | Clear contributor
+      |      |                                                  |       | guide.
+------+------+--------------------------------------------------+-------+-------------------------
+  5   | 5.1  | End-to-end test on 10-page sample volume       | QA    | All stages complete,
+      |      |                                                  |       | artefacts archived,
+      |      |                                                  |       | logs OK.
+------+------+--------------------------------------------------+-------+-------------------------
+  6   | 6.1  | (Optional) Temporal prototype if decision       | DevOps| Minimal workflow demo.
+      |      | shifts to Option B.                              |       |
+
+Total estimated effort: ~12 working days (Phases 1-5).
+
+================================================================================
+5. RISKS & MITIGATIONS
+================================================================================
+
+Risk                            | Likelihood | Impact | Mitigation
+--------------------------------|-------------|--------|--------------------------
+Vision model incompatibility     | Medium      | High   | Pin exact model name in
+                                 |             |        | config.yaml. Provide
+                                 |             |        | fallback Docker image
+                                 |             |        | with known-good model.
+External dep outage (manga-ocr) | Low         | High   | Wrap in retry with
+                                 |             |        | exponential backoff.
+                                 |             |        | Fallback OCR-free mode
+                                 |             |        | if unavailable.
+Orchestrator dead-lock           | Low         | Medium | Watchdog timer. Max
+                                 |             |        | duration per stage in
+                                 |             |        | config. Abort + alert.
+Knowledge pack drift             | Low         | Medium | Version-lock via git
+                                 |             |        | tag. Schedule quarterly
+                                 |             |        | manual review.
+CI false positives (flaky test)  | Medium      | Low    | Isolate flaky tests.
+                                 |             |        | Use test-repeat=3 for
+                                 |             |        | non-deterministic ones.
+
+================================================================================
+6. SUCCESS METRICS (post-deployment)
+================================================================================
+
+Metric                          | Target
+--------------------------------|--------------------------------
+Pipeline completion rate        | >= 95% unattended (no manual fix)
+Mean time to recovery (MTTR)    | < 5 minutes (auto-retry + alert)
+Orphaned artefacts (>30 days)   | 0
+CI pipeline pass rate           | 100% of PRs
+Preflight detection accuracy    | 100% (no silent failures post-G01 fix)
+Token usage per volume (avg)     | Track in pipeline.ndigest, review monthly
+
+================================================================================
+7. NEXT ACTIONS FOR DATDANG
+================================================================================
+
+  1. Confirm orchestration option (A or B). Option A is recommended.
+  2. Provide custom config values:
+       - Preferred vision model name (e.g., claude-sonnet-4-20250514)
+       - MCP manga-ocr endpoint (host:port)
+       - Cronjob schedule (current "0 3 * * *" = 10:00 JST, OK?)
+  3. Review and approve this proposal.
+  4. Assign Phase 1 to a developer.
+
+================================================================================
+END OF PROPOSAL
+================================================================================
