@@ -1,13 +1,13 @@
 ---
 name: "character-bible"
-description: "Capability: Deep Character Profile Creation (V6)"
+description: "Capability: Deep Character Profile Creation (v1.0.0)"
 owner: "Aria (character-architect)"
-version: "6.0.0"
+version: "1.0.0"
 web_bundle: true
 validateWorkflow: './steps/step-01-input-mode.md'
 ---
 
-# Character Bible Workflow (V6)
+# Character Bible Workflow (v1.0.0)
 
 **Goal:** Create comprehensive character profiles with psychological depth and fetish integration.
 

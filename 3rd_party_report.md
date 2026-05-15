@@ -34,7 +34,7 @@ LND Studio là một hệ thống agentic theo phong cách BMAD, trong đó:
 Tuy nhiên, `critical_actions` của nhiều agent đang tạo ra phụ thuộc ngầm:
 
 - Yêu cầu phải tồn tại các tài liệu/asset cụ thể:
-  - `studio/docs/architecture/dynamic_design/service_manga_adapter/sq_v6_1_gooner_alchemist_pipeline.puml`
+  - `studio/docs/architecture/dynamic_design/service_manga_adapter/sq_v1_0_0_gooner_alchemist_pipeline.puml`
   - `studio/docs/protocols/delegation-protocol.md`
   - Các rule `.agent/rules/*.md`.
 - Yêu cầu phải tồn tại tools/khả năng runtime:
@@ -178,7 +178,7 @@ Hiện tại, để thực thi một pipeline, LLM có thể phải “thấy”
   - `persona.role`, `identity`, `communication_style`, `principles` – thường dài, giàu ẩn dụ (Đặc biệt Suki và Prof. Atomic).
   - `critical_actions` với nhiều yêu cầu “READ ARCHITECTURE”, “Load config”, “Load delegation protocol”, “READ Lewd Writing Mechanics”, “CONSULT lexicon”, v.v.
 - Workflow prompt:
-  - `studio/services/gooner-alchemist/workflow.md` – mô tả V6 pipeline, context horizon, core transformation engine.
+  - `studio/services/gooner-alchemist/workflow.md` – mô tả v1.0.0 pipeline, context horizon, core transformation engine.
   - `studio/workflows/capabilities/*/workflow.md` – cho panel-forensic, prose-adapter, gooner-audit, bible-sync.
 - Global rules:
   - `.agent/rules/delegation_protocol.md`, `.agent/rules/one_page_one_file.md`, các rule khác.

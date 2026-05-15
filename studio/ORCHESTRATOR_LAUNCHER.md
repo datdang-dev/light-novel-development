@@ -114,11 +114,13 @@ USER: "MA"
 ## Key Architecture Rules
 
 ### ✅ DO (Correct)
+
 ```
 Orch → Agent → SKILL.md → steps/
 ```
 
 ### ❌ DON'T (Violation)
+
 ```
 Orch → SKILL.md (bypass Agent layer)
 ```
@@ -146,5 +148,5 @@ lnd-orchestrator (Layer 1)
 
 ---
 
-*Refactored: 2026-05-02 — v7.0 (Correct Architecture)*
+*Refactored: 2026-05-02 — v1.0.0 (Correct Architecture)*
 *Orchestrator now follows Layer 1 → 2 → 3 flow*

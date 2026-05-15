@@ -44,7 +44,7 @@ Update frontmatter of the session state:
 Display:
 
 ```text
-"✅ Phân tích Panel Forensic (V6.1) hoàn tất! Cấu trúc Dialogue-Anchor đã được thiết lập thành công.
+"✅ Phân tích Panel Forensic (v1.0.0) hoàn tất! Cấu trúc Dialogue-Anchor đã được thiết lập thành công.
 
 **File Output:** `{outputFile}`
 

@@ -1,13 +1,13 @@
 ---
 name: "panel-forensic"
-description: "Capability: Deep Panel Visual Forensic Analysis (V6.1) - Dialogue Anchor Protocol"
+description: "Capability: Deep Panel Visual Forensic Analysis (v1.0.0) - Dialogue Anchor Protocol"
 owner: "Director K (lnd-orchestrator)"
-version: "6.1.0"
+version: "1.0.0"
 web_bundle: true
 validateWorkflow: './steps/step-01-input-validation.md'
 ---
 
-# Panel Forensic Workflow (V6.1 - Dialogue-Anchor Protocol)
+# Panel Forensic Workflow (v1.0.0 - Dialogue-Anchor Protocol)
 
 **Goal:** Perform ATOMIC-LEVEL visual analysis of manga pages with an absolute Zero-Skip Protocol for dialogue using the Dialogue-First Architecture.
 
@@ -18,6 +18,7 @@ Vision models hallucinate when overwhelmed by complex R18 visuals. To prevent th
 The forensic phase exists to FORCE thorough examination of every detail. A good gooner adaption starts with SEEING everything the artist drew.
 
 **Minimum Requirements (Pervert Scan Protocol):**
+
 - Identify ALL characters in frame and document their positions.
 - Document clothing state (0-100% dressed) and skin exposure.
 - List ≥3 potential smells (see `sensory_density.md`).

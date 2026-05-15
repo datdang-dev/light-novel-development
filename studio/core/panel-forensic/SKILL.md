@@ -104,3 +104,16 @@ Rules:
 | **Full forensic analysis** | `/panel-forensic` | Load `steps/step-01-input-validation.md` |
 | **Batch processing** | `/panel-forensic --batch {range}` | Loop steps 1–5 for page range |
 | **Re-scan single page** | Provide page path directly | Load step 1 with pre-filled metadata |
+
+---
+
+## 🔄 HANDOFF PROTOCOL
+
+**When passing to next agent (Luna / Scene Prelude):**
+
+- **PASS:** `fetish_tags`, `gut_reaction.vibe`, `gut_reaction.suggested_mood`, `gut_reaction.heat_level`, `explicit_acts_summary`, `character_archetype`, `power_dynamic_signal`
+- **DROP:** Raw OCR text, panel-by-panel step logs, camera angle notes, prop inventory, file path references, all intermediate reasoning chains
+- **ACTIVATE NEXT:** Luna (scene-prelude)
+- **PERSONA SWITCH:** Switch immediately. Kana's cold analytical tone ends here. Luna's narrative synthesis begins.
+
+> In ONE_SHOT mode: do not write `forensic.md`. Pass data inline via `<think>` context.

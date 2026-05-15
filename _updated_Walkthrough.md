@@ -8,7 +8,7 @@ This system functions as a controlled, agent-driven "Studio" specifically design
 **Core Design Philosophy:**
 
 - **Agent-Driven Specialization:** Modeled after a real-world studio. An "Orchestrator" (Director K) routes work, while "Specialists" (e.g., Kana for forensics, Suki for prose, Riko for QA) handle distinct pipeline phases.
-- **Workflow Orchestration & Pipeline Constraints:** The system relies on rigid, sequential pipelines (such as the "V6.1 Gooner Alchemist Pipeline") mapped inside Markdown files (e.g., `workflow.md`). It employs strict quality gates, automated rewriting loops, and distinct phases (Discovery -> Forensics -> Prose -> Audit -> Bible Update).
+- **Workflow Orchestration & Pipeline Constraints:** The system relies on rigid, sequential pipelines (such as the "v1.0.0 Gooner Alchemist Pipeline") mapped inside Markdown files (e.g., `workflow.md`). It employs strict quality gates, automated rewriting loops, and distinct phases (Discovery -> Forensics -> Prose -> Audit -> Bible Update).
 - **Prompt Chaining & Explicit Handoff:** Agents exist not as arbitrary LLM wrappers but as compartmentalized prompt profiles defined in YAML. Control flow between them relies on structured Markdown banners (`🔄 DELEGATING TO...`) and JSON schema contracts (`forensic-state.schema.json`, `draft-prose.json`).
 
 ---
@@ -26,7 +26,7 @@ Agents are defined in `.agent.yaml` files located in `studio/agents/` (not `.age
 **Prompt Construction Patterns:**
 
 1. **Aggressive Role Framing:** Agents are heavily anthropomorphized with deep psychological constraints (e.g., Suki acts as a "disciplined prose craftsman" who despises "mechanical translation").
-2. **Path Dependency Injections:** Agents are instructed to strictly load hardcoded paths (e.g., `"Load and read {project-root}/studio/config/config.yaml"` or `"READ ARCHITECTURE: .../sq_v6_1_gooner_alchemist_pipeline.puml"`).
+2. **Path Dependency Injections:** Agents are instructed to strictly load hardcoded paths (e.g., `"Load and read {project-root}/studio/config/config.yaml"` or `"READ ARCHITECTURE: .../sq_v1_0_0_gooner_alchemist_pipeline.puml"`).
 3. **Implicit Contracts & State:** State is persisted entirely via the file system rather than an overarching memory bus. Agents output explicit schema-validated JSON files (`forensic-state.json`) into structured directories (`output/{chapter}/{page}/`). Subsequent agents read these files to continue the chain.
 
 ---
@@ -60,7 +60,7 @@ The execution model is heavily **Sequential** but handles **Conditional Recursio
 
 **Ambiguities & Inconsistencies:**
 
-- **Prompt Duplication:** Every agent has the exact same string to load `config.yaml` or understand the V6.1 Architecture.
+- **Prompt Duplication:** Every agent has the exact same string to load `config.yaml` or understand the v1.0.0 Architecture.
 - **Cognitive Overload:** Injecting massive formatting rules files (like `lewd_writing_mechanics.md` - 6KB+) into every generation cycle creates context bloat and can degrade the LLM's adherence to nuanced instructions.
 
 ---

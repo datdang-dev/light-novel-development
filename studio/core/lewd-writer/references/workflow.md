@@ -1,13 +1,13 @@
 ---
 name: "prose-adapter"
-description: "Capability: GOONER-GRADE R18 Light Novel Prose Generation (V6)"
+description: "Capability: GOONER-GRADE R18 Light Novel Prose Generation (v1.0.0)"
 owner: "Suki (lewd-writer)"
-version: "6.0.0"
+version: "1.0.0"
 web_bundle: true
 validateWorkflow: './steps/step-01-context-loading.md'
 ---
 
-# Prose Adapter Workflow (V6)
+# Prose Adapter Workflow (v1.0.0)
 
 **Goal:** Transform forensic analysis into GOONER-GRADE, sensory-saturated R18 Light Novel prose.
 

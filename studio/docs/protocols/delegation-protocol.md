@@ -61,3 +61,24 @@ Director K **MAY** directly:
 - Compile final outputs (release-compiler)
 - Facilitate discussions (party-mode moderator role)
 - Provide status updates to user
+
+---
+
+## 🆕 Single-Session Execution Mode (v1.0.0)
+
+> **IMPORTANT:** The above protocol was designed for multi-LLM setups. For single-session runs (all agents = one LLM), use the optimized protocol below.
+
+### How to Delegate in Single-Session
+
+Instead of reading 5+ individual SKILL/agent files, read **ONE manifest**:
+
+| Trigger | Manifest | Mode |
+|---|---|---|
+| EC | `studio/pipelines/EC_manifest.md` | ONE_SHOT |
+| PA | `studio/pipelines/PA_manifest.md` | ONE_SHOT |
+| MA | `studio/pipelines/MA_manifest.md` | STANDARD |
+| RP | `studio/pipelines/RP_manifest.md` | CONVERSATIONAL |
+
+**ONE_SHOT rules:** All sub-agent work (Kana, Luna) lives inside `<think>` blocks. Only the final artifact (`caption.json`) gets written to disk. See `studio/protocols/one-shot-response.md`.
+
+**HANDOFF rule:** At every agent boundary, follow the `PASS / DROP` declarations in the manifest exactly. Discard context explicitly; do not carry forward raw forensic logs into Suki.

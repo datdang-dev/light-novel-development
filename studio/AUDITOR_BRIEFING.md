@@ -1,4 +1,4 @@
-# LND Studio v7.0 — Auditor Briefing
+# LND Studio v1.0.0 — Auditor Briefing
 
 **For:** Human Auditor
 **From:** Opus 4.5 (AI Refactoring)
@@ -20,29 +20,34 @@ This is a **prompt engineering framework** for R18 light novel writing. The refa
 ## Key Questions for Auditor
 
 ### 1. Architecture
+
 - Is the 6-layer model correct and maintainable?
 - Should `services/` vs `core/` boundary be clearer?
 - Is Layer -1 (Infrastructure) naming appropriate?
 
 ### 2. Orchestrator Flow
+
 - **Before:** Orch → SKILL.md (direct)
 - **After:** Orch → Agent → SKILL.md
 
 Is the new flow correct? Any edge cases where direct SKILL.md load is needed?
 
 ### 3. Knowledge Injection
+
 - `injection.always:` — always loaded
 - `injection.triggers:` — loaded based on scene_tag
 
 Is this pattern sustainable? Should triggers be validated automatically?
 
 ### 4. Agent Coverage
+
 - All 10 services now have corresponding agents
 - 3 new agents: Ren (Ren'Py), Rex (RPG Maker), Nova (Caption)
 
 Is the agent count appropriate? Too many? Too few?
 
 ### 5. Testability
+
 - No automated tests exist
 - Manual trigger testing required
 

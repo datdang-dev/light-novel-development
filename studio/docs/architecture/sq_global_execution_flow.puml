@@ -1,7 +1,7 @@
 @startuml
 
 
-title LND Studio V7.0 - Global Execution Sequence Diagram
+title LND Studio v1.0.0 - Global Execution Sequence Diagram
 
 actor User
 participant ".agent/workflows/\n(Slash Command)" as Workflow

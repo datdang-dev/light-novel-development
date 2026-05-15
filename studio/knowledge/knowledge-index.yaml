@@ -207,7 +207,7 @@ scene_tags:
 # Metadata
 # ─────────────────────────────────────────────────────────────
 metadata:
-  version: "7.0"
+  version: "1.0.0"
   last_updated: "2026-05-02"
   total_knowledge_files: 35
   total_scene_tags: 5

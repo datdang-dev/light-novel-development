@@ -5,7 +5,7 @@ description: 'Weave action prose built around dialogue anchors with sensory dens
 nextStepFile: './step-05b-format-ensure.md'
 ---
 
-# Step 4: Dialogue-Driven Action Prose (V6.1)
+# Step 4: Dialogue-Driven Action Prose (v1.0.0)
 
 ## STEP GOAL
 
@@ -19,7 +19,7 @@ Transform the forensic data into a fully immersive, sensory-saturated scene by b
 - 📖 READ RESOURCE: `{{project_root}}/studio/knowledge/glossaries/hentai_lexicon.md` NOW.
 - ✅ Write prose in {document_output_language} (Vietnamese).
 
-### The "Chain Reaction" Protocol (V6.1)
+### The "Chain Reaction" Protocol (v1.0.0)
 
 ```text
 Every piece of dialogue/SFX MUST be anchored by a 3-part structure:
@@ -71,7 +71,7 @@ Before writing the actual prose for the scene beat, you MUST output a `<think>` 
 For each parsed dialogue/SFX:
 
 1. **Pre-speech (Sensory build-up):**
-   Describe the physical action or smell that CAUSES the character to speak. 
+   Describe the physical action or smell that CAUSES the character to speak.
    - What is rubbing?
    - What fluid is leaking?
    - What sensation is forcing their mouth open?
@@ -86,6 +86,7 @@ For each parsed dialogue/SFX:
    - Vaginal walls convulsing.
    - Eyes rolling back / haze settling in.
    - The contrast between haughty words and a pathetic physical state.
+
 ```
 
 **GOONER REQUIREMENTS (MANDATORY):**

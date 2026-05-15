@@ -31,7 +31,7 @@ Read and internalize the following files:
 📋 Đã nạp Studio Identity:
   - Module: {module_name} v{version}
   - Agents đang hoạt động: {agent_count}
-  - Pipeline Architecture: V6.1
+  - Pipeline Architecture: v1.0.0
 ```
 
 ### 2. Load World & Lore Context

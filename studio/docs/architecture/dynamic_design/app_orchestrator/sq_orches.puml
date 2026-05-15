@@ -1,6 +1,6 @@
 @startuml sq_orches
 
-title LND Orchestrator - Gooner Alchemist Pipeline (V7.0)
+title LND Orchestrator - Gooner Alchemist Pipeline (v1.0.0)
 
 skinparam sequenceMessageAlign center
 skinparam responseMessageBelowArrow true

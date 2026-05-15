@@ -1,4 +1,4 @@
-# LND Studio V7.0 (Light Novel Development Studio)
+# LND Studio v1.0.0 (Light Novel Development Studio)
 
 > **The Ultimate Multi-Agent Japanese R18 Prose Adaptation Engine**
 > Operating on the **BMAD Framework**, LND Studio is an enterprise-grade automated pipeline designed to transform visual media (Manga, Ren'Py Scripts) into sensory-dense, canonical Vietnamese Light Novel prose using strict JSON state contracts and specialized Agent Personas.
@@ -7,11 +7,10 @@
 
 ## 🏗️ The Multi-Agent Ecosystem
 
-LND Studio operates using a specialized team of **16 AI Agents**, orchestrated completely dynamically. There is no single massive prompt; instead, strict workflows isolate concerns:
+LND Studio operates using a specialized team of **15 AI Agents**, orchestrated completely dynamically. There is no single massive prompt; instead, strict workflows isolate concerns:
 
 - 🎬 **Director K** (`lnd-orchestrator`): The Boss. Owns the core pipelines, manages state (`state.yaml`), and enforces delegations.
-- 🔬 **Dr. Atomic** (`panel-forensic`): Visual forensic analysis. Extracts objects, bodily fluids, panel flow, and translates SFX from raw images.
-- 🖼️ **Kana** (`manga-adapter`): Visual Context Specialist. Generates POC (Proof of Concept) hypothesis to bridge image context.
+- 🖼️ **Kana** (`manga-adapter`): Visual Context Specialist. Runs full panel forensic analysis (ATOMIC matrix) — extracts objects, bodily fluids, panel flow, SFX, and generates POC hypothesis to bridge image context.
 - ✍️ **Suki** (`lewd-writer`): The R18 Prose Specialist. Handles the "Lewd/Dark" narrative tone and psychological depth.
 - 🛡️ **Riko** (`gooner-editor` / Quality Audit): The uncompromising Forensic Gatekeeper. Audits Suki's drafts on a 100-pt scale and forces rewrites if standards fail.
 
@@ -22,8 +21,10 @@ LND Studio operates using a specialized team of **16 AI Agents**, orchestrated c
 LND Studio provides several automation pipelines triggered via `/slash` commands:
 
 ### 1. The Gooner Alchemist (`/gooner-alchemist`)
-The flagship 8-Step pipeline for manga-to-prose adaptation. 
+
+The flagship 8-Step pipeline for manga-to-prose adaptation.
 Run by **Director K**, the pipeline flows sequentially:
+
 1. **Initialize & Horizon:** Load `state.yaml` and look-ahead trajectory.
 2. **Forensic Analysis:** Request Dr. Atomic for visual extractions (`forensic.md`).
 3. **Context Loading:** JIT (Just-In-Time) compilation of Lore + Output.
@@ -32,6 +33,7 @@ Run by **Director K**, the pipeline flows sequentially:
 6. **State Persistence:** Write continuity ledger and proceed to the next page.
 
 ### 2. RenPy Adaptation (`/renpy-adaptation`)
+
 Extracts AST from `.rpy` game scripts, builds a semantic payload, and directly feeds it into the Transformation Engine (Suki), bypassing the visual step.
 
 ---
@@ -51,7 +53,7 @@ studio/
 ├── schemas/           # Strict JSON Schema Contracts (forensic-state, draft-prose)
 ├── config/            # Global Config (pipeline-context.md, canon-rules)
 ├── docs/              # Architectural diagrams (.puml) & LLM developer guides
-└── tools/             # Python utilities (generate_horizon.py, simulator.py)
+└── tools/             # Utilities: Python scripts + JS tools (RPGMaker decrypt, scene extractors)
 ```
 
 ---

@@ -115,3 +115,24 @@ _lnd-output/_captions/{image-basename}/
 - **Orchestrator**: Director K (`DIR`)
 - **Sub-Systems**: `core/panel-forensic` (Kana), `core/scene-prelude` (Luna), `core/erotic-caption-writer` (Suki)
 - **Config**: `config/canon-rules.md`
+
+---
+
+## 🔄 HANDOFF PROTOCOL
+
+**This SKILL is the EC pipeline coordinator. Nova delegates to sub-agents.**
+
+- **Nova → Kana:** PASS `image_path`, `mood_seed`, `user_context`. DROP nothing (fresh start).
+- **Kana → Luna:** Follow `panel-forensic/SKILL.md` HANDOFF section.
+- **Luna → Suki:** Follow `scene-prelude/SKILL.md` HANDOFF section.
+- **Suki → Director K:** Return `caption.json` path. Drop all intermediate context.
+
+### ⚡ Single-Session Shortcut
+
+**Instead of reading this file + 3× sub-SKILL.md files, read ONE manifest:**
+
+```
+studio/pipelines/EC_manifest.md
+```
+
+This file pre-compiles all rules for Kana, Luna, and Suki. Use it for all single-session EC runs.

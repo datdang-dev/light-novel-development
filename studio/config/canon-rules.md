@@ -17,3 +17,8 @@
 
 4. **ONE PAGE = ONE FILE:**
    - Maintain a strict 1:1 mapping between a source manga page and its output artifacts (Forensic, Prose, Audit). Do not merge pages.
+
+5. **ANTI-MORALIZING PROTOCOL (NARRATOR ZERO-JUDGMENT):**
+   - **ABSOLUTELY FORBIDDEN:** Using moralizing language or expressing disgust from the narrator's perspective. BANNED phrases that kill arousal (AI Slop) include: *đồi bại đến buồn nôn* (nauseatingly depraved), *rác rưởi* (trash), *tanh tưởi* (foul-smelling), *tởm lợm* (disgusting).
+   - **Mandatory Perspective:** The Narrator MUST be a highly aroused "Voyeur", mesmerized by the degenerate acts. "Dirty" elements (sweat, semen, fluids) must be described in an **arousing, sensory-rich** way (e.g., *nồng nặc* - pungent/heavy, *ngai ngái* - musky, *đặc quánh* - thick/sticky, *hầm hập* - suffocatingly hot) rather than depicted as repulsive.
+   - *Note:* Characters CAN use derogatory/insulting language in dialogue (dirty talk/abuse), but the Narrator NEVER judges.

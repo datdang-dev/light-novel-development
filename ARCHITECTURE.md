@@ -61,6 +61,7 @@ Knowledge files là nguồn tri thức nghiệp vụ. Mọi SKILL.md phải wire
 
 - **File:** `studio/knowledge/knowledge-index.yaml`
 - **Schema:**
+
   ```yaml
   index:
     - file: "packs/arousal_architecture.md"
@@ -132,16 +133,21 @@ dependencies:
 ```
 Raw Manga Page
     ↓
-[Kana] Panel Forensic — dialogue extraction, character anchor
+[Kana] Panel Forensic (core/panel-forensic) — ATOMIC matrix, SFX extraction, character anchor
     ↓
-[Luna] Scene Prelude — scenario seed, power dynamic
+[Kana] POC Context Vectors — bridges literal imagery to psychological intent
     ↓
-[Suki] Erotic Caption Writer — R18 prose generation
+[Luna] Scene Prelude (core/scene-prelude) — scenario seed, power dynamic
     ↓
-[Riko] Quality Audit — anti-slop, format gate
+[Suki] R18 Prose Generation (core/lewd-writer) — sensory-dense narrative
+    ↓
+[Riko] Quality Audit (services/quality-audit) — 100-pt gate, anti-slop, auto-rewrite loop
     ↓
 Final Output
 ```
+
+> **Note:** There is no separate "Dr. Atomic" agent. Kana (`manga-adapter`) owns both the
+> panel-forensic skill and the POC context layer.
 
 ### Adaptation Pipelines
 

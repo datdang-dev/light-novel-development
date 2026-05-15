@@ -1,13 +1,13 @@
 ---
 name: "renpy-adaptation"
-description: "Pipeline: Ren'Py -> Semantics -> Kana (V6)"
+description: "Pipeline: Ren'Py -> Semantics -> Kana (v1.0.0)"
 owner: "Ren'Py Adapter (renpy-adapter)"
-version: "6.0.0"
+version: "1.0.0"
 web_bundle: true
 validateWorkflow: './steps/step-01-ast-mining.md'
 ---
 
-# Ren'Py Adaptation Pipeline (V6)
+# Ren'Py Adaptation Pipeline (v1.0.0)
 
 **Goal:** Adapt Ren'Py scripts into Light Novel prose by Extracting Truth (AST), Modeling Meaning (Semantics), and Delegating Creation (Kana).
 

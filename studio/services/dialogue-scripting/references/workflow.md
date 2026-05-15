@@ -1,13 +1,13 @@
 ---
 name: "dialogue-generator"
-description: "Capability: R18 Dialogue & SFX Generation (V6)"
+description: "Capability: R18 Dialogue & SFX Generation (v1.0.0)"
 owner: "Miki (dialogue-crafter)"
-version: "6.0.0"
+version: "1.0.0"
 web_bundle: true
 validateWorkflow: './steps/step-01-context-load.md'
 ---
 
-# Dialogue Generator Workflow (V6)
+# Dialogue Generator Workflow (v1.0.0)
 
 **Goal:** Generate authentic R18 dialogue and SFX patterns.
 

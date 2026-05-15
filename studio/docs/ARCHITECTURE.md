@@ -1,6 +1,6 @@
-# LND Studio Architecture (v7.0)
+# LND Studio Architecture (v1.0.0)
 
-> **BMAD v7.0 Compliant Framework for Light Novel Development**
+> **BMAD v1.0.0 Compliant Framework for Light Novel Development**
 > Refactored: 2026-05-02
 
 ## 1. 6-Layer Architecture
@@ -56,7 +56,7 @@ LND Studio operates on a **6-layer architecture** that separates concerns and en
 └──────────────────────────────────────────────────────────────┘
 ```
 
-LND Studio is structured as a dedicated BMAD Module, governed by `module.yaml` (v7.0.0). It follows the **SKILL.md Convention** for all components — every service, core engine, and module has a standardized `SKILL.md` entry point with YAML frontmatter, activation protocol, and routing tables.
+LND Studio is structured as a dedicated BMAD Module, governed by `module.yaml` (v1.0.0). It follows the **SKILL.md Convention** for all components — every service, core engine, and module has a standardized `SKILL.md` entry point with YAML frontmatter, activation protocol, and routing tables.
 
 ```text
 lnd_dev/
@@ -143,7 +143,9 @@ The framework operates on a strict 6-layer execution cascade:
 *(See: `studio/docs/architecture/sq_global_execution_flow.puml` for the detailed generic sequence diagram).*
 
 ### Pipeline-Specific Sequence Diagrams
+
 For detailed, step-by-step logic of our most complex pipelines, refer to their dedicated sequence diagrams:
+
 - **[Panel Forensic Engine]**: `studio/docs/architecture/sq_panel_forensic.puml`
 - **[Gooner Alchemist Pipeline]**: `studio/docs/architecture/sq_gooner_alchemist.puml`
 
@@ -298,6 +300,7 @@ The studio uses `agents/agent-registry.yaml` as the **SINGLE SOURCE OF TRUTH** f
 | LM | Luna | — | 2 | World Building |
 
 **Orchestrator Hierarchy:**
+
 - Director K **owns**: Kana, Suki, Riko, Aria, Miki, Luna
 - Director K **delegates to**: gooner-alchemist, quality-audit, bible-sync
 

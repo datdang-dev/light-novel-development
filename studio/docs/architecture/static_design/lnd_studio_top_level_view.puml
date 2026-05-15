@@ -1,6 +1,6 @@
 @startuml lnd_studio_top_level_view
 
-title LND Studio v7.0 — Top-Level Architecture View
+title LND Studio v1.0.0 — Top-Level Architecture View
 skinparam componentStyle uml2
 skinparam packageStyle rectangle
 skinparam linetype ortho

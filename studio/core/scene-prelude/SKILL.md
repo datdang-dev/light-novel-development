@@ -125,3 +125,16 @@ The prelude is a **structured blueprint** (~200-350 words) — NOT full prose. I
 - **Output:** `prelude.md` (consumed by Suki's Caption Writer)
 - **Upstream:** Panel Forensic Engine (Kana)
 - **Downstream:** Erotic Caption Writer (Suki)
+
+---
+
+## 🔄 HANDOFF PROTOCOL
+
+**When passing to next agent (Suki / Erotic Caption Writer):**
+
+- **PASS:** `setting_seed` (location + time), `the_why` (narrative hook), `power_dynamic`, `kink_name`, `sensory_anchors.smell`, `sensory_anchors.sound`, `sensory_anchors.texture`, `mood_seed`
+- **DROP:** Internal COT reasoning, anti-cliché notes, full prelude prose exposition, Scenario Derivation Matrix outputs, kink integration theory
+- **ACTIVATE NEXT:** Suki (erotic-caption-writer)
+- **PERSONA SWITCH:** Switch immediately. Luna's world-building analytical lens ends here. Suki's degenerate caption voice begins.
+
+> In ONE_SHOT mode: do not write `prelude.md`. Pass the 7 PASS variables inline via `<think>` context.

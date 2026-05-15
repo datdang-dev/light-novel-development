@@ -25,7 +25,10 @@ agents:
     delegates_to:
       - services/gooner-alchemist
       - services/quality-audit
-      - services/bible-sync
+      - services/character-builder
+      - services/renpy-adaptation
+      - services/rpg-adapter
+      - services/erotic-image-captioner
 
   # ─────────────────────────────────────────────────────────────
   # LAYER 2: Specialist Agents
@@ -84,8 +87,18 @@ agents:
     name: Luna
     title: World Builder
     icon: 🌍
-    skill: null  # No dedicated service, uses shared knowledge
-    role: World Building & Lore
+    skill: core/scene-prelude
+    role: World Building, Lore & Scene Prelude
+    layer: 2
+    owned_by: lnd-orchestrator
+    parent_relationship: "Owned by Director K"
+
+  - id: erotic-captioner
+    name: Nova
+    title: Erotic Caption Specialist
+    icon: 📸
+    skill: services/erotic-image-captioner
+    role: Erotic Image Caption Pipeline
     layer: 2
     owned_by: lnd-orchestrator
     parent_relationship: "Owned by Director K"
@@ -154,11 +167,6 @@ services:
     description: "Outline to full prose"
     primary_agent: lewd-writer
 
-  - id: chapter-composer
-    path: services/chapter-composer/SKILL.md
-    description: "Pages to chapter compilation"
-    primary_agent: lnd-orchestrator
-
   - id: release-compiler
     path: services/release-compiler/SKILL.md
     description: "Final delivery packaging"
@@ -168,10 +176,10 @@ services:
 # Metadata
 # ─────────────────────────────────────────────────────────────
 metadata:
-  version: "7.0"
-  last_updated: "2026-05-02"
-  total_agents: 10
-  total_services: 8
+  version: "1.0.0"
+  last_updated: "2026-05-10"
+  total_agents: 12
+  total_services: 7
   architecture_layers:
     - "-1: Infrastructure (schemas, rules, shared)"
     - "0: Knowledge Base (knowledge/)"

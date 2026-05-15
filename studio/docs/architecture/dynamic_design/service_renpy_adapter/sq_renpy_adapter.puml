@@ -1,6 +1,6 @@
 @startuml sq_renpy_adapter
 
-title RenPy Adapter Service - Dynamic Flow (V7.0)
+title RenPy Adapter Service - Dynamic Flow (v1.0.0)
 
 skinparam sequenceMessageAlign center
 skinparam responseMessageBelowArrow true

@@ -1,24 +1,24 @@
 ---
 name: "gooner-alchemist"
-description: "Pipeline: Ultimate Manga Adaptation Orchestrator (V6)"
+description: "Pipeline: Ultimate Manga Adaptation Orchestrator (v1.0.0)"
 owner: "Director K (lnd-orchestrator)"
-version: "6.0.0"
+version: "1.0.0"
 web_bundle: true
 validateWorkflow: './steps/step-01-initialize.md'
 ---
 
-# Gooner Alchemist Pipeline (V6)
+# Gooner Alchemist Pipeline (v1.0.0)
 
 **Goal:** The definitive "Studio Grade" manga-to-prose and video-to-prose pipeline.
 **Features:** Structured Artifacts, JSON Quality Gates, Service Integration, and a placeholder Context Horizon stage (currently stubbed; no vision-based look-ahead).
 
 **Orchestrator:** Director K (LND Orchestrator).
 
-**Architecture Reference:** [V6.1 Gooner Alchemist Pipeline](../../docs/architecture/dynamic_design/service_manga_adapter/sq_v6_1_gooner_alchemist_pipeline.puml)
+**Architecture Reference:** [v1.0.0 Gooner Alchemist Pipeline](../../docs/architecture/dynamic_design/service_gooner_alchemist/sq_v1_0_0_ga_pipeline.puml)
 
 ---
 
-## WORKFLOW ARCHITECTURE (V6)
+## WORKFLOW ARCHITECTURE (v1.0.0)
 
 ### 1. Initialization & Setup
 
@@ -35,7 +35,7 @@ validateWorkflow: './steps/step-01-initialize.md'
   - *Output:* `output/{ch}/{pg}/context_horizon.md`
   - *Goal:* "Emit a clearly labeled placeholder horizon file. Current builds do not pre-fetch factual trajectories or enable action deduplication."
 
-### PHASE 1: Dialogue-Anchor Forensics (V6.1)
+### PHASE 1: Dialogue-Anchor Forensics (v1.0.0)
 
 - **Step 2:** Directed Forensic Scan
   - *Input:* Current Image + `context_horizon.md`

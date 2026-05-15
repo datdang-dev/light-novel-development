@@ -2,7 +2,7 @@
 name: dialogue-scripting
 description: "Miki's Dialogue Crafter — generates authentic R18 Japanese-influenced Vietnamese dialogue with SFX integration. 6-step workflow: context load → voice calibration → escalation mapping → dialogue generation → SFX integration → polish. Use when scene requires character speech or audio cues."
 owner: "Miki (dialogue-crafter)"
-version: "6.0.0"
+version: "1.0.0"
 tags: [dialogue, sfx, r18, voice, escalation]
 validateWorkflow: "./references/workflow.md"
 injection:

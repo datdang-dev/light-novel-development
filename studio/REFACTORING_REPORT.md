@@ -1,4 +1,4 @@
-# LND Studio v7.0 — Architectural Refactoring Report
+# LND Studio v1.0.0 — Architectural Refactoring Report
 
 **Date:** 2026-05-02
 **Auditor:** Opus 4.5 → Human Review
@@ -83,6 +83,7 @@ LND Studio has undergone a comprehensive architectural refactoring to:
 ### 2.1 Orchestrator Flow Fix (CRITICAL)
 
 **BEFORE (Violation):**
+
 ```yaml
 menu:
   - trigger: MA
@@ -91,6 +92,7 @@ menu:
 ```
 
 **AFTER (Correct):**
+
 ```yaml
 menu:
   - trigger: MA
@@ -157,11 +159,13 @@ hierarchy:
 ### 2.4 Legacy Cleanup
 
 **DELETED:**
+
 - `services/bible-sync/` — Invalid service (utility)
 - `services/chapter-composer/` — Invalid service (step of pipeline)
 - `services/release-compiler/` — Invalid service (step of pipeline)
 
 **ARCHIVED:**
+
 ```
 studio/archive/
 ├── agent-registry.csv         # Replaced by YAML
@@ -172,6 +176,7 @@ studio/archive/
 ```
 
 **DELETED:**
+
 - `docs/architecture/v6.1_dialogue_anchor_pipeline.md`
 
 ---
@@ -263,17 +268,21 @@ All core engines have `injection:` metadata.
 ## 5. New Files Created
 
 ### 5.1 Agent Registry
+
 - `agents/agent-registry.yaml` — Single source of truth (replaces CSV)
 
 ### 5.2 Knowledge Index
+
 - `knowledge/knowledge-index.yaml` — RAG-ready mapping
 
 ### 5.3 New Agents
+
 - `agents/renpy-adapter.agent.yaml` — Ren (Ren'Py specialist)
 - `agents/rpg-adapter.agent.yaml` — Rex (RPG Maker specialist)
 - `agents/erotic-captioner.agent.yaml` — Nova (Caption specialist)
 
 ### 5.4 Documentation
+
 - `ORCHESTRATOR_LAUNCHER.md` — Quick reference guide
 
 ---
@@ -281,14 +290,17 @@ All core engines have `injection:` metadata.
 ## 6. Files Modified
 
 ### 6.1 Orchestrator
+
 - `agents/lnd-orchestrator.agent.yaml`
   - Added `hierarchy:` section
   - Fixed all menu items to follow Orch → Agent → SKILL.md flow
 
 ### 6.2 All SKILL.md Files
+
 Added `injection:` metadata with `always:` and `triggers:`:
 
 **Services (10):**
+
 - `services/gooner-alchemist/SKILL.md`
 - `services/quality-audit/SKILL.md`
 - `services/character-builder/SKILL.md`
@@ -301,6 +313,7 @@ Added `injection:` metadata with `always:` and `triggers:`:
 - `services/scene-expansion/SKILL.md`
 
 **Core (8):**
+
 - `core/lewd-writer/SKILL.md`
 - `core/panel-forensic/SKILL.md`
 - `core/erotic-caption-writer/SKILL.md`
@@ -311,7 +324,8 @@ Added `injection:` metadata with `always:` and `triggers:`:
 - `core/volume-context-extractor/SKILL.md`
 
 ### 6.3 Architecture Doc
-- `docs/ARCHITECTURE.md` — Updated to v7.0 with 6-layer diagram
+
+- `docs/ARCHITECTURE.md` — Updated to v1.0.0 with 6-layer diagram
 
 ---
 
@@ -346,6 +360,7 @@ Added `injection:` metadata with `always:` and `triggers:`:
 ## 9. Files for Next Auditor
 
 ### Required for Review
+
 1. ✅ `studio/agents/lnd-orchestrator.agent.yaml` — Main orchestrator
 2. ✅ `studio/agents/agent-registry.yaml` — Agent registry
 3. ✅ `studio/docs/ARCHITECTURE.md` — Architecture doc
@@ -353,9 +368,11 @@ Added `injection:` metadata with `always:` and `triggers:`:
 5. ✅ `studio/ORCHESTRATOR_LAUNCHER.md` — Quick reference
 
 ### Archive (for context)
+
 - `studio/archive/` — Legacy files for reference
 
 ### Sample SKILL.md (with injection)
+
 - `studio/core/lewd-writer/SKILL.md`
 - `studio/services/gooner-alchemist/SKILL.md`
 
@@ -365,7 +382,8 @@ Added `injection:` metadata with `always:` and `triggers:`:
 
 **Refactoring Status:** COMPLETE ✅
 
-The LND Studio v7.0 architecture now follows a clear 6-layer model with:
+The LND Studio v1.0.0 architecture now follows a clear 6-layer model with:
+
 - **Correct Orchestrator flow** (Orch → Agent → SKILL.md)
 - **Hybrid knowledge injection** (YAML-based triggers)
 - **Complete agent coverage** (12 agents, 10 services)

@@ -26,7 +26,7 @@ agent:
     - "INITIALIZATION: Follow agent-protocol.md (studio/agents/agent-protocol.md)"
     - "MANDATORY: Character Bible output MUST conform to {{project_root}}/studio/schemas/character-bible.schema.json"
     - "IF schema validation FAILS: DO NOT output, inline fix and retry"
-    - "READ ARCHITECTURE: Follow the V7.0 Character Builder protocol in `{{project_root}}/studio/services/character-builder/SKILL.md`."
+    - "READ ARCHITECTURE: Follow the v1.0.0 Character Builder protocol in `{{project_root}}/studio/services/character-builder/SKILL.md`."
     - "Maintain strict adherence to the output format: `.md` files designed perfectly for insertion into AI Context Prompts or Roleplay web kits."
   
   menu:

@@ -1,11 +1,11 @@
 ---
 name: "character-builder"
-description: "Capability: Build High-Fidelity Character Profiles & Bios (V6.1)"
+description: "Capability: Build High-Fidelity Character Profiles & Bios (v1.0.0)"
 owner: "Aria (character-architect)"
-version: "6.1.0"
+version: "1.0.0"
 ---
 
-# Character Builder Workflow (V6.1)
+# Character Builder Workflow (v1.0.0)
 
 **Goal:** Create high-fidelity psychological character profiles and foundational World Lore contexts. These files will be ingested by the Release Manager [RC] later to build Web Chat Kits.
 
