@@ -1,0 +1,80 @@
+@startuml LND_Studio_Core_Services
+title Core Engine, Services & Modules
+
+skinparam {
+  ComponentStyle uml2
+  PackageStyle frame
+  ArrowColor #555555
+  defaultFontName "Segoe UI"
+  defaultFontSize 11
+  TitleFontSize 14
+}
+
+package "Core Engine (studio/core/)" as CORE #F3E5F5 {
+  component [panel-forensic] as c_forensic
+  component [lewd-writer] as c_lewd
+  component [erotic-caption-writer] as c_caption
+  component [scene-prelude] as c_prelude
+  component [transformation-engine] as c_transform
+  component [volume-context-extractor] as c_vc
+  component [roleplay-engine] as c_rp
+  component [party-mode] as c_party
+
+  package "orchestration/" as ORCH {
+    component [pipeline_registry.yaml] as o_reg
+    component [pipeline_manager.py] as o_mgr
+    component [runner.py] as o_run
+  }
+
+  package "schemas/ (Pydantic)" as PY_SCH {
+    component [ForensicOutput] as py_f
+    component [PreludeOutput] as py_p
+    component [CaptionOutput] as py_c
+  }
+}
+
+package "Services (studio/services/)" as SERVICES #FCE4EC {
+  component [gooner-alchemist] as s_alch
+  component [erotic-image-captioner] as s_ec
+  component [character-builder] as s_char
+  component [dialogue-scripting] as s_dial
+  component [manga-context-extractor] as s_manga
+  component [novel-development] as s_novel
+  component [scene-expansion] as s_scene
+  component [release-compiler] as s_release
+  component [renpy-adaptation] as s_renpy
+  component [rpg-adapter] as s_rpg
+  component [bible-sync] as s_bible
+}
+
+package "Modules (studio/modules/)" as MODULES #E0F7FA {
+  component [fetish-guidance] as m_fetish
+  component [gooner-audit-engine] as m_audit
+  component [sfx-lookup] as m_sfx
+  component [style-enforcer] as m_style
+  component [lnd-re-specialist] as m_re
+  component [sillytavern-export] as m_st
+}
+
+' --- Services compose Core modules ---
+s_alch --> c_forensic : Step 1
+s_alch --> c_lewd : Step 3
+s_ec --> c_forensic : Step 1
+s_ec --> c_prelude : Step 2
+s_ec --> c_caption : Step 3
+
+' --- Core uses Modules ---
+c_lewd --> m_fetish : enriches
+c_lewd --> m_sfx : lookups
+c_lewd --> m_style : enforces
+
+' --- Core validates via Pydantic ---
+c_forensic --> py_f : validates
+c_prelude --> py_p : validates
+c_caption --> py_c : validates
+
+' --- Orchestration reads registry ---
+o_run --> o_mgr : uses
+o_mgr --> o_reg : reads
+
+@enduml

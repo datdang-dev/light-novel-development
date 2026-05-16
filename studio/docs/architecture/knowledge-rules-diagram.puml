@@ -1,0 +1,125 @@
+@startuml LND_Studio_Knowledge_Rules
+title Knowledge Base & Rules Foundation
+
+skinparam {
+  ComponentStyle uml2
+  PackageStyle frame
+  ArrowColor #555555
+  defaultFontName "Segoe UI"
+  defaultFontSize 11
+  TitleFontSize 14
+}
+
+package "Knowledge Base (studio/knowledge/)" as KB #FFF9C4 {
+  component [knowledge-index.yaml] as idx
+
+  package "packs/" {
+    component [arousal_architecture] as p_arousal
+    component [narrative_style_pack] as p_narrative
+    component [japanese_reader_psychology] as p_psych
+    component [r18_sensory_pack] as p_sensory
+    component [roleplay_st_pack] as p_rp
+    component [fetish_guidance_pack] as p_fetish
+  }
+
+  package "fetish-db/" {
+    component [anal / mindbreak /\nntr / creampie / ...] as fdb
+  }
+
+  package "glossaries/" {
+    component [hentai_lexicon] as gloss
+  }
+
+  package "sfx/" {
+    component [japanese_sfx_dictionary] as sfx_dict
+    component [moaning_sfx_research] as sfx_moan
+    component [r18_sfx_quickref.yaml] as sfx_ref
+  }
+
+  package "style-guides/" {
+    component [MESUGAKI_DIALOGUE_STYLE] as sg_mesu
+    component [R18_LIGHTNOVEL_CULTURE] as sg_culture
+  }
+
+  package "trope_beat_sheets/" {
+    component [corruption / mindbreak\n/ ... beats] as beats
+  }
+
+  package "characters/" {
+    component [Character Profiles] as chars
+  }
+}
+
+package "Rules (studio/rules/) — SINGLE SOURCE OF TRUTH" as RULES #F5F5F5 {
+  component [canon-preamble.md\n(ABSOLUTE TRUTH)] as canon #FFE0B2
+  component [canon-rules.md] as canon_rules
+  component [gooner_principles.md] as rule_gooner
+  component [anti_slop.md] as rule_slop
+  component [sensory_density.md] as rule_sensory
+  component [hentai_logic_gate.md] as rule_hentai
+  component [GOONER_AUDIT_FRAMEWORK.md] as rule_audit
+  component [+10 more rules...] as rule_more
+
+  package "mandatory/" {
+    component [00-anti-slop.md\n01-writing-mechanics.md\n02..05 more context files] as ctx_files
+  }
+}
+
+package "Config (studio/config/)" as CONFIG #F5F5F5 {
+  component [BOOTSTRAP.md] as bootstrap
+  component [pipeline-context.md] as pipe_ctx
+  component [atmosphere_ledger.json] as atmos
+  component [banned-words.txt] as banned
+
+  package "pipelines/" {
+    component [EC_manifest.md] as pipe_ec
+    component [RP_manifest.md] as pipe_rp
+  }
+
+  package "protocols/" {
+    component [one-shot-response.md] as proto
+  }
+
+  package "templates/" {
+    component [light-novel-prose.md\nST templates] as tpls
+  }
+}
+
+package "Infrastructure (studio/schemas/)" as INFRA #EFEBE9 {
+  package "JSON Schemas" {
+    component [8 schema files\n(forensic, prose, audit, ...)] as json_sch
+  }
+
+  package "pydantic/" {
+    component [ForensicOutput\nPreludeOutput\nCaptionOutput] as py_sch
+  }
+}
+
+' --- Canon governs everything ---
+canon --> canon_rules : derives
+canon --> ctx_files : injects into
+canon --> atmos : defines thresholds
+
+' --- Index references all knowledge ---
+idx --> p_arousal
+idx --> fdb
+idx --> gloss
+idx --> sfx_dict
+idx --> beats
+
+note bottom of canon
+  **Hierarchy of Authority:**
+  1. context_payload.md (Runtime)
+  2. canon-preamble.md (This file)
+  3. studio/rules/*.md (Modular)
+  4. Agent YAML critical_actions
+  5. General LLM knowledge
+end note
+
+note bottom of RULES
+  Consumers: ALL agents + developers
+  Developer roles symlink here,
+  not embed copies.
+end note
+
+@enduml

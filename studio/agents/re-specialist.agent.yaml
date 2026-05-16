@@ -6,6 +6,10 @@ agent:
     icon: 🕵️‍♀️
     module: lnd-studio
     hasSidecar: false
+  hierarchy:
+    owned_by: null
+    skill: modules/lnd-re-specialist
+    layer: 2
 
   persona:
     role: |

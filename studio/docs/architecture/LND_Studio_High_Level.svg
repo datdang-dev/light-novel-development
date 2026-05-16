@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="718px" preserveAspectRatio="none" style="width:967px;height:718px;" version="1.1" viewBox="0 0 967 718" width="967px" zoomAndPan="magnify"><defs><filter height="300%" id="f1aqw308osmyzo" width="300%" x="-1" y="-1"><feGaussianBlur result="blurOut" stdDeviation="2.0"/><feColorMatrix in="blurOut" result="blurOut2" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0"/><feOffset dx="4.0" dy="4.0" in="blurOut2" result="blurOut3"/><feBlend in="SourceGraphic" in2="blurOut3" mode="normal"/></filter></defs><g><text fill="#000000" font-family="Segoe UI" font-size="16" lengthAdjust="spacingAndGlyphs" textLength="371" x="301.5" y="14.8516">LND Studio — High-Level Architecture Overview</text><rect fill="#E8F5E9" filter="url(#f1aqw308osmyzo)" height="50.2656" style="stroke: #666666; stroke-width: 1.5;" width="109" x="26.5" y="27.625"/><path d="M125.5,28.625 L125.5,35.7578 L115.5,45.7578 L26.5,45.7578 " fill="none" style="stroke: #666666; stroke-width: 1.5;"/><text fill="#000000" font-family="Segoe UI" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="89" x="29.5" y="40.6919">Entry Points</text><rect fill="#FFF3E0" filter="url(#f1aqw308osmyzo)" height="50.2656" style="stroke: #666666; stroke-width: 1.5;" width="87" x="406.5" y="27.625"/><path d="M483.5,28.625 L483.5,35.7578 L473.5,45.7578 L406.5,45.7578 " fill="none" style="stroke: #666666; stroke-width: 1.5;"/><text fill="#000000" font-family="Segoe UI" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="67" x="409.5" y="40.6919">Pipelines</text><rect fill="#E3F2FD" filter="url(#f1aqw308osmyzo)" height="50.2656" style="stroke: #666666; stroke-width: 1.5;" width="72" x="333" y="154.625"/><path d="M395,155.625 L395,162.7578 L385,172.7578 L333,172.7578 " fill="none" style="stroke: #666666; stroke-width: 1.5;"/><text fill="#000000" font-family="Segoe UI" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="52" x="336" y="167.6919">Agents</text><rect fill="#FFCDD2" filter="url(#f1aqw308osmyzo)" height="50.2656" style="stroke: #666666; stroke-width: 1.5;" width="150" x="6" y="281.625"/><path d="M146,282.625 L146,289.7578 L136,299.7578 L6,299.7578 " fill="none" style="stroke: #666666; stroke-width: 1.5;"/><text fill="#000000" font-family="Segoe UI" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="130" x="9" y="294.6919">Meta: Developers</text><rect fill="#FCE4EC" filter="url(#f1aqw308osmyzo)" height="50.2656" style="stroke: #666666; stroke-width: 1.5;" width="81" x="584.5" y="281.625"/><path d="M655.5,282.625 L655.5,289.7578 L645.5,299.7578 L584.5,299.7578 " fill="none" style="stroke: #666666; stroke-width: 1.5;"/><text fill="#000000" font-family="Segoe UI" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="61" x="587.5" y="294.6919">Services</text><rect fill="#F3E5F5" filter="url(#f1aqw308osmyzo)" height="50.2656" style="stroke: #666666; stroke-width: 1.5;" width="109" x="227.5" y="407.625"/><path d="M326.5,408.625 L326.5,415.7578 L316.5,425.7578 L227.5,425.7578 " fill="none" style="stroke: #666666; stroke-width: 1.5;"/><text fill="#000000" font-family="Segoe UI" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="89" x="230.5" y="420.6919">Core Engine</text><rect fill="#E0F7FA" filter="url(#f1aqw308osmyzo)" height="50.2656" style="stroke: #666666; stroke-width: 1.5;" width="82" x="362" y="532.625"/><path d="M434,533.625 L434,540.7578 L424,550.7578 L362,550.7578 " fill="none" style="stroke: #666666; stroke-width: 1.5;"/><text fill="#000000" font-family="Segoe UI" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="62" x="365" y="545.6919">Modules</text><rect fill="#F5F5F5" filter="url(#f1aqw308osmyzo)" height="50.2656" style="stroke: #666666; stroke-width: 1.5;" width="129" x="17.5" y="532.625"/><path d="M136.5,533.625 L136.5,540.7578 L126.5,550.7578 L17.5,550.7578 " fill="none" style="stroke: #666666; stroke-width: 1.5;"/><text fill="#000000" font-family="Segoe UI" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="109" x="20.5" y="545.6919">Rules &amp; Config</text><rect fill="#FFF9C4" filter="url(#f1aqw308osmyzo)" height="50.2656" style="stroke: #666666; stroke-width: 1.5;" width="143" x="175.5" y="657.625"/><path d="M308.5,658.625 L308.5,665.7578 L298.5,675.7578 L175.5,675.7578 " fill="none" style="stroke: #666666; stroke-width: 1.5;"/><text fill="#000000" font-family="Segoe UI" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="123" x="178.5" y="670.6919">Knowledge Base</text><rect fill="#EFEBE9" filter="url(#f1aqw308osmyzo)" height="50.2656" style="stroke: #666666; stroke-width: 1.5;" width="121" x="700.5" y="281.625"/><path d="M811.5,282.625 L811.5,289.7578 L801.5,299.7578 L700.5,299.7578 " fill="none" style="stroke: #666666; stroke-width: 1.5;"/><text fill="#000000" font-family="Segoe UI" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="101" x="703.5" y="294.6919">Infrastructure</text><rect fill="#C8E6C9" filter="url(#f1aqw308osmyzo)" height="50.2656" style="stroke: #666666; stroke-width: 1.5;" width="73" x="802.5" y="154.625"/><path d="M865.5,155.625 L865.5,162.7578 L855.5,172.7578 L802.5,172.7578 " fill="none" style="stroke: #666666; stroke-width: 1.5;"/><text fill="#000000" font-family="Segoe UI" font-size="13" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="53" x="805.5" y="167.6919">Tooling</text><path d="M171,33.625 L171,71.5625 L371,71.5625 L371,43.625 L361,33.625 L171,33.625 " fill="#FBFB77" filter="url(#f1aqw308osmyzo)" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M361,33.625 L361,43.625 L371,43.625 L361,33.625 " fill="#FBFB77" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="Segoe UI" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="179" x="177" y="49.7637">Workflows, CLI triggers, Skills</text><text fill="#000000" font-family="Segoe UI" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="170" x="177" y="63.7324">(User-facing orchestration)</text><path d="M528.5,26.625 L528.5,78.5313 L757.5,78.5313 L757.5,36.625 L747.5,26.625 L528.5,26.625 " fill="#FBFB77" filter="url(#f1aqw308osmyzo)" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M747.5,26.625 L747.5,36.625 L757.5,36.625 L747.5,26.625 " fill="#FBFB77" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="Segoe UI" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="146" x="534.5" y="42.7637">Pre-compiled manifests</text><text fill="#000000" font-family="Segoe UI" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="208" x="534.5" y="56.7324">EC (Erotic Caption), RP (Roleplay)</text><text fill="#000000" font-family="Segoe UI" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="169" x="534.5" y="70.7012">ONE_SHOT execution mode</text><path d="M440.5,153.625 L440.5,205.5313 L615.5,205.5313 L615.5,163.625 L605.5,153.625 L440.5,153.625 " fill="#FBFB77" filter="url(#f1aqw308osmyzo)" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M605.5,153.625 L605.5,163.625 L615.5,163.625 L605.5,153.625 " fill="#FBFB77" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="Segoe UI" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="151" x="446.5" y="169.7637">12 Production personas</text><text fill="#000000" font-family="Segoe UI" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="154" x="446.5" y="183.7324">Director K (orchestrator)</text><text fill="#000000" font-family="Segoe UI" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="141" x="446.5" y="197.7012">+ 11 specialist agents</text><path d="M354.5,280.625 L354.5,332.5313 L549.5,332.5313 L549.5,290.625 L539.5,280.625 L354.5,280.625 " fill="#FBFB77" filter="url(#f1aqw308osmyzo)" style="stroke: #A80036; stroke-width: 1.0;"/><path d="M539.5,280.625 L539.5,290.625 L549.5,290.625 L539.5,280.625 " fill="#FBFB77" style="stroke: #A80036; stroke-width: 1.0;"/><text fill="#000000" font-family="Segoe UI" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="111" x="360.5" y="296.7637">QA &amp; Optimization</text><text fill="#000000" font-family="Segoe UI" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="137" x="360.5" y="310.7324">Hermes + Claude CLIs</text><text fill="#000000" font-family="Segoe UI" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="174" x="360.5" y="324.7012">SLOP detection, arch review</text><!--MD5=[3216e927f54e1a3a1a6fb0edcd8184fc]
+link ENTRY to GMN3--><path d="M135.55,52.625 C147.28,52.625 159.01,52.625 170.74,52.625 " fill="none" id="ENTRY-GMN3" style="stroke: #555555; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><!--MD5=[7c141b6e4a7e906c48583f8a4ac199af]
+link PIPES to GMN7--><path d="M493.73,52.625 C505.29,52.625 516.86,52.625 528.42,52.625 " fill="none" id="PIPES-GMN7" style="stroke: #555555; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><!--MD5=[40f5792baa13fc2a8c7bdc79223e800f]
+link AGENTS to GMN11--><path d="M405.02,179.625 C416.71,179.625 428.4,179.625 440.09,179.625 " fill="none" id="AGENTS-GMN11" style="stroke: #555555; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><!--MD5=[b3c81630780edf69bfe826d35b5daf6e]
+link GMN15 to DEVS--><path d="M406.82,280.615 C379.59,266.465 343.67,250.395 309.5,243.125 C262.12,233.045 247.51,231.415 200.5,243.125 C170.52,250.595 139.81,267.145 117.03,281.475 " fill="none" id="GMN15-DEVS" style="stroke: #555555; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><!--MD5=[86113476d934a1ef5d4987b6d3fddb35]
+link ENTRY to AGENTS--><path d="M135.51,77.285 C191.59,101.625 277.68,138.985 328.16,160.895 " fill="none" id="ENTRY-&gt;AGENTS" style="stroke: #555555; stroke-width: 1.0;"/><polygon fill="#555555" points="332.93,162.965,326.2605,155.7181,328.3417,160.9782,323.0816,163.0593,332.93,162.965" style="stroke: #555555; stroke-width: 1.0;"/><text fill="#000000" font-family="Segoe UI" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="57" x="244" y="120.7637">activates</text><!--MD5=[0d85d98b9f928c9ab279be6bb824d1eb]
+link ENTRY to DEVS--><path d="M81,77.785 C81,124.265 81,225.945 81,276.245 " fill="none" id="ENTRY-&gt;DEVS" style="stroke: #555555; stroke-width: 1.0;"/><polygon fill="#555555" points="81,281.535,85,272.535,81,276.535,77,272.535,81,281.535" style="stroke: #555555; stroke-width: 1.0;"/><text fill="#000000" font-family="Segoe UI" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="134" x="82" y="184.2637">invokes (axel-cowork)</text><!--MD5=[aa56970d469f58da0c630bf832709a2c]
+link PIPES to AGENTS--><path d="M434.38,77.725 C420.94,98.475 401.51,128.445 387.33,150.335 " fill="none" id="PIPES-&gt;AGENTS" style="stroke: #555555; stroke-width: 1.0;"/><polygon fill="#555555" points="384.57,154.595,392.8274,149.227,387.2939,150.4021,386.1188,144.8687,384.57,154.595" style="stroke: #555555; stroke-width: 1.0;"/><text fill="#000000" font-family="Segoe UI" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="37" x="415" y="120.7637">drives</text><!--MD5=[110b18184e33ac13dc87ee4ac8da96af]
+link AGENTS to SERVICES--><path d="M405.14,198.265 C450.93,220.635 529.89,259.185 579.68,283.495 " fill="none" id="AGENTS-&gt;SERVICES" style="stroke: #555555; stroke-width: 1.0;"/><polygon fill="#555555" points="584.4,285.805,578.0714,278.2586,579.9081,283.6089,574.5577,285.4456,584.4,285.805" style="stroke: #555555; stroke-width: 1.0;"/><text fill="#000000" font-family="Segoe UI" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="63" x="513" y="247.7637">delegates</text><!--MD5=[75813aa03fb15d145c3cdded997daf55]
+link AGENTS to CORE--><path d="M332.93,197.875 C302.94,214.435 262.3,242.555 244,280.625 C224.69,320.795 246.02,371.865 263.65,403.125 " fill="none" id="AGENTS-&gt;CORE" style="stroke: #555555; stroke-width: 1.0;"/><polygon fill="#555555" points="266.22,407.595,265.1826,397.8009,263.7193,403.2653,258.255,401.802,266.22,407.595" style="stroke: #555555; stroke-width: 1.0;"/><text fill="#000000" font-family="Segoe UI" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="91" x="245" y="311.2637">activates skills</text><!--MD5=[3b6183b0d673f8240c515e3bf477402c]
+link SERVICES to CORE--><path d="M584.28,325.615 C578.5,328.045 572.62,330.445 567,332.625 C489.83,362.615 399.31,393.305 341.34,412.405 " fill="none" id="SERVICES-&gt;CORE" style="stroke: #555555; stroke-width: 1.0;"/><polygon fill="#555555" points="336.53,413.995,346.3278,414.9968,341.2819,412.4396,343.8391,407.3937,336.53,413.995" style="stroke: #555555; stroke-width: 1.0;"/><text fill="#000000" font-family="Segoe UI" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="81" x="482" y="374.7637">orchestrates</text><!--MD5=[7d40c79772b48d14f62f81763ac691c2]
+link CORE to MODULES--><path d="M305.62,457.635 C325.64,477.985 354.38,507.205 375.45,528.625 " fill="none" id="CORE-&gt;MODULES" style="stroke: #555555; stroke-width: 1.0;"/><polygon fill="#555555" points="379.03,532.255,375.5687,523.0344,375.5231,528.6911,369.8664,528.6455,379.03,532.255" style="stroke: #555555; stroke-width: 1.0;"/><text fill="#000000" font-family="Segoe UI" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="87" x="351" y="499.7637">loads plug-ins</text><!--MD5=[935bbccd40f21c4d468316ec2ceec57e]
+link CORE to KB--><path d="M266.81,457.745 C255.53,477.135 241.11,505.525 235,532.625 C225.78,573.545 232.99,622.205 239.55,652.505 " fill="none" id="CORE-&gt;KB" style="stroke: #555555; stroke-width: 1.0;"/><polygon fill="#555555" points="240.68,657.575,242.6264,647.9204,239.5923,652.6947,234.818,649.6607,240.68,657.575" style="stroke: #555555; stroke-width: 1.0;"/><text fill="#000000" font-family="Segoe UI" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="107" x="236" y="562.2637">reads knowledge</text><!--MD5=[31e07b17d9eb2a324b70665472253c46]
+link CORE to RULES--><path d="M227.43,445.765 C198.07,454.145 162.38,467.495 135,487.625 C120.33,498.405 107.73,514.335 98.49,528.165 " fill="none" id="CORE-&gt;RULES" style="stroke: #555555; stroke-width: 1.0;"/><polygon fill="#555555" points="95.74,532.385,104.0057,527.0299,98.4705,528.1964,97.3039,522.6611,95.74,532.385" style="stroke: #555555; stroke-width: 1.0;"/><text fill="#000000" font-family="Segoe UI" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="55" x="136" y="499.7637">enforces</text><!--MD5=[51cebddad4f568be2dc09b10de48a114]
+link MODULES to KB--><path d="M372.55,582.635 C346.44,603.225 308.82,632.885 281.58,654.365 " fill="none" id="MODULES-&gt;KB" style="stroke: #555555; stroke-width: 1.0;"/><polygon fill="#555555" points="277.64,657.465,287.1831,655.03,281.5651,654.3677,282.2274,648.7498,277.64,657.465" style="stroke: #555555; stroke-width: 1.0;"/><text fill="#000000" font-family="Segoe UI" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="68" x="336" y="624.7637">references</text><!--MD5=[e9c79ac0d84079d81d619a1600640ef8]
+link DEVS to CORE--><path d="M86.64,331.735 C91.34,346.845 99.51,365.655 113,377.625 C143.2,404.415 186.77,417.925 222.1,424.735 " fill="none" id="DEVS-&gt;CORE" style="stroke: #555555; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="#555555" points="227.26,425.695,219.1435,420.1163,222.3443,424.7805,217.6802,427.9813,227.26,425.695" style="stroke: #555555; stroke-width: 1.0;"/><text fill="#000000" font-family="Segoe UI" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="85" x="114" y="374.7637">audits output</text><!--MD5=[e050dbfca1bb9b8841a5f62252c9afd8]
+link DEVS to RULES--><path d="M81.1,331.955 C81.28,378.005 81.68,477.715 81.88,527.345 " fill="none" id="DEVS-&gt;RULES" style="stroke: #555555; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="#555555" points="81.9,532.565,85.8485,523.5423,81.8714,527.5651,77.8486,523.588,81.9,532.565" style="stroke: #555555; stroke-width: 1.0;"/><text fill="#000000" font-family="Segoe UI" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="71" x="83" y="437.2637">reads rules</text><!--MD5=[fe8707ab7b48fac794d1d8572712d20d]
+link TOOLS to INFRA--><path d="M823.96,204.725 C811.01,225.475 792.31,255.445 778.65,277.335 " fill="none" id="TOOLS-&gt;INFRA" style="stroke: #555555; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="#555555" points="775.99,281.595,784.1653,276.1028,778.6503,277.3614,777.3916,271.8464,775.99,281.595" style="stroke: #555555; stroke-width: 1.0;"/><text fill="#000000" font-family="Segoe UI" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="56" x="805" y="247.7637">validates</text><!--MD5=[e74de26e1814fb0b0cada36d1fc6c26e]
+link TOOLS to CORE--><path d="M856.08,204.645 C861.66,213.885 867.16,224.815 870,235.625 C879.68,272.495 851.86,319.105 839,332.625 C771.58,403.535 471.72,424.035 342.06,429.645 " fill="none" id="TOOLS-&gt;CORE" style="stroke: #555555; stroke-width: 1.0; stroke-dasharray: 7.0,7.0;"/><polygon fill="#555555" points="336.77,429.865,345.933,433.476,341.7654,429.6509,345.5905,425.4833,336.77,429.865" style="stroke: #555555; stroke-width: 1.0;"/><text fill="#000000" font-family="Segoe UI" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="88" x="867" y="311.2637">runs pipelines</text><!--MD5=[925924ee4ebc0dc8e8640436b7b8bccd]
+reverse link INFRA to CORE--><path d="M699.09,333.605 C662.6,348.135 615.25,365.685 572,377.625 C491.29,399.915 395.38,415.755 336.61,424.295 " fill="none" id="INFRA&lt;-CORE" style="stroke: #555555; stroke-width: 1.0;"/><polygon fill="#555555" points="703.93,331.665,694.0881,331.2936,699.2876,333.522,697.0593,338.7214,703.93,331.665" style="stroke: #555555; stroke-width: 1.0;"/><text fill="#000000" font-family="Segoe UI" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="107" x="620" y="374.7637">validates against</text><!--MD5=[0c8829cb017579947901845699420462]
+@startuml LND_Studio_High_Level
+title LND Studio — High-Level Architecture Overview
+
+skinparam {
+  PackageStyle frame
+  ArrowColor #555555
+  PackageBorderColor #666666
+  defaultFontName "Segoe UI"
+  defaultFontSize 12
+  TitleFontSize 16
+  PackageFontSize 13
+}
+
+
+package "Entry Points" as ENTRY #E8F5E9 {
+}
+note right of ENTRY
+  Workflows, CLI triggers, Skills
+  (User-facing orchestration)
+end note
+
+package "Pipelines" as PIPES #FFF3E0 {
+}
+note right of PIPES
+  Pre-compiled manifests
+  EC (Erotic Caption), RP (Roleplay)
+  ONE_SHOT execution mode
+end note
+
+package "Agents" as AGENTS #E3F2FD {
+}
+note right of AGENTS
+  12 Production personas
+  Director K (orchestrator)
+  + 11 specialist agents
+end note
+
+package "Meta: Developers" as DEVS #FFCDD2 {
+}
+note left of DEVS
+  QA & Optimization
+  Hermes + Claude CLIs
+  SLOP detection, arch review
+end note
+
+package "Services" as SERVICES #FCE4EC {
+}
+
+package "Core Engine" as CORE #F3E5F5 {
+}
+
+package "Modules" as MODULES #E0F7FA {
+}
+
+package "Rules & Config" as RULES #F5F5F5 {
+}
+
+package "Knowledge Base" as KB #FFF9C4 {
+}
+
+package "Infrastructure" as INFRA #EFEBE9 {
+}
+
+package "Tooling" as TOOLS #C8E6C9 {
+}
+
+
+ENTRY - -> AGENTS : activates
+ENTRY - -> DEVS : invokes (axel-cowork)
+PIPES - -> AGENTS : drives
+AGENTS - -> SERVICES : delegates
+AGENTS - -> CORE : activates skills
+SERVICES - -> CORE : orchestrates
+CORE - -> MODULES : loads plug-ins
+CORE - -> KB : reads knowledge
+CORE - -> RULES : enforces
+MODULES - -> KB : references
+DEVS ..> CORE : audits output
+DEVS ..> RULES : reads rules
+TOOLS ..> INFRA : validates
+TOOLS ..> CORE : runs pipelines
+INFRA <- - CORE : validates against
+
+@enduml
+
+PlantUML version 1.2020.02(Sun Mar 01 17:22:07 ICT 2020)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Java Version: 21.0.10+7-Ubuntu-124.04
+Operating System: Linux
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>

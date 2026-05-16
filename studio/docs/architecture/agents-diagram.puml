@@ -1,0 +1,76 @@
+@startuml LND_Studio_Agents
+title Agents — Hierarchy & Delegation
+
+skinparam {
+  ComponentStyle uml2
+  PackageStyle frame
+  ArrowColor #555555
+  defaultFontName "Segoe UI"
+  defaultFontSize 11
+  TitleFontSize 14
+}
+
+package "Layer 1: Orchestration" as L1 #E3F2FD {
+  component [🎬 Director K\nlnd-orchestrator] as director #90CAF9
+}
+
+package "Layer 2: Specialists (Owned)" as L2 #E3F2FD {
+  component [🖼️ Kana\nmanga-adapter] as kana #BBDEFB
+  component [🖋️ Suki\nlewd-writer] as suki #BBDEFB
+  component [🌍 Luna\nworld-weaver] as luna #BBDEFB
+  component [🛡️ Riko\ngooner-editor] as riko #BBDEFB
+  component [👤 Aria\ncharacter-architect] as aria #BBDEFB
+  component [💬 Miki\ndialogue-crafter] as miki #BBDEFB
+  component [📸 Nova\nerotic-captioner] as nova #BBDEFB
+}
+
+package "Layer 2: Extended (Project-scoped)" as L2_EXT #E3F2FD {
+  component [🎭 Yua\nroleplay-actor] as yua #BBDEFB
+  component [🎨 Pixel\ncomfyui-prompter] as pixel #BBDEFB
+  component [🔍 RE Specialist] as re_spec #BBDEFB
+}
+
+' --- Director K owns Layer 2 ---
+director --> kana : owns
+director --> suki : owns
+director --> luna : owns
+director --> riko : owns
+director --> aria : owns
+director --> miki : owns
+director --> nova : owns
+
+' --- Nova sub-pipeline ---
+nova --> kana : forensic
+nova --> luna : prelude
+nova --> suki : caption
+
+' --- Agent → Primary Skill mapping ---
+package "Primary Skills" as SKILLS #F3E5F5 {
+  component [core/panel-forensic] as sk_forensic
+  component [core/lewd-writer] as sk_lewd
+  component [core/scene-prelude] as sk_prelude
+  component [core/roleplay-engine] as sk_rp
+  component [services/character-builder] as sk_char
+  component [services/dialogue-scripting] as sk_dialog
+  component [services/erotic-image-captioner] as sk_ec
+  component [modules/gooner-audit-engine] as sk_audit
+}
+
+kana --> sk_forensic
+suki --> sk_lewd
+luna --> sk_prelude
+riko --> sk_audit
+aria --> sk_char
+miki --> sk_dialog
+nova --> sk_ec
+yua --> sk_rp
+
+' --- Shared protocol ---
+component [agent-protocol.md] as protocol #F5F5F5
+component [agent-registry.yaml] as registry #F5F5F5
+
+director ..> protocol : follows
+kana ..> protocol : follows
+suki ..> protocol : follows
+
+@enduml

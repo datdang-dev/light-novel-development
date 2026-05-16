@@ -1,0 +1,36 @@
+# LND Studio Production Pipeline Registry
+# Defines the sequential tool-flows for R18 content generation
+
+pipelines:
+  EC:
+    name: "Erotic Image Caption Pipeline"
+    description: "Kana (Visual) -> Luna (Scenario) -> Suki (Prose)"
+    steps:
+      - id: "forensic"
+        agent: "kana"
+        template: "studio/core/panel-forensic/templates/forensic_analysis.md"
+        output_schema: "ForensicOutput"
+        knowledge: ["rules/global_rule_hub.md", "rules/gooner_principles.md"]
+
+      - id: "prelude"
+        agent: "luna"
+        template: "studio/core/scene-prelude/templates/scene_prelude.md"
+        output_schema: "PreludeOutput"
+        knowledge: ["rules/gooner_principles.md", "rules/sensory_density.md"]
+
+      - id: "caption"
+        agent: "suki"
+        template: "studio/core/erotic-caption-writer/templates/erotic_caption.md"
+        output_schema: "CaptionOutput"
+        knowledge: ["rules/gooner_principles.md", "rules/anti_slop.md", "rules/sensory_density.md"]
+
+  MA:
+    name: "Full Manga-to-Novel Pipeline"
+    description: "Kana -> Aria -> Suki -> Riko"
+    steps:
+      # To be defined more granularly as needed
+      - id: "forensic"
+        agent: "kana"
+        template: "studio/core/panel-forensic/templates/forensic_analysis.md"
+        output_schema: "ForensicOutput"
+      # ...

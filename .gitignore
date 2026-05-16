@@ -45,6 +45,21 @@ logs/
 .cache/
 tmp/
 
+# ==== Legacy Patterns (Phase 2 - Zero Legacy Policy) ====
+*_old/
+*_backup/
+*_deprecated/
+*_archive/
+*_legacy/
+*.bak
+*.orig
+*~
+old/
+backup/
+deprecated/
+archive/
+legacy/
+
 # ==== Build Outputs ====
 dist/
 build/
@@ -82,7 +97,7 @@ sources/
 *backup*
 *personal*
 *source*
-*output*
+*ou*
 *.kilo*
 *bmad*
 .agent
@@ -94,4 +109,5 @@ hitomi*
 SillyTavern-Docs/
 
 *gds*
-*wds*
+*wds*_lnd-output/
+studio/output/

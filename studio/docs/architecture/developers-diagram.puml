@@ -1,0 +1,94 @@
+@startuml LND_Studio_Developers
+title Developers — Meta Layer (QA & Optimization)
+
+skinparam {
+  ComponentStyle uml2
+  PackageStyle frame
+  ArrowColor #555555
+  defaultFontName "Segoe UI"
+  defaultFontSize 11
+  TitleFontSize 14
+}
+
+package "studio/developers/" as DEVS #FFCDD2 {
+
+  component [orchestrator.py\n(Multi-AI Review Runner)] as orch #EF9A9A
+
+  package "agents/" {
+    component [BaseAgent] as base
+    component [HermesAgent] as hermes
+    component [ClaudeAgent] as claude
+    component [MockAgent] as mock
+    component [registry.py] as reg
+  }
+
+  package "config/" {
+    component [mode_registry.yaml] as modes
+    component [knowledge_index.json] as ki
+
+    package "roles/" {
+      component [se/m-architect] as r_arch
+      component [dev/m-prompt-expert] as r_prompt
+      component [dev/f-r18-expert] as r_r18
+      component [qa/m-qa-gooner] as r_qa
+    }
+
+    package "templates/" {
+      component [arch_review.md] as t_arch
+      component [code_review.md] as t_code
+    }
+
+    package "dev/rules/" {
+      component [gooner_principles] as rule_gp
+      component [anti_slop] as rule_as
+      component [sensory_density] as rule_sd
+      component [hentai_logic_gate] as rule_hlg
+      component [+12 more...] as rule_more
+    }
+  }
+
+  package "schemas/" {
+    component [ArchReviewOutput] as s_arch
+    component [CodeReviewOutput] as s_code
+    component [QAAuditOutput] as s_qa
+  }
+
+  component [mode_registry.py] as mode_py
+}
+
+' --- Inheritance ---
+hermes --|> base
+claude --|> base
+mock --|> base
+
+' --- Orchestrator wiring ---
+orch --> reg : creates agents
+orch --> modes : loads modes
+orch --> mode_py : parses registry
+orch --> t_arch : renders prompt
+orch --> t_code : renders prompt
+orch --> s_arch : validates
+orch --> s_code : validates
+orch --> s_qa : validates
+
+' --- Roles inject rules ---
+r_prompt --> rule_gp : loads
+r_prompt --> rule_as : loads
+r_r18 --> rule_sd : loads
+r_qa --> rule_hlg : loads
+
+' --- External entry point ---
+component [axel-cowork\n(Entry Skill)] as entry #E8F5E9
+entry --> orch : bash run.sh
+
+' --- Audits production ---
+package "Production Output" as PROD #F3E5F5 {
+  component [draft-prose.json] as prod_prose
+  component [caption.json] as prod_caption
+  component [forensic-state.json] as prod_forensic
+}
+
+orch ..> prod_prose : reviews
+orch ..> prod_caption : reviews
+
+@enduml

@@ -19,7 +19,7 @@ agent:
     - erotic-captioner
     delegates_to:
     - services/gooner-alchemist
-    - services/quality-audit
+    - modules/gooner-audit-engine
     - services/character-builder
     - services/renpy-adaptation
     - services/rpg-adapter
@@ -68,7 +68,7 @@ agent:
       3. DELEGATE TO SUKI (lewd-writer.agent.yaml) -> Suki activates: core/lewd-writer/SKILL.md
       -> Input: forensic-state.json + character-bible.json -> Output: draft-prose.json
 
-      4. DELEGATE TO RIKO (gooner-editor.agent.yaml) -> Riko activates: services/quality-audit/SKILL.md
+      4. DELEGATE TO RIKO (gooner-editor.agent.yaml) -> Riko activates: modules/gooner-audit-engine/SKILL.md
       -> Input: draft-prose.json -> Output: audit-report.json (PASS/FAIL)'
   - trigger: EC or fuzzy match on erotic-caption
     description: '[EC] Erotic Image Captioner'
@@ -101,7 +101,7 @@ agent:
     description: '[QA] Run Quality Audit'
     action: 'ORCHESTRATION FLOW:
 
-      1. DELEGATE TO RIKO (gooner-editor.agent.yaml) -> Riko activates: services/quality-audit/SKILL.md
+      1. DELEGATE TO RIKO (gooner-editor.agent.yaml) -> Riko activates: modules/gooner-audit-engine/SKILL.md
       -> Input: draft-prose.json -> Output: audit-report.json'
   - trigger: CB or fuzzy match on character-builder
     description: '[CB] Update Character Bible'

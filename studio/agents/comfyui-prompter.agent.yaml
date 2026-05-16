@@ -6,6 +6,10 @@ agent:
     icon: 🎨
     module: lnd:agents:comfyui-prompter
     hasSidecar: false
+  hierarchy:
+    owned_by: null
+    skill: null
+    layer: 2
 
   persona:
     role: |

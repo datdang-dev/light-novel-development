@@ -1,0 +1,86 @@
+# LND Studio Developer Mode Registry
+# Declarative configuration for meta-review and framework optimization
+# Purely for studio/developers layer (Development & QA)
+
+modes:
+  arch_review:
+    description: "Deep architecture review of the framework"
+    execution_type: "single"
+    template: "arch_review.md"
+    output_schema: "ArchReviewOutput"
+    knowledge_namespaces: ["se"]
+    knowledge_files:
+      se: ["global_rule_hub.md", "delegation_protocol.md", "system.md"]
+    agents:
+      required: 1
+      roles: ["se/m-architect"]
+
+  content_audit:
+    description: "Review production output for SLOP and quality"
+    execution_type: "single"
+    template: "code_review.md"
+    output_schema: "CodeReviewOutput"
+    knowledge_namespaces: ["dev"]
+    knowledge_files:
+      dev: ["anti_slop.md", "sensory_density.md", "gooner_principles.md"]
+    agents:
+      required: 1
+      roles: ["dev/m-prompt-expert", "dev/f-r18-expert"]
+
+  prompt_opt:
+    description: "Optimize prompt templates and logic"
+    execution_type: "single"
+    template: "code_review.md" # Reuse or create specific
+    output_schema: "CodeReviewOutput"
+    knowledge_namespaces: ["se", "dev"]
+    knowledge_files:
+      se: ["delegation_protocol.md"]
+      dev: ["gooner_principles.md"]
+    agents:
+      required: 1
+      roles: ["dev/m-prompt-expert"]
+
+  gooner_audit:
+    description: "Gatekeeper review using GOONER_AUDIT_FRAMEWORK"
+    execution_type: "single"
+    template: "qa_audit.md"
+    output_schema: "QAAuditOutput"
+    knowledge_namespaces: ["qa"]
+    knowledge_files:
+      qa: ["quality_gates.md", "gooner_principles.md"]
+    agents:
+      required: 1
+      roles: ["qa/m-qa-gooner"]
+
+  review_debate:
+    description: "Cross-agent debate on framework architecture"
+    execution_type: "debate"
+    passes: 2
+    agents:
+      required: 2
+      roles: ["se/m-architect", "dev/m-prompt-expert"]
+
+schema_map:
+  arch_review.md: "ArchReviewOutput"
+  code_review.md: "CodeReviewOutput"
+  qa_audit.md: "QAAuditOutput"
+
+# Execution type definitions
+execution_types:
+  single:
+    description: "Single agent executes once"
+    handler: "_mode_single"
+  sequential:
+    description: "Multiple agents execute in sequence"
+    handler: "_mode_sequential"
+  debate:
+    description: "Multi-pass debate with synthesis"
+    handler: "_mode_cross"
+
+# Global settings
+settings:
+  timeout: 600.0
+  context_summarize_threshold: 120
+  max_tokens: 6000
+  auto_summarize: true
+  xml_wrapping: true

@@ -22,9 +22,10 @@ agents:
       - character-architect
       - dialogue-crafter
       - world-weaver
+      - erotic-captioner
     delegates_to:
       - services/gooner-alchemist
-      - services/quality-audit
+      - modules/gooner-audit-engine
       - services/character-builder
       - services/renpy-adaptation
       - services/rpg-adapter
@@ -57,7 +58,7 @@ agents:
     name: Riko
     title: Quality Gatekeeper
     icon: 🛡️
-    skill: services/quality-audit
+    skill: modules/gooner-audit-engine
     role: Quality Audit & Rewrites
     layer: 2
     owned_by: lnd-orchestrator
@@ -107,8 +108,8 @@ agents:
   # LAYER 2: Extended Agents (Not directly owned, project-scoped)
   # ─────────────────────────────────────────────────────────────
   - id: roleplay-actor
-    name: Actor
-    title: Roleplay Actor
+    name: Yua
+    title: Character Roleplay Specialist
     icon: 🎭
     skill: core/roleplay-engine
     role: Interactive Roleplay
@@ -116,16 +117,16 @@ agents:
     owned_by: null  # Project-level, not studio-specific
 
   - id: re-specialist
-    name: RE Specialist
-    title: Regex Specialist
+    name: Cipher
+    title: Reverse Engineering Specialist
     icon: 🔍
     skill: modules/lnd-re-specialist
-    role: Regex & Pattern Matching
+    role: Reverse Engineering & Asset Extraction
     layer: 2
     owned_by: null  # Utility agent
 
   - id: comfyui-prompter
-    name: ComfyUI Prompter
+    name: Pixel
     title: Image Prompt Engineer
     icon: 🎨
     skill: null  # No dedicated service
@@ -142,8 +143,8 @@ services:
     description: "Manga-to-Novel adaptation pipeline"
     primary_agent: lnd-orchestrator
 
-  - id: quality-audit
-    path: services/quality-audit/SKILL.md
+  - id: gooner-audit-engine
+    path: modules/gooner-audit-engine/SKILL.md
     description: "100-point prose quality audit"
     primary_agent: gooner-editor
 
@@ -176,9 +177,9 @@ services:
 # Metadata
 # ─────────────────────────────────────────────────────────────
 metadata:
-  version: "1.0.0"
-  last_updated: "2026-05-10"
-  total_agents: 12
+  version: "1.1.0"
+  last_updated: "2026-05-16"
+  total_agents: 13
   total_services: 7
   architecture_layers:
     - "-1: Infrastructure (schemas, rules, shared)"

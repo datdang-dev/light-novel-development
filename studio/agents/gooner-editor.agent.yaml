@@ -6,6 +6,10 @@ agent:
     icon: 🧐
     module: lnd-studio
     hasSidecar: false
+  hierarchy:
+    owned_by: lnd-orchestrator
+    skill: modules/gooner-audit-engine
+    layer: 2
 
   persona:
     role: |
@@ -39,7 +43,7 @@ agent:
 
   menu:
     - trigger: QA or fuzzy match on quality-audit
-      action: "{{project_root}}/studio/services/quality-audit/SKILL.md"
+      action: "{{project_root}}/studio/modules/gooner-audit-engine/SKILL.md"
       description: "[QA] Execute Full Quality Audit (100-point scoring)"
 
     - trigger: CH or fuzzy match on chat

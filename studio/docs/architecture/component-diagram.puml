@@ -1,0 +1,90 @@
+@startuml LND_Studio_High_Level
+title LND Studio — High-Level Architecture Overview
+
+skinparam {
+  PackageStyle frame
+  ArrowColor #555555
+  PackageBorderColor #666666
+  defaultFontName "Segoe UI"
+  defaultFontSize 12
+  TitleFontSize 16
+  PackageFontSize 13
+}
+
+' ════════════════════════════════════════════════════════════════
+' HIGH-LEVEL LAYERS (No individual components)
+' ════════════════════════════════════════════════════════════════
+
+package "Entry Points" as ENTRY #E8F5E9 {
+}
+note right of ENTRY
+  Workflows, CLI triggers, Skills
+  (User-facing orchestration)
+end note
+
+package "Pipelines" as PIPES #FFF3E0 {
+}
+note right of PIPES
+  Pre-compiled manifests
+  EC (Erotic Caption), RP (Roleplay)
+  ONE_SHOT execution mode
+end note
+
+package "Agents" as AGENTS #E3F2FD {
+}
+note right of AGENTS
+  12 Production personas
+  Director K (orchestrator)
+  + 11 specialist agents
+end note
+
+package "Meta: Developers" as DEVS #FFCDD2 {
+}
+note left of DEVS
+  QA & Optimization
+  Hermes + Claude CLIs
+  SLOP detection, arch review
+end note
+
+package "Services" as SERVICES #FCE4EC {
+}
+
+package "Core Engine" as CORE #F3E5F5 {
+}
+
+package "Modules" as MODULES #E0F7FA {
+}
+
+package "Rules & Config" as RULES #F5F5F5 {
+}
+
+package "Knowledge Base" as KB #FFF9C4 {
+}
+
+package "Infrastructure" as INFRA #EFEBE9 {
+}
+
+package "Tooling" as TOOLS #C8E6C9 {
+}
+
+' ════════════════════════════════════════════════════════════════
+' LAYER DEPENDENCIES
+' ════════════════════════════════════════════════════════════════
+
+ENTRY --> AGENTS : activates
+ENTRY --> DEVS : invokes (axel-cowork)
+PIPES --> AGENTS : drives
+AGENTS --> SERVICES : delegates
+AGENTS --> CORE : activates skills
+SERVICES --> CORE : orchestrates
+CORE --> MODULES : loads plug-ins
+CORE --> KB : reads knowledge
+CORE --> RULES : enforces
+MODULES --> KB : references
+DEVS ..> CORE : audits output
+DEVS ..> RULES : reads rules
+TOOLS ..> INFRA : validates
+TOOLS ..> CORE : runs pipelines
+INFRA <-- CORE : validates against
+
+@enduml

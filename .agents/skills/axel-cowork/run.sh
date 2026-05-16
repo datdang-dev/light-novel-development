@@ -14,6 +14,11 @@ REPO_ROOT="$(cd "$SKILL_DIR/../../.." && pwd)"
 # Add REPO_ROOT to PYTHONPATH so studio.developers can be imported
 export PYTHONPATH="$REPO_ROOT:${PYTHONPATH:-}"
 
+# Activate venv if exists
+if [ -d "$REPO_ROOT/.venv" ]; then
+    source "$REPO_ROOT/.venv/bin/activate"
+fi
+
 # Defaults
 TASK="default"
 MODE="review"

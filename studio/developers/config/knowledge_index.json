@@ -1,0 +1,48 @@
+{
+    "namespaces": {
+        "se": {
+            "description": "Architectural rules, bounds, JSON formats, and multi-agent payload contracts.",
+            "path": "studio/developers/config/roles/se/rules",
+            "files": [
+                "global_rule_hub.md",
+                "system.md",
+                "quality_gates.md",
+                "delegation_protocol.md",
+                "one_page_one_file.md",
+                "naming_conventions.md",
+                "canon-rules.md"
+            ]
+        },
+        "dev": {
+            "description": "R18 lore, fetish mechanics, sensory density standards, and character voice boundaries.",
+            "path": "studio/developers/config/roles/dev/rules",
+            "files": [
+                "anti_slop.md",
+                "sensory_density.md",
+                "hentai_logic_gate.md",
+                "gooner_principles.md",
+                "fetish_usage_protocol.md",
+                "character_voice.md",
+                "environmental_atmosphere.md",
+                "lewd_writing_mechanics.md",
+                "pervert_pov.md",
+                "prose_structure.md",
+                "rp_novel_format.md",
+                "rp_sfx_registry.md",
+                "scene_boundaries.md",
+                "user_fetish_profile.md",
+                "xcom_degenerate_style.md",
+                "dialogue_format.md",
+                "continuity.md",
+                "visual_forensics.md"
+            ]
+        },
+        "qa": {
+            "description": "Scoring frameworks and strict audit guidelines for testing outputs.",
+            "path": "studio/developers/config/roles/qa/rules",
+            "files": [
+                "GOONER_AUDIT_FRAMEWORK.md"
+            ]
+        }
+    }
+}

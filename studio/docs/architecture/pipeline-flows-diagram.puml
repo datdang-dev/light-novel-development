@@ -1,0 +1,89 @@
+@startuml LND_Studio_Pipeline_Flows
+title Pipeline Flows — EC, MA, RP
+
+skinparam {
+  ActivityBackgroundColor #FAFAFA
+  ActivityBorderColor #333333
+  ArrowColor #555555
+  defaultFontName "Segoe UI"
+  defaultFontSize 11
+  TitleFontSize 14
+  PartitionBackgroundColor #F5F5F5
+}
+
+|EC Pipeline|
+start
+:User provides image + mood_seed;
+:🖼️ **Kana** — Forensic Analysis
+  ----
+  OCR, character anchoring,
+  explicit elements, heat map,
+  gut reaction, fetish vector;
+note right
+  Output: forensic inline data
+  Pass: fetish_tags, gut_reaction,
+  explicit_acts, archetype
+end note
+:🌍 **Luna** — Scene Prelude
+  ----
+  Setting blueprint,
+  relationship topology,
+  "The Why", escalation arc,
+  sensory anchors;
+note right
+  Output: prelude inline data
+  Pass: setting_seed,
+  power_dynamic, kink_name,
+  sensory_anchors
+end note
+:🖋️ **Suki** — Caption Writer
+  ----
+  150-300 word Vietnamese prose
+  Mandatory COT think block
+  3 sensory anchors woven in;
+:Write caption.json;
+stop
+
+|MA Pipeline|
+start
+:Raw Manga Page(s);
+:🖼️ **Kana** — Panel Forensic
+  → forensic-state.json;
+:🖼️ **Kana** — POC Context Vectors;
+:👤 **Aria** — Character Builder
+  → character-bible.json;
+:🖋️ **Suki** — R18 Prose Generation
+  → draft-prose.json;
+:🛡️ **Riko** — Quality Audit (100-pt)
+  → audit-report.json;
+if (Score ≥ 85?) then (PASS)
+  :Final Output;
+  stop
+else (FAIL)
+  if (3rd consecutive fail?) then (yes)
+    :⚠️ HALT PIPELINE\nCircuit Breaker;
+    stop
+  else (no)
+    :Rewrite loop → Suki;
+  endif
+endif
+
+|RP Pipeline|
+start
+:User Turn (action/dialogue);
+:🎭 **Yua** — Turn Planning
+  ----
+  <think> block:
+  Turn deconstruct, archetype,
+  sensory mirror, escalation,
+  character pulse, principle check;
+:🎭 **Yua** — Novel Format Output
+  ----
+  Narrator block (italic prose)
+  + Character dialogue 「brackets」
+  + Thoughts （parens）
+  + SFX ***bold-italic***;
+:Deliver turn;
+stop
+
+@enduml

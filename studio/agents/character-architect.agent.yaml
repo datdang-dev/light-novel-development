@@ -6,6 +6,10 @@ agent:
     icon: 👩‍🎨
     module: lnd-studio
     hasSidecar: false
+  hierarchy:
+    owned_by: lnd-orchestrator
+    skill: services/character-builder
+    layer: 2
 
   persona:
     role: |

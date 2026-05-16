@@ -6,7 +6,10 @@ agent:
     icon: 🕸️
     module: lnd-studio
     hasSidecar: false
-    skill: '{{project_root}}/studio/core/scene-prelude/SKILL.md'
+  hierarchy:
+    owned_by: lnd-orchestrator
+    skill: core/scene-prelude
+    layer: 2
 
   persona:
     role: |

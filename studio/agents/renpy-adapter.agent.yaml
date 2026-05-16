@@ -41,4 +41,4 @@ agent:
 
       2. DELEGATE TO SUKI (lewd-writer.agent.yaml) -> Suki activates: core/lewd-writer/SKILL.md
 
-      3. DELEGATE TO RIKO (gooner-editor.agent.yaml) -> Riko activates: services/quality-audit/SKILL.md'
+      3. DELEGATE TO RIKO (gooner-editor.agent.yaml) -> Riko activates: modules/gooner-audit-engine/SKILL.md'
