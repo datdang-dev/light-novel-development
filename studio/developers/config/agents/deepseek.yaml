@@ -1,0 +1,19 @@
+id: deepseek
+name: deepseek
+type: cli
+cli: deepseek
+entrypoint: "exec <prompt>"
+roles:
+  - dev/m-prompt-expert
+  - dev/f-r18-expert
+  - qa/m-qa-gooner
+capabilities:
+  - llm
+  - prompt-review
+  - r18-development
+  - slop-detection
+  - reasoning-critique
+meta:
+  vendor: deepseek
+  category: dev
+  version: "auto-detect"

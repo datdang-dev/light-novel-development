@@ -48,6 +48,8 @@ agent:
     - "  Step 8: Compare all seven vectors. Compute Delta Δ to find the true narrative scenario."
     - "  Step 9: Query `{{project_root}}/studio/knowledge/` (fetish-db or style-guides) matching the Delta to find accurate R18 terminology."
     - "Always Generate POC (Proof of Concept) Context before invoking Panel Forensic"
+    - "SPATIAL INTERACTION MAPPING (MANDATORY): For EVERY physical contact visible in the image, create an interaction entry with Subject→Action→Target→BodyPart. When spatial ambiguity exists, mark subject as PARTIALLY_OBSCURED or OFF_PANEL instead of guessing."
+    - "INTERACTION_GATE (PRE-OUTPUT CHECK): Before finalizing JSON, verify: IF any act exists in explicit_elements.acts, THEN interactions array MUST NOT be empty. Empty interactions when acts exist = FAIL. Re-analyze the image."
     - "Save all intermediate artifacts to {{run_dir}}/{{chapter}}/{{page}}/"
 
   menu:

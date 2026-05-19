@@ -35,11 +35,14 @@ import textwrap
 import sys
 import argparse
 import json
+import os
+import re
+import tempfile
 from pathlib import Path
 from pydantic import ValidationError
 from .agents.registry import create_agent
 from .schemas import (
-    ArchReviewOutput, CodeReviewOutput, QAAuditOutput
+    ArchReviewOutput, CodeReviewOutput, QAAuditOutput, SynthesisOutput
 )
 from studio.core.schemas import (
     ForensicOutput, PreludeOutput, CaptionOutput
@@ -65,9 +68,17 @@ SCHEMA_MAP = {
     "ArchReviewOutput": ArchReviewOutput,
     "CodeReviewOutput": CodeReviewOutput,
     "QAAuditOutput": QAAuditOutput,
+    "SynthesisOutput": SynthesisOutput,
 }
 
 # ── Utilities ────────────────────────────────────────────────────────────────
+
+def _extract_json(text: str) -> str:
+    """Extract JSON from markdown code blocks if present."""
+    match = re.search(r'```(?:json)?\s*(\{.*\}|\[.*\])\s*```', text, re.DOTALL)
+    if match:
+        return match.group(1).strip()
+    return text.strip()
 
 def _sep(title: str):
     print(f"\n== {title} " + "=" * (max(0, 78 - len(title) - 4)))
@@ -76,7 +87,17 @@ def _session_dir(task: str) -> Path:
     return Path.cwd() / "_out" / "agent-sessions" / task
 
 def _write_atomic(path: Path, content: str):
-    path.write_text(content, encoding="utf-8")
+    """Write content to file atomically via temp file + os.replace."""
+    fd, tmp_path = tempfile.mkstemp(dir=path.parent, suffix=".tmp")
+    try:
+        with os.fdopen(fd, "w", encoding="utf-8") as f:
+            f.write(content)
+        os.replace(tmp_path, path)
+    except Exception:
+        # Clean up temp file on failure
+        if os.path.exists(tmp_path):
+            os.unlink(tmp_path)
+        raise
 
 def _append_context(session_dir: Path, header: str, content: str):
     ctx_file = session_dir / "context.md"
@@ -117,8 +138,13 @@ Output format:
     # Reset context.md
     ctx_file.write_text(f"# Context (Summarized on {datetime.now().isoformat()})\n\n")
 
-async def _inject_context(session_dir: Path, current_prompt: str) -> str:
-    """Inject context with auto-summarization and XML wrapping."""
+async def _inject_context(session_dir: Path, current_prompt: str = "") -> str:
+    """Inject context with auto-summarization and XML wrapping.
+
+    P3 FIX: current_prompt is NO LONGER embedded in the context injection.
+    The prompt should only appear once, in the <task_instruction> section
+    built by PromptBuilder. This eliminates token duplication.
+    """
     ctx_file = session_dir / "context.md"
     summary_file = session_dir / "context_summary.md"
 
@@ -128,7 +154,7 @@ async def _inject_context(session_dir: Path, current_prompt: str) -> str:
         if len(lines) > CONTEXT_SUMMARIZE_THRESHOLD:
             await _auto_summarize_context(ctx_file, summary_file)
 
-    # Structured injection with XML anchors
+    # Structured injection with XML anchors (context only, NO task duplication)
     parts = ["<system_context>"]
 
     if summary_file.exists():
@@ -138,7 +164,6 @@ async def _inject_context(session_dir: Path, current_prompt: str) -> str:
         recent_lines = ctx_file.read_text().split('\n')[-50:]
         parts.append(f"<recent_context>\n{chr(10).join(recent_lines)}\n</recent_context>")
 
-    parts.append(f"<current_task>\n{current_prompt}\n</current_task>")
     parts.append("</system_context>")
 
     return "\n".join(parts)
@@ -212,9 +237,14 @@ class KnowledgeIndex:
         return "\n\n".join(rules)
 
 class PromptBuilder:
-    """Enforces strict prompt hierarchy with XML boundaries."""
+    """Enforces strict prompt hierarchy with XML boundaries.
+
+    P3 FIX: Truncation now targets ONLY the context section.
+    System rules, role, task, and constraints are always preserved intact.
+    This prevents broken XML tags from corrupting agent behavior.
+    """
     def __init__(self, max_tokens: int = 6000):
-        self.max_tokens = max_tokens # Rough char-based limit (6000 tokens ~= 24k chars)
+        self.max_tokens = max_tokens  # Rough char-based limit (6000 tokens ~= 24k chars)
         self.max_chars = max_tokens * 4
         self.sections = {
             "system": [],
@@ -231,18 +261,28 @@ class PromptBuilder:
     def add_constraint(self, content: str): self.sections["constraints"].append(f"<constraint>\n{content}\n</constraint>")
 
     def build(self) -> str:
-        parts = [
-            "\n".join(self.sections["system"]),
-            "\n".join(self.sections["role"]),
-            "\n".join(self.sections["context"]),
-            "\n".join(self.sections["task"]),
-            "\n".join(self.sections["constraints"])
-        ]
-        full = "\n\n".join(p for p in parts if p)
-        # Simple suffix-based truncation for safety if truly massive
-        if len(full) > self.max_chars:
-            return full[:self.max_chars] + "\n[Truncated due to token limit]"
-        return full
+        # Build non-context sections first (these are NEVER truncated)
+        system_block = "\n".join(self.sections["system"])
+        role_block = "\n".join(self.sections["role"])
+        task_block = "\n".join(self.sections["task"])
+        constraint_block = "\n".join(self.sections["constraints"])
+        context_block = "\n".join(self.sections["context"])
+
+        # Calculate budget: protected sections get priority, context gets remainder
+        protected = "\n\n".join(p for p in [system_block, role_block, task_block, constraint_block] if p)
+        protected_chars = len(protected)
+        context_budget = self.max_chars - protected_chars - 100  # 100 char margin
+
+        # Truncate ONLY context if it exceeds budget
+        if context_budget > 0 and len(context_block) > context_budget:
+            context_block = (
+                context_block[:context_budget]
+                + "\n</context>\n<context>\n[Context truncated to fit token budget]\n</context>"
+            )
+
+        # Assemble in strict hierarchy order
+        parts = [system_block, role_block, context_block, task_block, constraint_block]
+        return "\n\n".join(p for p in parts if p)
 
 # ── Main Orchestration Logic ─────────────────────────────────────────────────
 
@@ -295,7 +335,7 @@ async def run_panel(
     elif execution_type == "sequential":
         await _mode_sequential(session_dir, agents, full_prompt, mode_config, knowledge)
     elif execution_type == "debate":
-        await _mode_cross(session_dir, full_prompt, agents, knowledge)
+        await _mode_cross(session_dir, full_prompt, agents, knowledge, mode)
     else:
         print(f"[!] Unknown execution type: {execution_type}")
 
@@ -358,14 +398,14 @@ async def _mode_single(session_dir: Path, prompt: str, agent_pkg: dict, title: s
 
     # Validate against schema if applicable (from registry)
     schema_name = MODE_REGISTRY.get_schema(mode)
-    if schema_name and template_name in SCHEMA_MAP:
+    if schema_name and schema_name in SCHEMA_MAP:
         try:
-            schema_cls = SCHEMA_MAP[template_name]
+            schema_cls = SCHEMA_MAP[schema_name]
             validated = schema_cls.model_validate_json(raw_output)
             output = validated.model_dump_json(indent=2)
-            print(f"✅ Schema validation passed")
+            print(f"✅ Schema validation passed ({schema_name})")
         except ValidationError as e:
-            print(f"❌ Schema validation failed:")
+            print(f"❌ Schema validation failed ({schema_name}):")
             print(f"   {e}")
             print(f"\nRaw output:\n{raw_output[:500]}...")
             return  # HALT on invalid output
@@ -384,26 +424,51 @@ async def _mode_review(session_dir: Path, prompt: str, agents: list[dict], knowl
     if len(agents) > 1:
         await _mode_single(session_dir, prompt, agents[1], "Code Review", "code_review.md", knowledge, "code")
 
-async def _mode_cross(session_dir: Path, prompt: str, agents: list[dict], knowledge: KnowledgeIndex):
+async def _mode_cross(session_dir: Path, prompt: str, agents: list[dict], knowledge: KnowledgeIndex, mode: str = "review_debate"):
     if len(agents) < 2:
         print("[!] Cross mode requires at least 2 agents.")
         return
 
-    # Pass 1 — Independent reviews with forced summary tagging
+    # ── P0 FIX: Freeze context BEFORE Pass 1 loop ────────────────────────
+    # Snapshot current context so all agents receive identical baseline.
+    # This guarantees true independence — no agent sees another's Pass 1 output.
+    frozen_context = await _inject_context(session_dir, prompt)
+
+    # ── Pass 1 — Independent reviews with frozen context ─────────────────
     summaries = []
     results = []
-    for pkg in agents:
+    for i, pkg in enumerate(agents):
         agent = pkg["instance"]
         builder = PromptBuilder(max_tokens=6000)
 
-        # Add rules, persona, and context
-        rules = knowledge.get_rules(pkg["cfg"]["role"])
-        if rules: builder.add_system(rules)
+        # P1 FIX: Use lazy knowledge loading via mode registry instead of greedy
+        mode_namespaces = MODE_REGISTRY.get_knowledge_namespaces("review_debate")
+        if mode_namespaces:
+            for ns in mode_namespaces:
+                files = MODE_REGISTRY.get_knowledge_files("review_debate", ns)
+                if files:
+                    rules = agent._load_knowledge(ns, files)
+                else:
+                    rules = agent._load_knowledge(ns)
+                if rules:
+                    builder.add_system(rules)
+        else:
+            # Fallback: load rules based on agent role (greedy, but only if registry has no config)
+            rules = knowledge.get_rules(pkg["cfg"]["role"])
+            if rules:
+                builder.add_system(rules)
+
         builder.add_role(agent.role_content)
-        builder.add_context(await _inject_context(session_dir, prompt))
-        
-        # Add template
-        tmpl_name = "arch_review.md" if agents.index(pkg) == 0 else "code_review.md"
+        builder.add_context(frozen_context)  # P0 FIX: Use frozen snapshot
+
+        # Select template based on agent role, not hardcoded index
+        role_prefix = pkg["cfg"]["role"].split("/")[0]
+        if role_prefix == "se":
+            tmpl_name = "arch_review.md"
+        elif role_prefix == "qa":
+            tmpl_name = "qa_audit.md"
+        else:
+            tmpl_name = "code_review.md"
         builder.add_context(f"GUIDANCE TEMPLATE:\n{_load_template(tmpl_name)}")
 
         # Task with forced summary constraint
@@ -414,7 +479,7 @@ async def _mode_cross(session_dir: Path, prompt: str, agents: list[dict], knowle
         out = await agent.call(builder.build(), session_dir, timeout=TIMEOUT)
         print(out)
         results.append(out)
-        
+
         # Extract summary (naive fallback if tag missing)
         summary = out
         if "<review_summary>" in out and "</review_summary>" in out:
@@ -422,32 +487,94 @@ async def _mode_cross(session_dir: Path, prompt: str, agents: list[dict], knowle
         summaries.append(summary)
 
         _write_atomic(session_dir / f"{pkg['cfg']['id']}_last.md", out)
-        _append_context(session_dir, f"{pkg['cfg']['id']} Pass 1", out)
 
-    # Pass 2 — Challenge each other using ONLY summaries to save tokens
-    _sep(f"Pass 2 — {agents[0]['cfg']['id']} vs {agents[1]['cfg']['id']}")
-    
-    h2_prompt = f"The other reviewer ({agents[1]['cfg']['id']}) summarized their findings as:\n<other_summary>\n{summaries[1]}\n</other_summary>\n\nDo you agree or disagree? Max 200 words."
-    h2 = await agents[0]["instance"].call(h2_prompt, session_dir, timeout=TIMEOUT)
-    print(f"\n{agents[0]['cfg']['id']} response:\n{h2}")
-    _append_context(session_dir, f"{agents[0]['cfg']['id']} Pass 2 (cross)", h2)
+    # P0 FIX: Batch-append ALL Pass 1 outputs AFTER the loop completes
+    for i, pkg in enumerate(agents):
+        _append_context(session_dir, f"{pkg['cfg']['id']} Pass 1", results[i])
 
-    c2_prompt = f"The other reviewer ({agents[0]['cfg']['id']}) summarized their findings as:\n<other_summary>\n{summaries[0]}\n</other_summary>\n\nDo you agree or disagree? Max 200 words."
-    c2 = await agents[1]["instance"].call(c2_prompt, session_dir, timeout=TIMEOUT)
-    print(f"\n{agents[1]['cfg']['id']} response:\n{c2}")
-    _append_context(session_dir, f"{agents[1]['cfg']['id']} Pass 2 (cross)", c2)
+    # ── Pass 2 — Round-robin cross-examination (supports N agents) ───────
+    debates = {}  # {agent_id: debate_response}
+    for i, pkg in enumerate(agents):
+        # Each agent challenges all OTHER agents' summaries
+        other_summaries = []
+        for j, other_pkg in enumerate(agents):
+            if i == j:
+                continue
+            other_summaries.append(
+                f"<other_summary agent='{other_pkg['cfg']['id']}'>\n{summaries[j]}\n</other_summary>"
+            )
 
-    # Synthesis by first agent
+        challenge_prompt = (
+            f"The following reviewer(s) summarized their findings:\n"
+            f"{''.join(other_summaries)}\n\n"
+            f"Do you agree or disagree with their assessments? "
+            f"Challenge assumptions, identify missing concerns, and highlight areas of agreement. Max 200 words."
+        )
+
+        _sep(f"Pass 2 — {pkg['cfg']['id']} cross-examining")
+        response = await pkg["instance"].call(challenge_prompt, session_dir, timeout=TIMEOUT)
+        print(f"\n{pkg['cfg']['id']} response:\n{response}")
+
+        debates[pkg['cfg']['id']] = response
+        _write_atomic(session_dir / f"{pkg['cfg']['id']}_pass2.md", response)
+        _append_context(session_dir, f"{pkg['cfg']['id']} Pass 2 (cross)", response)
+
+    # ── Synthesis by lead agent ───────────────────────────────────────────
     _sep("Synthesis")
+
+    summary_block = "\n".join(
+        f"- {agents[i]['cfg']['id']}: {summaries[i]}" for i in range(len(agents))
+    )
+    debate_block = "\n".join(
+        f"- {aid}: {resp}" for aid, resp in debates.items()
+    )
+
+    schema_name = MODE_REGISTRY.get_schema(mode)
+    schema_instruction = ""
+    if schema_name and schema_name in SCHEMA_MAP:
+        schema_cls = SCHEMA_MAP[schema_name]
+        schema_instruction = (
+            f"\n\nIMPORTANT: You MUST return ONLY raw JSON matching the following schema:\n"
+            f"{json.dumps(schema_cls.model_json_schema(), indent=2)}"
+        )
+
     syn_prompt = (
-        "Synthesize this panel review into 3 actionable conclusions.\n"
-        f"Summary 1: {summaries[0]}\n"
-        f"Summary 2: {summaries[1]}\n"
-        f"Debate: {h2}\n{c2}"
+        "Synthesize this panel review into a structured, highly actionable synthesis.\n"
+        "Provide 3 actionable conclusions. For each conclusion include:\n"
+        "- decision: what to do\n"
+        "- rationale: why\n"
+        "- implementation_steps: concrete steps\n\n"
+        f"Agent Summaries:\n{summary_block}\n\n"
+        f"Cross-Examination Debate:\n{debate_block}"
+        f"{schema_instruction}"
     )
     syn = await agents[0]["instance"].call(syn_prompt, session_dir, timeout=TIMEOUT)
-    print(syn)
-    _append_context(session_dir, "Synthesis", syn)
+    
+    # Validate against schema if applicable (from registry)
+    if schema_name and schema_name in SCHEMA_MAP:
+        try:
+            schema_cls = SCHEMA_MAP[schema_name]
+            clean_json = _extract_json(syn)
+            validated = schema_cls.model_validate_json(clean_json)
+            output = validated.model_dump_json(indent=2)
+            print(f"✅ Debate synthesis schema validation passed ({schema_name})")
+        except ValidationError as e:
+            print(f"❌ Debate synthesis schema validation failed ({schema_name}):")
+            print(f"   {e}")
+            print(f"\nRaw synthesis output:\n{syn[:500]}...")
+            return  # HALT on invalid output
+        except json.JSONDecodeError as e:
+            print(f"❌ JSON Decode Error ({schema_name}):")
+            print(f"   {e}")
+            print(f"\nRaw synthesis output:\n{syn[:500]}...")
+            return
+    else:
+        output = syn
+
+    print(output)
+    _write_atomic(session_dir / "synthesis.md", output)
+    _append_context(session_dir, "Synthesis", output)
+    print(f"\n[✓] Synthesis saved: {session_dir / 'synthesis.md'}")
 
 # ── CLI Interface ────────────────────────────────────────────────────────────
 

@@ -48,6 +48,45 @@
                 }
             },
             "additionalProperties": false
+        },
+        "sensory_affect": {
+            "type": "object",
+            "properties": {
+                "olfactory": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                },
+                "tactile": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                },
+                "visual": {
+                    "type": "array",
+                    "items": { "type": "string" }
+                },
+                "dialogue_escalation": {
+                    "type": "string"
+                },
+                "tsundere_breakdown": {
+                    "type": "number",
+                    "minimum": 0.0,
+                    "maximum": 10.0
+                },
+                "stroking_metric": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 10
+                }
+            },
+            "required": [
+                "olfactory",
+                "tactile",
+                "visual",
+                "dialogue_escalation",
+                "tsundere_breakdown",
+                "stroking_metric"
+            ],
+            "additionalProperties": false
         }
     },
     "required": [
@@ -55,7 +94,8 @@
         "prose_content",
         "word_count",
         "metrics",
-        "format_compliance"
+        "format_compliance",
+        "sensory_affect"
     ],
     "additionalProperties": false
 }

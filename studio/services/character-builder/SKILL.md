@@ -27,6 +27,8 @@ The Character Builder creates **high-fidelity psychological character profiles**
 
 Output profiles are used by downstream services (Lewd Writer, Dialogue Scripting, ST Card Export) and are the authoritative character source of truth for the story bible.
 
+It also supports compiling these profiles directly into exportable **SillyTavern V3 Character Cards** utilizing the downstream `sillytavern-export` module, allowing immediate high-fidelity interactive roleplay simulation in the compiled universe.
+
 ## On Activation
 
 1. Check for existing story bible at the project's bible path
@@ -36,9 +38,10 @@ Output profiles are used by downstream services (Lewd Writer, Dialogue Scripting
 ## Steps
 
 | Step | File | Purpose |
-|------|------|---------|
+| :--- | :--- | :--- |
 | 1 | `steps/step-01-world-info.md` | Create/update world lore and setting context |
 | 2 | `steps/step-02-character-profile.md` | Build detailed character profiles with psychology |
+| 3 | `{{project_root}}/studio/modules/sillytavern-export/SKILL.md` | Compile profiles and world lore into SillyTavern V3 Character Cards |
 
 ## Sub-Workflows
 
@@ -53,6 +56,6 @@ The `character-bible/` directory contains additional resources for character man
 ## Quick Reference
 
 | Intent | Trigger | Route |
-|--------|---------|-------|
+| :--- | :--- | :--- |
 | **Create character** | `/character-bible` | Load `steps/step-01-world-info.md` |
 | **Edit existing** | Provide character name | Load existing profile, edit in step 2 |

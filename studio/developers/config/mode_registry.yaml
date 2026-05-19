@@ -56,6 +56,11 @@ modes:
     description: "Cross-agent debate on framework architecture"
     execution_type: "debate"
     passes: 2
+    output_schema: "SynthesisOutput"
+    knowledge_namespaces: ["se", "dev"]
+    knowledge_files:
+      se: ["global_rule_hub.md", "delegation_protocol.md", "system.md"]
+      dev: ["gooner_principles.md", "anti_slop.md"]
     agents:
       required: 2
       roles: ["se/m-architect", "dev/m-prompt-expert"]
@@ -64,6 +69,7 @@ schema_map:
   arch_review.md: "ArchReviewOutput"
   code_review.md: "CodeReviewOutput"
   qa_audit.md: "QAAuditOutput"
+  synthesis.md: "SynthesisOutput"
 
 # Execution type definitions
 execution_types:

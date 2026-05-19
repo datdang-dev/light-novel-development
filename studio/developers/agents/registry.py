@@ -3,11 +3,18 @@ from typing import Dict, Type
 from .base import BaseAgent
 from .hermes_agent import HermesAgent
 from .claude_agent import ClaudeAgent
+from .qwen_agent import QwenAgent
+from .openclaw_agent import OpenClawAgent
+from .deepseek_agent import DeepSeekAgent
+from .codex_agent import CodexAgent
 
 AGENT_MAP: Dict[str, Type[BaseAgent]] = {
     "hermes": HermesAgent,
     "claude": ClaudeAgent,
-    # "codex": CodexAgent, # Placeholder for future restoration if needed
+    "qwen": QwenAgent,
+    "openclaw": OpenClawAgent,
+    "deepseek": DeepSeekAgent,
+    "codex": CodexAgent,
 }
 
 def get_agent_class(agent_id: str) -> Type[BaseAgent]:

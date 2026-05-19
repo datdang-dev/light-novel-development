@@ -1,0 +1,22 @@
+{
+  "tasks": {
+    "task-1779207034366-krwqim": {
+      "taskId": "task-1779207034366-krwqim",
+      "type": "feature",
+      "description": "Demo Dev/QA/SE workflow: SE reviews architecture, DEV proposes adapter integration, QA validates mode registry and schema contract for Ruflo orchestration layer.",
+      "priority": "normal",
+      "status": "pending",
+      "progress": 0,
+      "assignedTo": [],
+      "tags": [
+        "lnd_dev",
+        "studio-developers",
+        "ruflo-demo"
+      ],
+      "createdAt": "2026-05-19T16:10:34.366Z",
+      "startedAt": null,
+      "completedAt": null
+    }
+  },
+  "version": "3.0.0"
+}

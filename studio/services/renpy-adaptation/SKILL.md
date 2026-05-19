@@ -21,44 +21,41 @@ dependencies:
 ---
 
 
-# Ren'Py Adaptation Pipeline
+# Ren'Py Playthrough Novelization Pipeline
 
 ## Overview
 
-The Ren'Py Adaptation pipeline enables **visual novel game script adaptation** — an alternative input source to manga pages. Operated by the **Ren'Py Adapter** agent, it mines Ren'Py `.rpy` scripts via AST analysis, builds a semantic model of scenes/dialogue/choices, and then delegates to the standard Transformation Engine for prose generation.
+The Ren'Py Playthrough Novelization pipeline enables the **autonomous conversion of visual novel game scripts into high-fidelity, interactive R18 Light Novels**. Operated by the **Ren'Py Adapter** agent, it parses `.rpy` scripts, flattens branching dialogue trees based on a *Playthrough Choice Matrix*, maps multi-modal cues (sprites, backgrounds, sound effects) into stage directions, and compiles Suki's (`lewd-writer`) sensory-dense R18 Vietnamese prose with embedded game image illustrations.
 
-This pipeline demonstrates the **input-agnostic design** of the Transformation Engine — any source that can produce a standardized `forensic-state.json` can feed into the prose generation flow.
+This pipeline redefines game adaptation — transforming raw, complex game code into a beautiful, linear, or multi-route story book.
 
 ## On Activation
 
-1. Load Ren'Py script file(s) (`.rpy`)
-2. Verify tools are available (`tools/` directory)
-3. Begin at `steps/step-01-ast-mining.md`
+1. Load target Ren'Py script file(s) (`.rpy`)
+2. Load or define the **Playthrough Choice Matrix** (e.g. `choices = {"day26_asuka": "slut"}`) to resolve narrative branching.
+3. Verify extraction and index tools in the `tools/` directory.
+4. Begin at `steps/step-01-ast-mining.md`
 
 ## Steps
 
 | Step | File | Purpose |
-|------|------|---------|
-| 1 | `steps/step-01-ast-mining.md` | Parse Ren'Py scripts and extract AST |
-| 2 | `steps/step-02-semantic-model.md` | Build semantic model from AST data |
-| 3 | `steps/step-03-delegate.md` | Convert to `forensic-state.json` and delegate to Transformation Engine |
+| --- | --- | --- |
+| 1 | `steps/step-01-ast-mining.md` | Parse `.rpy` files and discover characters, variables, and branches. |
+| 2 | `steps/step-02-timeline-flattening.md` | Apply the Choice Matrix to resolve game flags and flatten the AST into a linear chronological script. |
+| 3 | `steps/step-03-visual-audio-merging.md` | Map `scene`, `show`, `play music`, and transitions (e.g., `vpunch`) into multi-modal stage directions and visual anchors. |
+| 4 | `steps/step-04-prose-drafting.md` | Suki (`lewd-writer`) rewrites the structured script into sensory-dense Vietnamese R18 prose, embedding images. |
+| 5 | `steps/step-05-book-compilation.md` | Aggregate chapters and compile a self-contained, glassmorphic HTML/JS Web Book SPA. |
 
 ## Tools
 
 | Path | Purpose |
-|------|---------|
-| `tools/` | Ren'Py parsing and extraction utilities (3 tools) |
-| `test_script.rpy` | Test script for validation |
+| --- | --- |
+| `tools/extract_renpy_ast.py` | Parses `.rpy` files into a structured AST JSON. |
+| `tools/analyze_semantics.py` | Resolves positions, zooms, and environmental cues from the AST. |
+| `tools/index_assets.py` | Indexes physical `.jpg`, `.png`, and `.webm` assets to link into the novel. |
 
 ## Dependencies
 
 - **Agent**: Ren'Py Adapter (`renpy-adapter.agent.yaml`)
-- **Output**: `forensic-state.json` (standard format)
-- **Downstream**: Transformation Engine → Lewd Writer → Quality Audit
-
-## Quick Reference
-
-| Intent | Trigger | Route |
-|--------|---------|-------|
-| **Adapt Ren'Py game** | Provide `.rpy` file path | Load `steps/step-01-ast-mining.md` |
-| **Test with sample** | Use built-in `test_script.rpy` | — |
+- **Output**: Beautiful, self-contained interactive Markdown/HTML Web Book chapters.
+- **Downstream**: Suki (`lewd-writer`) → QA Audit (`riko`) → Web Book SPA Compiler.

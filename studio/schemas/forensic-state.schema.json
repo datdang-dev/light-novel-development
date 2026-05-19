@@ -124,6 +124,64 @@
             },
             "additionalProperties": false
         },
+        "interactions": {
+            "type": "array",
+            "description": "Spatial interactions: who is doing what to whom. MANDATORY if erotic_elements has acts.",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "subject": {
+                        "type": "string",
+                        "description": "Entity performing the action (name, or PARTIALLY_OBSCURED / OFF_PANEL)"
+                    },
+                    "action": {
+                        "type": "string",
+                        "description": "Physical verb: licking, groping, restraining, penetrating, etc."
+                    },
+                    "target": {
+                        "type": "string",
+                        "description": "Entity receiving the action"
+                    },
+                    "body_part": {
+                        "type": "string",
+                        "description": "Specific body part involved"
+                    },
+                    "sensory_tags": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "modality": {
+                                    "type": "string",
+                                    "enum": ["smell", "texture", "temperature", "sound"]
+                                },
+                                "value": {
+                                    "type": "string"
+                                },
+                                "certainty": {
+                                    "type": "string",
+                                    "enum": ["confirmed", "probable", "ambiguous"],
+                                    "default": "probable"
+                                }
+                            },
+                            "required": ["modality", "value"]
+                        },
+                        "minItems": 2
+                    },
+                    "power_dynamic": {
+                        "type": "string",
+                        "enum": ["dominant", "submissive", "mutual", "neutral"],
+                        "default": "neutral"
+                    },
+                    "intensity": {
+                        "type": "string",
+                        "enum": ["LOW", "MED", "HIGH", "EXTREME"],
+                        "default": "MED"
+                    }
+                },
+                "required": ["subject", "action", "target", "body_part", "sensory_tags"]
+            }
+        },
         "sensory_extraction": {
             "type": "object",
             "properties": {

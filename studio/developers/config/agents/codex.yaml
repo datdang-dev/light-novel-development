@@ -1,0 +1,15 @@
+id: codex
+name: codex
+type: cli
+cli: codex
+entrypoint: "--acp --stdio"
+roles:
+  - qa/m-qa-gooner
+capabilities:
+  - llm
+  - qa
+  - slop-detection
+meta:
+  vendor: codex
+  category: qa
+  version: "auto-detect"

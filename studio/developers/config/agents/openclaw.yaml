@@ -1,0 +1,16 @@
+id: openclaw
+name: openclaw
+type: cli
+cli: openclaw
+entrypoint: "agent --local --session-id <session> --message <prompt>"
+roles:
+  - se/m-architect
+capabilities:
+  - system-design
+  - integration-review
+  - agentic-framework-architecture
+  - orchestration-review
+meta:
+  vendor: openclaw
+  category: se
+  version: "auto-detect"

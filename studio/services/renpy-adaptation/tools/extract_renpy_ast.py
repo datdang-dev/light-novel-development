@@ -27,7 +27,7 @@ def extract_ast(script_path):
     show_pat = re.compile(r'show\s+(\w+)\s*([\w\s]*)')
     at_pat = re.compile(r'at\s+(\w+)')
     zoom_pat = re.compile(r'zoom\s+([\d.]+)')
-    say_pat = re.compile(r'(\w+)?\s+"([^"]+)"')
+    say_pat = re.compile(r'(\w+)?\s+"((?:[^"\\]|\\.)*)"')
     var_pat = re.compile(r'\$\s+(\w+)\s*=\s*([\w\d\(\)\'"]+)')
     default_var_pat = re.compile(r'default\s+(\w+)\s*=\s*([\w\d\(\)\'"]+)')
 

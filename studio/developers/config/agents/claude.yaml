@@ -1,0 +1,19 @@
+id: claude
+name: claude
+type: cli
+cli: claude
+entrypoint: "--acp --stdio"
+roles:
+  - dev/m-prompt-expert
+  - dev/f-r18-expert
+  - qa/m-qa-gooner
+capabilities:
+  - llm
+  - prompt-review
+  - r18-development
+  - slop-detection
+  - rewrite-targets
+meta:
+  vendor: claude
+  category: dev
+  version: "auto-detect"

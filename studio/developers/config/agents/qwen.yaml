@@ -1,0 +1,17 @@
+id: qwen
+name: qwen
+type: cli
+cli: qwen
+entrypoint: "-p <prompt>"
+roles:
+  - dev/m-prompt-expert
+  - dev/f-r18-expert
+capabilities:
+  - llm
+  - prompt-review
+  - r18-development
+  - cross-check
+meta:
+  vendor: qwen
+  category: dev
+  version: "auto-detect"
