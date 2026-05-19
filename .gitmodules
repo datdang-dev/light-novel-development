@@ -1,3 +1,6 @@
 [submodule "external/everything-claude-code"]
 	path = external/everything-claude-code
 	url = https://github.com/affaan-m/everything-claude-code.git
+[submodule "external/ruflo"]
+	path = external/ruflo
+	url = https://github.com/datdang-dev/ruflo.git
