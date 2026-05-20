@@ -1,0 +1,208 @@
+{
+  "$defs": {
+    "ScreenplayElement": {
+      "description": "Represents a single flattened element of a Ren'Py script execution timeline.",
+      "properties": {
+        "type": {
+          "description": "Type of the screenplay action",
+          "enum": [
+            "dialogue",
+            "scene",
+            "show",
+            "play_music",
+            "play_sound",
+            "play_movie",
+            "stop_audio"
+          ],
+          "title": "Type",
+          "type": "string"
+        },
+        "speaker": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Name or identifier of the character speaking",
+          "title": "Speaker"
+        },
+        "text": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Substituted dialogue text spoken by the character",
+          "title": "Text"
+        },
+        "vpunch": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Whether visual punch effect (vpunch/hpunch) is active",
+          "title": "Vpunch"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Value or identifier for bg, music, sound or movie",
+          "title": "Value"
+        },
+        "effects": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Visual effects associated with scene/show changes",
+          "title": "Effects"
+        },
+        "character": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Name of character to show",
+          "title": "Character"
+        },
+        "expression": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Details of character expression, clothes, pose",
+          "title": "Expression"
+        },
+        "channel": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Audio/video channel name for stop_audio",
+          "title": "Channel"
+        },
+        "asset_path": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Physical path to referenced asset, if resolved under asset-root",
+          "title": "Asset Path"
+        },
+        "desc": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Human readable description of the action",
+          "title": "Desc"
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "title": "ScreenplayElement",
+      "type": "object"
+    },
+    "ScreenplayMetadata": {
+      "description": "Compilation metadata for a playthrough segment.",
+      "properties": {
+        "start_label": {
+          "description": "Ren'Py start label name",
+          "title": "Start Label",
+          "type": "string"
+        },
+        "total_elements": {
+          "description": "Total elements in the compiled playthrough",
+          "title": "Total Elements",
+          "type": "integer"
+        },
+        "variables": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Final variable values substituted during compile",
+          "title": "Variables",
+          "type": "object"
+        }
+      },
+      "required": [
+        "start_label",
+        "total_elements"
+      ],
+      "title": "ScreenplayMetadata",
+      "type": "object"
+    }
+  },
+  "description": "Full schema for compiled playthrough novel screenplay outputs.",
+  "properties": {
+    "screenplay": {
+      "description": "Sequence of screenplay elements",
+      "items": {
+        "$ref": "#/$defs/ScreenplayElement"
+      },
+      "title": "Screenplay",
+      "type": "array"
+    },
+    "metadata": {
+      "$ref": "#/$defs/ScreenplayMetadata",
+      "description": "Compilation metadata"
+    }
+  },
+  "required": [
+    "screenplay",
+    "metadata"
+  ],
+  "title": "ScreenplayOutput",
+  "type": "object"
+}

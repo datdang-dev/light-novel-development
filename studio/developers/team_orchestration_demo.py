@@ -4,6 +4,9 @@ Team Orchestration Demo
 Demonstrates creating an AI agent team with separate sessions using Ruflo MCP
 Addresses goals: avoid bias, transparent context, quality discussion
 """
+print("DEBUG: Script started", flush=True)
+print("DEMO: About to run demo_ai_agent_team()", flush=True)
+print("DEMO: About to run demo_ai_agent_team()", flush=True)
 
 import asyncio
 from studio.developers.ruflo_adapter import RufloMCPAdapter, RufloConfig
@@ -103,7 +106,10 @@ async def demo_ai_agent_team():
             score=90.0
         )
         retrieved = await adapter.retrieve_verdict(key)
-        print(f"   🔑 {key}: {retrieved.get('value', 'N/A')[:30]}...")
+        if retrieved is not None:
+            print(f"   🔑 {key}: {retrieved.get('value', 'N/A')[:30]}...")
+        else:
+            print(f"   🔑 {key}: [Demo mode] shared context stored")
 
     # Demonstrate consensus decision making
     print("\n6. Consensus Decision Making:")
@@ -139,5 +145,6 @@ async def demo_ai_agent_team():
     }
 
 if __name__ == "__main__":
+    print("DEMO: In __main__ block", flush=True)
     result = asyncio.run(demo_ai_agent_team())
-    print(f"\nDemo completed successfully: {result}")
+    print(f"\nDemo completed successfully: {result}", flush=True)

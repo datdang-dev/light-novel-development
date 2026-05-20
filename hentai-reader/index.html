@@ -1,0 +1,1880 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LND Hentai Haven - Premium Erotic Novel Reader & Swarm Monitor</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Outfit:wght@100..900&family=Fira+Code:wght@300..700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* ==========================================================================
+           1. CORE DESIGN SYSTEM & VARIABLES (HSL TAILORED PALETTE)
+           ========================================================================== */
+        :root {
+            /* Theme: Midnight Plum (Default) */
+            --bg-base: #0a050f;
+            --bg-surface: rgba(22, 13, 31, 0.7);
+            --bg-surface-solid: #160d1f;
+            --border-glow: rgba(255, 46, 126, 0.2);
+            --border-glow-active: rgba(255, 46, 126, 0.6);
+            
+            /* Curated Erotic Highlight Colors */
+            --color-primary: #ff2e7e; /* Rose Neon */
+            --color-secondary: #a855f7; /* Violet Glow */
+            --color-accent: #3b82f6; /* Electric Blue */
+            --color-bg-pulse: rgba(255, 46, 126, 0.05);
+            
+            /* Text Color Tokens */
+            --text-main: #f3f1f6;
+            --text-muted: #a39cb0;
+            --text-dialogue-female: #ffa6c9;
+            --text-dialogue-male: #9cd5ff;
+            --text-thought: #d8b4fe;
+            
+            /* Fonts */
+            --font-display: 'Outfit', sans-serif;
+            --font-serif: 'Playfair Display', serif;
+            --font-mono: 'Fira Code', monospace;
+            
+            /* Animations */
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --heartbeat-speed: 2s;
+        }
+
+        /* Ambient Heartbeat Pulse Overlay */
+        .ambient-pulse {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 9999;
+            box-shadow: inset 0 0 80px rgba(255, 46, 126, 0);
+            transition: box-shadow 0.3s ease;
+        }
+
+        /* Dynamic Themes */
+        body.theme-velvet {
+            --bg-base: #080202;
+            --bg-surface: rgba(30, 8, 12, 0.7);
+            --bg-surface-solid: #1e080c;
+            --color-primary: #e11d48;
+            --color-secondary: #f43f5e;
+            --border-glow: rgba(225, 29, 72, 0.2);
+            --text-main: #fff5f5;
+        }
+
+        body.theme-sepia {
+            --bg-base: #14100d;
+            --bg-surface: rgba(38, 28, 22, 0.75);
+            --bg-surface-solid: #261c16;
+            --color-primary: #d97706;
+            --color-secondary: #f59e0b;
+            --border-glow: rgba(217, 119, 6, 0.25);
+            --text-main: #f7ede2;
+            --text-muted: #c5b3a3;
+        }
+
+        body.theme-cyber {
+            --bg-base: #020617;
+            --bg-surface: rgba(15, 23, 42, 0.7);
+            --bg-surface-solid: #0f172a;
+            --color-primary: #06b6d4;
+            --color-secondary: #3b82f6;
+            --border-glow: rgba(6, 182, 212, 0.2);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        /* Global Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            font-family: var(--font-display);
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(255, 46, 126, 0.08) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(168, 85, 247, 0.08) 0px, transparent 50%);
+            background-attachment: fixed;
+        }
+
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.02);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 46, 126, 0.3);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--color-primary);
+        }
+
+        /* ==========================================================================
+           2. APP HEADER (PREMIUM BRANDING)
+           ========================================================================== */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.25rem 2rem;
+            background: rgba(10, 5, 15, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .logo-icon {
+            font-size: 1.8rem;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 8px rgba(255, 46, 126, 0.4));
+            animation: pulse-icon 2s infinite ease-in-out;
+        }
+
+        .logo-text {
+            font-size: 1.4rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            background: linear-gradient(to right, #ffffff, #ffa6c9);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-family: var(--font-display);
+        }
+
+        .status-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 0.8rem;
+            background: rgba(255, 46, 126, 0.1);
+            border: 1px solid rgba(255, 46, 126, 0.25);
+            border-radius: 99px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--color-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 0 10px rgba(255, 46, 126, 0.1);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--color-primary);
+            box-shadow: 0 0 8px var(--color-primary);
+            animation: pulse-dot 1.5s infinite alternate;
+        }
+
+        /* ==========================================================================
+           3. MAIN LAYOUT (THREE-COLUMN PREMIUM INTERFACE)
+           ========================================================================== */
+        .container {
+            display: grid;
+            grid-template-columns: 280px 1fr 340px;
+            gap: 1.5rem;
+            padding: 1.5rem;
+            flex-grow: 1;
+            max-width: 1800px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        @media (max-width: 1200px) {
+            .container {
+                grid-template-columns: 240px 1fr;
+            }
+            .sidebar-right {
+                display: none;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+            .sidebar-left {
+                display: none;
+            }
+        }
+
+        /* Sidebar Panels */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            height: calc(100vh - 120px);
+            position: sticky;
+            top: 90px;
+            overflow-y: auto;
+            padding-right: 0.25rem;
+        }
+
+        .card {
+            background: var(--bg-surface);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            padding: 1.25rem;
+            transition: var(--transition-smooth);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+        }
+
+        .card:hover {
+            border-color: var(--border-glow);
+            box-shadow: 0 8px 32px 0 rgba(255, 46, 126, 0.05);
+        }
+
+        .card-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #ffffff;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 0.5rem;
+        }
+
+        .card-title i {
+            color: var(--color-primary);
+        }
+
+        /* ==========================================================================
+           4. LEFT SIDEBAR: SWARM MONITOR & LOGS
+           ========================================================================== */
+        .agent-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.6rem 0.8rem;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            transition: var(--transition-smooth);
+        }
+
+        .agent-item:hover {
+            background: rgba(255, 46, 126, 0.05);
+            border-color: rgba(255, 46, 126, 0.2);
+        }
+
+        .agent-info {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .agent-avatar {
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .agent-name {
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .agent-role {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        .agent-status-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: #10b981;
+            box-shadow: 0 0 6px #10b981;
+        }
+
+        /* Live Activity Logs */
+        .log-box {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            height: 200px;
+            overflow-y: auto;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            padding: 0.75rem;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .log-entry {
+            line-height: 1.4;
+        }
+
+        .log-time {
+            color: var(--text-muted);
+            margin-right: 0.4rem;
+        }
+
+        .log-tag {
+            color: var(--color-primary);
+            font-weight: 600;
+            margin-right: 0.4rem;
+        }
+
+        .log-text {
+            color: #d1cbd8;
+        }
+
+        /* ==========================================================================
+           5. MIDDLE SECTION: THE PREMIUM NOVEL READER
+           ========================================================================== */
+        .reader-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        /* Cover & Chapter Showcase header */
+        .cover-showcase {
+            background: linear-gradient(135deg, rgba(22, 13, 31, 0.85), rgba(41, 18, 59, 0.85));
+            border: 1px solid rgba(255, 46, 126, 0.15);
+            display: flex;
+            gap: 1.5rem;
+            padding: 1.5rem;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(255, 46, 126, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cover-showcase::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 150px;
+            height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255, 46, 126, 0.08));
+            pointer-events: none;
+        }
+
+        .novel-cover {
+            width: 110px;
+            height: 155px;
+            background: linear-gradient(135deg, #1e0d33, #e11d48);
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 0.75rem;
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .novel-cover-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, transparent 20%, rgba(0, 0, 0, 0.6) 80%);
+        }
+
+        .novel-cover-badge {
+            background: var(--color-primary);
+            color: #ffffff;
+            font-size: 0.55rem;
+            font-weight: 800;
+            padding: 0.15rem 0.35rem;
+            border-radius: 4px;
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            z-index: 2;
+            text-transform: uppercase;
+        }
+
+        .novel-cover-text {
+            font-family: var(--font-display);
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #ffffff;
+            position: relative;
+            z-index: 2;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        .novel-meta-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .novel-title {
+            font-family: var(--font-serif);
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #ffffff;
+            line-height: 1.2;
+            margin-bottom: 0.4rem;
+        }
+
+        .novel-subtitle {
+            font-size: 0.95rem;
+            color: var(--color-primary);
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .novel-stats-row {
+            display: flex;
+            gap: 1.25rem;
+            flex-wrap: wrap;
+        }
+
+        .novel-stat-item {
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .novel-stat-item i {
+            color: var(--color-secondary);
+        }
+
+        .novel-stat-value {
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        /* Erotic Reader View Styling */
+        .reader-view {
+            padding: 2.5rem;
+            line-height: 1.8;
+            font-size: 1.15rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+            transition: var(--transition-smooth);
+            background-color: var(--bg-surface-solid);
+        }
+
+        .chapter-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 2rem;
+        }
+
+        .chapter-number {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--color-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .chapter-title {
+            font-family: var(--font-serif);
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #ffffff;
+            line-height: 1.3;
+        }
+
+        .chapter-nav-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            color: #ffffff;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .chapter-nav-btn:hover {
+            background: rgba(255, 46, 126, 0.1);
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+        }
+
+        /* Prose specific styles */
+        .prose-block {
+            margin-bottom: 1.5rem;
+            color: var(--text-main);
+            transition: var(--transition-smooth);
+        }
+
+        /* Context note */
+        .context-note {
+            background: rgba(168, 85, 247, 0.05);
+            border-left: 3px solid var(--color-secondary);
+            padding: 1rem 1.25rem;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            border-radius: 0 12px 12px 0;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .context-note i {
+            color: var(--color-secondary);
+            margin-right: 0.4rem;
+        }
+
+        /* Section Headings */
+        .section-heading {
+            font-family: var(--font-serif);
+            font-size: 1.4rem;
+            color: #ffffff;
+            margin: 2.5rem 0 1.25rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 700;
+        }
+
+        .section-heading::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 18px;
+            background: linear-gradient(to bottom, var(--color-primary), var(--color-secondary));
+            border-radius: 2px;
+        }
+
+        /* Erotic Highlighted text & bubbles */
+        .dialogue-bubble {
+            background: rgba(255, 255, 255, 0.015);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            padding: 0.8rem 1.2rem;
+            margin: 1.2rem 0;
+            transition: var(--transition-smooth);
+            position: relative;
+        }
+
+        .dialogue-bubble::before {
+            content: '';
+            position: absolute;
+            left: -1px;
+            top: 20px;
+            width: 3px;
+            height: 30px;
+            border-radius: 0 4px 4px 0;
+        }
+
+        /* Female Dialogue Bubble */
+        .dialogue-female {
+            color: var(--text-dialogue-female);
+            border-color: rgba(255, 74, 147, 0.08);
+            background: rgba(255, 46, 126, 0.01);
+        }
+
+        .dialogue-female::before {
+            background-color: var(--color-primary);
+        }
+
+        .dialogue-female:hover {
+            background: rgba(255, 46, 126, 0.03);
+            border-color: rgba(255, 46, 126, 0.25);
+            box-shadow: 0 0 15px rgba(255, 46, 126, 0.08);
+        }
+
+        /* Male Dialogue Bubble */
+        .dialogue-male {
+            color: var(--text-dialogue-male);
+            border-color: rgba(59, 130, 246, 0.08);
+            background: rgba(59, 130, 246, 0.01);
+        }
+
+        .dialogue-male::before {
+            background-color: var(--color-accent);
+        }
+
+        .dialogue-male:hover {
+            background: rgba(59, 130, 246, 0.03);
+            border-color: rgba(59, 130, 246, 0.25);
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.08);
+        }
+
+        /* Thought dialogue */
+        .thought-bubble {
+            color: var(--text-thought);
+            font-style: italic;
+            background: rgba(168, 85, 247, 0.015);
+            border-color: rgba(168, 85, 247, 0.08);
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            display: inline-block;
+            margin: 0.2rem 0;
+            border-left: 2px solid var(--color-secondary);
+        }
+
+        /* Clickable SFX tags */
+        .dialogue-sfx {
+            background: linear-gradient(135deg, rgba(255, 46, 126, 0.15), rgba(168, 85, 247, 0.15));
+            border: 1px dashed var(--color-primary);
+            border-radius: 4px;
+            padding: 0.1rem 0.4rem;
+            font-weight: 700;
+            color: #ffffff;
+            cursor: pointer;
+            position: relative;
+            display: inline-block;
+            transition: var(--transition-smooth);
+            animation: pulse-sfx 1.5s infinite alternate;
+        }
+
+        .dialogue-sfx:hover {
+            transform: scale(1.1);
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            border-style: solid;
+            box-shadow: 0 0 15px rgba(255, 46, 126, 0.5);
+        }
+
+        /* Visual Erotic Illustration Placeholders (Premium styled gradient blocks) */
+        .illustration-block {
+            width: 100%;
+            height: 380px;
+            margin: 2.5rem 0;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #100619 0%, #300c24 50%, #0a030c 100%);
+            border: 1px solid rgba(255, 46, 126, 0.15);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.8);
+            transition: var(--transition-smooth);
+        }
+
+        .illustration-block.blurred {
+            filter: blur(12px);
+        }
+
+        .illustration-glow {
+            position: absolute;
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--color-primary) 0%, transparent 70%);
+            opacity: 0.25;
+            filter: blur(20px);
+            animation: drift 10s infinite alternate ease-in-out;
+        }
+
+        .illustration-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            z-index: 10;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .illustration-icon {
+            font-size: 2.5rem;
+            color: var(--color-primary);
+            animation: heartbeat 1.5s infinite ease-in-out;
+        }
+
+        .illustration-title {
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #ffffff;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .illustration-subtitle {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            max-width: 320px;
+            line-height: 1.5;
+        }
+
+        .illustration-btn {
+            background: rgba(255, 46, 126, 0.15);
+            border: 1px solid var(--color-primary);
+            padding: 0.5rem 1.25rem;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #ffffff;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .illustration-btn:hover {
+            background: var(--color-primary);
+            box-shadow: 0 0 15px var(--color-primary);
+        }
+
+        /* ==========================================================================
+           6. RIGHT SIDEBAR: CHARACTER CARDS & INTERACTIVE CLI TERMINAL
+           ========================================================================== */
+        .character-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0.01) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .character-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, var(--color-primary), var(--color-secondary));
+            opacity: 0;
+            transition: var(--transition-smooth);
+            z-index: 0;
+        }
+
+        .character-card:hover {
+            border-color: var(--color-primary);
+            transform: translateY(-2px);
+        }
+
+        .character-card:hover::before {
+            opacity: 0.03;
+        }
+
+        .char-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            z-index: 2;
+            position: relative;
+        }
+
+        .char-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #300c24, #ffa6c9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .char-details {
+            flex-grow: 1;
+        }
+
+        .char-name {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .char-sub {
+            font-size: 0.75rem;
+            color: var(--color-primary);
+            font-weight: 600;
+        }
+
+        .char-badge {
+            background: rgba(255, 46, 126, 0.15);
+            color: var(--color-primary);
+            border: 1px solid rgba(255, 46, 126, 0.3);
+            border-radius: 4px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 0.1rem 0.3rem;
+            text-transform: uppercase;
+        }
+
+        /* Interactive Terminal Card */
+        .terminal-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .terminal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-bottom: 0.25rem;
+        }
+
+        .terminal-dots {
+            display: flex;
+            gap: 4px;
+        }
+
+        .terminal-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .terminal-dot.red { background-color: #ef4444; }
+        .terminal-dot.yellow { background-color: #eab308; }
+        .terminal-dot.green { background-color: #22c55e; }
+
+        .terminal-screen {
+            background: #050208;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 1rem;
+            height: 240px;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            overflow-y: auto;
+            color: #4ade80; /* Hacker green */
+            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.8);
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .terminal-output {
+            line-height: 1.5;
+            white-space: pre-wrap;
+        }
+
+        .terminal-input-row {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 0.5rem;
+            margin-top: auto;
+        }
+
+        .terminal-prompt {
+            color: var(--color-primary);
+            font-weight: 700;
+        }
+
+        .terminal-input {
+            flex-grow: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: #ffffff;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+        }
+
+        /* ==========================================================================
+           7. SETTINGS COMPONENT (GLOBAL INTERACTIVE PANEL)
+           ========================================================================== */
+        .settings-panel {
+            background: linear-gradient(135deg, rgba(22, 13, 31, 0.9), rgba(15, 8, 22, 0.9));
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 1.5rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .settings-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .settings-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+        }
+
+        /* Palette selector */
+        .palette-selector {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .palette-btn {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .palette-btn.active {
+            border-color: #ffffff;
+            transform: scale(1.1);
+        }
+
+        .palette-plum { background: linear-gradient(135deg, #0a050f, #ff2e7e); }
+        .palette-velvet { background: linear-gradient(135deg, #080202, #e11d48); }
+        .palette-sepia { background: linear-gradient(135deg, #14100d, #d97706); }
+        .palette-cyber { background: linear-gradient(135deg, #020617, #06b6d4); }
+
+        /* Font selectors */
+        .font-selector {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .config-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            padding: 0.4rem 0.8rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #ffffff;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            flex-grow: 1;
+            text-align: center;
+        }
+
+        .config-btn.active, .config-btn:hover {
+            background: rgba(255, 46, 126, 0.1);
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+        }
+
+        /* Erotic Intensity Slider */
+        .sensory-slider-container {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .sensory-slider {
+            flex-grow: 1;
+            -webkit-appearance: none;
+            height: 6px;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            outline: none;
+            transition: var(--transition-smooth);
+        }
+
+        .sensory-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--color-primary);
+            cursor: pointer;
+            box-shadow: 0 0 10px var(--color-primary);
+            transition: var(--transition-smooth);
+        }
+
+        .sensory-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+
+        .sensory-value {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            min-width: 20px;
+        }
+
+        /* Toggle switch */
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 0.5rem 0.75rem;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 44px;
+            height: 22px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(255,255,255,0.1);
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 14px;
+            width: 14px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .toggle-slider {
+            background-color: var(--color-primary);
+            box-shadow: 0 0 8px var(--color-primary);
+        }
+
+        input:checked + .toggle-slider:before {
+            transform: translateX(22px);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            margin-top: 3rem;
+            background: rgba(5, 2, 8, 0.9);
+        }
+
+        footer i {
+            color: var(--color-primary);
+            margin: 0 0.2rem;
+        }
+
+        /* ==========================================================================
+           8. ANIMATIONS & EFFECTS
+           ========================================================================== */
+        @keyframes pulse-icon {
+            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 8px rgba(255, 46, 126, 0.4)); }
+            50% { transform: scale(1.1); filter: drop-shadow(0 0 16px rgba(255, 46, 126, 0.8)); }
+        }
+
+        @keyframes pulse-dot {
+            0% { transform: scale(0.9); opacity: 0.6; }
+            100% { transform: scale(1.1); opacity: 1; }
+        }
+
+        @keyframes pulse-sfx {
+            0% { box-shadow: 0 0 4px rgba(255, 46, 126, 0.2); }
+            100% { box-shadow: 0 0 12px rgba(255, 46, 126, 0.6); }
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            20% { transform: scale(1.15); }
+            40% { transform: scale(1.05); }
+            60% { transform: scale(1.2); }
+            80% { transform: scale(1); }
+        }
+
+        @keyframes screen-shake {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            10% { transform: translate(-4px, -4px) rotate(-0.5deg); }
+            30% { transform: translate(4px, 2px) rotate(0.5deg); }
+            50% { transform: translate(-4px, 4px) rotate(-0.5deg); }
+            70% { transform: translate(4px, -2px) rotate(0.5deg); }
+            90% { transform: translate(-2px, -2px) rotate(-0.5deg); }
+        }
+
+        @keyframes drift {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(40px, 30px) scale(1.2); }
+        }
+
+        /* Particle effect */
+        .love-particle {
+            position: fixed;
+            pointer-events: none;
+            z-index: 10000;
+            color: var(--color-primary);
+            font-size: 1.25rem;
+            animation: particle-rise 1s forwards cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        @keyframes particle-rise {
+            0% { transform: translateY(0) scale(0.5); opacity: 1; }
+            100% { transform: translateY(-100px) scale(1.5) rotate(20deg); opacity: 0; }
+        }
+
+        .screen-shake-active {
+            animation: screen-shake 0.3s ease-in-out;
+        }
+
+        /* Floating heart pulse indicator */
+        .heartbeat-pulse-active {
+            box-shadow: inset 0 0 120px rgba(255, 46, 126, 0.45) !important;
+        }
+    </style>
+</head>
+<body class="theme-plum">
+
+    <!-- Ambient Heartbeat red glow overlay -->
+    <div class="ambient-pulse" id="ambientPulse"></div>
+
+    <!-- 1. APP HEADER -->
+    <header>
+        <div class="logo-area">
+            <i class="fa-solid fa-heart-pulse logo-icon"></i>
+            <div class="logo-text">LND HENTAI HAVEN</div>
+        </div>
+        <div class="status-badge" id="swarmStatus">
+            <span class="status-dot"></span>
+            <span>RUFLO SWARM [ACTIVE: task-skynlq]</span>
+        </div>
+    </header>
+
+    <!-- 2. MAIN GRID CONTAINER -->
+    <div class="container">
+        
+        <!-- ==========================================
+             LEFT SIDEBAR: SWARM MONITOR & ACTIVE RUNS
+             ========================================== -->
+        <aside class="sidebar sidebar-left">
+            
+            <!-- Swarm Controller overview -->
+            <div class="card">
+                <div class="card-title">
+                    <i class="fa-solid fa-network-wired"></i>
+                    <span>Swarm Orchestration</span>
+                </div>
+                <div style="font-size: 0.8rem; margin-bottom: 1rem;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.3rem;">
+                        <span class="text-muted">Topology:</span>
+                        <span style="font-weight: 700; color: var(--color-primary);">Hierarchical Mesh</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.3rem;">
+                        <span class="text-muted">Active Swarm ID:</span>
+                        <span style="font-family: var(--font-mono); font-size: 0.7rem; color: #ffffff;">swarm-ieua2s</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span class="text-muted">Neural Consensus:</span>
+                        <span style="color: #10b981; font-weight: 700;">BFT-Activated</span>
+                    </div>
+                </div>
+                
+                <!-- Swarm Agents -->
+                <div class="agent-item">
+                    <div class="agent-info">
+                        <div class="agent-avatar">DK</div>
+                        <div>
+                            <div class="agent-name">Director K</div>
+                            <div class="agent-role">Orchestrator</div>
+                        </div>
+                    </div>
+                    <div class="agent-status-dot"></div>
+                </div>
+                <div class="agent-item">
+                    <div class="agent-info">
+                        <div class="agent-avatar" style="background: linear-gradient(135deg, #ec4899, #f43f5e);">SU</div>
+                        <div>
+                            <div class="agent-name">Suki-Prose</div>
+                            <div class="agent-role">R18 Narrative</div>
+                        </div>
+                    </div>
+                    <div class="agent-status-dot"></div>
+                </div>
+                <div class="agent-item">
+                    <div class="agent-info">
+                        <div class="agent-avatar" style="background: linear-gradient(135deg, #a855f7, #3b82f6);">MI</div>
+                        <div>
+                            <div class="agent-name">Miki-Dialogue</div>
+                            <div class="agent-role">SFX & Dialogue</div>
+                        </div>
+                    </div>
+                    <div class="agent-status-dot"></div>
+                </div>
+                <div class="agent-item">
+                    <div class="agent-info">
+                        <div class="agent-avatar" style="background: linear-gradient(135deg, #10b981, #059669);">RQ</div>
+                        <div>
+                            <div class="agent-name">Riko-QA</div>
+                            <div class="agent-role">Adult Auditor</div>
+                        </div>
+                    </div>
+                    <div class="agent-status-dot"></div>
+                </div>
+            </div>
+
+            <!-- Active logs from Swarm -->
+            <div class="card">
+                <div class="card-title">
+                    <i class="fa-solid fa-terminal"></i>
+                    <span>Swarm Activity Log</span>
+                </div>
+                <div class="log-box" id="swarmLogs">
+                    <div class="log-entry"><span class="log-time">[19:10:02]</span><span class="log-tag">[Director K]</span><span class="log-text">Spawning 4 expert agents...</span></div>
+                    <div class="log-entry"><span class="log-time">[19:10:05]</span><span class="log-tag">[Suki]</span><span class="log-text">Initializing sensory narrative template...</span></div>
+                    <div class="log-entry"><span class="log-time">[19:10:12]</span><span class="log-tag">[Miki]</span><span class="log-text">Injecting erotic dialogue constraints and SFX tokens...</span></div>
+                    <div class="log-entry"><span class="log-time">[19:10:18]</span><span class="log-tag">[Riko]</span><span class="log-text">Auditing chapter 1 prose for intensity, flow, and consent...</span></div>
+                    <div class="log-entry"><span class="log-time">[19:10:25]</span><span class="log-tag">[Director K]</span><span class="log-text">Swarm optimized. Success rate: 98.7%</span></div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- ==========================================
+             MIDDLE SECTION: READING VIEW & READER CONTROLS
+             ========================================== -->
+        <main class="reader-section">
+            
+            <!-- 2.1 NOVEL HEADER & COVER DISPLAY -->
+            <div class="cover-showcase">
+                <div class="novel-cover">
+                    <div class="novel-cover-overlay"></div>
+                    <div class="novel-cover-badge">R18+</div>
+                    <div class="novel-cover-text">Waifu Academy</div>
+                </div>
+                <div class="novel-meta-content">
+                    <div class="novel-subtitle">Waifu Academy: Uniform and Submission</div>
+                    <h1 class="novel-title">Chương 1: Sự sụp đổ của lòng tự trọng (Biến cố Ngày 26)</h1>
+                    <div class="novel-stats-row">
+                        <div class="novel-stat-item">
+                            <i class="fa-solid fa-fire"></i>
+                            <span>Sensory Density: <span class="novel-stat-value">9.8/10</span></span>
+                        </div>
+                        <div class="novel-stat-item">
+                            <i class="fa-solid fa-venus"></i>
+                            <span>Lead: <span class="novel-stat-value">Asuka Sazaki</span></span>
+                        </div>
+                        <div class="novel-stat-item">
+                            <i class="fa-solid fa-star"></i>
+                            <span>Quality Grade: <span class="novel-stat-value">A++</span></span>
+                        </div>
+                        <div class="novel-stat-item">
+                            <i class="fa-solid fa-users"></i>
+                            <span>Swarm Audited: <span class="novel-stat-value">Yes</span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2.2 INTERACTIVE SETTINGS BAR -->
+            <div class="settings-panel">
+                <div class="settings-group">
+                    <div class="settings-label">Vibe Palette</div>
+                    <div class="palette-selector">
+                        <button class="palette-btn palette-plum active" onclick="changeTheme('plum', this)" title="Midnight Plum"></button>
+                        <button class="palette-btn palette-velvet" onclick="changeTheme('velvet', this)" title="Velvet Dark"></button>
+                        <button class="palette-btn palette-sepia" onclick="changeTheme('sepia', this)" title="Sepia Sin"></button>
+                        <button class="palette-btn palette-cyber" onclick="changeTheme('cyber', this)" title="Cyber Slate"></button>
+                    </div>
+                </div>
+
+                <div class="settings-group">
+                    <div class="settings-label">Typography</div>
+                    <div class="font-selector">
+                        <button class="config-btn active" id="fontSerifBtn" onclick="changeFont('serif')">Serif</button>
+                        <button class="config-btn" id="fontSansBtn" onclick="changeFont('sans')">Modern</button>
+                    </div>
+                </div>
+
+                <div class="settings-group">
+                    <div class="settings-label">Sensory Overdrive</div>
+                    <div class="sensory-slider-container">
+                        <input type="range" min="1" max="10" value="5" class="sensory-slider" id="sensoryRange" oninput="adjustSensory(this.value)">
+                        <span class="sensory-value" id="sensoryVal">5</span>
+                    </div>
+                </div>
+
+                <div class="settings-group">
+                    <div class="settings-label">NSFW Graphics</div>
+                    <div class="toggle-container">
+                        <span style="font-size: 0.8rem; font-weight: 600;">Show Illustrations</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox" checked id="nsfwToggle" onchange="toggleNSFW(this.checked)">
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2.3 NOVEL WRITTEN TEXT VIEWER -->
+            <article class="reader-view" id="readerText" style="font-family: var(--font-serif);">
+                <div class="chapter-header">
+                    <div class="chapter-number">Chapter 1</div>
+                    <h2 class="chapter-title" style="font-family: var(--font-serif);">ĐỒNG PHỤC VÀ KHUẤT PHỤC</h2>
+                    <div style="margin-top: 1rem; font-size: 0.85rem; color: var(--text-muted);">
+                        <span>Tác giả: Suki-Prose & Miki-Dialogue | Biên tập: QA Riko</span>
+                    </div>
+                </div>
+
+                <div class="context-note">
+                    <i class="fa-solid fa-circle-info"></i>
+                    Bối cảnh: Phòng vệ sinh nam khu hành lang phụ Sazaki Academy. Tiếng nước nhỏ giọt đều đặn trên lớp gạch men lạnh lẽo. Ánh sáng vàng vọt từ bóng đèn tuýp cũ kỹ phản chiếu sự u ám, ngột ngạt của một mối quan hệ đang đứng trên bờ vực tan vỡ.
+                </div>
+
+                <div class="section-heading">Phân Đoạn 1: Cơn Thịnh Nộ Của Tiểu Thư Kiêu Kỳ</div>
+
+                <div class="prose-block">
+                    Asuka giãy giụa trong vô vọng. Đôi cổ tay mảnh mai của cô bị ghim chặt bởi bàn tay cứng rắn của tôi, ép sát vào bức tường gạch men buốt giá của phòng vệ sinh trường học Sazaki. Tiếng thở dốc đầy phẫn uất của cô nàng vang vọng vào không gian chật hẹp, đập vào tai tôi như một bản nhạc của sự phản kháng bất lực.
+                </div>
+
+                <div class="dialogue-bubble dialogue-female">
+                    "Thả ra! Buông tôi ra!" Giọng Asuka rít qua kẽ răng, gương mặt kiêu sa thường ngày giờ đây méo mó vì tức giận. "Tại sao anh lại quan tâm tôi nói dối? Giữa chúng ta... mối quan hệ này có là cái thá gì đối với anh đâu!"
+                </div>
+
+                <div class="dialogue-bubble dialogue-male">
+                    Tôi siết chặt tay hơn, dồn trọng lượng cơ thể ép cô nàng không thể nhúc nhích. "Sai rồi. Tôi chỉ là không thích bị lừa dối bởi kẻ mà tôi đáng lẽ phải tin tưởng. Giờ thì nói đi Asuka, tại sao?"
+                </div>
+
+                <div class="dialogue-bubble dialogue-female">
+                    "Nhìn thấy chưa?! Anh chỉ quan tâm đến bản thân mình thôi, chẳng khác gì bà mẹ độc tài của tôi cả! Tôi ghét anh! <span class="thought-bubble">(Tôi ghét việc mình đã từng tin tưởng anh...)</span>" Cô nàng gào lên, những giọt nước mắt uất ức bắt đầu tràn qua khóe mắt, lăn dài trên đôi má đỏ bừng vì xấu hổ và tức giận.
+                </div>
+
+                <div class="prose-block">
+                    Tôi thở dài, sự kiên nhẫn đã cạn kiệt. Kịch bản tiểu thư giận dỗi này đã quá giới hạn chịu đựng của tôi. Tôi buông tay, lùi lại một bước, ánh mắt lạnh lùng quét qua cơ thể đang run rẩy của cô nàng.
+                </div>
+
+                <div class="dialogue-bubble dialogue-male">
+                    "Thế thôi. Hủy đăng ký cái sự phiền toái này đi, vì tôi đã quá mệt mỏi với đống rắc rối của cô rồi. Tôi không biết cô cần một bác sĩ tâm lý hay một bảo mẫu hơn, nhưng tôi từ chối làm cả hai."
+                </div>
+
+                <div class="prose-block">
+                    Tôi quay lưng, sải bước định rời đi. Sự im lặng chết chóc bao trùm hành lang.
+                </div>
+
+                <!-- NSFW Illustration Panel 1 -->
+                <div class="illustration-block" id="illust1">
+                    <div class="illustration-glow"></div>
+                    <div class="illustration-card">
+                        <i class="fa-solid fa-heart-circle-exclamation illustration-icon"></i>
+                        <div class="illustration-title">ASUKA TUYỆT VỌNG</div>
+                        <div class="illustration-subtitle">Gương mặt ngấn lệ đầy hờn dỗi của tiểu thư Sazaki khi bị đối phương phớt lờ.</div>
+                        <button class="illustration-btn" onclick="revealIllust('illust1')">Cảm nhận Visual</button>
+                    </div>
+                </div>
+
+                <div class="section-heading">Phân Đoạn 2: Sự Sụp Đổ Của Một Tâm Hồn Sợ Bỏ Rơi</div>
+
+                <div class="dialogue-bubble dialogue-female">
+                    "N-Này! Tôi chưa nói chuyện xong với anh!" Giọng Asuka vang lên phía sau, nhưng lần này không còn là sự giận dữ kiêu hãnh nữa. Đó là sự hoảng loạn tột độ. "Nếu anh dám đi ngay bây giờ... t-tôi sẽ rêu rao với cả trường là chúng ta đ-đang quen nhau! <span class="thought-bubble">(Không, không! Mình đang mất anh ấy! Ôi không... mình đã phá hỏng mọi thứ rồi...)</span>"
+                </div>
+
+                <div class="dialogue-bubble dialogue-male">
+                    Tôi dừng lại, nhưng không thèm quay đầu. "Hết lừa dối lại đến đe dọa? Cô thật vô vọng, Asuka."
+                </div>
+
+                <div class="prose-block">
+                    Tôi nhấc chân định bước tiếp. Nhưng chỉ chưa đầy ba bước, một âm thanh nhỏ bé, đáng thương và yếu ớt nhất mà tôi từng nghe thấy trong đời đã giữ chân tôi lại.
+                </div>
+
+                <div class="dialogue-bubble dialogue-female">
+                    "Chờ đã..." Giọng Asuka sụt sịt, dường như cô nàng đang phải dùng hết sức lực để thốt ra từng từ. "Em biết... em biết em không có quyền cầu xin... n-nhưng anh có thể đợi một chút để em xin lỗi được không...? Em biết anh sẽ không bao giờ n-nói chuyện với em nữa sau chuyện này, n-nhưng anh có thể cho em xin một điều cuối cùng này được không...? Làm ơn...?"
+                </div>
+
+                <div class="dialogue-bubble dialogue-female">
+                    "Em xin lỗi... vì tất cả những gì em đã làm... Anh hoàn toàn đúng: em là kẻ vô vọng..." Giọng cô nàng nhỏ dần, nghẹn ngào trong tiếng khóc. "Em sợ... em sợ cảm giác phải cô độc một mình đến mức khi tìm thấy một người chú ý đến em... khi tìm thấy anh... em đã trở nên tham lam... và làm những điều tồi tệ để giữ anh lại..."
+                </div>
+
+                <div class="prose-block">
+                    Cô nàng nín thở chờ đợi một phản ứng từ tôi. Tôi vẫn đứng im lặng. Và rồi, trong sự tuyệt vọng cùng cực, Asuka đưa ra lời đề nghị cuối cùng để tự hiến tế bản thân:
+                </div>
+
+                <div class="dialogue-bubble dialogue-female">
+                    "V-Và... em hứa sẽ làm b-bất cứ điều gì anh nói từ giờ trở đi... để trở thành... um... của anh..."
+                </div>
+
+                <div class="prose-block">
+                    Cô nàng ngập ngừng, chiếc lưỡi tê cứng không thể thốt ra danh tính phục tùng đó. Tôi quay lại, nhìn sâu vào đôi mắt ướt đẫm của cô, và mở lời dồn ép:
+                </div>
+
+                <div class="dialogue-bubble dialogue-male">
+                    "Bitch? Slave? Hay là... Slut?"
+                </div>
+
+                <!-- NSFW Illustration Panel 2 -->
+                <div class="illustration-block" id="illust2">
+                    <div class="illustration-glow" style="background: radial-gradient(circle, var(--color-secondary) 0%, transparent 70%);"></div>
+                    <div class="illustration-card">
+                        <i class="fa-solid fa-venus-mars illustration-icon" style="color: var(--color-secondary);"></i>
+                        <div class="illustration-title">SỰ SỤP ĐỔ CỦA TIỂU THƯ</div>
+                        <div class="illustration-subtitle">Asuka buông xuôi lòng tự trọng, tự hứa sẽ trở thành "slut" phục tùng mọi mong muốn của nam chính.</div>
+                        <button class="illustration-btn" onclick="revealIllust('illust2')">Cảm nhận Visual</button>
+                    </div>
+                </div>
+
+                <div class="section-heading">Phân Đoạn 3: Cơn Cuồng Nộ Biến Thành Dục Vọng Cực Hạn</div>
+
+                <div class="prose-block">
+                    Tôi tiến lại gần, dồn ép cơ thể Asuka vào sát góc tường vệ sinh. Bản tính bạo lực trỗi dậy, tôi giật mạnh hai cổ tay cô nàng ghìm chặt lên đầu, tạo nên tiếng động mạnh dội vào vách tường.
+                </div>
+
+                <div class="dialogue-bubble dialogue-male">
+                    "Nghe cho kỹ đây, Asuka. Nếu cô muốn có giá trị đối với tôi, cô phải chứng minh điều đó. Bất kỳ lúc nào cô không phải nịnh bợt mụ mẹ của cô để lấy thông tin, cô phải quỳ dưới háng tôi để nuốt sạch tinh trùng của tôi, rõ chưa?"
+                </div>
+
+                <div class="dialogue-bubble dialogue-female">
+                    Asuka sững sờ, nhưng cơn phê pha từ việc bị áp chế thô bạo bắt đầu kích hoạt hệ thần kinh của cô. "Em... em rõ rồi. Em sẽ giúp..."
+                </div>
+
+                <div class="dialogue-bubble dialogue-male">
+                    "Giúp là không đủ! Cô thuộc về tôi, hay thuộc về mụ mẹ của cô?" Tôi thét nhẹ, giáng mạnh một cú tát tay lên vách tường ngay sát tai cô nàng.
+                </div>
+
+                <div class="dialogue-bubble dialogue-female">
+                    "Anh... em thuộc về anh! Em thuộc về anh!" Asuka hét lên trong sự kích động. "Ôi chúa ơi... anh... anh muốn lật đổ trường học và phá nát gia tộc Zaibatsu cùng mẹ em đúng không...?"
+                </div>
+
+                <div class="dialogue-bubble dialogue-female">
+                    "Không... Điều đó... *càng làm em muốn phục tùng anh hơn.* Em muốn nhìn thấy mụ ta phải quỳ gối, run rẩy bò rạp trên thảm văn phòng trước mặt anh! Em muốn mụ ta không có một mảnh vải che thân! Em sẽ làm *bất cứ điều gì* để điều đó xảy ra!"
+                </div>
+
+                <div class="prose-block">
+                    "Tốt lắm, cô gái ngoan!" Tôi cười lớn, giật phăng chiếc blouse đồng học sinh của cô nàng, để lộ cơ thể non nớt đang run rẩy vì kích thích.
+                </div>
+
+                <div class="dialogue-bubble dialogue-female">
+                    "Chịch em đi, [player_name]! Hãy cho em nếm trải những gì anh sẽ làm với mụ ta!" Asuka gào lên đầy dâm đãng.
+                </div>
+
+                <div class="section-heading">Phân Đoạn 4: Sự Trừng Phạt Thô Bạo Trong Buồng Tối</div>
+
+                <div class="prose-block">
+                    Tôi bế thốc hai chân Asuka lên, không một chút nhẹ nhàng, đâm thẳng dương vật thô nóng của mình vào sâu trong khe bướm đang ướt đẫm của cô nàng.
+                </div>
+
+                <div class="dialogue-bubble dialogue-female">
+                    "Ah...! <span class="dialogue-sfx" onclick="triggerSensorySFX('Harder!', event)">Harder!</span> <span class="dialogue-sfx" onclick="triggerSensorySFX('Mhm!', event)">Mhm!</span> Đi mà anh!" Asuka rên rỉ dữ dội, tấm lưng trần đập mạnh vào vách tường lạnh lẽo theo từng cú thúc như búa bổ của tôi.
+                </div>
+
+                <div class="prose-block">
+                    Dù mới cãi vã chỉ vài phút trước, nhưng vùng kín của cô nàng đã sớm ngập lụt dâm dịch từ lâu. Sự tương phản giữa lòng căm thù mụ mẹ và khao khát được MC chiếm đoạt đã biến cô nàng thành một con dâm phụ đích thực.
+                </div>
+
+                <div class="dialogue-bubble dialogue-male">
+                    "Chúa ơi, Asuka. Cô đã biến thành một con nympho cuồng chịch thực sự rồi. Tôi thích điều đó đấy."
+                </div>
+
+                <div class="dialogue-bubble dialogue-female">
+                    "Ah! Y-You made me... <span class="dialogue-sfx" onclick="triggerSensorySFX('HAHN!', event)">HAHN!</span> this way!" Cô nàng ngửa cổ rên rỉ, hai bầu ngực nhỏ nhấp nhô theo nhịp đâm.
+                </div>
+
+                <div class="dialogue-bubble dialogue-female">
+                    "Tại sao cô còn thèm mặc quần lót làm gì nữa? Thứ degenerate như cô thì tốt nhất nên để háng trống để tôi có thể đè cô ra chịch bất cứ lúc nào trống vắng."
+                </div>
+
+                <div class="dialogue-bubble dialogue-female">
+                    "W-What if someone sees...? <span class="dialogue-sfx" onclick="triggerSensorySFX('HAHN!', event)">HAHN!</span> W-What if we're caught?"
+                </div>
+
+                <div class="dialogue-bubble dialogue-male">
+                    "Thì cứ thành thật bảo họ là cô đang tự nguyện dâng hiến để tôi sử dụng cơ thể cô. Nếu có ai bắt quả tang, chúng ta sẽ cho họ thấy một màn kịch liệt đến mức họ phải ngất xỉu tại chỗ."
+                </div>
+
+                <div class="dialogue-bubble dialogue-female">
+                    "F-Fuck... nghe n-nóng quá... <span class="thought-bubble">(Nếu họ nhìn thấy, họ sẽ biết mình hoàn toàn thuộc về [player_name], và không ai có thể làm gì được nữa!)</span>" Tâm trí Asuka hoàn toàn bị chiếm đoạt, cô nàng tự co thắt cơ bướm chặt như một gọng kìm, ép chặt lấy dương vật của tôi.
+                </div>
+
+                <div class="prose-block">
+                    Cơn chấn động liên hoàn từ cực khoái dồn dập khiến Asuka run lên bần bật.
+                </div>
+
+                <div class="dialogue-bubble dialogue-female">
+                    "AHH! [player_name]! Bắn vào đi! *OH!* Bơm đầy em đi! <span class="dialogue-sfx" onclick="triggerSensorySFX('HAHN!', event)">HAHN!</span>"
+                </div>
+
+                <div class="prose-block">
+                    Tôi gầm lên, thúc mạnh cú cuối cùng lút cán và bắn thẳng những luồng tinh trùng nóng hổi vào sâu tận cổ tử cung của cô nàng. Asuka rú lên một tiếng dâm đãng, cơ thể co giật liên hồi trong cơn cực khoái cực hạn.
+                </div>
+
+                <!-- NSFW Illustration Panel 3 -->
+                <div class="illustration-block" id="illust3">
+                    <div class="illustration-glow" style="background: radial-gradient(circle, #f43f5e 0%, transparent 70%);"></div>
+                    <div class="illustration-card">
+                        <i class="fa-solid fa-droplet illustration-icon" style="color: #f43f5e;"></i>
+                        <div class="illustration-title">AFTERMATH DÂM DỊCH</div>
+                        <div class="illustration-subtitle">Tinh dịch nóng hổi hòa lẫn dâm dịch trắng đục trào ra từ khe bướm Asuka chảy dài trên đùi non.</div>
+                        <button class="illustration-btn" onclick="revealIllust('illust3')">Cảm nhận Visual</button>
+                    </div>
+                </div>
+
+                <div class="dialogue-bubble dialogue-female">
+                    "Hah... Hah... Đồng ý cúi đầu trước anh... là quyết định sáng suốt nhất đời em... Em không thể đợi được đến lúc chúng ta làm chuyện này... *mỗi ngày*..."
+                </div>
+
+                <div class="dialogue-bubble dialogue-male">
+                    "Việc đó chỉ xảy ra nếu cô tỏ ra hữu ích. Giờ thì ngoan ngoãn đứng đây vài phút, tôi sẽ về lớp trước để tránh bị nghi ngờ."
+                </div>
+
+                <div class="dialogue-bubble dialogue-female">
+                    "Vâng, thưa Chủ nhân!" Asuka cúi đầu ngoan ngoãn.
+                </div>
+
+                <div class="prose-block" style="border-top: 1px solid rgba(255,255,255,0.05); padding-top: 1.5rem; margin-top: 2rem;">
+                    Tôi bước ra hành lang, chỉnh lại quần áo và liếc nhìn đồng hồ. Đã 8:15, muộn học 16 phút. Tôi bước nhanh vào lớp học của Keiko-sensei với vẻ mặt thản nhiên.
+                </div>
+
+                <div class="dialogue-bubble dialogue-female" style="border-left-color: var(--color-secondary);">
+                    "Em muộn chính xác 16 phút, [player_name]-kun. Có lý do gì chính đáng không?" Keiko-sensei gõ thước lên bàn.
+                </div>
+
+                <div class="dialogue-bubble dialogue-male">
+                    "Em xin lỗi, Keiko-sensei." Tôi mỉm cười thầm kín. "Em phát hiện một sự cố rò rỉ nước (<span class="dialogue-sfx" onclick="triggerSensorySFX('Flood!', event)">flood</span>) nghiêm trọng trong phòng vệ sinh và phải tốn chút thời gian để điều tra và 'bịt kín' nó lại."
+                </div>
+            </article>
+        </main>
+
+        <!-- ==========================================
+             RIGHT SIDEBAR: CHARACTER CARDS & CLI TERMINAL
+             ========================================== -->
+        <aside class="sidebar sidebar-right">
+            
+            <!-- Character Cards -->
+            <div class="card">
+                <div class="card-title">
+                    <i class="fa-solid fa-id-card"></i>
+                    <span>Cast & Character Cards</span>
+                </div>
+                
+                <!-- Asuka Sazaki -->
+                <div class="character-card" onclick="showCharacterInfo('asuka')">
+                    <div class="char-header">
+                        <div class="char-avatar">AS</div>
+                        <div class="char-details">
+                            <div class="char-name">Asuka Sazaki</div>
+                            <div class="char-sub">Tsundere / Submission</div>
+                        </div>
+                        <span class="char-badge">Slut</span>
+                    </div>
+                </div>
+
+                <!-- Reira (Special R18 Card) -->
+                <div class="character-card" onclick="showCharacterInfo('reira')">
+                    <div class="char-header">
+                        <div class="char-avatar" style="background: linear-gradient(135deg, #7c3aed, #d8b4fe);">RE</div>
+                        <div class="char-details">
+                            <div class="char-name">Reira Senpai</div>
+                            <div class="char-sub">Hypnosis / Dominant</div>
+                        </div>
+                        <span class="char-badge" style="background: rgba(168, 85, 247, 0.15); border-color: rgba(168, 85, 247, 0.3); color: #d8b4fe;">Gooner</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fully Functional CLI Terminal Simulator -->
+            <div class="card terminal-container">
+                <div class="terminal-header">
+                    <span>RuFlo Autopilot Terminal</span>
+                    <div class="terminal-dots">
+                        <span class="terminal-dot red"></span>
+                        <span class="terminal-dot yellow"></span>
+                        <span class="terminal-dot green"></span>
+                    </div>
+                </div>
+                <div class="terminal-screen" id="terminalScreen">
+                    <div class="terminal-output">✅ RuFlo CLI v3.4.1 initialized
+Type "help" for a list of available commands.
+$ </div>
+                </div>
+                <div class="terminal-input-row">
+                    <span class="terminal-prompt">$</span>
+                    <input type="text" class="terminal-input" id="terminalInput" placeholder="Type a command..." autofocus autocomplete="off">
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- 3. FOOTER -->
+    <footer>
+        <p>Built with <i class="fa-solid fa-heart"></i> for premium R18 Light Novel Development. Connected to Ruflo Autopilot Engine.</p>
+    </footer>
+
+    <!-- ==========================================
+         9. INTERACTIVE JAVASCRIPT LOGIC
+         ========================================== -->
+    <script>
+        // Active Theme Variable
+        let activeTheme = 'plum';
+        let isNSFWRevealed = false;
+
+        // Custom logs storage
+        const swarmLogBox = document.getElementById('swarmLogs');
+        const availableSwarmLogPhrases = [
+            "[Suki] Refined chapter paragraphs for optimal erotic tension.",
+            "[Miki] Added heartbeat acoustic cues and wet SFX words.",
+            "[Riko] Automated consent verification: PASS.",
+            "[Director K] Load balancing complete. GPU allocation optimal.",
+            "[Neural] Optimization rewards recalculated: +0.89.",
+            "[Swarm] Synchronization with database: completed in 12ms."
+        ];
+
+        // Periodically inject new swarm logs to make it feel alive!
+        setInterval(() => {
+            const time = new Date().toTimeString().split(' ')[0];
+            const phrase = availableSwarmLogPhrases[Math.floor(Math.random() * availableSwarmLogPhrases.length)];
+            
+            const logEntry = document.createElement('div');
+            logEntry.className = 'log-entry';
+            logEntry.innerHTML = `<span class="log-time">[${time}]</span><span class="log-tag">[Swarm]</span><span class="log-text">${phrase}</span>`;
+            
+            swarmLogBox.appendChild(logEntry);
+            swarmLogBox.scrollTop = swarmLogBox.scrollHeight;
+        }, 8000);
+
+        // ==========================================
+        // SETTINGS & APPERANCE MANAGEMENT
+        // ==========================================
+        function changeTheme(themeName, element) {
+            // Remove active classes
+            document.querySelectorAll('.palette-btn').forEach(btn => btn.classList.remove('active'));
+            element.classList.add('active');
+
+            // Remove existing theme classes from body
+            document.body.className = '';
+            document.body.classList.add(`theme-${themeName}`);
+            activeTheme = themeName;
+        }
+
+        function changeFont(fontType) {
+            const reader = document.getElementById('readerText');
+            document.getElementById('fontSerifBtn').classList.remove('active');
+            document.getElementById('fontSansBtn').classList.remove('active');
+
+            if (fontType === 'serif') {
+                reader.style.fontFamily = "var(--font-serif)";
+                document.getElementById('fontSerifBtn').classList.add('active');
+            } else {
+                reader.style.fontFamily = "var(--font-display)";
+                document.getElementById('fontSansBtn').classList.add('active');
+            }
+        }
+
+        // Adjust Sensory Overdrive
+        function adjustSensory(value) {
+            document.getElementById('sensoryVal').innerText = value;
+            const pulse = document.getElementById('ambientPulse');
+            
+            // Adjust glowing speed based on intensity slider
+            if (value >= 7) {
+                pulse.style.animation = `heartbeat ${3.5 - (value * 0.25)}s infinite ease-in-out`;
+                pulse.style.boxShadow = `inset 0 0 100px rgba(255, 46, 126, ${value * 0.05})`;
+            } else if (value >= 4) {
+                pulse.style.animation = `heartbeat 4s infinite ease-in-out`;
+                pulse.style.boxShadow = `inset 0 0 50px rgba(255, 46, 126, ${value * 0.03})`;
+            } else {
+                pulse.style.animation = 'none';
+                pulse.style.boxShadow = 'none';
+            }
+        }
+
+        // Toggle NSFW Visuals
+        function toggleNSFW(isChecked) {
+            const blocks = document.querySelectorAll('.illustration-block');
+            blocks.forEach(block => {
+                if (isChecked) {
+                    block.style.display = 'flex';
+                } else {
+                    block.style.display = 'none';
+                }
+            });
+        }
+
+        // Reveal Individual Graphic Block
+        function revealIllust(id) {
+            const block = document.getElementById(id);
+            const card = block.querySelector('.illustration-card');
+            
+            // Add premium visual effect
+            block.style.background = 'radial-gradient(circle, #5b1035 0%, #15051a 100%)';
+            block.style.borderColor = 'var(--color-primary)';
+            block.style.boxShadow = '0 0 30px rgba(255, 46, 126, 0.4)';
+            
+            card.innerHTML = `
+                <i class="fa-solid fa-sparkles" style="font-size: 2.5rem; color: #ffeb3b; animation: heartbeat 1s infinite;"></i>
+                <div class="illustration-title" style="color: #ffeb3b;">VISUAL KÍCH HOẠT</div>
+                <div class="illustration-subtitle" style="color: #ffffff; font-weight: 600;">Một cảnh sắc nóng bỏng, quyến rũ được Suki và Miki phác họa cực kỳ chi tiết!</div>
+                <div style="font-size: 0.75rem; color: var(--text-muted); background: rgba(0, 0, 0, 0.4); padding: 0.5rem 1rem; border-radius: 6px;">[Visual mô tả theo chuẩn light novel: 18+]</div>
+            `;
+
+            // Trigger screen shake & floating particles
+            triggerScreenAction();
+        }
+
+        // Trigger Screen Shake & Erotic haptic particles
+        function triggerSensorySFX(word, event) {
+            // Spawn floating particles at click location
+            const count = 5;
+            for(let i = 0; i < count; i++) {
+                const particle = document.createElement('i');
+                particle.className = 'fa-solid fa-heart love-particle';
+                particle.style.left = `${event.clientX + (Math.random() * 40 - 20)}px`;
+                particle.style.top = `${event.clientY + (Math.random() * 40 - 20)}px`;
+                particle.style.color = i % 2 === 0 ? 'var(--color-primary)' : 'var(--color-secondary)';
+                document.body.appendChild(particle);
+                
+                // Remove particle after animation
+                setTimeout(() => particle.remove(), 1000);
+            }
+
+            // Trigger screen shake
+            triggerScreenAction();
+        }
+
+        function triggerScreenAction() {
+            document.body.classList.add('screen-shake-active');
+            const pulse = document.getElementById('ambientPulse');
+            pulse.classList.add('heartbeat-pulse-active');
+            
+            setTimeout(() => {
+                document.body.classList.remove('screen-shake-active');
+                pulse.classList.remove('heartbeat-pulse-active');
+            }, 300);
+        }
+
+        // ==========================================
+        // CAST & CHARACTER INFO MODAL SIMULATOR
+        // ==========================================
+        function showCharacterInfo(char) {
+            const pulse = document.getElementById('ambientPulse');
+            triggerScreenAction();
+            
+            if (char === 'asuka') {
+                alert(`🌸 CHARACTER CARD: ASUKA SAZAKI 🌸\n-----------------------------------\nVai trò: Nữ sinh / Slut riêng của MC\nTính cách: Tsundere cực hạn đã bị khuất phục\nTình trạng: Đã hiến tế lòng tự trọng trong toilet trường Sazaki (Biến cố Ngày 26).\nƯu điểm: Gia thế giàu có (con gái Hiệu trưởng Helen), hữu ích làm gián điệp.`);
+            } else {
+                alert(`🔮 CHARACTER CARD: REIRA SENPAI 🔮\n-----------------------------------\nVai trò: Hội trưởng Hội học sinh / Dominant\nTính cách: Nữ vương kiêu ngạo / Gooner bậc thầy\nTình trạng: Thích điều khiển tâm trí, kiểm soát các trò chơi đồi trụy ở phòng tối câu lạc bộ.`);
+            }
+        }
+
+        // ==========================================
+        // TERMINAL COMMAND SIMULATOR FOR RUFLO
+        // ==========================================
+        const terminalScreen = document.getElementById('terminalScreen');
+        const terminalInput = document.getElementById('terminalInput');
+
+        const cliCommands = {
+            "help": "Available commands:\n- ruflo status       Show current system health & active modules\n- ruflo swarm status Show agent topology and metrics\n- ruflo task list    List current scheduled and running tasks\n- ruflo autopilot status Check goal progression\n- clear              Clear the terminal screen",
+            "ruflo status": "✅ Using sql.js (WASM SQLite)\n[SYSTEM STATUS]\n  Swarm: Active (swarm-ieua2s)\n  Agents: 4 Active | 0 Idle\n  Tasks: 1 Active | 7 Completed\n  Memory: HNSW Enabled, 1,410 entries\n  Health: HEALTHY (0 degraded)",
+            "ruflo swarm status": "[SWARM TOPOLOGY]\n  Mode: Hierarchical Mesh\n  Orchestrator: Director K (Load: 12%)\n  Active nodes: Coder, QA, adult-prose, adult-dialogue\n  Consensus state: Synced",
+            "ruflo task list": "[ACTIVE TASKS]\n  - task-skynlq: Build premium responsive web app for hentai novels (in_progress, Coder assigned)\n[COMPLETED TASKS]\n  - task-001: Set up BMad workflow structures\n  - task-002: Compile Ren'py adaptation scenarios",
+            "ruflo autopilot status": "[AUTOPILOT LOOP]\n  Status: ENABLED\n  Max Iterations: 50 | Timeout: 240m\n  Elapsed: 12 min\n  Active goal: Complete R18 Storyline & Reader WebApp\n  Remaining: 1 task (task-skynlq)",
+            "clear": ""
+        };
+
+        terminalInput.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                const commandText = terminalInput.value.trim();
+                terminalInput.value = '';
+
+                if (commandText === '') return;
+
+                // Append command to screen
+                const commandRow = document.createElement('div');
+                commandRow.className = 'terminal-output';
+                commandRow.innerHTML = `<span class="terminal-prompt">$</span> ${commandText}`;
+                terminalScreen.appendChild(commandRow);
+
+                // Add delay for realism
+                setTimeout(() => {
+                    const outputRow = document.createElement('div');
+                    outputRow.className = 'terminal-output';
+
+                    if (commandText.toLowerCase() === 'clear') {
+                        terminalScreen.innerHTML = '';
+                        outputRow.innerHTML = 'Screen cleared.\n$ ';
+                        terminalScreen.appendChild(outputRow);
+                        return;
+                    }
+
+                    const response = cliCommands[commandText.toLowerCase()];
+                    if (response !== undefined) {
+                        outputRow.innerText = response;
+                    } else {
+                        outputRow.innerText = `Command not found: "${commandText}". Type "help" for a list of valid commands.`;
+                    }
+                    
+                    terminalScreen.appendChild(outputRow);
+                    
+                    // Always show prompt at the end
+                    const promptRow = document.createElement('div');
+                    promptRow.className = 'terminal-output';
+                    promptRow.innerText = '$ ';
+                    terminalScreen.appendChild(promptRow);
+
+                    terminalScreen.scrollTop = terminalScreen.scrollHeight;
+                }, 300);
+            }
+        });
+
+    </script>
+</body>
+</html>
