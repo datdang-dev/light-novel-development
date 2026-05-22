@@ -405,6 +405,12 @@ async def run_panel(
             print(f"[*] Ruflo Swarm Health Status: {health_res.get('status')}")
         except Exception as e:
             print(f"[!] Ruflo completion metrics logging failed: {e}")
+        finally:
+            try:
+                await adapter.close()
+            except Exception:
+                pass
+
 
 
 async def _mode_sequential(session_dir: Path, agents: list[dict], prompt: str, mode_config: dict, knowledge: KnowledgeIndex):
