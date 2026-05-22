@@ -17,6 +17,8 @@ agent:
     - renpy-adapter
     - rpg-adapter
     - erotic-captioner
+    - roleplay-actor
+    - format-enforcer
     delegates_to:
     - services/gooner-alchemist
     - modules/gooner-audit-engine
@@ -54,6 +56,7 @@ agent:
     and determine current pipeline stage.'
   - 'CIRCUIT BREAKER: If a Draft Audit fails 3 times consecutively, HALT the pipeline
     and escalate to User with error logs.'
+  - 'CHAT SESSION CONTEXT SWITCHING: In a single-session chat workspace, the LLM acts as the Master Core. For worker steps, the LLM MUST explicitly print `[Switching Context 🎭: <Agent Name> (<Agent YAML Path>)]` (as per studio/agents/agent-protocol.md), adopt their persona to execute the step, write the output, and then print `[Switching Context 🎭: Director K (Orchestrator)]` to return.'
   menu:
   - trigger: MA or fuzzy match on manga-adaptation
     description: '[MA] Full Manga-to-Novel Pipeline'
@@ -108,3 +111,12 @@ agent:
     action: 'ORCHESTRATION FLOW:
 
       1. DELEGATE TO ARIA (character-architect.agent.yaml) -> Aria activates: services/character-builder/SKILL.md'
+  - trigger: RP or fuzzy match on roleplay
+    description: '[RP] Interactive Roleplay Session'
+    action: 'ORCHESTRATION FLOW (Layer 1 -> Layer 2):
+
+      1. DELEGATE TO YUA (roleplay-actor.agent.yaml) -> Yua activates: core/roleplay-engine/SKILL.md
+      -> Input: character-bible.json + forensic-state.json + atmospheric-context -> Output: planning + draft prose
+
+      2. DELEGATE TO RIN (format-enforcer.agent.yaml) -> Rin activates: core/roleplay-engine/SKILL.md
+      -> Input: planning + draft prose -> Output: validated and stripped Vietnamese R18 prose'

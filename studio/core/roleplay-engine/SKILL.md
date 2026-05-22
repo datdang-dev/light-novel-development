@@ -1,11 +1,9 @@
 ---
 name: roleplay-engine
 description: Comprehensive roleplay execution engine with SillyTavern-grade immersion
-  systems — operated by Yua (Roleplay Actor).
+  systems — operated by Yua (Roleplay Actor) and Rin (Format Enforcer).
 injection:
   always:
-  - '{{project_root}}/studio/rules/rp_novel_format.md'
-  - '{{project_root}}/studio/rules/rp_sfx_registry.md'
   - '{{project_root}}/studio/rules/user_fetish_profile.md'
   triggers:
   - scene_tag: explicit|r18|sexual
@@ -15,6 +13,18 @@ injection:
   - scene_tag: dialogue-heavy|intimate
     loads:
     - '{{project_root}}/studio/rules/character_voice.md'
+  - mood_seed: aggressive|lustful|depraved
+    loads:
+    - '{{project_root}}/studio/knowledge/packs/depravity_enhancement_pack.md'
+  - mood_seed: gentle|comforting|teasing
+    loads:
+    - '{{project_root}}/studio/knowledge/packs/gentle_teasing_pack.md'
+  - archetype: submissive|broken
+    loads:
+    - '{{project_root}}/studio/knowledge/packs/submission_pack.md'
+  - archetype: dominant|sadistic
+    loads:
+    - '{{project_root}}/studio/knowledge/packs/domination_pack.md'
 dependencies:
   knowledge:
   - path: '{{project_root}}/studio/knowledge/packs/narrative_style_pack.md'
@@ -36,7 +46,7 @@ dependencies:
 **Every roleplay turn MUST begin with a hidden internal planning block.**
 
 ```markdown
-<think>
+<planning>
 ## RP Scratchpad — Turn [N]
 
 ### 1. Turn Deconstruct
@@ -67,8 +77,27 @@ dependencies:
 - Dialogue-to-narration ratio: [e.g., 60/40]
 - Target length: [short/medium/long based on scene energy]
 - Key moments to hit: [list 2-3 specific beats]
-</think>
+</planning>
 ```
+
+### 🔬 Programmatic Validation Gate (Enforced by Rin)
+
+Rin (Format Enforcer) programmatically validates the `<planning>` block before letting the output pass to the pipeline.
+
+The turn will be REJECTED and REGENERATED if:
+
+1. **Missing Block**: The `<planning>` and `</planning>` tags are missing or incorrectly nested.
+2. **Missing Core Sections**: Any of the 6 core sections (Turn Deconstruct, Character State, Scene Spatial, Fetish Exploitation, Anti-Echo Check, Response Plan) is missing or incomplete.
+3. **Empty Values**: Any value is left blank or populated with generic placeholders (e.g., `[list]`).
+4. **Token Limit Excess**: The `<planning>` block exceeds **500 tokens**, preventing context bloat.
+5. **Duplicate/Echo Check**: The `<planning>` block or generated prose duplicates content from the prompt or repeats exact sentences/SFX sequences from the previous turn.
+
+### 🔄 Fallback Recovery Handler
+
+To prevent a single validation failure from crashing the entire interactive session, the pipeline implements a robust fallback recovery protocol:
+
+- **First Failure**: Auto-regenerate with a corrective prompt citing the exact validation gate that failed (e.g., `"Validation Error: Gate 4 (Token Limit Excess). Please summarize your thoughts."`).
+- **Second Failure (Hard Fallback)**: Bypass Yua's current turn planning and load a pre-computed minimal valid turn structure (conforming to the archetype and current scene context) to maintain session continuity, logging the event for offline developer debugging.
 
 ## 🇻🇳 Module 3: Vietnamese Hentai Voice
 

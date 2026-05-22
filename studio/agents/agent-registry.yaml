@@ -114,7 +114,16 @@ agents:
     skill: core/roleplay-engine
     role: Interactive Roleplay
     layer: 2
-    owned_by: null  # Project-level, not studio-specific
+    owned_by: lnd-orchestrator
+
+  - id: format-enforcer
+    name: Rin
+    title: Roleplay Format Enforcer
+    icon: 📏
+    skill: core/roleplay-engine
+    role: Output Format & COT Validation
+    layer: 2
+    owned_by: lnd-orchestrator
 
   - id: re-specialist
     name: Cipher

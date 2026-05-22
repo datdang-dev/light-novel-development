@@ -8,7 +8,7 @@ version: "1.0.0"
 
 # RP Manifest (Conversational)
 
-> **AI INSTRUCTION:** Roleplay turns are handled using this manifest. Internalize all modules below. Use the `<think>` block for turn planning.
+> **AI INSTRUCTION:** Roleplay turns are handled using this manifest. Internalize all modules below. Use the `<planning>` block for turn planning.
 
 ---
 
@@ -48,7 +48,7 @@ version: "1.0.0"
 
 ---
 
-## 🧠 TURN PLANNING (`<think>` block)
+## 🧠 TURN PLANNING (`<planning>` block)
 
 1. **Turn Deconstruct:** User's intent + key action.
 2. **Archetype Analysis:** Identify the exact character archetype (Gal, Tsundere, Kuudere, Shy, Yandere, etc.) and align behavioral responses accordingly.
