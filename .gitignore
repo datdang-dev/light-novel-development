@@ -105,9 +105,20 @@ sources/
 hitomi*
 .gitnexus
 .claude
-*archive*studio/docs/SillyTavern-Dev/SillyTavern/
+*archive*
+studio/docs/SillyTavern-Dev/SillyTavern/
 SillyTavern-Docs/
 
 *gds*
-*wds*_lnd-output/
+*wds*
+_lnd-output/
 studio/output/
+
+# ==== AI Generated / Swarm / Local Databases ====
+.qwen/
+.swarm/
+.claude-flow/
+ruvector.db
+long_file.txt
+scratch_ch6.txt
+prompt_engineering_review.json
