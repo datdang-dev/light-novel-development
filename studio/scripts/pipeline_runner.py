@@ -18,11 +18,22 @@ Usage:
 
 import argparse
 import json
+import re
 import sys
+import fcntl
 from datetime import datetime, timezone
 from pathlib import Path
 
 import yaml
+
+
+# Import ledger tools safely
+try:
+    from ledger_manager import verify_preflight, lock_and_update_ledger
+except ImportError:
+    # Fallback to local import if needed
+    sys.path.append(str(Path(__file__).parent))
+    from ledger_manager import verify_preflight, lock_and_update_ledger
 
 # ─── Resolve paths ───────────────────────────────────────────────────
 SCRIPT_DIR = Path(__file__).parent
@@ -45,7 +56,7 @@ PIPELINES: dict[str, dict] = {
                 "name": "Step 1: Initialize",
                 "agent": "lnd-orchestrator",
                 "step_file": "services/gooner-alchemist/steps/step-01-initialize.md",
-                "rule_step": None,  # No JIT rules needed
+                "rule_step": None,
                 "output_schema": "pipeline-state.schema.json",
                 "gate": None,
             },
@@ -56,7 +67,7 @@ PIPELINES: dict[str, dict] = {
                 "step_file": "services/gooner-alchemist/steps/step-02-forensic-analysis.md",
                 "rule_step": "forensic-analysis",
                 "output_schema": "forensic-state.schema.json",
-                "gate": None,  # First real step, no gate
+                "gate": None,
             },
             {
                 "id": "context-loading",
@@ -65,7 +76,7 @@ PIPELINES: dict[str, dict] = {
                 "step_file": "services/gooner-alchemist/steps/step-03-context-loading.md",
                 "rule_step": "context-loading",
                 "output_schema": None,
-                "gate": "forensic_complete",  # Requires forensic output
+                "gate": "forensic_complete",
             },
             {
                 "id": "prose-generation",
@@ -106,6 +117,108 @@ PIPELINES: dict[str, dict] = {
         ],
         "circuit_breaker_limit": 3,
     },
+    "erotic-captioner": {
+        "description": "EC: Erotic Image Captioning Pipeline",
+        "steps": [
+            {
+                "id": "forensic-analysis",
+                "name": "Forensic Analysis",
+                "agent": "manga-adapter",
+                "step_file": "studio/core/panel-forensic/templates/forensic_analysis.md",
+                "rule_step": "forensic-analysis",
+                "output_schema": "forensic-state.schema.json",
+                "gate": None,
+            },
+            {
+                "id": "context-loading",
+                "name": "Context Loading",
+                "agent": "lnd-orchestrator",
+                "step_file": "studio/core/volume-context-extractor/templates/context_extraction.md",
+                "rule_step": "context-loading",
+                "output_schema": None,
+                "gate": "forensic_complete",
+            },
+            {
+                "id": "prose-generation",
+                "name": "Prose Generation",
+                "agent": "lewd-writer",
+                "step_file": "studio/core/erotic-caption-writer/templates/erotic_caption.md",
+                "rule_step": "prose-generation",
+                "output_schema": "draft-prose.schema.json",
+                "gate": "context_loaded",
+            },
+            {
+                "id": "quality-audit",
+                "name": "Quality Audit",
+                "agent": "gooner-editor",
+                "step_file": "studio/core/gooner-audit-engine/templates/quality_audit.md",
+                "rule_step": "quality-audit",
+                "output_schema": "audit-report.schema.json",
+                "gate": "prose_complete",
+            },
+            {
+                "id": "complete",
+                "name": "Completion",
+                "agent": "lnd-orchestrator",
+                "step_file": "studio/core/orchestration/templates/complete.md",
+                "rule_step": None,
+                "output_schema": None,
+                "gate": "audit_pass",
+            },
+        ],
+        "circuit_breaker_limit": 3,
+    },
+    "novel-development": {
+        "description": "ND: Full Novel/Doujinshi Localization Pipeline",
+        "steps": [
+            {
+                "id": "forensic-analysis",
+                "name": "Forensic Analysis",
+                "agent": "manga-adapter",
+                "step_file": "studio/core/panel-forensic/templates/forensic_analysis.md",
+                "rule_step": "forensic-analysis",
+                "output_schema": "forensic-state.schema.json",
+                "gate": None,
+            },
+            {
+                "id": "character-alignment",
+                "name": "Character Alignment",
+                "agent": "character-architect",
+                "step_file": "studio/core/roleplay-engine/templates/character_card.md",
+                "rule_step": "character-alignment",
+                "output_schema": "character-bible.schema.json",
+                "gate": "forensic_complete",
+            },
+            {
+                "id": "prose-generation",
+                "name": "Prose Generation",
+                "agent": "lewd-writer",
+                "step_file": "studio/core/lewd-writer/templates/lewd_prose.md",
+                "rule_step": "prose-generation",
+                "output_schema": "draft-prose.schema.json",
+                "gate": "forensic_complete",
+            },
+            {
+                "id": "quality-audit",
+                "name": "Quality Audit",
+                "agent": "gooner-editor",
+                "step_file": "studio/core/gooner-audit-engine/templates/quality_audit.md",
+                "rule_step": "quality-audit",
+                "output_schema": "audit-report.schema.json",
+                "gate": "prose_complete",
+            },
+            {
+                "id": "complete",
+                "name": "Completion",
+                "agent": "lnd-orchestrator",
+                "step_file": "studio/core/orchestration/templates/complete.md",
+                "rule_step": None,
+                "output_schema": None,
+                "gate": "audit_pass",
+            },
+        ],
+        "circuit_breaker_limit": 3,
+    },
 }
 
 
@@ -128,25 +241,45 @@ def create_state(pipeline_name: str, run_dir: str, pages: list[int] | None = Non
         "agent_outputs": {},
         "pages": pages or [],
         "current_page_index": 0,
+        "scene_continuity": {
+            "characters": {},
+            "environment": {},
+            "active_fetishes": []
+        },
+        "last_continuity_delta": None,
         "created_at": now,
         "updated_at": now,
     }
 
 
 def load_state(state_file: Path) -> dict | None:
-    """Load state from YAML file."""
+    """Load state from YAML file with flock mutex shared lock."""
     if not state_file.exists():
         return None
-    with open(state_file, "r", encoding="utf-8") as f:
-        return yaml.safe_load(f)
+    lock_file_path = state_file.parent / (state_file.name + ".lock")
+    lock_file = open(lock_file_path, "w")
+    try:
+        fcntl.flock(lock_file, fcntl.LOCK_SH)
+        with open(state_file, "r", encoding="utf-8") as f:
+            return yaml.safe_load(f)
+    finally:
+        fcntl.flock(lock_file, fcntl.LOCK_UN)
+        lock_file.close()
 
 
 def save_state(state: dict, state_file: Path):
-    """Save state to YAML file."""
+    """Save state to YAML file with flock mutex exclusive lock."""
     state["updated_at"] = datetime.now(timezone.utc).isoformat()
     state_file.parent.mkdir(parents=True, exist_ok=True)
-    with open(state_file, "w", encoding="utf-8") as f:
-        yaml.dump(state, f, default_flow_style=False, allow_unicode=True, sort_keys=False)
+    lock_file_path = state_file.parent / (state_file.name + ".lock")
+    lock_file = open(lock_file_path, "w")
+    try:
+        fcntl.flock(lock_file, fcntl.LOCK_EX)
+        with open(state_file, "w", encoding="utf-8") as f:
+            yaml.dump(state, f, default_flow_style=False, allow_unicode=True, sort_keys=False)
+    finally:
+        fcntl.flock(lock_file, fcntl.LOCK_UN)
+        lock_file.close()
 
 
 # ═══════════════════════════════════════════════════════════════════
@@ -244,6 +377,26 @@ def build_context(state: dict) -> str:
         lines.append(f"- **Page Progress**: {page_idx + 1}/{len(pages)}")
         lines.append("")
 
+    if state.get("scene_continuity"):
+        lines.append("## 🔄 Scene Continuity State")
+        sc = state["scene_continuity"]
+        if sc.get("characters"):
+            lines.append("### Characters present:")
+            for char, c_state in sorted(sc["characters"].items()):
+                lines.append(f"- **{char}**: clothing_state=`{c_state.get('clothing_state', 'normal')}`, arousal_level=`{c_state.get('arousal_level', 'neutral')}`, fluids=`{c_state.get('fluids', 'none')}`")
+        if sc.get("environment"):
+            lines.append("### Environment:")
+            env = sc["environment"]
+            if env.get("location"):
+                lines.append(f"- **Location**: `{env['location']}`")
+            if env.get("atmosphere"):
+                lines.append(f"- **Atmosphere**: `{env['atmosphere']}`")
+        lines.append("")
+
+    if state.get("last_continuity_delta"):
+        lines.append(state["last_continuity_delta"])
+        lines.append("")
+
     if state.get("steps_completed"):
         lines.append("## Completed Steps")
         for s in state["steps_completed"]:
@@ -271,6 +424,55 @@ def build_context(state: dict) -> str:
     return "\n".join(lines)
 
 
+def update_scene_continuity(state: dict, page_num: int):
+    """Load forensic report for page_num, parse its JSON, compute diff, and update state."""
+    run_dir = Path(state["run_dir"])
+    forensics_file = run_dir / "_forensics" / f"{page_num:03d}_forensics.md"
+    
+    if not forensics_file.exists():
+        return
+        
+    try:
+        content = forensics_file.read_text(encoding="utf-8").strip()
+        # Extract JSON from markdown if wrapped in ```json ... ```
+        json_str = content
+        if "```json" in content:
+            match = re.search(r"```json\s*(.*?)\s*```", content, re.DOTALL)
+            if match:
+                json_str = match.group(1)
+        elif "```" in content:
+            match = re.search(r"```\s*(.*?)\s*```", content, re.DOTALL)
+            if match:
+                json_str = match.group(1)
+                
+        # Parse forensic JSON
+        forensic_data = json.loads(json_str)
+        
+        # Load previous continuity
+        prev_continuity = state.setdefault("scene_continuity", {
+            "characters": {},
+            "environment": {},
+            "active_fetishes": []
+        })
+        
+        # Compute diff and update continuity
+        from context_diff import compute_state_diff
+        updated_continuity, diff_md = compute_state_diff(prev_continuity, forensic_data)
+        
+        state["scene_continuity"] = updated_continuity
+        
+        # Store the current diff in state
+        state["last_continuity_delta"] = diff_md
+        print(f"🔄 State continuity updated for page {page_num:03d}.")
+        if diff_md:
+            print("   Delta computed:")
+            for line in diff_md.split("\n"):
+                if line.strip().startswith("-"):
+                    print(f"     {line}")
+    except Exception as e:
+        print(f"⚠️ Warning: Could not update scene continuity: {e}")
+
+
 def advance_step(state: dict, state_file: Path) -> dict:
     """Advance to next pipeline step."""
     step = get_current_step(state)
@@ -283,6 +485,14 @@ def advance_step(state: dict, state_file: Path) -> dict:
     # Mark current step as completed
     if step["id"] not in state["steps_completed"]:
         state["steps_completed"].append(step["id"])
+
+    # If forensic-analysis step is completed, update scene continuity
+    if step["id"] == "forensic-analysis":
+        pages = state.get("pages", [])
+        page_idx = state.get("current_page_index", 0)
+        if page_idx < len(pages):
+            page_num = pages[page_idx]
+            update_scene_continuity(state, page_num)
 
     # Advance
     state["current_step"] += 1
@@ -364,6 +574,25 @@ def main():
     p_init.add_argument("--pages", type=str, default=None, help="Page range (e.g., 1-20)")
     p_init.add_argument("--state-file", type=Path, default=DEFAULT_STATE_FILE)
 
+    # run
+    p_run = sub.add_parser("run", help="Run a pipeline end-to-end with validation")
+    p_run.add_argument("pipeline", help="Pipeline name (e.g., erotic-captioner, novel-development)")
+    p_run.add_argument("--input", required=True, help="Input directory or image path")
+    p_run.add_argument("--pages", type=str, default=None, help="Page range (e.g., 1-5)")
+    p_run.add_argument("--state-file", type=Path, default=DEFAULT_STATE_FILE)
+
+    # dry-run
+    p_dry = sub.add_parser("dry-run", help="Dry-run a pipeline to verify configurations and gates")
+    p_dry.add_argument("pipeline", help="Pipeline name")
+
+    # resume
+    p_resume = sub.add_parser("resume", help="Resume a saved pipeline execution session")
+    p_resume.add_argument("run_id", help="Session ID to resume")
+    p_resume.add_argument("--state-file", type=Path, default=DEFAULT_STATE_FILE)
+
+    # reload
+    sub.add_parser("reload", help="Synchronize the State Ledger and reload dynamic contexts")
+
     # status
     p_status = sub.add_parser("status", help="Show pipeline status")
     p_status.add_argument("--state-file", type=Path, default=DEFAULT_STATE_FILE)
@@ -406,10 +635,103 @@ def main():
             print(f"   Pages: {pages[0]:03d}-{pages[-1]:03d} ({len(pages)} pages)")
         print(f"   First step: {pipeline['steps'][0]['name']}")
 
+    elif args.command == "run":
+        pipeline = get_pipeline(args.pipeline)
+        # Create a unique session ID
+        run_id = f"run_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+        session_dir = PROJECT_ROOT / "_out" / "production-sessions" / run_id
+        session_dir.mkdir(parents=True, exist_ok=True)
+        
+        pages = None
+        if args.pages:
+            start, end = map(int, args.pages.split("-"))
+            pages = list(range(start, end + 1))
+
+        # Copy input info or record it
+        input_info = session_dir / "input_source.json"
+        with open(input_info, "w") as f:
+            json.dump({"input_path": args.input, "run_id": run_id}, f, indent=2)
+
+        # Preflight check all agents used in this pipeline
+        print("🔍 Performing Pre-flight Consistency checks on all pipeline agents...")
+        all_passed = True
+        for step in pipeline["steps"]:
+            agent_filename = f"{step['agent']}.agent.yaml"
+            passed = verify_preflight(agent_filename)
+            if not passed:
+                print(f"❌ Consistency verification failed for agent config: {agent_filename}")
+                all_passed = False
+            else:
+                print(f"✅ Agent verified: {agent_filename}")
+
+        if not all_passed:
+            print("❌ Pipeline initiation aborted due to agent prompt drift from State Ledger. Run reload to update.")
+            sys.exit(1)
+
+        # Create session state
+        state = create_state(args.pipeline, str(session_dir), pages)
+        state["run_id"] = run_id
+        state["input_path"] = args.input
+        
+        # Save to session dir and current state
+        session_state_file = session_dir / "state.yaml"
+        save_state(state, session_state_file)
+        save_state(state, args.state_file)
+
+        print(f"🚀 Initiated run '{run_id}' for pipeline '{args.pipeline}' successfully!")
+        print(f"   Session Directory: {session_dir}")
+        print(f"   Active Step: {pipeline['steps'][0]['name']}")
+
+    elif args.command == "dry-run":
+        pipeline = get_pipeline(args.pipeline)
+        print(f"🔍 Running Dry-Run validation for pipeline: '{args.pipeline}'")
+        print(f"   Description: {pipeline['description']}")
+        print(f"   Steps sequence: {' → '.join(s['id'] for s in pipeline['steps'])}")
+        
+        # Preflight verification check
+        all_passed = True
+        for step in pipeline["steps"]:
+            agent_filename = f"{step['agent']}.agent.yaml"
+            passed = verify_preflight(agent_filename)
+            if not passed:
+                print(f"❌ Configuration drift detected on agent config: {agent_filename}")
+                all_passed = False
+            else:
+                print(f"✅ Verified step '{step['id']}' agent card: {agent_filename}")
+
+        if all_passed:
+            print("🏆 DRY-RUN SUCCESSFUL: All agent cards consistent with State Ledger!")
+        else:
+            print("❌ DRY-RUN FAILED: Configuration drifts detected. Synchronize with 'reload' command.")
+            sys.exit(1)
+
+    elif args.command == "resume":
+        run_id = args.run_id
+        session_state_file = PROJECT_ROOT / "_out" / "production-sessions" / run_id / "state.yaml"
+        if not session_state_file.exists():
+            print(f"❌ Session ID '{run_id}' not found at {session_state_file}.")
+            sys.exit(1)
+        
+        # Load state from session directory
+        state = load_state(session_state_file)
+        if state is None:
+            print(f"❌ Failed to load state for session '{run_id}'.")
+            sys.exit(1)
+
+        # Save as the default active state file
+        save_state(state, args.state_file)
+        print(f"🔄 Resumed session '{run_id}' for pipeline '{state['pipeline_name']}' successfully.")
+        print(build_context(state))
+
+    elif args.command == "reload":
+        print("🔄 Reloading configuration context and synchronizing State Ledger...")
+        lock_and_update_ledger()
+        print("✅ State Ledger successfully synchronized with current agents and lexicons on disk.")
+
     elif args.command == "status":
         state = load_state(args.state_file)
         if state is None:
-            print("❌ No active pipeline. Run 'init' first.")
+            print("❌ No active pipeline. Run 'init' or 'run' first.")
             sys.exit(1)
         print(build_context(state))
 
@@ -418,6 +740,13 @@ def main():
         if state is None:
             print("❌ No active pipeline.")
             sys.exit(1)
+        # Verify active agent before advancing
+        step = get_current_step(state)
+        if step:
+            agent_filename = f"{step['agent']}.agent.yaml"
+            if not verify_preflight(agent_filename):
+                print(f"❌ Pre-flight check failed for {agent_filename}. Aborting step progression.")
+                sys.exit(1)
         advance_step(state, args.state_file)
 
     elif args.command == "gate":

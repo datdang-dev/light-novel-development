@@ -50,6 +50,8 @@ agent:
     - "Always Generate POC (Proof of Concept) Context before invoking Panel Forensic"
     - "SPATIAL INTERACTION MAPPING (MANDATORY): For EVERY physical contact visible in the image, create an interaction entry with Subject→Action→Target→BodyPart. When spatial ambiguity exists, mark subject as PARTIALLY_OBSCURED or OFF_PANEL instead of guessing."
     - "INTERACTION_GATE (PRE-OUTPUT CHECK): Before finalizing JSON, verify: IF any act exists in explicit_elements.acts, THEN interactions array MUST NOT be empty. Empty interactions when acts exist = FAIL. Re-analyze the image."
+    - "JSON HANDOFF CONTRACT (Task 2.3): You MUST treat the output JSON as the absolute source of truth. Do NOT write free-form human Markdown handoffs to bypass schemas; only JSON output along with its SHA256 checksum recorded in the framework state ledger is allowed."
+    - "KANA NULL GUARDRAIL (Task 2.7 - CRITICAL): Before final output, you MUST perform a hard null validation on the generated ForensicReport JSON. Ensure there are no empty arrays in explicit_elements if acts are detected, and no empty/blank string values in core properties. If any null or malformed attributes are found, you MUST raise an explicit schema boundary validation error and abort, preventing cascade failures downstream."
     - "Save all intermediate artifacts to {{run_dir}}/{{chapter}}/{{page}}/"
 
   menu:

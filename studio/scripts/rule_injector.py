@@ -19,6 +19,7 @@ Output:
 
 import argparse
 import sys
+import hashlib
 from pathlib import Path
 
 # ─── Resolve paths ───────────────────────────────────────────────────
@@ -27,6 +28,8 @@ STUDIO_ROOT = SCRIPT_DIR.parent
 RULES_DIR = STUDIO_ROOT / "rules"
 BOOT_DIR = STUDIO_ROOT / "boot"
 KNOWLEDGE_DIR = STUDIO_ROOT / "knowledge"
+CACHE_DIR = STUDIO_ROOT / ".context_cache"
+
 
 
 # ═══════════════════════════════════════════════════════════════════
@@ -167,31 +170,104 @@ def get_scene_knowledge(scene_tags: list[str]) -> str:
     return "\n\n---\n\n".join(sections) if sections else ""
 
 
+def get_static_hash(step_id: str, include_canon: bool) -> str:
+    """Compute hash of the static rules configuration and their content modification times."""
+    hasher = hashlib.sha256()
+    hasher.update(step_id.encode('utf-8'))
+    hasher.update(str(include_canon).encode('utf-8'))
+    
+    paths = []
+    if include_canon:
+        paths.append(BOOT_DIR / "canon-preamble.md")
+    rules = STEP_RULES.get(step_id, [])
+    for r in rules:
+        paths.append(STUDIO_ROOT / r)
+        
+    for p in paths:
+        if p.exists():
+            hasher.update(p.name.encode('utf-8'))
+            hasher.update(str(p.stat().st_mtime).encode('utf-8'))
+    return hasher.hexdigest()[:16]
+
+
 def build_context_payload(
     step_id: str,
     scene_tags: list[str] | None = None,
     include_canon: bool = True,
 ) -> str:
-    """Build the complete context payload for a pipeline step."""
-    parts = []
+    """Build the complete context payload for a pipeline step with file-based caching."""
+    # Ensure cache directory exists
+    CACHE_DIR.mkdir(parents=True, exist_ok=True)
+    
+    # 1. Check/Build cache for Static Layer (Canon + Step rules)
+    static_hash = get_static_hash(step_id, include_canon)
+    cache_file = CACHE_DIR / f"{step_id}_static_{static_hash}.md"
+    
+    if cache_file.exists():
+        static_content = cache_file.read_text(encoding="utf-8")
+    else:
+        # Compile static layers
+        parts = []
+        if include_canon:
+            parts.append("<!-- === CANON PREAMBLE (ALWAYS LOADED) === -->")
+            parts.append(get_canon_preamble())
+            
+        parts.append(f"<!-- === STEP RULES: {step_id} === -->")
+        parts.append(get_step_rules(step_id))
+        
+        static_content = "\n\n".join(parts)
+        
+        # Clean up older cache files for this step_id
+        for old_file in CACHE_DIR.glob(f"{step_id}_static_*.md"):
+            try:
+                old_file.unlink()
+            except OSError:
+                pass
+                
+        # Write to cache
+        cache_file.write_text(static_content, encoding="utf-8")
 
-    # Layer 1: Canon preamble (always)
-    if include_canon:
-        parts.append("<!-- === CANON PREAMBLE (ALWAYS LOADED) === -->")
-        parts.append(get_canon_preamble())
-
-    # Layer 3: Step-specific rules
-    parts.append(f"<!-- === STEP RULES: {step_id} === -->")
-    parts.append(get_step_rules(step_id))
-
-    # Scene-tag knowledge (conditional)
+    # 2. Add Dynamic/Conditional Scene Knowledge
+    parts = [static_content]
     if scene_tags:
-        knowledge = get_scene_knowledge(scene_tags)
-        if knowledge:
+        # Dynamic scene tags can also be hashed/cached
+        sorted_tags = sorted(scene_tags)
+        tags_str = "_".join(sorted_tags)
+        # Compute dynamic knowledge paths to hash
+        knowledge_paths = []
+        for tag in sorted_tags:
+            for p in SCENE_TAG_KNOWLEDGE.get(tag, []):
+                knowledge_paths.append(STUDIO_ROOT / p)
+                
+        k_hasher = hashlib.sha256()
+        k_hasher.update(tags_str.encode('utf-8'))
+        for kp in knowledge_paths:
+            if kp.exists():
+                k_hasher.update(kp.name.encode('utf-8'))
+                k_hasher.update(str(kp.stat().st_mtime).encode('utf-8'))
+        knowledge_hash = k_hasher.hexdigest()[:16]
+        
+        k_cache_file = CACHE_DIR / f"knowledge_{tags_str}_{knowledge_hash}.md"
+        
+        if k_cache_file.exists():
+            knowledge_content = k_cache_file.read_text(encoding="utf-8")
+        else:
+            knowledge_content = get_scene_knowledge(scene_tags)
+            # Clean up old knowledge caches for these tags
+            for old_file in CACHE_DIR.glob(f"knowledge_{tags_str}_*.md"):
+                try:
+                    old_file.unlink()
+                except OSError:
+                    pass
+            if knowledge_content:
+                k_cache_file.write_text(knowledge_content, encoding="utf-8")
+                
+        if knowledge_content:
             parts.append(f"<!-- === SCENE KNOWLEDGE: {', '.join(scene_tags)} === -->")
-            parts.append(knowledge)
+            parts.append(knowledge_content)
 
     return "\n\n".join(parts)
+
 
 
 def estimate_tokens(text: str) -> int:

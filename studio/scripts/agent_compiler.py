@@ -46,57 +46,70 @@ def extract_file_paths(text: str) -> list[str]:
     return list(set(matches1 + matches2))
 
 
-def compile_agent_context(agent_yaml_path: Path, step_id: str, scene_tags: list[str]) -> str:
+def compile_agent_context(agent_yaml_path: Path, step_id: str, scene_tags: list[str], layout: str = 'prefix-cache') -> str:
     data = load_yaml(agent_yaml_path)
     agent = data.get('agent', {})
     persona = agent.get('persona', {})
     actions = agent.get('critical_actions', [])
 
-    parts = []
-    
+    persona_parts = []
     # 1. PERSONA INJECTION
-    parts.append("=========================================")
-    parts.append("=== AGENT PERSONA (WHO YOU ARE)       ===")
-    parts.append("=========================================")
-    parts.append(f"ROLE:\n{persona.get('role', '').strip()}")
-    parts.append(f"\nIDENTITY:\n{persona.get('identity', '').strip()}")
-    parts.append(f"\nCOMMUNICATION STYLE:\n{persona.get('communication_style', '').strip()}")
+    persona_parts.append("=========================================")
+    persona_parts.append("=== AGENT PERSONA (WHO YOU ARE)       ===")
+    persona_parts.append("=========================================")
+    persona_parts.append(f"ROLE:\n{persona.get('role', '').strip()}")
+    persona_parts.append(f"\nIDENTITY:\n{persona.get('identity', '').strip()}")
+    persona_parts.append(f"\nCOMMUNICATION STYLE:\n{persona.get('communication_style', '').strip()}")
     
     principles = persona.get('principles', [])
     if principles:
-        parts.append("\nCORE PRINCIPLES:")
+        persona_parts.append("\nCORE PRINCIPLES:")
         for p in principles:
-            parts.append(f"- {p}")
+            persona_parts.append(f"- {p}")
 
+    actions_parts = []
     # 2. CRITICAL ACTIONS & REFERENCED KNOWLEDGE
-    parts.append("\n=========================================")
-    parts.append("=== CRITICAL ACTIONS & KNOWLEDGE      ===")
-    parts.append("=========================================")
+    actions_parts.append("=========================================")
+    actions_parts.append("=== CRITICAL ACTIONS & KNOWLEDGE      ===")
+    actions_parts.append("=========================================")
     
     referenced_files = set()
     for action in actions:
-        parts.append(f"- {action}")
+        actions_parts.append(f"- {action}")
         referenced_files.update(extract_file_paths(action))
     
-    # Load all referenced markdown files dynamically
-    for ref in referenced_files:
+    # Load all referenced markdown files dynamically (sort for consistency)
+    for ref in sorted(referenced_files):
         full_path = PROJECT_ROOT / ref
         if full_path.exists() and full_path.is_file():
             content = full_path.read_text(encoding='utf-8')
-            parts.append(f"\n<!-- 📖 LOADED FROM: {ref} -->\n{content}")
+            actions_parts.append(f"\n<!-- 📖 LOADED FROM: {ref} -->\n{content}")
         elif full_path.is_dir():
-             parts.append(f"\n<!-- 📁 REFERENCED DIRECTORY: {ref} (Skipping content read) -->")
+             actions_parts.append(f"\n<!-- 📁 REFERENCED DIRECTORY: {ref} (Skipping content read) -->")
         else:
-            parts.append(f"\n<!-- ⚠️ WARNING: Missing referenced file {ref} -->")
+            actions_parts.append(f"\n<!-- ⚠️ WARNING: Missing referenced file {ref} -->")
 
+    jit_parts = []
     # 3. JIT RULES (Layer 1 + Layer 3)
-    parts.append("\n=========================================")
-    parts.append(f"=== JIT INJECTED RULES: {step_id} ===")
-    parts.append("=========================================")
+    jit_parts.append("=========================================")
+    jit_parts.append(f"=== JIT INJECTED RULES: {step_id} ===")
+    jit_parts.append("=========================================")
     jit_payload = build_context_payload(step_id, scene_tags, include_canon=True)
-    parts.append(jit_payload)
+    jit_parts.append(jit_payload)
 
-    return "\n".join(parts)
+    parts = []
+    if layout == 'prefix-cache':
+        # Prefix cache layout places identical canon/JIT rules at top for cross-agent prompt caching
+        parts.append("\n".join(jit_parts))
+        parts.append("\n".join(persona_parts))
+        parts.append("\n".join(actions_parts))
+    else:
+        # Legacy/original layout
+        parts.append("\n".join(persona_parts))
+        parts.append("\n".join(actions_parts))
+        parts.append("\n".join(jit_parts))
+
+    return "\n\n".join(parts)
 
 
 def main():
@@ -104,6 +117,7 @@ def main():
     parser.add_argument("agent_file", help="Path to the agent YAML file")
     parser.add_argument("step_id", help="Pipeline step ID for rule injection (e.g. prose-generation)")
     parser.add_argument("--scene-tags", nargs="*", default=[], help="Scene tags (e.g. explicit, bedroom)")
+    parser.add_argument("--layout", choices=["prefix-cache", "legacy"], default="prefix-cache", help="Layout style for compiling context prompt")
     
     args = parser.parse_args()
     yaml_path = Path(args.agent_file)
@@ -112,9 +126,10 @@ def main():
         print(f"❌ Error: Agent file not found at {yaml_path}", file=sys.stderr)
         sys.exit(1)
         
-    compiled_prompt = compile_agent_context(yaml_path, args.step_id, args.scene_tags)
+    compiled_prompt = compile_agent_context(yaml_path, args.step_id, args.scene_tags, args.layout)
     print(compiled_prompt)
 
 
 if __name__ == "__main__":
     main()
+

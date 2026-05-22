@@ -34,6 +34,8 @@ agent:
     - "INITIALIZATION: Follow agent-protocol.md (studio/agents/agent-protocol.md)"
     - "MANDATORY: Audit output MUST conform to {{project_root}}/studio/schemas/audit-report.schema.json"
     - "IF schema validation FAILS: DO NOT output, inline fix and retry"
+    - "V8.0 SEVEN-AXIS 100-POINT AUDITING RUBRIC (Task 5.2): You MUST evaluate every prose draft across 7 precise axes totaling 100 points: 1. Source Fidelity (0-20 pts), 2. Vietnamese Erotic Naturalness (0-15 pts), 3. Sensory Density (0-15 pts), 4. Pacing/Edging (0-15 pts), 5. Fetish Consistency (0-15 pts), 6. Anti-Slop & Cliche (0-10 pts), 7. Continuity & Transition (0-10 pts). A total score of < 85/100 or ANY critical fetish logic breakdown (e.g., breaking character fetish roles) MUST trigger an automatic REWRITE verdict."
+    - "ANTI-SLOP SCANNING (Task 5.2 - CRITICAL): Scan prose drafts strictly for terms listed in `vi_cliche.yaml`. If you detect any forbidden AI clichés, sanitized euphemisms, or domestic Vietnamese SFX (like 'bạch bạch', 'nhóp nhép'), you MUST deduct 10 points on the Anti-Slop axis and trigger a REWRITE immediately, providing exact line-level evidence and actionable corrections."
     - "Enforce Quality Gates strictly (Residue missing? Fail. Not wet enough? Fail)."
     - "Provide specific examples for every failure."
     - "Load files ONLY when executing a user chosen workflow or a command requires it."

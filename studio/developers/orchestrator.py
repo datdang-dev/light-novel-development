@@ -127,7 +127,7 @@ Output format:
     sum_agent_id = MODE_REGISTRY.get_setting("summarization_agent", "hermes")
     sum_role = MODE_REGISTRY.get_setting("summarization_role", "se/m-architect")
     agent = create_agent(sum_agent_id, sum_role, CONFIG_DIR)
-    summary = await agent.call(summary_prompt, ctx_file.parent, timeout=TIMEOUT)
+    summary = await _call_agent_with_retry(agent, summary_prompt, ctx_file.parent, timeout=TIMEOUT)
 
     summary_file.write_text(f"# Context Summary (Generated: {datetime.now().isoformat()})\n\n{summary}")
 
@@ -190,6 +190,26 @@ def _load_files(file_paths: list[str]) -> str:
 
 def _build_prompt(role_content: str, template: str, content: str) -> str:
     return f"{role_content}\n\n{template}\n\n{content}"
+
+async def _call_agent_with_retry(agent, prompt: str, session_dir: Path, timeout: float = 180.0, retries: int = 3) -> str:
+    """Call an agent's call method with retries and exponential backoff."""
+    last_err = None
+    for attempt in range(retries):
+        try:
+            if attempt > 0:
+                print(f"[🔄 Attempt {attempt + 1}/{retries}] Retrying call to agent {agent.role_name}...")
+            return await agent.call(prompt, session_dir, timeout=timeout)
+        except asyncio.TimeoutError as e:
+            print(f"[⚠️ Warning] Timeout occurred calling agent {agent.role_name} (Attempt {attempt + 1}/{retries})")
+            last_err = e
+        except Exception as e:
+            print(f"[⚠️ Warning] Error occurred calling agent {agent.role_name}: {e} (Attempt {attempt + 1}/{retries})")
+            last_err = e
+        if attempt < retries - 1:
+            await asyncio.sleep(2 ** attempt)
+    
+    # If we get here, all retries failed
+    raise last_err or Exception(f"Failed to call agent {agent.role_name} after {retries} attempts.")
 
 # ── Classes ──────────────────────────────────────────────────────────────────
 
@@ -280,8 +300,8 @@ class PromptBuilder:
                 + "\n</context>\n<context>\n[Context truncated to fit token budget]\n</context>"
             )
 
-        # Assemble in strict hierarchy order
-        parts = [system_block, role_block, context_block, task_block, constraint_block]
+        # Assemble in strict hierarchy order (task block with schema/instruction ALWAYS at the absolute end for maximum LLM compliance)
+        parts = [system_block, role_block, context_block, constraint_block, task_block]
         return "\n\n".join(p for p in parts if p)
 
 # ── Main Orchestration Logic ─────────────────────────────────────────────────
@@ -385,23 +405,33 @@ async def _mode_single(session_dir: Path, prompt: str, agent_pkg: dict, title: s
     # 3. Add context (structured with tags)
     builder.add_context(await _inject_context(session_dir, prompt))
 
-    # 4. Add template as guidance
-    builder.add_context(f"GUIDANCE TEMPLATE:\n{_load_template(template_name)}")
+    # 4. Add template as guidance (moved to protected constraints to prevent truncation)
+    builder.add_constraint(f"GUIDANCE TEMPLATE:\n{_load_template(template_name)}")
 
     # 5. Add specific task
-    builder.add_task(prompt)
+    schema_name = MODE_REGISTRY.get_schema(mode)
+    schema_instruction = ""
+    if schema_name and schema_name in SCHEMA_MAP:
+        schema_cls = SCHEMA_MAP[schema_name]
+        schema_instruction = (
+            f"\n\nCRITICAL DIRECTIVE: Regardless of any output format specified in your role description or persona, "
+            f"you MUST return ONLY raw JSON matching the following schema. Do NOT include any markdown text outside the JSON. "
+            f"Do NOT output headings, bullet points, or markdown formatting outside the JSON structure. Output ONLY valid JSON:\n"
+            f"{json.dumps(schema_cls.model_json_schema(), indent=2)}"
+        )
+    builder.add_task(prompt + schema_instruction)
 
     full = builder.build()
 
     _sep(f"{agent_pkg['cfg']['id']} [{agent.role_name}] — {title}")
-    raw_output = await agent.call(full, session_dir, timeout=TIMEOUT)
+    raw_output = await _call_agent_with_retry(agent, full, session_dir, timeout=TIMEOUT)
 
     # Validate against schema if applicable (from registry)
-    schema_name = MODE_REGISTRY.get_schema(mode)
     if schema_name and schema_name in SCHEMA_MAP:
         try:
             schema_cls = SCHEMA_MAP[schema_name]
-            validated = schema_cls.model_validate_json(raw_output)
+            clean_json = _extract_json(raw_output)
+            validated = schema_cls.model_validate_json(clean_json)
             output = validated.model_dump_json(indent=2)
             print(f"✅ Schema validation passed ({schema_name})")
         except ValidationError as e:
@@ -469,14 +499,15 @@ async def _mode_cross(session_dir: Path, prompt: str, agents: list[dict], knowle
             tmpl_name = "qa_audit.md"
         else:
             tmpl_name = "code_review.md"
-        builder.add_context(f"GUIDANCE TEMPLATE:\n{_load_template(tmpl_name)}")
+        # Moved guidance template to protected constraints to prevent context truncation
+        builder.add_constraint(f"GUIDANCE TEMPLATE:\n{_load_template(tmpl_name)}")
 
         # Task with forced summary constraint
         task_plus = f"{prompt}\n\nIMPORTANT: End your review with a structured summary tagged with <review_summary> containing 3 key bullet points."
         builder.add_task(task_plus)
 
         _sep(f"Pass 1 — {pkg['cfg']['id']} [{agent.role_name}]")
-        out = await agent.call(builder.build(), session_dir, timeout=TIMEOUT)
+        out = await _call_agent_with_retry(agent, builder.build(), session_dir, timeout=TIMEOUT)
         print(out)
         results.append(out)
 
@@ -512,7 +543,7 @@ async def _mode_cross(session_dir: Path, prompt: str, agents: list[dict], knowle
         )
 
         _sep(f"Pass 2 — {pkg['cfg']['id']} cross-examining")
-        response = await pkg["instance"].call(challenge_prompt, session_dir, timeout=TIMEOUT)
+        response = await _call_agent_with_retry(pkg["instance"], challenge_prompt, session_dir, timeout=TIMEOUT)
         print(f"\n{pkg['cfg']['id']} response:\n{response}")
 
         debates[pkg['cfg']['id']] = response
@@ -534,7 +565,9 @@ async def _mode_cross(session_dir: Path, prompt: str, agents: list[dict], knowle
     if schema_name and schema_name in SCHEMA_MAP:
         schema_cls = SCHEMA_MAP[schema_name]
         schema_instruction = (
-            f"\n\nIMPORTANT: You MUST return ONLY raw JSON matching the following schema:\n"
+            f"\n\nCRITICAL DIRECTIVE: Regardless of any output format specified in your role description or persona, "
+            f"you MUST return ONLY raw JSON matching the following schema. Do NOT include any markdown text outside the JSON. "
+            f"Do NOT output headings, bullet points, or markdown formatting outside the JSON structure. Output ONLY valid JSON:\n"
             f"{json.dumps(schema_cls.model_json_schema(), indent=2)}"
         )
 
@@ -548,7 +581,7 @@ async def _mode_cross(session_dir: Path, prompt: str, agents: list[dict], knowle
         f"Cross-Examination Debate:\n{debate_block}"
         f"{schema_instruction}"
     )
-    syn = await agents[0]["instance"].call(syn_prompt, session_dir, timeout=TIMEOUT)
+    syn = await _call_agent_with_retry(agents[0]["instance"], syn_prompt, session_dir, timeout=TIMEOUT)
     
     # Validate against schema if applicable (from registry)
     if schema_name and schema_name in SCHEMA_MAP:
