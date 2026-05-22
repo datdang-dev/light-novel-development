@@ -29,15 +29,8 @@ try:
 except ImportError as e:
     MCP_IMPORT_ERROR = f"mcp package: {e}"
 
-# Try alternative import paths for Ruflo MCP tools
+# Flag to denote if tool calls are supported (real session or pre-injected environment)
 RUFLO_TOOLS_AVAILABLE = False
-try:
-    # Check if Ruflo MCP tools are available via direct attribute access
-    import mcp
-    if hasattr(mcp, 'mcp__ruflo__swarm_init'):
-        RUFLO_TOOLS_AVAILABLE = True
-except Exception:
-    pass
 
 
 @dataclass
@@ -80,6 +73,7 @@ class RufloMCPAdapter:
     def __init__(self, config: Optional[RufloConfig] = None):
         self.config = config or RufloConfig()
         self._session = None
+        self._client_context = None
         self._initialized = False
 
     async def initialize(self) -> bool:
@@ -92,13 +86,62 @@ class RufloMCPAdapter:
             return False
 
         try:
-            # In a real implementation, this would establish an MCP connection
-            # For now, we'll mark as initialized for demo purposes
+            # 1. Attempt to load config from mcp_config.json to find node command, args, env
+            config_path = Path("/home/datdang/.gemini/antigravity/mcp_config.json")
+            cmd = "node"
+            args = ["/home/datdang/working/lnd_dev/external/ruflo/v3/@claude-flow/cli/bin/mcp-server-lnd.js"]
+            env = {
+                "CLAUDE_FLOW_CWD": "/home/datdang/working/lnd_dev",
+                "PATH": os.environ.get("PATH", "")
+            }
+
+            if config_path.exists():
+                try:
+                    with open(config_path, "r") as f:
+                        cfg_data = json.load(f)
+                    ruflo_cfg = cfg_data.get("mcpServers", {}).get("ruflo", {})
+                    if ruflo_cfg:
+                        cmd = ruflo_cfg.get("command", cmd)
+                        args = ruflo_cfg.get("args", args)
+                        env.update(ruflo_cfg.get("env", {}))
+                except Exception as e:
+                    print(f"[*] Warning loading mcp_config.json: {e}")
+
+            # 2. Establish STDIO client connection to the Ruflo MCP Server subprocess
+            from mcp import stdio_client, ClientSession, StdioServerParameters
+            server_params = StdioServerParameters(command=cmd, args=args, env=env)
+
+            self._client_context = stdio_client(server_params)
+            read_stream, write_stream = await self._client_context.__aenter__()
+            
+            self._session = ClientSession(read_stream, write_stream)
+            await self._session.__aenter__()
+            await self._session.initialize()
+
             self._initialized = True
+            global RUFLO_TOOLS_AVAILABLE
+            RUFLO_TOOLS_AVAILABLE = True
             return True
         except Exception as e:
-            print(f"[!] Ruflo initialization failed: {e}")
+            print(f"[!] Ruflo real MCP initialization failed: {e}")
+            self._initialized = False
             return False
+
+    async def close(self):
+        """Close the MCP connection gracefully."""
+        if self._session:
+            try:
+                await self._session.__aexit__(None, None, None)
+            except Exception:
+                pass
+            self._session = None
+        if self._client_context:
+            try:
+                await self._client_context.__aexit__(None, None, None)
+            except Exception:
+                pass
+            self._client_context = None
+        self._initialized = False
 
     async def ensure_initialized(self) -> bool:
         """Ensure adapter is initialized, initialize if needed."""
@@ -115,48 +158,41 @@ class RufloMCPAdapter:
         if not await self.ensure_initialized():
             return {"error": "Ruflo not enabled"}
 
-        # Check if Ruflo MCP tools are available
-        if not RUFLO_TOOLS_AVAILABLE:
-            # Demo mode: simulate swarm initialization
-            return {
-                "swarm_id": swarm_id or "swarm-lnd-dev-001",
-                "topology": self.config.topology,
-                "strategy": self.config.strategy,
-                "max_agents": self.config.max_agents,
-                "status": "initialized",
-                "demo_mode": True,
-                "note": "Ruflo MCP tools not available - running in demo mode"
-            }
+        # Use active session if available
+        if self._session:
+            try:
+                res = await self._session.call_tool(
+                    "swarm_init",
+                    arguments={
+                        "topology": self.config.topology,
+                        "strategy": self.config.strategy,
+                        "maxAgents": self.config.max_agents,
+                        "config": {"swarmId": swarm_id}
+                    }
+                )
+                if res and res.content and len(res.content) > 0:
+                    try:
+                        return json.loads(res.content[0].text)
+                    except Exception:
+                        return {"status": "initialized", "swarm_id": swarm_id, "raw": res.content[0].text}
+                return {"status": "initialized", "swarm_id": swarm_id}
+            except Exception as e:
+                return {"error": str(e), "swarm_id": swarm_id, "status": "failed"}
 
-        try:
-            from mcp import mcp__ruflo__swarm_init
-
-            result = await mcp__ruflo__swarm_init(
-                topology=self.config.topology,
-                strategy=self.config.strategy,
-                maxAgents=self.config.max_agents,
-                config={"swarmId": swarm_id}
-            )
-
-            return result
-        except Exception as e:
-            return {
-                "error": str(e),
-                "swarm_id": swarm_id or "swarm-lnd-dev-001",
-                "status": "fallback"
-            }
+        # Fallback to simulated demo
+        return {
+            "swarm_id": swarm_id or "swarm-lnd-dev-001",
+            "topology": self.config.topology,
+            "strategy": self.config.strategy,
+            "max_agents": self.config.max_agents,
+            "status": "initialized",
+            "demo_mode": True,
+            "note": "Ruflo MCP tools not available - running in demo mode"
+        }
 
     async def route_task(self, task: str, context: str = "") -> Dict[str, Any]:
         """
         Route a task to the optimal agent using Ruflo's semantic router.
-
-        Returns:
-            {
-                "primary_agent": str,
-                "alternatives": List[str],
-                "recommended_topology": str,
-                "confidence": float
-            }
         """
         if not self.config.routing_enabled:
             return {"error": "Routing disabled"}
@@ -164,22 +200,34 @@ class RufloMCPAdapter:
         if not await self.ensure_initialized():
             return {"error": "Ruflo not initialized"}
 
-        # Check if Ruflo MCP tools are available
-        if not RUFLO_TOOLS_AVAILABLE:
-            # Demo mode: simulate routing based on task content
-            return self._route_task_demo(task, context)
+        # Use active session if available
+        if self._session:
+            try:
+                res = await self._session.call_tool(
+                    "hooks_route",
+                    arguments={
+                        "task": task,
+                        "context": context
+                    }
+                )
+                if res and res.content and len(res.content) > 0:
+                    try:
+                        data = json.loads(res.content[0].text)
+                        return {
+                            "primary_agent": data.get("recommended", "sonnet"),
+                            "alternatives": ["haiku", "opus"],
+                            "recommended_topology": "hierarchical",
+                            "confidence": 0.9,
+                            "raw": data
+                        }
+                    except Exception:
+                        return {"primary_agent": "sonnet", "raw": res.content[0].text}
+                return {"primary_agent": "sonnet"}
+            except Exception as e:
+                return {"error": str(e), "demo_fallback": True}
 
-        try:
-            from mcp import mcp__ruflo__agentdb_route
-
-            result = await mcp__ruflo__agentdb_route(
-                task=task,
-                context=context
-            )
-
-            return result
-        except Exception as e:
-            return {"error": str(e), "demo_fallback": True}
+        # Simulated demo fallback
+        return self._route_task_demo(task, context)
 
     def _route_task_demo(self, task: str, context: str) -> Dict[str, Any]:
         """Demo routing logic when MCP unavailable."""
@@ -214,15 +262,6 @@ class RufloMCPAdapter:
     ) -> bool:
         """
         Store a verdict in Ruflo shared memory for cross-session recall.
-
-        Args:
-            task_id: Unique task identifier
-            verdict: PASS/FAIL/REWRITE
-            score: Quality score (0-100)
-            details: Additional metadata
-
-        Returns:
-            True if stored successfully
         """
         if not self.config.memory_enabled:
             return False
@@ -230,33 +269,34 @@ class RufloMCPAdapter:
         if not await self.ensure_initialized():
             return False
 
-        # Check if Ruflo MCP tools are available
-        if not RUFLO_TOOLS_AVAILABLE:
-            # Demo mode: store in local dict
-            print(f"[Demo] Would store verdict for {task_id}: {verdict} (score: {score})")
-            return True
+        # Use active session if available
+        if self._session:
+            try:
+                memory_key = f"verdict:{task_id}"
+                memory_value = {
+                    "task_id": task_id,
+                    "verdict": verdict,
+                    "score": score,
+                    "details": details or {},
+                    "timestamp": __import__("time").time()
+                }
+                await self._session.call_tool(
+                    "memory_store",
+                    arguments={
+                        "key": memory_key,
+                        "value": json.dumps(memory_value),
+                        "namespace": self.config.memory_namespace,
+                        "upsert": True
+                    }
+                )
+                return True
+            except Exception as e:
+                print(f"[!] Failed to store verdict via MCP: {e}")
+                return False
 
-        try:
-            from mcp import mcp__ruflo__memory_store
-
-            memory_key = f"verdict:{task_id}"
-            memory_value = {
-                "task_id": task_id,
-                "verdict": verdict,
-                "score": score,
-                "details": details or {},
-                "timestamp": __import__("time").time()
-            }
-
-            await mcp__ruflo__memory_store(
-                key=memory_key,
-                value=json.dumps(memory_value),
-                namespace=self.config.memory_namespace
-            )
-            return True
-        except Exception as e:
-            print(f"[!] Failed to store verdict: {e}")
-            return False
+        # Demo Mode fallback
+        print(f"[Demo] Would store verdict for {task_id}: {verdict} (score: {score})")
+        return True
 
     async def retrieve_verdict(self, task_id: str) -> Optional[Dict[str, Any]]:
         """Retrieve a previously stored verdict."""
@@ -266,25 +306,30 @@ class RufloMCPAdapter:
         if not await self.ensure_initialized():
             return None
 
-        # Check if Ruflo MCP tools are available
-        if not RUFLO_TOOLS_AVAILABLE:
-            # Demo mode: return None (not found in demo storage)
-            print(f"[Demo] Would retrieve verdict for {task_id}")
-            return None
+        # Use active session if available
+        if self._session:
+            try:
+                memory_key = f"verdict:{task_id}"
+                res = await self._session.call_tool(
+                    "memory_retrieve",
+                    arguments={
+                        "key": memory_key,
+                        "namespace": self.config.memory_namespace
+                    }
+                )
+                if res and res.content and len(res.content) > 0:
+                    try:
+                        return json.loads(res.content[0].text)
+                    except Exception:
+                        return res.content[0].text
+                return None
+            except Exception as e:
+                print(f"[!] Failed to retrieve verdict via MCP: {e}")
+                return None
 
-        try:
-            from mcp import mcp__ruflo__memory_retrieve
-
-            memory_key = f"verdict:{task_id}"
-
-            result = await mcp__ruflo__memory_retrieve(
-                key=memory_key,
-                namespace=self.config.memory_namespace
-            )
-            return json.loads(result) if result else None
-        except Exception as e:
-            print(f"[!] Failed to retrieve verdict: {e}")
-            return None
+        # Demo fallback
+        print(f"[Demo] Would retrieve verdict for {task_id}")
+        return None
 
     async def run_with_orchestration(
         self,
@@ -296,31 +341,12 @@ class RufloMCPAdapter:
     ) -> Dict[str, Any]:
         """
         Run a panel with optional Ruflo orchestration.
-
-        This method wraps the existing orchestrator behavior,
-        adding Ruflo features when enabled.
-
-        Args:
-            task: Task description
-            mode: Mode name from mode_registry.yaml
-            prompt: User prompt
-            agents: List of agent configurations
-            files: Optional list of file paths to include
-
-        Returns:
-            {
-                "success": bool,
-                "results": List[Dict],
-                "verdict": str,
-                "total_score": float,
-                "ruflo_metadata": Dict
-            }
         """
         results = []
         scores = []
         ruflo_metadata = {}
 
-        # 1. Optional: Route task to optimal agents
+        # 1. Route task to optimal agents
         if self.config.routing_enabled:
             route_result = await self.route_task(
                 task=f"{mode}: {task}",
@@ -328,28 +354,26 @@ class RufloMCPAdapter:
             )
             ruflo_metadata["routing"] = route_result
 
-        # 2. Execute using existing orchestrator logic
-        # (In a real implementation, this would call the actual orchestrator)
         for agent_cfg in agents:
             agent_id = agent_cfg.get("id", "unknown")
             role = agent_cfg.get("role", "unknown")
 
-            # 3. Optional: Store task start
-            if self.config.memory_enabled and RUFLO_TOOLS_AVAILABLE:
+            # 3. Store task start
+            task_id = f"task-{agent_id}-{mode}"
+            if self.config.memory_enabled and self._session:
                 try:
-                    from mcp import mcp__ruflo__task_create
-                    task_id = f"task-{agent_id}-{mode}"
-                    await mcp__ruflo__task_create(
-                        type="review",
-                        description=f"{mode} review by {agent_id}",
-                        tags=[role, mode]
+                    await self._session.call_tool(
+                        "task_create",
+                        arguments={
+                            "type": "review",
+                            "description": f"{mode} review by {agent_id}",
+                            "tags": [role, mode]
+                        }
                     )
                 except Exception:
-                    task_id = f"task-{agent_id}-{mode}"
-            else:
-                task_id = f"task-{agent_id}-{mode}"
+                    pass
 
-            # Simulate agent execution (replace with actual call in production)
+            # Simulate agent execution
             result = {
                 "agent_id": agent_id,
                 "role": role,
@@ -360,7 +384,7 @@ class RufloMCPAdapter:
             results.append(result)
             scores.append(result.get("score", 0))
 
-            # 4. Optional: Store verdict
+            # 4. Store verdict
             if self.config.memory_enabled:
                 verdict = "PASS" if result.get("score", 0) >= 70 else "REWRITE"
                 await self.store_verdict(
@@ -370,7 +394,6 @@ class RufloMCPAdapter:
                     details={"agent": agent_id, "mode": mode}
                 )
 
-        # 5. Calculate aggregate verdict
         avg_score = sum(scores) / len(scores) if scores else 0
         overall_verdict = "PASS" if avg_score >= 70 else "REWRITE"
 
@@ -390,27 +413,34 @@ class RufloMCPAdapter:
         if not await self.ensure_initialized():
             return {"error": "Ruflo not initialized"}
 
-        # Check if Ruflo MCP tools are available
-        if not RUFLO_TOOLS_AVAILABLE:
-            # Demo mode: return simulated health status
-            return {
-                "status": "healthy",
-                "components": {
-                    "mcp": {"status": "available", "demo_mode": True},
-                    "memory": {"status": "available", "demo_mode": True},
-                    "routing": {"status": "available", "demo_mode": True},
-                    "swarm": {"status": "available", "demo_mode": True}
-                },
-                "timestamp": __import__("time").time(),
-                "demo_mode": True
-            }
+        # Use active session if available
+        if self._session:
+            try:
+                res = await self._session.call_tool(
+                    "system_health",
+                    arguments={}
+                )
+                if res and res.content and len(res.content) > 0:
+                    try:
+                        return json.loads(res.content[0].text)
+                    except Exception:
+                        return {"status": "healthy", "raw": res.content[0].text}
+                return {"status": "healthy"}
+            except Exception as e:
+                return {"error": str(e), "demo_fallback": True}
 
-        try:
-            from mcp import mcp__ruflo__system_health
-
-            return await mcp__ruflo__system_health()
-        except Exception as e:
-            return {"error": str(e), "demo_fallback": True}
+        # Simulated health check
+        return {
+            "status": "healthy",
+            "components": {
+                "mcp": {"status": "available", "demo_mode": True},
+                "memory": {"status": "available", "demo_mode": True},
+                "routing": {"status": "available", "demo_mode": True},
+                "swarm": {"status": "available", "demo_mode": True}
+            },
+            "timestamp": __import__("time").time(),
+            "demo_mode": True
+        }
 
 
 # Convenience function for easy integration
@@ -424,17 +454,10 @@ async def run_panel_with_ruflo(
 ) -> Dict[str, Any]:
     """
     Convenience wrapper for run_panel with optional Ruflo orchestration.
-
-    Args:
-        task: Task description
-        mode: Mode name from mode_registry.yaml
-        prompt: User prompt
-        agents: List of agent configurations
-        files: Optional list of file paths
-        ruflo_config: Optional RufloConfig (defaults to disabled)
-
-    Returns:
-        Same structure as run_with_orchestration
     """
     adapter = RufloMCPAdapter(config=ruflo_config or RufloConfig())
-    return await adapter.run_with_orchestration(task, mode, prompt, agents, files)
+    try:
+        res = await adapter.run_with_orchestration(task, mode, prompt, agents, files)
+        return res
+    finally:
+        await adapter.close()
