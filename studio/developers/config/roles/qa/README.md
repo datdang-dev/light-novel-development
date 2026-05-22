@@ -22,25 +22,25 @@ Previously a manual multi-step checklist, this service is now fully automated an
 
 - **Owner**: Antigravity Developer (You)
 - **Primary Agent**: `qa/m-qa-gooner` (QA Gatekeeper / Slop Detector)
-- **Secondary Agent (Optional)**: `f-r18-expert` (For Cross-Review)
+- **Secondary Agent (Optional)**: `dev/f-r18-expert` (For Cross-Review)
 
 ## On Activation (`/gooner-audit`)
 
 When the Product Owner triggers this skill, the **Antigravity Developer** must:
 
 1. **Locate the Draft**: Identify the prose or JSON caption file that needs review.
-2. **Execute the Co-Work Wrapper**: Trigger `.agents/skills/axel-cowork/run.sh`.
+2. **Execute the Co-Work Wrapper**: Trigger `.agent/skills/axel-cowork/run.sh`.
 
    ```bash
-   bash .agents/skills/axel-cowork/run.sh \
+   bash .agent/skills/axel-cowork/run.sh \
      --task "audit-$(date +%s)" \
-     --mode review \
+     --mode gooner_audit \
      --agents "hermes:qa/m-qa-gooner" \
      --prompt "Perform a strict 100-point Gooner Framework Audit on the attached draft. Provide the final Total Score, Category breakdowns, and detect any SLOP." \
      --files "studio/developers/config/roles/qa/rules/GOONER_AUDIT_FRAMEWORK.md path/to/draft-prose.json"
    ```
 
-3. **Cross-Review (Optional)**: If the PO requests a deeper review, run in `--mode cross` adding `claude:f-r18-expert` to the `--agents` argument.
+3. **Cross-Review (Optional)**: If the PO requests a deeper review, run in `--mode review_debate` adding `claude:dev/f-r18-expert` to the `--agents` argument.
 
 ## Review Outputs
 
