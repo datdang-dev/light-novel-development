@@ -22,22 +22,26 @@ class HermesAgent(BaseAgent):
         else:
             cmd = ["hermes", "-z", prompt]
 
-        proc = await asyncio.create_subprocess_exec(
-            *cmd,
-            stdout=asyncio.subprocess.PIPE,
-            stderr=asyncio.subprocess.PIPE,
-            env=env,
-        )
+        try:
+            proc = await asyncio.create_subprocess_exec(
+                *cmd,
+                stdout=asyncio.subprocess.PIPE,
+                stderr=asyncio.subprocess.PIPE,
+                env=env,
+            )
 
-        stdout, stderr = await asyncio.wait_for(proc.communicate(), timeout=kwargs.get("timeout", 180.0))
-        output = stdout.decode(errors="replace").strip()
+            stdout, stderr = await asyncio.wait_for(proc.communicate(), timeout=kwargs.get("timeout", 180.0))
+            output = stdout.decode(errors="replace").strip()
 
-        if proc.returncode != 0:
-            err = stderr.decode(errors="replace").strip()
-            output += f"\n[ERROR hermes] {err or f'exit code {proc.returncode}'}"
+            if proc.returncode != 0:
+                # CLI execution returned error status, fallback to direct API
+                output = await self.call_api_direct(prompt)
+        except Exception:
+            # Subprocess failed to start (e.g. FileNotFoundError), fallback to direct API
+            output = await self.call_api_direct(prompt)
 
         # Capture session ID for future --resume
-        if not session_id and output:
+        if not session_id and output and not output.startswith("[ERROR"):
             for line in output.splitlines():
                 if line.startswith("session_id:"):
                     new_id = line.split(":", 1)[1].strip()

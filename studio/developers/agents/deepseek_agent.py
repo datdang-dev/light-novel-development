@@ -27,12 +27,5 @@ class DeepSeekAgent(BaseAgent):
             except Exception:
                 continue
 
-        # Fallback: help dump
-        try:
-            proc = await asyncio.create_subprocess_exec("deepseek", "exec", "--help", stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE, env=env)
-            stdout, stderr = await asyncio.wait_for(proc.communicate(), timeout=10.0)
-            help_text = stdout.decode(errors="replace") + "\n" + stderr.decode(errors="replace")
-        except Exception as e:
-            help_text = f"(Failed to run deepseek exec --help: {e})"
-
-        return f"[ERROR deepseek] No successful invocation. Help:\n{help_text}"
+        # Fallback: call direct API
+        return await self.call_api_direct(prompt)

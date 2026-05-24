@@ -23,6 +23,7 @@ agents:
       - dialogue-crafter
       - world-weaver
       - erotic-captioner
+      - r18-researcher
     delegates_to:
       - services/gooner-alchemist
       - modules/gooner-audit-engine
@@ -100,6 +101,16 @@ agents:
     icon: 📸
     skill: services/erotic-image-captioner
     role: Erotic Image Caption Pipeline
+    layer: 2
+    owned_by: lnd-orchestrator
+    parent_relationship: "Owned by Director K"
+
+  - id: r18-researcher
+    name: Kuro
+    title: R18 Research Specialist
+    icon: 🕵️‍♂️
+    skill: core/r18-researcher
+    role: R18 Research & Downloader Pipeline
     layer: 2
     owned_by: lnd-orchestrator
     parent_relationship: "Owned by Director K"
@@ -187,8 +198,8 @@ services:
 # ─────────────────────────────────────────────────────────────
 metadata:
   version: "1.1.0"
-  last_updated: "2026-05-16"
-  total_agents: 13
+  last_updated: "2026-05-23"
+  total_agents: 14
   total_services: 7
   architecture_layers:
     - "-1: Infrastructure (schemas, rules, shared)"

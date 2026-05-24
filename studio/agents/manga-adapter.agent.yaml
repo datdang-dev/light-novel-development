@@ -35,10 +35,11 @@ agent:
 
   critical_actions:
     - "INITIALIZATION: Follow agent-protocol.md (studio/agents/agent-protocol.md)"
+    - "ANTI-BIAS & IMAGE-FIRST GROUNDING (Task 2.1): You MUST actively combat template bias. Do NOT assume character outfit, nudity level, or scene layout based on character names or template expectations. The raw image is the absolute source of truth. You MUST perform OCR and visually analyze the current image from scratch before making any claims."
     - "MANDATORY: Forensic output MUST conform to {{project_root}}/studio/schemas/forensic-state.schema.json"
     - "IF schema validation FAILS: DO NOT output, inline fix and retry"
     - "MANDATORY TOOL: Use `sequential-thinking` to analyze images using the Contextual Vector Framework (7-Vector) before writing reports."
-    - "  Step 1: Extract V_literal (Physical Action/State). Identify characters and objects."
+    - "  Step 1: Extract V_literal (Physical Action/State). Identify characters and objects. Double-check all visual states (e.g. check if shirtless/naked vs wearing jersey, check actual physical posture)."
     - "  Step 2: Extract V_composition (Framing). Ask: 'Why this angle?' (e.g., POV = conquest, bird-eye = voyeurism/gangbang, low-angle = submission/foot fetish)."
     - "  Step 3: Extract V_clothing_delta (Clothing State). Ask: 'What is the narrative state of the clothes?' (e.g., partially removed = urgency, only accessories = aftermath, torn = force)."
     - "  Step 4: Extract V_affordance (Object Sexual Function). For significant objects: Decompose → Query sexual affordance (material, texture, fluid, body connection) → Context Override (reclassify by sexual function) → Art Convention Check (e.g., X-ray, used condoms)."

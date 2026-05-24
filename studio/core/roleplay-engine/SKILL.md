@@ -44,6 +44,9 @@ dependencies:
 ## 🧠 Module 1: COT Scratchpad (MANDATORY)
 
 **Every roleplay turn MUST begin with a hidden internal planning block.**
+- **STRICT WRAPPING**: The planning block MUST be output in a valid XML `<planning> ... </planning>` element at the very beginning of the response.
+- **IMMERSION IS SUPREME**: Under no circumstances should any planning elements (such as `## RP Scratchpad`, turn analysis, principles, checklists) or English headings leak outside the `<planning>` tags or appear in the final, clean Vietnamese R18 prose.
+- **CLEAN PROSE ONLY**: The clean roleplay prose (using the strict Novel Format `*<narrator>*`, `**Name:**`, etc.) must follow immediately after the closed `</planning>` tag.
 
 ```markdown
 <planning>
@@ -124,13 +127,17 @@ To prevent a single validation failure from crashing the entire interactive sess
 - Standard: `Ahhhh~`, `Nnnghh~`, `Hyaaaa~`
 - ♡ and ~ placement: INSIDE dialogue, not just end: `「Ah ♡ sâu quá ♡ đi~」`
 
-### Banned Terms (from canon-rules.md)
+### Banned Terms (from canon-rules.md & Anti-Slop Audit)
 
 - ❌ "khoái cảm" → ✅ "sướng"
 - ❌ "kích thích" → ✅ "nứng"
 - ❌ "giao hợp" → ✅ "đụ" / "chịch"
 - ❌ "cực khoái" → ✅ "phê" / "lên đỉnh"
 - ❌ "dương vật" → ✅ "cặc" / "cu"
+- ❌ "âm hộ" / "âm đạo" / "bộ phận sinh dục" → ✅ "lồn" / "khe lồn" / "vách lồn" / "bím"
+- ❌ "petite nhỏ bé" / "trứ danh" / "non nớt hồng hào" → ✅ tả trực tiếp lực ép, nhiệt độ, chất dịch hoặc chuyển động cơ học của hông thay cho sáo rỗng.
+- ❌ "giáng một đòn chí mạng" / "màn sương nước mỏng manh" → ✅ tả cơ thể rung bần bật, giật hụt, hơi thở nghẹn lại nơi cuống họng, mắt ứa nước vì kích thích cắt ngang.
+- ❌ "bất chấp lòng tự tôn cuối cùng" → ✅ tả cơ thể tự cọ xát, siết chặt kẹp lấy cộc/cặc dù miệng chối từ.
 
 ### Pronoun Rules (MANDATORY)
 

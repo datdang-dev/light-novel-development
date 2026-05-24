@@ -47,179 +47,13 @@ SCHEMAS_DIR = STUDIO_ROOT / "schemas"
 # PIPELINE DEFINITIONS
 # ═══════════════════════════════════════════════════════════════════
 
-PIPELINES: dict[str, dict] = {
-    "gooner-alchemist": {
-        "description": "Manga-to-Novel Full Pipeline",
-        "steps": [
-            {
-                "id": "initialize",
-                "name": "Step 1: Initialize",
-                "agent": "lnd-orchestrator",
-                "step_file": "services/gooner-alchemist/steps/step-01-initialize.md",
-                "rule_step": None,
-                "output_schema": "pipeline-state.schema.json",
-                "gate": None,
-            },
-            {
-                "id": "forensic-analysis",
-                "name": "Step 2: Forensic Analysis",
-                "agent": "manga-adapter",
-                "step_file": "services/gooner-alchemist/steps/step-02-forensic-analysis.md",
-                "rule_step": "forensic-analysis",
-                "output_schema": "forensic-state.schema.json",
-                "gate": None,
-            },
-            {
-                "id": "context-loading",
-                "name": "Step 3: Context Loading",
-                "agent": "lnd-orchestrator",
-                "step_file": "services/gooner-alchemist/steps/step-03-context-loading.md",
-                "rule_step": "context-loading",
-                "output_schema": None,
-                "gate": "forensic_complete",
-            },
-            {
-                "id": "prose-generation",
-                "name": "Step 4: Prose Generation",
-                "agent": "lewd-writer",
-                "step_file": "services/gooner-alchemist/steps/step-04-prose-generation.md",
-                "rule_step": "prose-generation",
-                "output_schema": "draft-prose.schema.json",
-                "gate": "context_loaded",
-            },
-            {
-                "id": "quality-audit",
-                "name": "Step 5: Quality Audit",
-                "agent": "gooner-editor",
-                "step_file": "services/gooner-alchemist/steps/step-05-quality-audit.md",
-                "rule_step": "quality-audit",
-                "output_schema": "audit-report.schema.json",
-                "gate": "prose_complete",
-            },
-            {
-                "id": "state-persistence",
-                "name": "Step 6: State Persistence",
-                "agent": "lnd-orchestrator",
-                "step_file": "services/gooner-alchemist/steps/step-06-state-persistence.md",
-                "rule_step": None,
-                "output_schema": None,
-                "gate": "audit_pass",
-            },
-            {
-                "id": "complete",
-                "name": "Step 7: Completion",
-                "agent": "lnd-orchestrator",
-                "step_file": "services/gooner-alchemist/steps/step-07-complete.md",
-                "rule_step": None,
-                "output_schema": None,
-                "gate": None,
-            },
-        ],
-        "circuit_breaker_limit": 3,
-    },
-    "erotic-captioner": {
-        "description": "EC: Erotic Image Captioning Pipeline",
-        "steps": [
-            {
-                "id": "forensic-analysis",
-                "name": "Forensic Analysis",
-                "agent": "manga-adapter",
-                "step_file": "studio/core/panel-forensic/templates/forensic_analysis.md",
-                "rule_step": "forensic-analysis",
-                "output_schema": "forensic-state.schema.json",
-                "gate": None,
-            },
-            {
-                "id": "context-loading",
-                "name": "Context Loading",
-                "agent": "lnd-orchestrator",
-                "step_file": "studio/core/volume-context-extractor/templates/context_extraction.md",
-                "rule_step": "context-loading",
-                "output_schema": None,
-                "gate": "forensic_complete",
-            },
-            {
-                "id": "prose-generation",
-                "name": "Prose Generation",
-                "agent": "lewd-writer",
-                "step_file": "studio/core/erotic-caption-writer/templates/erotic_caption.md",
-                "rule_step": "prose-generation",
-                "output_schema": "draft-prose.schema.json",
-                "gate": "context_loaded",
-            },
-            {
-                "id": "quality-audit",
-                "name": "Quality Audit",
-                "agent": "gooner-editor",
-                "step_file": "studio/core/gooner-audit-engine/templates/quality_audit.md",
-                "rule_step": "quality-audit",
-                "output_schema": "audit-report.schema.json",
-                "gate": "prose_complete",
-            },
-            {
-                "id": "complete",
-                "name": "Completion",
-                "agent": "lnd-orchestrator",
-                "step_file": "studio/core/orchestration/templates/complete.md",
-                "rule_step": None,
-                "output_schema": None,
-                "gate": "audit_pass",
-            },
-        ],
-        "circuit_breaker_limit": 3,
-    },
-    "novel-development": {
-        "description": "ND: Full Novel/Doujinshi Localization Pipeline",
-        "steps": [
-            {
-                "id": "forensic-analysis",
-                "name": "Forensic Analysis",
-                "agent": "manga-adapter",
-                "step_file": "studio/core/panel-forensic/templates/forensic_analysis.md",
-                "rule_step": "forensic-analysis",
-                "output_schema": "forensic-state.schema.json",
-                "gate": None,
-            },
-            {
-                "id": "character-alignment",
-                "name": "Character Alignment",
-                "agent": "character-architect",
-                "step_file": "studio/core/roleplay-engine/templates/character_card.md",
-                "rule_step": "character-alignment",
-                "output_schema": "character-bible.schema.json",
-                "gate": "forensic_complete",
-            },
-            {
-                "id": "prose-generation",
-                "name": "Prose Generation",
-                "agent": "lewd-writer",
-                "step_file": "studio/core/lewd-writer/templates/lewd_prose.md",
-                "rule_step": "prose-generation",
-                "output_schema": "draft-prose.schema.json",
-                "gate": "forensic_complete",
-            },
-            {
-                "id": "quality-audit",
-                "name": "Quality Audit",
-                "agent": "gooner-editor",
-                "step_file": "studio/core/gooner-audit-engine/templates/quality_audit.md",
-                "rule_step": "quality-audit",
-                "output_schema": "audit-report.schema.json",
-                "gate": "prose_complete",
-            },
-            {
-                "id": "complete",
-                "name": "Completion",
-                "agent": "lnd-orchestrator",
-                "step_file": "studio/core/orchestration/templates/complete.md",
-                "rule_step": None,
-                "output_schema": None,
-                "gate": "audit_pass",
-            },
-        ],
-        "circuit_breaker_limit": 3,
-    },
-}
+sys.path.append(str(STUDIO_ROOT))
+from core.state_store import StateStore
+from core.pipeline_registry import PipelineRegistry
+from core.gate_registry import GateRegistry
+
+pipeline_registry = PipelineRegistry(STUDIO_ROOT / "config" / "pipelines")
+gate_registry = GateRegistry()
 
 
 # ═══════════════════════════════════════════════════════════════════
@@ -253,33 +87,13 @@ def create_state(pipeline_name: str, run_dir: str, pages: list[int] | None = Non
 
 
 def load_state(state_file: Path) -> dict | None:
-    """Load state from YAML file with flock mutex shared lock."""
-    if not state_file.exists():
-        return None
-    lock_file_path = state_file.parent / (state_file.name + ".lock")
-    lock_file = open(lock_file_path, "w")
-    try:
-        fcntl.flock(lock_file, fcntl.LOCK_SH)
-        with open(state_file, "r", encoding="utf-8") as f:
-            return yaml.safe_load(f)
-    finally:
-        fcntl.flock(lock_file, fcntl.LOCK_UN)
-        lock_file.close()
+    """Load state from YAML file using unified StateStore."""
+    return StateStore(state_file).load()
 
 
 def save_state(state: dict, state_file: Path):
-    """Save state to YAML file with flock mutex exclusive lock."""
-    state["updated_at"] = datetime.now(timezone.utc).isoformat()
-    state_file.parent.mkdir(parents=True, exist_ok=True)
-    lock_file_path = state_file.parent / (state_file.name + ".lock")
-    lock_file = open(lock_file_path, "w")
-    try:
-        fcntl.flock(lock_file, fcntl.LOCK_EX)
-        with open(state_file, "w", encoding="utf-8") as f:
-            yaml.dump(state, f, default_flow_style=False, allow_unicode=True, sort_keys=False)
-    finally:
-        fcntl.flock(lock_file, fcntl.LOCK_UN)
-        lock_file.close()
+    """Save state to YAML file using unified StateStore."""
+    StateStore(state_file).save(state)
 
 
 # ═══════════════════════════════════════════════════════════════════
@@ -287,44 +101,8 @@ def save_state(state: dict, state_file: Path):
 # ═══════════════════════════════════════════════════════════════════
 
 def check_gate(state: dict, gate_name: str | None) -> tuple[bool, str]:
-    """Check if a pipeline gate is satisfied."""
-    if gate_name is None:
-        return True, "No gate required"
-
-    run_dir = Path(state["run_dir"])
-
-    if gate_name == "forensic_complete":
-        # Check that forensic output exists for current page
-        forensics_dir = run_dir / "_forensics"
-        if not forensics_dir.exists():
-            return False, f"Forensics directory not found: {forensics_dir}"
-        pages = state.get("pages", [])
-        if pages:
-            page_idx = state.get("current_page_index", 0)
-            if page_idx < len(pages):
-                page_num = pages[page_idx]
-                expected = forensics_dir / f"{page_num:03d}_forensics.md"
-                if not expected.exists():
-                    return False, f"Missing forensic report: {expected.name}. Run forensic analysis first."
-        return True, "Forensic gate passed"
-
-    elif gate_name == "context_loaded":
-        # Context loading is a soft gate - just check step completed
-        if "context-loading" in state.get("steps_completed", []):
-            return True, "Context loaded"
-        return False, "Context loading step not completed"
-
-    elif gate_name == "prose_complete":
-        if "prose-generation" in state.get("steps_completed", []):
-            return True, "Prose generated"
-        return False, "Prose generation step not completed"
-
-    elif gate_name == "audit_pass":
-        if "quality-audit" in state.get("steps_completed", []):
-            return True, "Audit passed"
-        return False, "Quality audit not completed or not passed"
-
-    return True, f"Unknown gate '{gate_name}' — allowing (permissive)"
+    """Check if a pipeline gate is satisfied using GateRegistry."""
+    return gate_registry.check(gate_name, state)
 
 
 # ═══════════════════════════════════════════════════════════════════
@@ -332,12 +110,13 @@ def check_gate(state: dict, gate_name: str | None) -> tuple[bool, str]:
 # ═══════════════════════════════════════════════════════════════════
 
 def get_pipeline(name: str) -> dict:
-    """Get pipeline definition."""
-    if name not in PIPELINES:
-        available = ", ".join(PIPELINES.keys())
+    """Get pipeline definition from PipelineRegistry."""
+    pipeline = pipeline_registry.get(name)
+    if pipeline is None:
+        available = ", ".join(pipeline_registry.list_pipelines().keys())
         print(f"❌ Unknown pipeline: '{name}'. Available: {available}", file=sys.stderr)
         sys.exit(1)
-    return PIPELINES[name]
+    return pipeline
 
 
 def get_current_step(state: dict) -> dict | None:
@@ -382,7 +161,13 @@ def build_context(state: dict) -> str:
         sc = state["scene_continuity"]
         if sc.get("characters"):
             lines.append("### Characters present:")
-            for char, c_state in sorted(sc["characters"].items()):
+            chars = sorted(sc["characters"].items())
+            total_chars = len(chars)
+            # Limit to top 5 characters to avoid context bloat
+            if total_chars > 5:
+                lines.append(f"*(Truncated: showing 5 of {total_chars} active characters)*")
+                chars = chars[-5:]
+            for char, c_state in chars:
                 lines.append(f"- **{char}**: clothing_state=`{c_state.get('clothing_state', 'normal')}`, arousal_level=`{c_state.get('arousal_level', 'neutral')}`, fluids=`{c_state.get('fluids', 'none')}`")
         if sc.get("environment"):
             lines.append("### Environment:")
@@ -399,13 +184,25 @@ def build_context(state: dict) -> str:
 
     if state.get("steps_completed"):
         lines.append("## Completed Steps")
-        for s in state["steps_completed"]:
+        steps = state["steps_completed"]
+        total_steps = len(steps)
+        # Limit to last 10 steps to prevent unbounded context growth
+        if total_steps > 10:
+            lines.append(f"*(Truncated: showing last 10 of {total_steps} completed steps)*")
+            steps = steps[-10:]
+        for s in steps:
             lines.append(f"- ✅ {s}")
         lines.append("")
 
     if state.get("agent_outputs"):
         lines.append("## Agent Outputs")
-        for agent, path in state["agent_outputs"].items():
+        outputs = list(state["agent_outputs"].items())
+        total_outputs = len(outputs)
+        # Limit to last 5 outputs to prevent unbounded context growth
+        if total_outputs > 5:
+            lines.append(f"*(Truncated: showing last 5 of {total_outputs} outputs)*")
+            outputs = outputs[-5:]
+        for agent, path in outputs:
             lines.append(f"- `{agent}` → `{path}`")
         lines.append("")
 
@@ -421,7 +218,18 @@ def build_context(state: dict) -> str:
             lines.append(f"JIT Rules: `python rule_injector.py {step['rule_step']}`")
         lines.append("")
 
-    return "\n".join(lines)
+    context_str = "\n".join(lines)
+    # Estimated token count (1 token ≈ 4 characters)
+    est_tokens = len(context_str) // 4
+    if est_tokens > 8000:
+        import warnings
+        warnings.warn(
+            f"Context payload size (~{est_tokens} tokens) exceeds standard 8000 token threshold. "
+            "Downstream agents may experience context truncation.",
+            UserWarning
+        )
+
+    return context_str
 
 
 def update_scene_continuity(state: dict, page_num: int):
@@ -783,7 +591,7 @@ def main():
 
     elif args.command == "list":
         print("Available pipelines:")
-        for name, pipeline in PIPELINES.items():
+        for name, pipeline in pipeline_registry.list_pipelines().items():
             steps = [s["id"] for s in pipeline["steps"]]
             print(f"  {name}: {pipeline['description']}")
             print(f"    Steps: {' → '.join(steps)}")

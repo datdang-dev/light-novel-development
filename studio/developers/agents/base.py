@@ -59,6 +59,90 @@ class BaseAgent(ABC):
 
         return "\n".join(content)
 
+    async def call_api_direct(self, prompt: str, model: str = "coding-model") -> str:
+        """Call the local port 20128 API directly as a robust fallback/override."""
+        import urllib.request
+        import json
+        import asyncio
+
+        def _parse_body(res_body: str) -> str:
+            res_body = res_body.strip()
+            if res_body.startswith("{"):
+                try:
+                    res_json = json.loads(res_body)
+                    if "choices" in res_json and len(res_json["choices"]) > 0:
+                        choice = res_json["choices"][0]
+                        if "message" in choice and "content" in choice["message"]:
+                            return choice["message"]["content"]
+                        elif "delta" in choice and "content" in choice["delta"]:
+                            return choice["delta"]["content"]
+                    return res_body
+                except Exception:
+                    return res_body
+            else:
+                content = []
+                for line in res_body.splitlines():
+                    line = line.strip()
+                    if not line:
+                        continue
+                    if line.startswith("data:"):
+                        data_str = line[len("data:"):].strip()
+                        if data_str == "[DONE]":
+                            continue
+                        try:
+                            chunk = json.loads(data_str)
+                            if "choices" in chunk and len(chunk["choices"]) > 0:
+                                choice = chunk["choices"][0]
+                                if "delta" in choice and "content" in choice["delta"]:
+                                    content.append(choice["delta"]["content"])
+                                elif "message" in choice and "content" in choice["message"]:
+                                    content.append(choice["message"]["content"])
+                        except Exception:
+                            pass
+                return "".join(content)
+
+        def _make_call():
+            url = "http://localhost:20128/v1/chat/completions"
+            headers = {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer sk-21b7954167b683bc-e9yyb0-0431b1ff"
+            }
+            data = {
+                "model": model,
+                "messages": [
+                    {"role": "user", "content": prompt}
+                ]
+            }
+            req = urllib.request.Request(
+                url, 
+                data=json.dumps(data).encode("utf-8"), 
+                headers=headers,
+                method="POST"
+            )
+            try:
+                with urllib.request.urlopen(req, timeout=180) as response:
+                    res_body = response.read().decode("utf-8")
+                    return _parse_body(res_body)
+            except Exception as e:
+                # Try fallback model if coding-model failed
+                if model == "coding-model":
+                    data["model"] = "kc/google/gemini-2.5-pro"
+                    req2 = urllib.request.Request(
+                        url,
+                        data=json.dumps(data).encode("utf-8"),
+                        headers=headers,
+                        method="POST"
+                    )
+                    try:
+                        with urllib.request.urlopen(req2, timeout=180) as response2:
+                            res_body2 = response2.read().decode("utf-8")
+                            return _parse_body(res_body2)
+                    except Exception as e2:
+                        return f"[ERROR API] Both coding-model ({e}) and fallback ({e2}) failed."
+                return f"[ERROR API] Request failed: {e}"
+
+        return await asyncio.to_thread(_make_call)
+
     @abstractmethod
     async def call(self, prompt: str, session_dir: Path, **kwargs) -> str:
         """Call the agent CLI or API.

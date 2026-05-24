@@ -106,9 +106,25 @@
                 "additionalProperties": false
             }
         },
-        "erotic_elements": {
+        "explicit_elements": {
             "type": "object",
+            "description": "R18 elements: acts, exposure, fluids, and metadata. Canonical field — gate_registry and Pydantic model both reference this key.",
             "properties": {
+                "acts": {
+                    "type": "array",
+                    "items": { "type": "string" },
+                    "description": "Sexual acts detected (e.g., penetration, oral, groping)"
+                },
+                "exposure": {
+                    "type": "array",
+                    "items": { "type": "string" },
+                    "description": "Exposed body parts (e.g., breasts, crotch)"
+                },
+                "fluids": {
+                    "type": "array",
+                    "items": { "type": "string" },
+                    "description": "Fluids present (e.g., semen, saliva, sweat)"
+                },
                 "clothing_state": {
                     "type": "string"
                 },
@@ -126,7 +142,7 @@
         },
         "interactions": {
             "type": "array",
-            "description": "Spatial interactions: who is doing what to whom. MANDATORY if erotic_elements has acts.",
+            "description": "Spatial interactions: who is doing what to whom. MANDATORY if explicit_elements.acts is non-empty.",
             "items": {
                 "type": "object",
                 "properties": {
@@ -211,6 +227,35 @@
                 }
             },
             "additionalProperties": false
+        },
+        "evidence_ledger": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "claim": {
+                        "type": "string"
+                    },
+                    "confidence_score": {
+                        "type": "number",
+                        "minimum": 0.0,
+                        "maximum": 1.0
+                    },
+                    "evidence_type": {
+                        "type": "string",
+                        "enum": ["pixel_grounded", "verified_inference", "tag_suggested", "lore_assumed"]
+                    },
+                    "visibility": {
+                        "type": "string",
+                        "enum": ["visible", "partially_occluded", "not_visible", "absent"]
+                    },
+                    "source": {
+                        "type": "string"
+                    }
+                },
+                "required": ["claim", "confidence_score", "evidence_type", "visibility", "source"],
+                "additionalProperties": false
+            }
         }
     },
     "required": [

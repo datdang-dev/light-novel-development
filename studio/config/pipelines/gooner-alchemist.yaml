@@ -1,0 +1,53 @@
+name: "gooner-alchemist"
+description: "Manga-to-Novel Full Pipeline"
+circuit_breaker_limit: 3
+steps:
+  - id: "initialize"
+    name: "Step 1: Initialize"
+    agent: "lnd-orchestrator"
+    step_file: "services/gooner-alchemist/steps/step-01-initialize.md"
+    rule_step: null
+    output_schema: "pipeline-state.schema.json"
+    gate: null
+  - id: "forensic-analysis"
+    name: "Step 2: Forensic Analysis"
+    agent: "manga-adapter"
+    step_file: "services/gooner-alchemist/steps/step-02-forensic-analysis.md"
+    rule_step: "forensic-analysis"
+    output_schema: "forensic-state.schema.json"
+    gate: null
+  - id: "context-loading"
+    name: "Step 3: Context Loading"
+    agent: "lnd-orchestrator"
+    step_file: "services/gooner-alchemist/steps/step-03-context-loading.md"
+    rule_step: "context-loading"
+    output_schema: null
+    gate: "forensic_complete"
+  - id: "prose-generation"
+    name: "Step 4: Prose Generation"
+    agent: "lewd-writer"
+    step_file: "services/gooner-alchemist/steps/step-04-prose-generation.md"
+    rule_step: "prose-generation"
+    output_schema: "draft-prose.schema.json"
+    gate: "context_loaded"
+  - id: "quality-audit"
+    name: "Step 5: Quality Audit"
+    agent: "gooner-editor"
+    step_file: "services/gooner-alchemist/steps/step-05-quality-audit.md"
+    rule_step: "quality-audit"
+    output_schema: "audit-report.schema.json"
+    gate: "prose_complete"
+  - id: "state-persistence"
+    name: "Step 6: State Persistence"
+    agent: "lnd-orchestrator"
+    step_file: "services/gooner-alchemist/steps/step-06-state-persistence.md"
+    rule_step: null
+    output_schema: null
+    gate: "audit_pass"
+  - id: "complete"
+    name: "Step 7: Completion"
+    agent: "lnd-orchestrator"
+    step_file: "services/gooner-alchemist/steps/step-07-complete.md"
+    rule_step: null
+    output_schema: null
+    gate: null

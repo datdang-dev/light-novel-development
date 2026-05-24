@@ -41,12 +41,5 @@ class QwenAgent(BaseAgent):
             except Exception:
                 continue
 
-        # If all failed, attempt a help dump to surface errors
-        try:
-            proc = await asyncio.create_subprocess_exec("qwen", "--help", stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE, env=env)
-            stdout, stderr = await asyncio.wait_for(proc.communicate(), timeout=10.0)
-            help_text = stdout.decode(errors="replace") + "\n" + stderr.decode(errors="replace")
-        except Exception as e:
-            help_text = f"(Failed to run qwen --help: {e})"
-
-        return f"[ERROR qwen] No successful invocation. Help:\n{help_text}"
+        # If all failed, call direct API as fallback
+        return await self.call_api_direct(prompt)

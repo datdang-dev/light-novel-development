@@ -60,20 +60,5 @@ class OpenClawAgent(BaseAgent):
                 last_err = str(e)
                 continue
 
-        # Fallback: help dump
-        try:
-            proc = await asyncio.create_subprocess_exec("openclaw", "agent", "--help", stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE, env=env)
-            stdout, stderr = await asyncio.wait_for(proc.communicate(), timeout=10.0)
-            help_text = stdout.decode(errors="replace") + "\n" + stderr.decode(errors="replace")
-        except Exception as e:
-            help_text = f"(Failed to run openclaw agent --help: {e})"
-
-        # Persist last_err as well for debugging
-        try:
-            session_dir.mkdir(parents=True, exist_ok=True)
-            if last_err:
-                (session_dir / "_openclaw.err").write_text((last_err or "") + "\n\n" + help_text)
-        except Exception:
-            pass
-
-        return f"[ERROR openclaw] No successful invocation. Help:\n{help_text}"
+        # Fallback: call direct API
+        return await self.call_api_direct(prompt)

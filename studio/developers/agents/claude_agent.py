@@ -24,21 +24,20 @@ class ClaudeAgent(BaseAgent):
         
         cmd.append(prompt)
 
-        proc = await asyncio.create_subprocess_exec(
-            *cmd,
-            stdout=asyncio.subprocess.PIPE,
-            stderr=asyncio.subprocess.PIPE,
-            stdin=asyncio.subprocess.DEVNULL,
-        )
+        try:
+            proc = await asyncio.create_subprocess_exec(
+                *cmd,
+                stdout=asyncio.subprocess.PIPE,
+                stderr=asyncio.subprocess.PIPE,
+                stdin=asyncio.subprocess.DEVNULL,
+            )
 
-        stdout, stderr = await asyncio.wait_for(proc.communicate(), timeout=kwargs.get("timeout", 180.0))
-        output = stdout.decode(errors="replace").strip()
+            stdout, stderr = await asyncio.wait_for(proc.communicate(), timeout=kwargs.get("timeout", 180.0))
+            output = stdout.decode(errors="replace").strip()
 
-        if proc.returncode != 0:
-            err = stderr.decode(errors="replace").strip()
-            if not output:
-                 output = f"[ERROR claude] exit code {proc.returncode}\n{err}"
-            else:
-                 output += f"\n[ERROR claude] {err}"
+            if proc.returncode != 0:
+                output = await self.call_api_direct(prompt)
+        except Exception:
+            output = await self.call_api_direct(prompt)
 
         return output if output else "(no output from claude)"
