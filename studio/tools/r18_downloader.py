@@ -16,6 +16,7 @@ import subprocess
 import requests
 from bs4 import BeautifulSoup
 from concurrent.futures import ThreadPoolExecutor
+from curl_cffi import requests as curl_requests
 
 # Style/Console helpers
 class Colors:
@@ -259,6 +260,117 @@ def download_telegraph_images(url, output_base):
         return True
     except Exception as e:
         print_status(f"Error scraping Telegraph images: {e}", "error")
+        return False
+
+# ---------------------------------------------------------------------------
+# 3. NHENTAI DOWNLOADER (Bypasses Cloudflare using curl_cffi TLS fingerprint)
+# ---------------------------------------------------------------------------
+def download_nhentai_gallery(gallery_id, output_base):
+    """
+    Download nhentai gallery directly from nhentai.net
+    Uses curl_cffi to impersonate Chrome TLS fingerprint → bypasses Cloudflare JS challenge
+    Parses SvelteKit <script type="application/json"> payload for gallery metadata
+    """
+    print_status(f"Fetching nhentai gallery {gallery_id} via curl_cffi (Chrome impersonation)...", "info")
+
+    try:
+        # Step 1: Fetch gallery page with TLS fingerprint impersonation
+        r = curl_requests.get(
+            f"https://nhentai.net/g/{gallery_id}/",
+            impersonate="chrome120",
+            timeout=20
+        )
+        if r.status_code != 200:
+            print_status(f"nhentai.net returned HTTP {r.status_code}", "error")
+            return False
+
+        html = r.text
+
+        # Step 2: Parse SvelteKit JSON payload from <script type="application/json">
+        script_pattern = re.compile(
+            r'<script[^>]*type="application/json"[^>]*>(.*?)</script>',
+            re.DOTALL
+        )
+        gallery_json = None
+        for match in script_pattern.findall(html):
+            try:
+                data = json.loads(match)
+                body_str = data.get("body", "")
+                # The body is an escaped JSON string containing gallery data
+                if isinstance(body_str, str) and f'"id":{gallery_id}' in body_str:
+                    gallery_json = json.loads(body_str)
+                    break
+            except (json.JSONDecodeError, TypeError):
+                continue
+
+        if not gallery_json:
+            print_status("Could not find gallery data in page HTML", "error")
+            return False
+
+        # Step 3: Extract metadata
+        media_id = gallery_json.get("media_id", "")
+        if not media_id:
+            print_status("media_id not found in gallery data", "error")
+            return False
+
+        title_data = gallery_json.get("title", {})
+        title = (title_data.get("english") or title_data.get("pretty") or
+                 title_data.get("japanese") or f"nhentai_{gallery_id}")
+
+        pages_data = gallery_json.get("pages", [])
+        num_pages = len(pages_data)
+        print_status(f"Title: {title}", "success")
+        print_status(f"Media ID: {media_id} | Pages: {num_pages}", "info")
+
+        # Step 4: Download all pages from CDN
+        manga_dir = os.path.join(output_base, clean_filename(title))
+        os.makedirs(manga_dir, exist_ok=True)
+
+        def download_page(page_info):
+            page_num = page_info.get("number", 0)
+            path = page_info.get("path", "")
+            if not path:
+                return False
+
+            img_url = f"https://i.nhentai.net/{path}"
+            try:
+                img_resp = curl_requests.get(img_url, impersonate="chrome120", timeout=30)
+                if img_resp.status_code == 200:
+                    _, ext = os.path.splitext(path)
+                    if not ext:
+                        ext = ".webp"
+                    filename = f"page_{page_num:03d}{ext}"
+                    with open(os.path.join(manga_dir, filename), "wb") as f:
+                        f.write(img_resp.content)
+                    return True
+                else:
+                    print_status(f"Page {page_num}: HTTP {img_resp.status_code}", "warning")
+                    return False
+            except Exception as e:
+                print_status(f"Page {page_num}: {e}", "warning")
+                return False
+
+        print_status("Starting parallel download of pages...", "info")
+        with ThreadPoolExecutor(max_workers=8) as executor:
+            results = list(executor.map(download_page, pages_data))
+
+        success_count = sum(1 for r in results if r)
+        print_status(f"Successfully downloaded {success_count}/{num_pages} pages.", "success")
+
+        # Save info file
+        with open(os.path.join(manga_dir, "info.json"), "w", encoding="utf-8") as f:
+            json.dump({
+                "title": title,
+                "source": f"https://nhentai.net/g/{gallery_id}/",
+                "gallery_id": gallery_id,
+                "media_id": media_id,
+                "pages": num_pages,
+                "downloaded": success_count
+            }, f, indent=2, ensure_ascii=False)
+
+        return success_count >= num_pages * 0.8  # >= 80% is success
+    except Exception as e:
+        print_status(f"Error downloading nhentai gallery: {e}", "error")
         return False
 
 # ---------------------------------------------------------------------------
@@ -609,12 +721,8 @@ def main():
     if nhentai_match:
         gallery_id = nhentai_match.group(1)
         print_status(f"Detected nhentai Gallery ID: {gallery_id}", "info")
-        url = f"https://nhentai.net/g/{gallery_id}/"
-        
-        cmd = ["python3", "/home/datdang/working/Telegraph-Image-Downloader/nhentai-downloander/main.py", url, manga_output_root, "--archive", "--lang", "en"]
-        print_status(f"Running nhentai downloader: {' '.join(cmd)}", "info")
-        res = subprocess.run(cmd)
-        sys.exit(res.returncode)
+        success = download_nhentai_gallery(gallery_id, manga_output_root)
+        sys.exit(0 if success else 1)
 
     # 4. Detect Telegraph / Teletype
     if "telegra.ph/" in input_val or "teletype.in/" in input_val:
