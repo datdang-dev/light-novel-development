@@ -67,10 +67,14 @@
 | Audit FAIL | <70 |
 | Circuit breaker | 3 consecutive fails → HALT pipeline |
 
-## 11. HIERARCHY OF AUTHORITY
-When rules conflict, follow this order (1 wins):
-1. `context_payload.md` (Runtime — from Orchestrator)
-2. This file (`canon-preamble.md` — Global Truth)
-3. `studio/rules/<rule>.md` (Modular rules)
-4. Agent YAML `critical_actions`
-5. General LLM knowledge
+## 11. HIERARCHY OF AUTHORITY & OVERRIDES
+When rules conflict, follow this order (1 wins, highest priority):
+1. `context_payload.md` (Runtime — JIT payload from Orchestrator)
+2. `user_fetish_profile.md` (Overrides all default style/tone preferences to satisfy target kinks)
+3. This file (`canon-preamble.md` — Global Absolute Truth)
+4. `studio/rules/<rule>.md` (Modular rules / specialized constraints)
+5. Agent YAML `critical_actions`
+6. General LLM knowledge
+
+### STYLE OVERRIDE RULE
+If a custom style guide or fetish profile is provided in runtime context, it overrides ALL generic principles and guidelines (including general writing style guides). The ONLY exception is structural integrity (do not break output JSON schemas or exit parameters).

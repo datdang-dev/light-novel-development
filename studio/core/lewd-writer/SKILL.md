@@ -43,6 +43,20 @@ The Lewd Writer is the **primary prose generation engine** of LND Studio. Operat
 
 The engine enforces a 10-step sequential pipeline with strict escalation loops, sensory density requirements, and format compliance checks. Output is validated against `draft-prose.schema.json` before handoff to the Quality Audit engine.
 
+## INPUTS & OUTPUTS CONTRACT
+
+**Inputs:**
+- **forensic-state.json** (required, object/file) — The output from the Panel Forensic stage containing visual details, layout, and character dialogue.
+- **knowledge_payload.md** (optional, string/file) — Additional narrative transformation, beat sheets, and character trope cues.
+- **story_bible** (optional, object) — Continuity book and character bios.
+- **user_fetish_profile** (optional, object) — Kinks and core fetish metrics to prioritize in prose details.
+
+**Outputs:**
+- **draft-prose.json** (conforming to `draft-prose.schema.json`) — Contains:
+  - `metadata`: `manga_name`, `page_number`, `POV`
+  - `prose`: string containing fully realized Vietnamese Light Novel prose.
+  - `sensory_affect`: audit score breakdown including `olfactory`, `tactile`, `visual`, `dialogue_escalation`, `tsundere_breakdown`, and `stroking_metric`.
+
 ## On Activation
 
 1. Load config from `{{project_root}}/studio/config/config.yaml` (resolve `output_folder`, `communication_language`)
@@ -92,3 +106,18 @@ The engine enforces a 10-step sequential pipeline with strict escalation loops, 
 | **Full prose generation** | `/prose-adapter` | Load `steps/step-01-context-loading.md` |
 | **Resume from step** | `/prose-adapter --resume` | Read frontmatter `stepsCompleted` and resume |
 | **Modification pass** | Agent receives rewrite instructions from audit | Re-enter at step 4 with fix notes |
+
+---
+
+## 🛑 HALT CONDITIONS (FAIL-EARLY GATES)
+
+If any of the following conditions are met during execution, you MUST immediately halt processing and return a JSON error response instead of writing any output file:
+
+1. **MISSING_FORENSIC_DATA**: If the input `forensic-state.json` is missing or cannot be resolved, halt with:
+   `{"status": "HALT", "error": "MISSING_FORENSIC_DATA", "reason": "Required forensic analysis file is missing or inaccessible."}`
+2. **INVALID_FORENSIC_STRUCTURE**: If the `forensic-state.json` is invalid, empty, or does not match its schema, halt with:
+   `{"status": "HALT", "error": "INVALID_FORENSIC_STRUCTURE", "reason": "Forensic data is malformed or invalid."}`
+3. **MISSING_REQUIRED_SENSORY_TAGS**: If the forensic data does not contain the mandatory sensory grounding elements (at least 2 sensory_tags per active panel), halt with:
+   `{"status": "HALT", "error": "MISSING_REQUIRED_SENSORY_TAGS", "reason": "Forensic panels lack the mandatory sensory grounding markers."}`
+4. **UNSUPPORTED_TROPE_GENRE**: If the dynamic context specifies a trope or genre beat sheet that cannot be located or is incompatible with the character profiles, halt with:
+   `{"status": "HALT", "error": "UNSUPPORTED_TROPE_GENRE", "reason": "Specified narrative genre trope or beat sheet is unsupported or missing."}`

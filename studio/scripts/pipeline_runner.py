@@ -8,12 +8,12 @@ Enforces step ordering, validates gates, implements circuit breaker.
 This is Layer 2 of the 4-Layer Rule Enforcement Architecture.
 
 Usage:
-    python pipeline_runner.py init <pipeline> <run_dir> [--pages 1-20]
-    python pipeline_runner.py status [<state_file>]
-    python pipeline_runner.py advance [<state_file>]
-    python pipeline_runner.py gate <step_id> [<state_file>]
-    python pipeline_runner.py context [<state_file>]
-    python pipeline_runner.py fail-audit [<state_file>]
+    python pipeline_runner.py run <pipeline> --input <path> [--pages 1-20]
+    python pipeline_runner.py status --run-id <run_id>
+    python pipeline_runner.py advance --run-id <run_id>
+    python pipeline_runner.py gate <step_id> --run-id <run_id>
+    python pipeline_runner.py context --run-id <run_id>
+    python pipeline_runner.py fail-audit --run-id <run_id>
 """
 
 import argparse
@@ -39,7 +39,7 @@ except ImportError:
 SCRIPT_DIR = Path(__file__).parent
 STUDIO_ROOT = SCRIPT_DIR.parent
 PROJECT_ROOT = STUDIO_ROOT.parent
-DEFAULT_STATE_FILE = PROJECT_ROOT / ".agent" / "state" / "current.yaml"
+SESSIONS_DIR = PROJECT_ROOT / "_out" / "production-sessions"
 SCHEMAS_DIR = STUDIO_ROOT / "schemas"
 
 
@@ -94,6 +94,24 @@ def load_state(state_file: Path) -> dict | None:
 def save_state(state: dict, state_file: Path):
     """Save state to YAML file using unified StateStore."""
     StateStore(state_file).save(state)
+
+
+def get_session_state_file(run_id: str) -> Path:
+    """Resolve the canonical state file path for a given run_id."""
+    return SESSIONS_DIR / run_id / "state.yaml"
+
+
+def load_state_by_run_id(run_id: str) -> dict | None:
+    """Load state from a session run_id. Exits with error if not found."""
+    state_file = get_session_state_file(run_id)
+    if not state_file.exists():
+        print(f"❌ Run ID '{run_id}' not found at {state_file}", file=sys.stderr)
+        sys.exit(1)
+    state = load_state(state_file)
+    if state is None:
+        print(f"❌ Failed to load state for run '{run_id}'.", file=sys.stderr)
+        sys.exit(1)
+    return state
 
 
 # ═══════════════════════════════════════════════════════════════════
@@ -281,7 +299,7 @@ def update_scene_continuity(state: dict, page_num: int):
         print(f"⚠️ Warning: Could not update scene continuity: {e}")
 
 
-def advance_step(state: dict, state_file: Path) -> dict:
+def advance_step(state: dict, state_file: Path) -> dict:  # noqa: state_file is session-scoped
     """Advance to next pipeline step."""
     step = get_current_step(state)
     if step is None:
@@ -375,87 +393,66 @@ def main():
     parser = argparse.ArgumentParser(description="LND Studio Pipeline Runner")
     sub = parser.add_subparsers(dest="command")
 
-    # init
-    p_init = sub.add_parser("init", help="Initialize pipeline state")
-    p_init.add_argument("pipeline", help="Pipeline name (e.g., gooner-alchemist)")
-    p_init.add_argument("run_dir", help="Output directory for this run")
-    p_init.add_argument("--pages", type=str, default=None, help="Page range (e.g., 1-20)")
-    p_init.add_argument("--state-file", type=Path, default=DEFAULT_STATE_FILE)
-
     # run
     p_run = sub.add_parser("run", help="Run a pipeline end-to-end with validation")
     p_run.add_argument("pipeline", help="Pipeline name (e.g., erotic-captioner, novel-development)")
     p_run.add_argument("--input", required=True, help="Input directory or image path")
     p_run.add_argument("--pages", type=str, default=None, help="Page range (e.g., 1-5)")
-    p_run.add_argument("--state-file", type=Path, default=DEFAULT_STATE_FILE)
+    p_run.add_argument("--run-id", type=str, default=None, help="Custom run ID (auto-generated if omitted)")
 
     # dry-run
     p_dry = sub.add_parser("dry-run", help="Dry-run a pipeline to verify configurations and gates")
     p_dry.add_argument("pipeline", help="Pipeline name")
 
     # resume
-    p_resume = sub.add_parser("resume", help="Resume a saved pipeline execution session")
+    p_resume = sub.add_parser("resume", help="Show context for a saved pipeline execution session")
     p_resume.add_argument("run_id", help="Session ID to resume")
-    p_resume.add_argument("--state-file", type=Path, default=DEFAULT_STATE_FILE)
 
     # reload
     sub.add_parser("reload", help="Synchronize the State Ledger and reload dynamic contexts")
 
     # status
     p_status = sub.add_parser("status", help="Show pipeline status")
-    p_status.add_argument("--state-file", type=Path, default=DEFAULT_STATE_FILE)
+    p_status.add_argument("--run-id", required=True, help="Run ID of the session")
 
     # advance
     p_advance = sub.add_parser("advance", help="Advance to next step")
-    p_advance.add_argument("--state-file", type=Path, default=DEFAULT_STATE_FILE)
+    p_advance.add_argument("--run-id", required=True, help="Run ID of the session")
 
     # gate
     p_gate = sub.add_parser("gate", help="Check if a gate is satisfied")
     p_gate.add_argument("step_id", help="Step ID to check gate for")
-    p_gate.add_argument("--state-file", type=Path, default=DEFAULT_STATE_FILE)
+    p_gate.add_argument("--run-id", required=True, help="Run ID of the session")
 
     # context
     p_context = sub.add_parser("context", help="Output context string for current state")
-    p_context.add_argument("--state-file", type=Path, default=DEFAULT_STATE_FILE)
+    p_context.add_argument("--run-id", required=True, help="Run ID of the session")
 
     # fail-audit
     p_fail = sub.add_parser("fail-audit", help="Record audit failure + circuit breaker check")
-    p_fail.add_argument("--state-file", type=Path, default=DEFAULT_STATE_FILE)
+    p_fail.add_argument("--run-id", required=True, help="Run ID of the session")
+
+    # list-sessions
+    sub.add_parser("sessions", help="List all past pipeline sessions")
 
     # list-pipelines
     sub.add_parser("list", help="List available pipelines")
 
     args = parser.parse_args()
 
-    if args.command == "init":
-        pipeline = get_pipeline(args.pipeline)
-        pages = None
-        if args.pages:
-            start, end = map(int, args.pages.split("-"))
-            pages = list(range(start, end + 1))
-
-        state = create_state(args.pipeline, args.run_dir, pages)
-        save_state(state, args.state_file)
-        print(f"✅ Pipeline '{args.pipeline}' initialized")
-        print(f"   Run dir: {args.run_dir}")
-        print(f"   State file: {args.state_file}")
-        if pages:
-            print(f"   Pages: {pages[0]:03d}-{pages[-1]:03d} ({len(pages)} pages)")
-        print(f"   First step: {pipeline['steps'][0]['name']}")
-
-    elif args.command == "run":
+    if args.command == "run":
         pipeline = get_pipeline(args.pipeline)
         # Create a unique session ID
-        run_id = f"run_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
-        session_dir = PROJECT_ROOT / "_out" / "production-sessions" / run_id
+        run_id = args.run_id or f"run_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+        session_dir = SESSIONS_DIR / run_id
         session_dir.mkdir(parents=True, exist_ok=True)
-        
+
         pages = None
         if args.pages:
             start, end = map(int, args.pages.split("-"))
             pages = list(range(start, end + 1))
 
-        # Copy input info or record it
+        # Record input source
         input_info = session_dir / "input_source.json"
         with open(input_info, "w") as f:
             json.dump({"input_path": args.input, "run_id": run_id}, f, indent=2)
@@ -476,18 +473,16 @@ def main():
             print("❌ Pipeline initiation aborted due to agent prompt drift from State Ledger. Run reload to update.")
             sys.exit(1)
 
-        # Create session state
+        # Create session state — saved ONLY to session dir
         state = create_state(args.pipeline, str(session_dir), pages)
         state["run_id"] = run_id
         state["input_path"] = args.input
-        
-        # Save to session dir and current state
-        session_state_file = session_dir / "state.yaml"
+        session_state_file = get_session_state_file(run_id)
         save_state(state, session_state_file)
-        save_state(state, args.state_file)
 
         print(f"🚀 Initiated run '{run_id}' for pipeline '{args.pipeline}' successfully!")
         print(f"   Session Directory: {session_dir}")
+        print(f"   Run ID: {run_id}")
         print(f"   Active Step: {pipeline['steps'][0]['name']}")
 
     elif args.command == "dry-run":
@@ -514,21 +509,8 @@ def main():
             sys.exit(1)
 
     elif args.command == "resume":
-        run_id = args.run_id
-        session_state_file = PROJECT_ROOT / "_out" / "production-sessions" / run_id / "state.yaml"
-        if not session_state_file.exists():
-            print(f"❌ Session ID '{run_id}' not found at {session_state_file}.")
-            sys.exit(1)
-        
-        # Load state from session directory
-        state = load_state(session_state_file)
-        if state is None:
-            print(f"❌ Failed to load state for session '{run_id}'.")
-            sys.exit(1)
-
-        # Save as the default active state file
-        save_state(state, args.state_file)
-        print(f"🔄 Resumed session '{run_id}' for pipeline '{state['pipeline_name']}' successfully.")
+        state = load_state_by_run_id(args.run_id)
+        print(f"🔄 Resumed session '{args.run_id}' for pipeline '{state['pipeline_name']}'.")
         print(build_context(state))
 
     elif args.command == "reload":
@@ -537,31 +519,21 @@ def main():
         print("✅ State Ledger successfully synchronized with current agents and lexicons on disk.")
 
     elif args.command == "status":
-        state = load_state(args.state_file)
-        if state is None:
-            print("❌ No active pipeline. Run 'init' or 'run' first.")
-            sys.exit(1)
+        state = load_state_by_run_id(args.run_id)
         print(build_context(state))
 
     elif args.command == "advance":
-        state = load_state(args.state_file)
-        if state is None:
-            print("❌ No active pipeline.")
-            sys.exit(1)
-        # Verify active agent before advancing
+        state = load_state_by_run_id(args.run_id)
         step = get_current_step(state)
         if step:
             agent_filename = f"{step['agent']}.agent.yaml"
             if not verify_preflight(agent_filename):
                 print(f"❌ Pre-flight check failed for {agent_filename}. Aborting step progression.")
                 sys.exit(1)
-        advance_step(state, args.state_file)
+        advance_step(state, get_session_state_file(args.run_id))
 
     elif args.command == "gate":
-        state = load_state(args.state_file)
-        if state is None:
-            print("❌ No active pipeline.")
-            sys.exit(1)
+        state = load_state_by_run_id(args.run_id)
         pipeline = get_pipeline(state["pipeline_name"])
         target_step = None
         for step in pipeline["steps"]:
@@ -576,18 +548,28 @@ def main():
         sys.exit(0 if gate_pass else 1)
 
     elif args.command == "context":
-        state = load_state(args.state_file)
-        if state is None:
-            print("❌ No active pipeline.")
-            sys.exit(1)
+        state = load_state_by_run_id(args.run_id)
         print(build_context(state))
 
     elif args.command == "fail-audit":
-        state = load_state(args.state_file)
-        if state is None:
-            print("❌ No active pipeline.")
-            sys.exit(1)
-        record_audit_failure(state, args.state_file)
+        state = load_state_by_run_id(args.run_id)
+        record_audit_failure(state, get_session_state_file(args.run_id))
+
+    elif args.command == "sessions":
+        if not SESSIONS_DIR.exists():
+            print("No sessions found.")
+        else:
+            sessions = sorted(SESSIONS_DIR.iterdir(), reverse=True)
+            if not sessions:
+                print("No sessions found.")
+            else:
+                print(f"{'RUN ID':<35} {'PIPELINE':<25} {'STATUS':<12} {'UPDATED'}")
+                print("-" * 90)
+                for s in sessions:
+                    sf = s / "state.yaml"
+                    if sf.exists():
+                        st = load_state(sf) or {}
+                        print(f"{s.name:<35} {st.get('pipeline_name','?'):<25} {st.get('status','?'):<12} {st.get('updated_at','?')}")
 
     elif args.command == "list":
         print("Available pipelines:")

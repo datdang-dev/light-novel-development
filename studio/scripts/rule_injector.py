@@ -26,7 +26,7 @@ from pathlib import Path
 SCRIPT_DIR = Path(__file__).parent
 STUDIO_ROOT = SCRIPT_DIR.parent
 RULES_DIR = STUDIO_ROOT / "rules"
-BOOT_DIR = STUDIO_ROOT / "boot"
+BOOT_DIR = RULES_DIR
 KNOWLEDGE_DIR = STUDIO_ROOT / "knowledge"
 CACHE_DIR = STUDIO_ROOT / ".context_cache"
 
