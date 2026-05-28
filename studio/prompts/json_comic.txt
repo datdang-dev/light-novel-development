@@ -1,0 +1,12 @@
+Use json-style caption to describe to comin, stick to following structure:
+{
+"comic_format": "menation the format, for example Comic of N frames",
+"1st_frame": "Main description of the content for fist frame",
+"2nd_frame": "Same for the second",
+...
+"Nth_ftame": "...",
+"character_1": "Describe the characters in comic",
+...
+"character_N": "Separate description for each",
+"meaning": "Try to guess general mood, vibe and meaning of the comic"
+}

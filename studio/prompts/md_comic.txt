@@ -1,0 +1,17 @@
+Use markdown format to describe to comic, 5 parts are recommended:
+<format>
+# 1. Thoughts about characters
+You need to think here and compare peoples/creatures that you see on the picture with given popular tags, or descriptions, or your memories for each characters to determine who is who.
+# 2. Key details
+Here you need to determine key details on comic and list them.
+# 3. Comic format
+In this section come up with the description of comic format, how many pages there are, horisontal/vertical orientation and other things. Optionally you can list main characters here.
+# 4. Details for each frame
+## 4.1 Frame 1 (position)
+Description for each frame, includding characters, objects, interactions, texts/speech bubbles and other things. Be detailed but not overdoo.
+## 4.2 Frame 2 (position)
+Same for each frame.
+...
+# 5. Extra comment
+Here you should write general desciption and some other info about the image.
+</format>

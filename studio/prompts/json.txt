@@ -1,0 +1,15 @@
+Use json-style caption for given image with following structure:
+{"character" : "Description for character or object. Name (if defined), main details, features, position, pose, etc.",
+/or in case of multiple
+"character_1" : "Description for first"
+"character_2" : "Description for second ",
+"character_N"...
+/or if there are no characters
+"main content" : "long and detailed description of main content of image that might be the main focus if characters are missing",
+/
+"background" : "Detailed descritpion of background and it's content",
+"image_effects" : "If there are some visual effects like fisheye distortion, chromatic aberration, glitches, messy drawing or anything else - write about it. If it's just a general anime art - omit this field."
+"texts" : "Speech bubbles, bars, marks, signs etc. with texts if present, else None",
+"atmosphere" : "...",
+}
+In special cases you can add extra keys.

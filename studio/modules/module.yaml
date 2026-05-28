@@ -11,5 +11,5 @@ modules:
     path: "sfx-lookup/SKILL.md"
   - id: "style-enforcer"
     path: "style-enforcer/SKILL.md"
-  - id: "sillytavern-export"
-    path: "sillytavern-export/SKILL.md"
+  - id: "sillytavern-expert"
+    path: "sillytavern-expert/SKILL.md"

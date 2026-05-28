@@ -1,138 +1,86 @@
----
-name: erotic-image-captioner
-description: 'Lightweight 4-step pipeline: Image → Forensic Analysis (Kana) → Scene
-  Prelude (Luna) → Erotic Caption (Suki Caption Mode with Mood Seed). Outputs short,
-  explicit R18 image captions with narrative context.'
-injection:
-  always:
-  - '{{project_root}}/studio/config/canon-rules.md'
-  triggers:
-  - scene_tag: explicit|r18|sexual
-    loads:
-    - '{{project_root}}/studio/knowledge/packs/r18_sensory_pack.md'
-    - '{{project_root}}/studio/knowledge/packs/arousal_architecture.md'
-dependencies:
-  knowledge:
-  - path: '{{project_root}}/studio/knowledge/packs/r18_sensory_pack.md'
-  - path: '{{project_root}}/studio/knowledge/glossaries/hentai_lexicon.md'
-  modules: []
----
-
-
-# Erotic Image Captioner Pipeline
+# Erotic Image Captioner Pipeline (Unified Caption Engine)
 
 ## Overview
 
-The Erotic Image Captioner is a **lightweight pipeline** for generating short, explicit R18 captions from manga/hentai images. Unlike the full `gooner-alchemist` pipeline (which produces novel-length prose), this pipeline produces punchy, visually-driven **image captions** optimized for maximum arousal in minimal words.
+The Erotic Image Captioner (EC) has been refactored from a multi-agent manual prompting sequence and complex MCP tool structure into a **unified, high-performance local Caption Engine** (`studio/core/caption_engine/caption_engine.py`). 
 
-**Pipeline:** `Image → Kana (Forensic) → Luna (Scene Prelude) → Suki (Caption Mode + Mood Seed)`
+Instead of prompting multiple text-only agents (Kana, Luna, Suki) in-session with large system files or invoking fragmented MCP tools, LND Studio now leverages a single optimized multimodal execution pass using the Qwen2-VL local vision engine. Prompts reside as independent templates in `studio/prompts/` and are loaded dynamically on-demand based on the specified `--type`.
 
-## On Activation
+This architecture ensures:
+1. **Low VRAM footprint**: Visual inference runs in clean, dedicated local processes without multiple client-server context duplications.
+2. **Beautiful Observability**: Color-coded, dashboard-style execution logging with real-time terminal output and log files (`_lnd-output/caption_engine.log`) suitable for `tail -f`.
+3. **Toggleable Streaming**: CLI option (`--no-stream`) to switch between instant single-shot generation and real-time chunk streaming.
 
-1. Load pipeline context from `{{project_root}}/studio/config/pipeline-context.md`
-2. Load canon rules from `{{project_root}}/studio/config/canon-rules.md`
-3. Begin at Step 1
-
-## Steps
-
-### Step 1 — Initialize
-
-1. Validate image path exists
-2. Extract image basename for output directory naming
-3. Create output directory: `{{project_root}}/_lnd-output/_captions/{image-basename}/`
-4. Check if user provided additional context (scene backstory) — store as `user_context`
-5. Check if user provided `mood_seed` parameter — store as `mood_seed` (default: `AUTO`)
-   - Valid values: `AUTO`, `MANIC`, `COLD`, `BRATTY`, `BROKEN`, `MASO`
-
-### Step 2 — Forensic Analysis (Delegate to Kana)
-
-1. **🔄 [Delegating to Kana]...**
-2. Execute `{{project_root}}/studio/core/panel-forensic/SKILL.md`
-3. Kana performs:
-   - OCR extraction (if text present)
-   - Character identification (appearance, clothing state, expression)
-   - Explicit content documentation (acts, exposure, penetration, fluids)
-   - Fetish tag extraction
-   - SFX cataloguing
-   - **🔥 Gut Reaction** — subjective vibe assessment with `suggested_mood` for Suki
-4. Save forensic report to `_lnd-output/_captions/{image-basename}/forensic.md`
-
-### Step 2.5 — Scene Prelude (Delegate to Luna)
-
-1. **🔄 [Delegating to Luna]...**
-2. Load forensic report from Step 2
-3. Load `user_context` if provided
-4. Pass `mood_seed` to Luna for scenario tone alignment
-5. Execute `{{project_root}}/studio/core/scene-prelude/SKILL.md`
-6. Luna performs:
-   - Forensic tag cluster analysis
-   - Scenario derivation (WHO, WHERE, WHEN, WHY)
-   - Power topology mapping
-   - Kink integration from `user_fetish_profile.md`
-   - Sensory anchor generation (smell, texture, sound)
-   - Anti-cliché validation
-7. Save prelude to `_lnd-output/_captions/{image-basename}/prelude.md`
-
-### Step 3 — Caption Generation (Delegate to Suki Caption Mode)
-
-1. **🔄 [Delegating to Suki — Caption Mode]...**
-2. Load forensic report from Step 2 (including Gut Reaction section)
-3. Load **prelude from Step 2.5** (Luna's scenario seed)
-4. Load user_context if provided
-5. Pass `mood_seed` to Suki:
-   - If user provided explicit mood → use it
-   - If `AUTO` → Suki resolves from Kana's `gut_reaction.suggested_mood`
-6. Execute `{{project_root}}/studio/core/erotic-caption-writer/SKILL.md`
-7. Suki performs:
-   - Internal COT Scratchpad (hidden planning)
-   - **Prelude integration** — incorporate Luna's scenario, relationships, and sensory anchors
-   - Structure variant selection (Standard / Cold Open / Aftermath / Stream Fragment)
-   - Caption generation with mood-consistent voice
-8. Validate against quality gates in erotic-caption-writer SKILL.md
-9. Save caption to `_lnd-output/_captions/{image-basename}/caption.md`
-10. Pipeline complete ✅
-
-## Output Directory Structure
-
+**Unified Architecture:**
 ```
-_lnd-output/_captions/{image-basename}/
-├── forensic.md      # Kana's analysis + Gut Reaction
-├── prelude.md       # Luna's scenario seed (context blueprint)
-└── caption.md       # Suki's erotic caption (prelude-informed, mood-seeded)
+[User Image] ──> [CaptionEngine (caption_engine.py)]
+                        │
+                        ├──► Loads: studio/prompts/{type}.txt (e.g., long_thoughts_v2, manga, etc.)
+                        ├──► Resolves base64/local files
+                        └──► Executes local InProcessQwen2VLAdapter
 ```
-
-## Quick Reference
-
-| Intent | Trigger | Route |
-|--------|---------|-------|
-| **Single image caption** | `EC` or `erotic caption` | Start Step 1 |
-| **Multi-image caption** | `EC` + multiple paths | Loop Steps 1–3 per image |
-| **With mood override** | `EC --mood BRATTY` | Start Step 1 with mood_seed=BRATTY |
-| **Skip prelude** | `EC --no-prelude` | Skip Step 2.5, direct Kana→Suki |
-
-## Dependencies
-
-- **Orchestrator**: Director K (`DIR`)
-- **Sub-Systems**: `core/panel-forensic` (Kana), `core/scene-prelude` (Luna), `core/erotic-caption-writer` (Suki)
-- **Config**: `config/canon-rules.md`
 
 ---
 
-## 🔄 HANDOFF PROTOCOL
+## 🛠️ CAPTION ENGINE CLI SET
 
-**This SKILL is the EC pipeline coordinator. Nova delegates to sub-agents.**
+The engine can be invoked directly from the CLI or via automated workflows using the following syntax:
 
-- **Nova → Kana:** PASS `image_path`, `mood_seed`, `user_context`. DROP nothing (fresh start).
-- **Kana → Luna:** Follow `panel-forensic/SKILL.md` HANDOFF section.
-- **Luna → Suki:** Follow `scene-prelude/SKILL.md` HANDOFF section.
-- **Suki → Director K:** Return `caption.json` path. Drop all intermediate context.
-
-### ⚡ Single-Session Shortcut
-
-**Instead of reading this file + 3× sub-SKILL.md files, read ONE manifest:**
-
-```
-studio/pipelines/EC_manifest.md
+```bash
+python3 studio/core/caption_engine/caption_engine.py \
+    --image "/path/to/image.png" \
+    --type "long_thoughts_v2" \
+    --mood "AUTO" \
+    --temp 0.5 \
+    --max-tokens 4096
 ```
 
-This file pre-compiles all rules for Kana, Luna, and Suki. Use it for all single-session EC runs.
+### Parameter Map:
+*   `--image`: Absolute path to the target image file (mandatory).
+*   `--type`: Prompt style from `studio/prompts/` (e.g., `long_thoughts_v2`, `manga`, `json`, `md_comic`).
+*   `--mood`: Mood setting seeds (e.g., `AUTO`, `MANIC`, `COLD`, `BRATTY`, `BROKEN`, `MASO`).
+*   `--context`: Optional backstory or descriptive user context to inject.
+*   `--temp`: Generation temperature (default: `0.5`).
+*   `--max-tokens`: Max output generation length (default: `4096`).
+*   `--no-stream`: Disables real-time streaming, running in clean single-shot mode.
+
+---
+
+## 📋 PIPELINE EXECUTION STEPS
+
+When executing the pipeline, the active agent (typically Nova) or the orchestrator invokes the Caption Engine directly:
+
+### Step 1 — Ingest & Validate
+1. Verify the input image path exists.
+2. Read the `mood_seed` parameter (default: `AUTO`).
+3. Capture optional `user_context` (backstory/constraints).
+
+### Step 2 — Direct Multimodal Generation
+1. The engine dynamically compiles the prompt using `StudioPromptLoader` from the target template in `studio/prompts/{type}.txt`.
+2. The engine initializes the local in-process model wrapper (`InProcessQwen2VLAdapter`) referencing `models/ToriiGate-0.5_Q4_K_L.gguf` and `mmproj_Q8_0.gguf`.
+3. **Inference with Streaming/Single-Shot**: Depending on `--no-stream`, tokens are either streamed back in real-time with an ANSI colored dashboard or processed in a single fast block.
+4. Output is verified and persisted in `_lnd-output/_captions/` as well as color-logged in `_lnd-output/caption_engine.log`.
+
+---
+
+## 📦 OUTPUT DIRECTORY STRUCTURE
+
+For each processed image, the pipeline writes:
+
+```
+_lnd-output/_captions/
+└── {image_name}_{timestamp}_{type}.md   # Output markdown/JSON formatted report
+```
+
+And appends live execution monitoring data to:
+```
+_lnd-output/caption_engine.log           # Structured color logs (viewable with tail -f)
+```
+
+---
+
+## 🚀 ADVANTAGES OF THE NEW UNIFIED CONCEPT
+
+1. **Deterministic Environment**: Bypasses unstable fastmcp/client-server connections. The execution is in-process and fast.
+2. **Flexible Templates**: Switch prompt engineering templates on-the-fly by dropping new txt/md files into `studio/prompts/` and calling `--type {filename}`.
+3. **Production Observability**: Full execution telemetry (token count, generation speed, temperature, and visual parameters) are beautiful, colored, and persisted.

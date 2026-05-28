@@ -17,6 +17,18 @@
         "CLAUDE_FLOW_MEMORY_BACKEND": "hybrid"
       },
       "autoStart": false
+    },
+    "toriigate": {
+      "command": "/home/datdang/working/lnd_dev/.venv/bin/python",
+      "args": [
+        "/home/datdang/working/lnd_dev/playground/toriigate/mcp_server.py"
+      ],
+      "env": {
+        "TORIIGATE_API_URL": "http://127.0.0.1:1234",
+        "TORIIGATE_NGL": "99",
+        "TORIIGATE_NCTX": "8192"
+      },
+      "autoStart": false
     }
   }
 }

@@ -214,7 +214,7 @@ Plug-in rule sets and specialized engines. Loaded on-demand by Core skills.
 | `sfx-lookup/` | Sound effect dictionary and rotation | Suki, Miki |
 | `style-enforcer/` | Writing style compliance engine | Suki |
 | `lnd-re-specialist/` | Regex pattern matching utilities | RE Specialist agent |
-| `sillytavern-export/` | SillyTavern character card exporter | Export pipeline |
+| `sillytavern-expert/` | SillyTavern framework engineering + V3 card export | Export pipeline, preset engineering |
 
 ---
 

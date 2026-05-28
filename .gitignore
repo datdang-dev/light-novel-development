@@ -138,3 +138,7 @@ studio/services/renpy-adaptation/tools/
 hentai-reader/bridge_server.py
 hentai-reader/index_template.html
 hentai-reader/reader_data.json
+
+# ==== Large GGUF Models ====
+*.gguf
+studio/core/caption_engine/models/

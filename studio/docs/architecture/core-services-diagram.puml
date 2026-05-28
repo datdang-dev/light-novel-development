@@ -53,7 +53,7 @@ package "Modules (studio/modules/)" as MODULES #E0F7FA {
   component [sfx-lookup] as m_sfx
   component [style-enforcer] as m_style
   component [lnd-re-specialist] as m_re
-  component [sillytavern-export] as m_st
+  component [sillytavern-expert] as m_st
 }
 
 ' --- Services compose Core modules ---

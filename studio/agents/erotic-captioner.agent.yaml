@@ -33,14 +33,5 @@ agent:
   - 'CAPTION: Activate Suki''s caption mode with mood seed.'
   menu:
   - trigger: EC or fuzzy match on erotic-caption
-    description: '[EC] Erotic Image Captioner'
-    action: 'ORCHESTRATION FLOW:
-
-      1. DELEGATE TO NOVA (erotic-captioner.agent.yaml) -> Nova activates: services/erotic-image-captioner/SKILL.md,
-      Coordinate: Kana (forensic) -> Luna (prelude) -> Suki (caption)
-
-      2. DELEGATE TO KANA (manga-adapter.agent.yaml) -> Kana activates: core/panel-forensic/SKILL.md
-
-      3. DELEGATE TO LUNA (world-weaver.agent.yaml) -> Luna activates: core/scene-prelude/SKILL.md
-
-      4. DELEGATE TO SUKI (lewd-writer.agent.yaml) -> Suki activates: core/erotic-caption-writer/SKILL.md'
+    description: '[EC-CLI] Erotic Image Captioner (Qwen2-VL In-Process Engine)'
+    action: "python3 studio/core/caption_engine/caption_engine.py --image {image_path} --type long_thoughts_v2"

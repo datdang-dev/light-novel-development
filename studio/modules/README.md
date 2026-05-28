@@ -14,7 +14,7 @@ Knowledge-backed modules that extend agent capabilities. Each module follows the
 | [🔞 fetish-guidance](./fetish-guidance/SKILL.md) | `fetish-guidance/` | Fetish patterns & escalation |
 | [🔥 gooner-audit-engine](./gooner-audit-engine/SKILL.md) | `gooner-audit-engine/` | 100-point QA scoring |
 | [✍️ style-enforcer](./style-enforcer/SKILL.md) | `style-enforcer/` | Archetype & style validation |
-| [📤 sillytavern-export](./sillytavern-export/SKILL.md) | `sillytavern-export/` | ST V3 card export |
+| [🧩 sillytavern-expert](./sillytavern-expert/SKILL.md) | `sillytavern-expert/` | ST framework engineering + V3 card export |
 
 ---
 
@@ -44,9 +44,9 @@ module-name/
 ├─────────────────────────────────────────────────────────────┤
 │  dialogue-crafter ←→ sfx-lookup, style-enforcer            │
 │  lewd-writer      ←→ fetish-guidance, sfx-lookup, style    │
-│  character-arch   ←→ fetish-guidance, sillytavern-export   │
+│  character-arch   ←→ fetish-guidance, sillytavern-expert   │
 │  gooner-editor    ←→ gooner-audit-engine, style-enforcer   │
-│  world-weaver     ←→ sillytavern-export                    │
+│  world-weaver     ←→ sillytavern-expert                    │
 ├─────────────────────────────────────────────────────────────┤
 │                      MODULE LAYER                           │
 ├─────────────────────────────────────────────────────────────┤

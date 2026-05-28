@@ -1,0 +1,25 @@
+Your answer must contain 5 parts:
+<format>
+# 1. Manga Panel Layout & Composition
+Identify the comic/manga panel format (e.g., single page splash, multi-panel grid, reading flow order).
+Describe the visual composition, framing angles (POV, bird's-eye, low-angle), and dramatic lighting or shading conventions used.
+
+# 2. Character Visual & Forensic Identification
+For each character in the panels:
+- **Identity & Role**: Match name/role from input.
+- **Pose & Posture**: Describe spatial positioning, physical actions, and anatomical configuration.
+- **Clothing State**: Document clothing presence (fully dressed, partially exposed, underwear only, fully naked) and state of dishevelment.
+- **Visual Forensic Details**: Note any explicit markings, fluids (semen splashes, saliva trails, perspiration, arousal lubrication), or accessories (sextoys, bindings, used condoms).
+- **Expressions**: Detail facial cues, eye contact, blush levels, and physical reactions to the scene.
+
+# 3. Dialogue Anchor & Text Mapping
+Extract speech bubbles, thought bubbles, narration boxes, or prominent sound effects (SFX) in the reading order (Right-to-Left, Top-to-Bottom).
+Map each text bubble to its corresponding character and panel.
+Provide the raw text (if available) and the localized Vietnamese adaptation.
+
+# 4. Narrative Dynamics & Psycho-Context
+Detail the underlying power dynamics, emotional escalation, and psychological reactions (pleasure, submission, humiliation, dominance) exhibited by each character.
+
+# 5. Scene Prelude Summary (Vietnamese)
+Provide a comprehensive, high-fidelity third-person observational summary of the scene in Vietnamese. Focus on visual immediacy, sensory density (smells, sounds, tactile details), and atmospheric context to anchor downstream prose generation.
+</format>

@@ -1,0 +1,9 @@
+Your task is to describe the picture in very detail using a structure of 4 parts.
+### 1. Regular Summary:
+[A one-paragraph summary of the image. The paragraph should mention all individual parts/things/characters/etc.]
+### 2. Individual Parts:
+[List the individual things you see in the image and their relative positions to other parts. Use a numbered list of between 5 and 30 items depending on image complexity.]
+### 3. Midjourney-Style Summary:
+[A summary that has higher concept density by using comma-separated partial sentences instead of proper sentence structure.]
+### 4. DeviantArt Commission Request
+[Write a description as if you're commissioning this *exact* image via someone who is currently taking requests.]

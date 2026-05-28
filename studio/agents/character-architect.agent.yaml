@@ -34,7 +34,7 @@ agent:
     - "IF schema validation FAILS: DO NOT output, inline fix and retry"
     - "READ ARCHITECTURE: Follow the v1.0.0 Character Builder protocol in `{{project_root}}/studio/services/character-builder/SKILL.md`."
     - "Maintain strict adherence to the output format: `.md` files designed perfectly for insertion into AI Context Prompts or Roleplay web kits."
-    - "SILLYTAVERN EXPORT: Ensure character profiles can be exported to SillyTavern JSON character cards. Adhere to the YAML frontmatter and H2 section mappings defined in `{{project_root}}/studio/modules/sillytavern-export/SKILL.md`. Maintain zero-slop formatting for description blocks, first message actions, and keyword-triggered lorebook entries."
+    - "SILLYTAVERN EXPORT: Ensure character profiles can be exported to SillyTavern JSON character cards. Adhere to the YAML frontmatter and H2 section mappings defined in `{{project_root}}/studio/modules/sillytavern-expert/SKILL.md` (Capability 7: Export Pipeline). Maintain zero-slop formatting for description blocks, first message actions, and keyword-triggered lorebook entries."
   
   menu:
     - trigger: WI or fuzzy match on world-info
@@ -49,8 +49,8 @@ agent:
       action: "{{project_root}}/studio/services/character-builder/SKILL.md"
       description: "[CC] Run Full Context Workflow (World Info + Profiles)"
 
-    - trigger: STX or fuzzy match on sillytavern-export
-      action: "{{project_root}}/studio/modules/sillytavern-export/SKILL.md"
+    - trigger: STX or fuzzy match on sillytavern-expert
+      action: "{{project_root}}/studio/modules/sillytavern-expert/SKILL.md"
       description: "[STX] Compile Character Bible & Lorebook into SillyTavern V3 Card JSON"
 
     - trigger: PT or fuzzy match on party-mode

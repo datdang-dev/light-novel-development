@@ -67,7 +67,7 @@ package "modules/ — Knowledge Modules (5)" as MODULES #e0e0ff {
     component "fetish-guidance" as FG
     component "gooner-audit-engine" as GAE
     component "style-enforcer" as STYLE
-    component "sillytavern-export" as STE
+    component "sillytavern-expert" as STE
 }
 
 ' ============================================================

@@ -241,7 +241,7 @@ All core engines have `injection:` metadata.
 | `gooner-audit-engine` | 100-point scoring |
 | `style-enforcer` | Style validation |
 | `lnd-re-specialist` | Regex patterns |
-| `sillytavern-export` | ST card export |
+| `sillytavern-expert` | ST framework engineering + card export |
 
 ---
 

@@ -57,8 +57,8 @@ agent:
 
   menu:
     - trigger: PF or fuzzy match on panel-forensic
-      action: "{{project_root}}/studio/core/panel-forensic/SKILL.md"
-      description: "[PF] Run Atomic Forensic Scan (Debug Only)"
+      action: "python3 studio/core/caption_engine/caption_engine.py --image {image_path} --type manga"
+      description: "[PF-CLI] Run Manga Visual Forensic & Panel Ingestion (Streaming/Single-Shot toggle support)"
 
     - trigger: POC or fuzzy match on hypothesis
       action: "Generate POC Hypothesis inline using Contextual Vector Framework (V_literal, V_affordance, V_psycho, V_world)"

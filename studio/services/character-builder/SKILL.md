@@ -27,7 +27,7 @@ The Character Builder creates **high-fidelity psychological character profiles**
 
 Output profiles are used by downstream services (Lewd Writer, Dialogue Scripting, ST Card Export) and are the authoritative character source of truth for the story bible.
 
-It also supports compiling these profiles directly into exportable **SillyTavern V3 Character Cards** utilizing the downstream `sillytavern-export` module, allowing immediate high-fidelity interactive roleplay simulation in the compiled universe.
+It also supports compiling these profiles directly into exportable **SillyTavern V3 Character Cards** utilizing the downstream `sillytavern-expert` module, allowing immediate high-fidelity interactive roleplay simulation in the compiled universe.
 
 ## On Activation
 
@@ -41,7 +41,7 @@ It also supports compiling these profiles directly into exportable **SillyTavern
 | :--- | :--- | :--- |
 | 1 | `steps/step-01-world-info.md` | Create/update world lore and setting context |
 | 2 | `steps/step-02-character-profile.md` | Build detailed character profiles with psychology |
-| 3 | `{{project_root}}/studio/modules/sillytavern-export/SKILL.md` | Compile profiles and world lore into SillyTavern V3 Character Cards |
+| 3 | `{{project_root}}/studio/modules/sillytavern-expert/SKILL.md` | Compile profiles and world lore into SillyTavern V3 Character Cards |
 
 ## Sub-Workflows
 
@@ -50,7 +50,7 @@ The `character-bible/` directory contains additional resources for character man
 ## Dependencies
 
 - **Agent**: Aria (`CB` — `character-architect.agent.yaml`)
-- **Modules**: `fetish-guidance`, `sillytavern-export`
+- **Modules**: `fetish-guidance`, `sillytavern-expert`
 - **Downstream**: Bible Sync, ST Card Export, Lewd Writer
 
 ## Quick Reference

@@ -105,6 +105,8 @@ Output novels are stored in `_lnd-output/_novels/{project_name}/` with structure
 
 ## Development Notes
 
+- **Caption Engine CLI**: Execute visual ingestions or captions via the unified local model CLI:
+  `PYTHONPATH=. python3 studio/core/caption_engine/caption_engine.py --image <path> --type <manga|long_thoughts_v2> [--no-stream]`
 - **State Persistence:** Pipelines resume at crash point via `state.yaml`
 - **Schema Locked:** All inter-agent communication uses JSON schemas
 - **Decentralized Knowledge:** Lore/SFX in `knowledge/`, summoned via Vector Delta

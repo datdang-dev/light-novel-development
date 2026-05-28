@@ -93,7 +93,7 @@ lnd_dev/
     │   ├── fetish-guidance/       # Fetish patterns & escalation
     │   ├── gooner-audit-engine/   # 100-point scoring logic
     │   ├── style-enforcer/        # Style & archetype validation
-    │   └── sillytavern-export/    # ST V3 card export logic
+    │   └── sillytavern-expert/    # ST framework engineering + V3 card export
     │
     ├── shared/                    # Cross-cutting shared skills
     │   ├── agent-memory/          # Persistent learning layer
