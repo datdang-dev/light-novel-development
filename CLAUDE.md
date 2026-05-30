@@ -111,6 +111,22 @@ Output novels are stored in `_lnd-output/_novels/{project_name}/` with structure
 - **Schema Locked:** All inter-agent communication uses JSON schemas
 - **Decentralized Knowledge:** Lore/SFX in `knowledge/`, summoned via Vector Delta
 
+## Shell Scripts
+
+This project uses **PowerShell** on Windows (scripts in `studio/scripts/` and `.agent/skills/*/`). If you ported from WSL/bash:
+
+- Replace `.sh` with `.ps1`
+- Use `python` instead of `python3`
+- Use `\` path separators instead of `/`
+- Set execution policy: `Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass`
+
+**Available PowerShell scripts:**
+- `studio/scripts/run_rewrite_chapter09.ps1` - Rewrite chapter via Hermes CLI
+- `studio/scripts/run_suki_local.ps1` - Run Suki with forensic input
+- `.agent/skills/axel-cowork/run.ps1` - Multi-agent review panel entry
+- `.agent/skills/axel-cowork/axel-panel.ps1` - Axel panel CLI wrapper
+- `.agent/skills/lnd-web-researcher/scripts/ensure_browser.ps1` - Chrome CDP bootstrap
+
 <!-- gitnexus:start -->
 # GitNexus — Code Intelligence
 
